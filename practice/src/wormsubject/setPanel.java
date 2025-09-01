@@ -128,7 +128,7 @@ public class setPanel extends SimpleFrame {
                     </a>
                     </p>
                     <hr>
-                    By Cay Horstmann
+                    宋宁龙
                     </html>
                     """
                     , SwingConstants.CENTER);

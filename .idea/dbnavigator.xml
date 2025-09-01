@@ -6,7 +6,7 @@
   </component>
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
@@ -27,12 +27,16 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="745a1212-789e-411a-a089-5eb738f91ace">
-      <console name="Connection" type="STANDARD" schema="User" session="Main" />
+      <console name="Connection" type="STANDARD" schema="booksale" session="Pool"><![CDATA[use user;
+use booksale;
+
+select * from books  ;]]></console>
       <console name="mysql" type="STANDARD" schema="user" session="Main"><![CDATA[use user;
 create table user(id int,username varchar(20));
 
 insert into user(id,username) 
 values (1,'宋宁龙');
+
 
 select * 
 from `user`  ;
@@ -40,8 +44,10 @@ from `user`  ;
 
 
 
+
 insert into greeting(message) 
 values ('你好世界！');
+
 
 select * from greeting;]]></console>
     </connection>
@@ -50,7 +56,9 @@ select * from greeting;]]></console>
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="745a1212-789e-411a-a089-5eb738f91ace" object-ref="consoles/Connection" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="745a1212-789e-411a-a089-5eb738f91ace" />
@@ -85,7 +93,7 @@ select * from greeting;]]></console>
           <url-type value="DATABASE" />
           <host value="localhost" />
           <port value="3306" />
-          <database value="User" />
+          <database value="booksale" />
           <tns-folder value="" />
           <tns-profile value="" />
           <server-type value="" />

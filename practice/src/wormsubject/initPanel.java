@@ -22,6 +22,7 @@ public class initPanel extends JPanel {
     private static int size;
     private Pair[] body;
     private Pair food;
+    private Login login;
 
     static {
         listColor = new Color[]{BLACK, BLUE, CYAN, DARK_GRAY, GRAY, GREEN, LIGHT_GRAY,
@@ -29,7 +30,6 @@ public class initPanel extends JPanel {
     }
 
     public initPanel(JFrame jFrame) {
-
         setLayout(new BorderLayout());
         customButton = new CustomButton("进入游戏");
         timeStamp = System.currentTimeMillis();
@@ -42,9 +42,7 @@ public class initPanel extends JPanel {
         addMouseMotionListener(new MouseMotion());
         addMouseListener(new MouseHandler());
         customButton.addActionListener(event -> {
-            var frame = new setPanel(1200,800);
-            frame.setResizable(true);
-            jFrame.setVisible(false);
+            if (login == null) login = new Login(jFrame);
         });
         timeStamp = System.currentTimeMillis();
         fps = 0;
@@ -100,6 +98,7 @@ public class initPanel extends JPanel {
             double y = body[i].getY();
             g2.fill(new Rectangle2D.Double(x*squareSize,y*squareSize,squareSize,squareSize));
         }
+        move();
 
         g2.dispose();
         paintChildren(g);
@@ -153,5 +152,12 @@ public class initPanel extends JPanel {
         }
         label.setLocation(x, label.getY());
 
+    }
+
+    public void move() {
+        Pair head = body[2];
+        int x = head.getX();
+        x++;
+        body[2] = new Pair(x,head.getY());
     }
 }
