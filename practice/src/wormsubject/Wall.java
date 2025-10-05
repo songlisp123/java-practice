@@ -21,12 +21,8 @@ public class Wall {
         Random random = new Random();
         while (r<turn*3) {
             while (true) {
-//                System.out.println(jpanel.columns);
                 int x = random.nextInt(jpanel.columns);
-//                System.out.println(x);
-//                System.out.println(jpanel.rows);
                 int y = random.nextInt(jpanel.rows);
-//                System.out.println(y);
                 if (!warms.contains(x,y)) {
                     body.add(new Pair(x,y));
                     body.add(new Pair(x+1,y));

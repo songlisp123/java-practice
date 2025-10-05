@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/JDBC/JDBC.iml" filepath="$PROJECT_DIR$/JDBC/JDBC.iml" />
       <module fileurl="file://$PROJECT_DIR$/Scoket/Scoket.iml" filepath="$PROJECT_DIR$/Scoket/Scoket.iml" />
       <module fileurl="file://$PROJECT_DIR$/Thread/Thread.iml" filepath="$PROJECT_DIR$/Thread/Thread.iml" />
       <module fileurl="file://$PROJECT_DIR$/char03/char03.iml" filepath="$PROJECT_DIR$/char03/char03.iml" />
@@ -12,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/char07/char07.iml" filepath="$PROJECT_DIR$/char07/char07.iml" />
       <module fileurl="file://$PROJECT_DIR$/gitSpace/gitSpace.iml" filepath="$PROJECT_DIR$/gitSpace/gitSpace.iml" />
       <module fileurl="file://$PROJECT_DIR$/java_practice.iml" filepath="$PROJECT_DIR$/java_practice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JDBC/jdbc_maven.iml" filepath="$PROJECT_DIR$/JDBC/jdbc_maven.iml" />
       <module fileurl="file://$PROJECT_DIR$/practice/practice.iml" filepath="$PROJECT_DIR$/practice/practice.iml" />
     </modules>
   </component>

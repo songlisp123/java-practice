@@ -3,7 +3,6 @@ package wormsubject;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
@@ -151,7 +150,6 @@ public class initPanel extends JPanel {
             label.setForeground(listColor[random.nextInt(listColor.length)]);
         }
         label.setLocation(x, label.getY());
-
     }
 
     public void move() {

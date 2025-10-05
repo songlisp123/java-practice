@@ -16,10 +16,9 @@ public class SimpleFrame  extends JFrame {
         //初始化窗口大小
         this.WIDTH = width;
         this.HEIGHT = height;
-        int x = (screenWidth - WIDTH) / 2;
-        int y = (screenHeight - HEIGHT) / 2;
-        setBounds(x, y, WIDTH, HEIGHT);
-
+            int x = (screenWidth - WIDTH) / 2;
+            int y = (screenHeight - HEIGHT) / 2;
+            setBounds(x, y, WIDTH, HEIGHT);
 
         setTitle("贪吃蛇");
 

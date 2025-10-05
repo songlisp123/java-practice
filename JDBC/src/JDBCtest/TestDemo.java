@@ -1,10 +1,12 @@
 package JDBCtest;
 
-import java.io.IOException;
-import java.io.Reader;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.Properties;
 
 public class TestDemo {
@@ -19,10 +21,9 @@ public class TestDemo {
     }
 
     public static void runTest() throws SQLException, IOException, ClassNotFoundException {
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement())
+        try (Connection connection = getConnection())
         {
-            System.out.println(connection);
+//            System.out.println(connection);
 //            String sql = """
 //                    create table greeting(message varchar(50))
 //                    """;
@@ -40,6 +41,25 @@ public class TestDemo {
 //                    """;
 //            ResultSet resultSet = statement.executeQuery(query);
 //            System.out.println(resultSet);
+            Blob blob = connection.createBlob();
+            var off = 0L;
+            try (OutputStream outputStream = blob.setBinaryStream(off+1)) {
+                BufferedImage image = ImageIO.read(new File("ten.gif"));
+                ImageIO.write(image,"gif",outputStream);
+            }
+            String SQL = """
+                    INSERT INTO user(id,username,password,image,create_time,update_time,description)
+                    VALUES(?,?,?,?,?,?,?)
+                    """;
+            PreparedStatement statement = connection.prepareStatement(SQL);
+            statement.setLong(1,1);
+            statement.setString(2,"赵云");
+            statement.setString(3,"A0116659");
+            statement.setBlob(4,blob);
+            statement.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
+            statement.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
+            statement.setString(7,"能否插入成功？");
+            statement.executeUpdate();
 
         }
 
@@ -53,8 +73,9 @@ public class TestDemo {
         }
         String drivers = props.getProperty("db.driver");
 //        System.out.println(drivers);
-        //获取驱动器，用以驱动数据库
-        Class.forName(drivers);
+//        获取驱动器，用以驱动数据库
+//        Class.forName(drivers);
+        if (drivers != null) System.setProperty("db.driver",drivers);
         String url = props.getProperty("db.url");
 //        System.out.println(url);
         String username = props.getProperty("db.username");

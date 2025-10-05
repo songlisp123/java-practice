@@ -107,14 +107,20 @@ public class Warms {
     }
 
     /**
-     * 收割食物！
-     * @param food
-     * @return
+     * 重载的{@code creep}方法，返回蛇的身体
+     * @param food 食物的位置
      */
     public boolean creep(Pair food) {
         return creep(this.direction,food);
     }
 
+    /**
+     * 判断蛇碰撞的逻辑，与蛇碰撞的主要原因有<br />
+     * 自相交，碰撞墙体
+     * @param direction 蛇头运动的方向
+     * @return {@code true}如果发生碰撞<br />
+     * {@code false}如果未发生碰撞
+     */
     public boolean hit(int direction) {
 
         //如果输入方向与蛇的方向相反，则修正此效果，不处理碰撞
@@ -132,6 +138,11 @@ public class Warms {
         return contains();
     }
 
+    /**
+     * 此函数是为了生产蛇的头部设置的函数
+     * @param direction 用户点击按钮后生成的方向事件
+     * @return 一个表示新的蛇头的位置Pair类型的函数
+     */
     public Pair createHead(int direction) {
         int x = body[0].getX();
         int y = body[0].getY();
