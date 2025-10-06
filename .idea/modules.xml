@@ -9,9 +9,9 @@
       <module fileurl="file://$PROJECT_DIR$/char05/char05.iml" filepath="$PROJECT_DIR$/char05/char05.iml" />
       <module fileurl="file://$PROJECT_DIR$/char06/char06.iml" filepath="$PROJECT_DIR$/char06/char06.iml" />
       <module fileurl="file://$PROJECT_DIR$/char07/char07.iml" filepath="$PROJECT_DIR$/char07/char07.iml" />
+      <module fileurl="file://$PROJECT_DIR$/genric.iml" filepath="$PROJECT_DIR$/genric.iml" />
       <module fileurl="file://$PROJECT_DIR$/gitSpace/gitSpace.iml" filepath="$PROJECT_DIR$/gitSpace/gitSpace.iml" />
       <module fileurl="file://$PROJECT_DIR$/java_practice.iml" filepath="$PROJECT_DIR$/java_practice.iml" />
-      <module fileurl="file://$PROJECT_DIR$/JDBC/jdbc_maven.iml" filepath="$PROJECT_DIR$/JDBC/jdbc_maven.iml" />
       <module fileurl="file://$PROJECT_DIR$/practice/practice.iml" filepath="$PROJECT_DIR$/practice/practice.iml" />
     </modules>
   </component>
