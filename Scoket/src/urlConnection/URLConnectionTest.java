@@ -22,7 +22,7 @@ public class URLConnectionTest
       {
          String urlName;
          if (args.length > 0) urlName = args[0];
-         else urlName = "http://horstmann.com";
+         else urlName = "https://www.jd.com";
 
          var url = new URI(urlName).toURL();
          //获取与给定的url的链接中间价
@@ -69,9 +69,11 @@ public class URLConnectionTest
          {   
             // print first ten lines of contents
    
-            for (int n = 1; in.hasNextLine() && n <= 500; n++)
+//            for (int n = 1; in.hasNextLine() && n <= 500; n++)
+            while (in.hasNextLine()) {
                System.out.println(in.nextLine());
-            if (in.hasNextLine()) System.out.println(". . .");
+            }
+//            if (in.hasNextLine()) System.out.println(". . .");
          }
       }
       catch (IOException | URISyntaxException e)

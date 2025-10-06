@@ -10,5 +10,8 @@
         <module name="genric" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jdbc_maven" target="23" />
+    </bytecodeTargetLevel>
   </component>
 </project>

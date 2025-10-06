@@ -66,7 +66,6 @@ select * from greeting;]]></console>
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
     <mapping file-url="file://$PROJECT_DIR$/JDBC/Books.sql" connection-id="745a1212-789e-411a-a089-5eb738f91ace" session-id="MAIN" current-schema="User" />
-    <mapping file-url="file://$PROJECT_DIR$/JDBC/user.sql" connection-id="745a1212-789e-411a-a089-5eb738f91ace" session-id="POOL" current-schema="booksale" />
     <mapping file-url="file://$PROJECT_DIR$/JDBC/Authors.sql" connection-id="745a1212-789e-411a-a089-5eb738f91ace" session-id="MAIN" current-schema="User" />
     <mapping file-url="file://$PROJECT_DIR$/JDBC/BooksAuthors.sql" connection-id="745a1212-789e-411a-a089-5eb738f91ace" session-id="MAIN" current-schema="User" />
   </component>

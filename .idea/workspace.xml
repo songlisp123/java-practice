@@ -5,149 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JDBC/jdbc_maven.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JDBC/src/JDBCtest/user/user.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/genric/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Thread/src/ThreadTest/windowHandle/CustonFormatter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Thread/src/ThreadTest/windowHandle/Jmenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Thread/src/ThreadTest/windowHandle/windowHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JDBC/src/JDBCtest/TestDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/JDBC/src/JDBCtest/TestDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java.one" beforeDir="false" afterPath="$PROJECT_DIR$/java.one" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JDBC/JDBCtest/TestDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JDBC/JDBCtest/TestDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/Execption/StackTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/Execption/StackTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/Lambda/lamda.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/Lambda/lamda.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/Caculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/Caculator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/CheckBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/CheckBox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/CompoxBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/CompoxBox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/CustomButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/CustomButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/Dialogbox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/Dialogbox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/File.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/File.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/Menu$myAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/Menu$myAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/MenuDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/MenuDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/Model$myClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/Model$myClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/Model.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/SignalButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/SignalButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/SimpleFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/SimpleFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/SliderDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/SliderDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/TestCompent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/TestCompent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/TextFileds.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/TextFileds.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/ToolBarTest$myaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/ToolBarTest$myaction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/ToolBarTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/ToolBarTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/layout.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/layout.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/slider.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/slider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test01.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test01.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test02.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test02.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test03.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test03.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test04.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test04.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test05.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test05.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test06.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test06.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test07.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test07.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test08.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test08.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test09.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test09.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/char007/test13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/employee/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/employee/Employee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/employee/Manager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/employee/Manager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/ColorAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/ColorAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/MyComponent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/MyComponent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/SimpleFrame$Myaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/SimpleFrame$Myaction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/SimpleFrame$WindowClosed.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/SimpleFrame$WindowClosed.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/SimpleFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/SimpleFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/button/ButtonFrame$Mylistener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/button/ButtonFrame$Mylistener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/button/ButtonFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/button/ButtonFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/button/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/button/test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/font/FontCompent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/font/FontCompent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/font/FontFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/font/FontFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/font/font.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/font/font.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/frame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/frame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/grafics/DrawComponent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/grafics/DrawComponent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/grafics/DrawFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/grafics/DrawFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/grafics/DrawTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/grafics/DrawTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/mouse/MouseComponent$MouseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/mouse/MouseComponent$MouseHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/mouse/MouseComponent$MouseMotionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/mouse/MouseComponent$MouseMotionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/mouse/MouseComponent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/mouse/MouseComponent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/mouse/SimpleFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/mouse/SimpleFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/mouse/testFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/mouse/testFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/ordinary/ButtonFrame$ColorAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/ordinary/ButtonFrame$ColorAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/ordinary/ButtonFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/ordinary/ButtonFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/ordinary/frame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/ordinary/frame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/perfence/ImageTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/perfence/ImageTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/perfence/ImageViewerFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/perfence/ImageViewerFrame$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/perfence/ImageViewerFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/perfence/ImageViewerFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/picture/Picture.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/picture/Picture.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/picture/frame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/picture/frame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/picture/test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/picture/test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/words/Frame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/words/Frame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/words/HelloWord.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/words/HelloWord.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/words/MyhelloWorldComponent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/frame/words/MyhelloWorldComponent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/genic/ArrayAlgh.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/genic/ArrayAlgh.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/genic/Pair.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/genic/Pair.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/genic/PairTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/genic/PairTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/genic/Rectange.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/genic/Rectange.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/genric/Pair.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/genric/Pair.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/intefaces/HuiDiao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/intefaces/HuiDiao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/intefaces/TimerPrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/intefaces/TimerPrinter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/intefaces/cloneable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/intefaces/cloneable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/intefaces/comparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/intefaces/comparator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/intefaces/intefaces.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/intefaces/intefaces.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/intefaces/lengthComputor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/intefaces/lengthComputor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/logger/logger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/logger/logger.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/reflect/reflectDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char06/com/apress/bgn/char006/reflect/reflectDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/TestDemo/Frame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/TestDemo/Frame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/TestDemo/Jpanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/TestDemo/Jpanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/studentManageMent/CustomHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/studentManageMent/CustomHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/studentManageMent/DemoTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/studentManageMent/DemoTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/studentManageMent/FileInputDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/studentManageMent/FileInputDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/studentManageMent/ManageSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/studentManageMent/ManageSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/studentManageMent/Rank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/studentManageMent/Rank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/studentManageMent/Reader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/studentManageMent/Reader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/studentManageMent/SimplateFormattor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/studentManageMent/SimplateFormattor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/studentManageMent/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/studentManageMent/Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/studentManageMent/TimeringStorage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/studentManageMent/TimeringStorage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/studentManageMent/Writer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/studentManageMent/Writer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/AboutDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/AboutDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/Editor$Terminator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/Editor$Terminator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/Editor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/Editor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/ImagePreviewer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/ImagePreviewer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/MenuBar$myAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/MenuBar$myAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/MenuBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/MenuBar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/imageView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/imageView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/panel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/panel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/CustomButton$MouseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/CustomButton$MouseHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/CustomButton$MouseMotion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/CustomButton$MouseMotion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/CustomButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/CustomButton.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/Login.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/MenuBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/MenuBar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/Pair.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/Pair.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/SimpleFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/SimpleFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/TestDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/TestDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/Wall.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/Wall.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/Warms.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/Warms.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/WindowHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/WindowHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/WindowHandler$Myaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/WindowHandler$Myaction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/WindowHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/WindowHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scoket/src/urlConnection/URLConnectionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Scoket/src/urlConnection/URLConnectionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Scoket/post/PostTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Scoket/post/PostTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Scoket/socket/EchoServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Scoket/socket/EchoServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Scoket/socket/IntenetTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Scoket/socket/IntenetTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Scoket/socket/Sercuty.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Scoket/socket/Sercuty.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Scoket/socket/SocketTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Scoket/socket/SocketTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Scoket/socket/TestDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Scoket/socket/TestDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Scoket/urlConnection/URLConnectionTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Scoket/urlConnection/URLConnectionTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thread/ThreadTest/Bank.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thread/ThreadTest/Bank.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thread/ThreadTest/SwingWorkerFrame$ProgressData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thread/ThreadTest/SwingWorkerFrame$ProgressData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thread/ThreadTest/SwingWorkerFrame$TextReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thread/ThreadTest/SwingWorkerFrame$TextReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thread/ThreadTest/SwingWorkerFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thread/ThreadTest/SwingWorkerFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thread/ThreadTest/SwingWorkerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thread/ThreadTest/SwingWorkerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thread/ThreadTest/ThreadTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thread/ThreadTest/ThreadTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Thread/ThreadTest/ThreadTestDemo2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Thread/ThreadTest/ThreadTestDemo2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/initPanel$MouseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/initPanel$MouseHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/initPanel$MouseMotion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/initPanel$MouseMotion.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/initPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/initPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/jpanel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/jpanel$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/jpanel$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/jpanel$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/jpanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/jpanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/practice01.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/practice01.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/setPanel$AboutDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/setPanel$AboutDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/setPanel$D.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/setPanel$D.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/setPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/setPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/wormsubject/SimpleFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/wormsubject/SimpleFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/wormsubject/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/wormsubject/Wall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/wormsubject/Warms.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/wormsubject/Warms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/wormsubject/initPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/wormsubject/initPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,6 +54,46 @@
     &quot;assignee&quot;: &quot;songlisp123&quot;
   }
 }</component>
+  <component name="GitToolBoxStore">
+    <option name="branchesCleanupHistory">
+      <BranchesCleanupHistory>
+        <option name="history">
+          <list>
+            <BranchCleanupEntry>
+              <option name="deletions">
+                <list>
+                  <BranchDeletion>
+                    <option name="hash" value="d99e613e71c1921ac463b7c055d28982795a2499" />
+                    <option name="name" value="development" />
+                  </BranchDeletion>
+                </list>
+              </option>
+              <option name="timestamp" value="1759679161071" />
+            </BranchCleanupEntry>
+          </list>
+        </option>
+      </BranchesCleanupHistory>
+    </option>
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1759677859" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/songlisp123/java_pratice.git&quot;,
@@ -198,97 +119,102 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;developTest&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/java_practice&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/home/snl/java/java_code/java_practice/char03/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.39310345&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;应用程序.ArrayListDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.CalendarDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.CollectionBasicDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.DateDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.DemoTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.DrawTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.EchoServer.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Editor.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.EmployeeDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.FileInputDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Fileinput.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Frame.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.GenericListDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.HelloWord.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.HelloWorld.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.HuiDiao.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.ImageTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Input.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.IntContainerDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.IntenetTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.ListJvmThreads.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.LoggingImageViewer.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Model.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.NewCalendarDateDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.PairTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.PostTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.SetDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.SocketTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.StackTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.SwappDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.SwingWorkerTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.TestCompent.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.TestDB.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.TestDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.TextFileds.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.ThreadTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.ThreadTestDemo2.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.URLConnectionTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.WrapperDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.arrays.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.arraysListDemo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.calendar.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.comparator.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.demo.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.font.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.frame.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.intefaces.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.lamda.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.logger.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.map.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.newTest.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.test.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.test01.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.test02.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.test03.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.test04.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.test05.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.test06.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.test07.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.test08.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.test09.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.test10.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.test13.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.testFrame.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.thread.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.wormsubject.test01.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/java_practice/Thread/src/ThreadTest",
+    "onboarding.tips.debug.path": "/home/snl/java/java_code/java_practice/char03/src/Main.java",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.39310345",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "应用程序.ArrayListDemo.executor": "Run",
+    "应用程序.CalendarDemo.executor": "Run",
+    "应用程序.CollectionBasicDemo.executor": "Run",
+    "应用程序.DateDemo.executor": "Run",
+    "应用程序.DelayQueue.executor": "Run",
+    "应用程序.DelayQueueTest.executor": "Run",
+    "应用程序.DemoTest.executor": "Run",
+    "应用程序.DrawTest.executor": "Run",
+    "应用程序.EchoServer.executor": "Run",
+    "应用程序.Editor.executor": "Run",
+    "应用程序.EmployeeDemo.executor": "Run",
+    "应用程序.FileInputDemo.executor": "Run",
+    "应用程序.Fileinput.executor": "Run",
+    "应用程序.Frame.executor": "Run",
+    "应用程序.GenericListDemo.executor": "Run",
+    "应用程序.HelloWord.executor": "Run",
+    "应用程序.HelloWorld.executor": "Run",
+    "应用程序.HuiDiao.executor": "Run",
+    "应用程序.ImageTest.executor": "Run",
+    "应用程序.Input.executor": "Run",
+    "应用程序.IntContainerDemo.executor": "Run",
+    "应用程序.IntenetTest.executor": "Run",
+    "应用程序.LikeQueue.executor": "Run",
+    "应用程序.ListJvmThreads.executor": "Run",
+    "应用程序.LoggingImageViewer.executor": "Run",
+    "应用程序.Model.executor": "Run",
+    "应用程序.NewCalendarDateDemo.executor": "Run",
+    "应用程序.PairTest.executor": "Run",
+    "应用程序.PostTest.executor": "Run",
+    "应用程序.SetDemo.executor": "Run",
+    "应用程序.SocketTest.executor": "Run",
+    "应用程序.StackTest.executor": "Run",
+    "应用程序.SwappDemo.executor": "Run",
+    "应用程序.SwingWorkerTest.executor": "Run",
+    "应用程序.TestCompent.executor": "Run",
+    "应用程序.TestDB.executor": "Run",
+    "应用程序.TestDemo.executor": "Run",
+    "应用程序.TextFileds.executor": "Run",
+    "应用程序.ThreadTest.executor": "Run",
+    "应用程序.ThreadTestDemo2.executor": "Run",
+    "应用程序.URLConnectionTest.executor": "Run",
+    "应用程序.WrapperDemo.executor": "Run",
+    "应用程序.arrayblockingtest.executor": "Run",
+    "应用程序.arrays.executor": "Run",
+    "应用程序.arraysListDemo.executor": "Run",
+    "应用程序.calendar.executor": "Run",
+    "应用程序.comparator.executor": "Run",
+    "应用程序.demo.executor": "Run",
+    "应用程序.font.executor": "Run",
+    "应用程序.frame.executor": "Run",
+    "应用程序.intefaces.executor": "Run",
+    "应用程序.lamda.executor": "Run",
+    "应用程序.logTest.executor": "Run",
+    "应用程序.logger.executor": "Run",
+    "应用程序.map.executor": "Run",
+    "应用程序.newTest.executor": "Run",
+    "应用程序.test.executor": "Run",
+    "应用程序.test01.executor": "Run",
+    "应用程序.test02.executor": "Run",
+    "应用程序.test03.executor": "Run",
+    "应用程序.test04.executor": "Run",
+    "应用程序.test05.executor": "Run",
+    "应用程序.test06.executor": "Run",
+    "应用程序.test07.executor": "Run",
+    "应用程序.test08.executor": "Run",
+    "应用程序.test09.executor": "Run",
+    "应用程序.test10.executor": "Run",
+    "应用程序.test13.executor": "Run",
+    "应用程序.testFrame.executor": "Run",
+    "应用程序.thread.executor": "Run",
+    "应用程序.wormsubject.test01.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.apress.bgn.char006.frame" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\java_practice\Thread\src\ThreadTest" />
       <recent name="D:\java_practice" />
       <recent name="D:\java_practice\Scoket\src" />
-      <recent name="D:\java_practice\Thread\src\ThreadTest" />
       <recent name="D:\java_practice\JDBC" />
       <recent name="D:\java_practice\char07\src\wormsubject" />
     </key>
@@ -335,6 +261,33 @@
       <updated>1753952480287</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="有事烧纸" />
+    <option name="LAST_COMMIT_MESSAGE" value="有事烧纸" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
