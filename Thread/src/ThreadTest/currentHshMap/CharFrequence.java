@@ -12,7 +12,7 @@ public class CharFrequence {
     private static ConcurrentHashMap<String,Long> hashMap =
             new ConcurrentHashMap<>();
     //给定的查询参数
-    private static String string = "傻";
+    private static String string = "我";
     //给定的根目录路径
     private static Path root = Path.of(".");
 
@@ -62,6 +62,7 @@ public class CharFrequence {
         {
             while (in.hasNext()) {
                 String word = in.next();
+
                 for (int i=0;i<word.length();i++) {
                     String c = word.substring(i,i+1);
                     if (string.endsWith(c)) {

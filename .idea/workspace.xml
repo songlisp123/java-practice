@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="有事烧纸04">
-      <change afterPath="$PROJECT_DIR$/genric.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="有事烧纸05">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_practice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/java_practice.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Thread/src/ThreadTest/currentHshMap/CharFrequence.java" beforeDir="false" afterPath="$PROJECT_DIR$/Thread/src/ThreadTest/currentHshMap/CharFrequence.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/Editor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/Editor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paste.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/textEditor/Editor.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/textEditor/Editor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/practice/src/textEditor/MenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/textEditor/MenuBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/测试.txt" beforeDir="false" afterPath="$PROJECT_DIR$/测试.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/蝇.txt" beforeDir="false" afterPath="$PROJECT_DIR$/蝇.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,6 +121,7 @@
     "应用程序.ArrayListDemo.executor": "Run",
     "应用程序.CalendarDemo.executor": "Run",
     "应用程序.CharFrequence.executor": "Run",
+    "应用程序.CharSequenceOp.executor": "Run",
     "应用程序.CollectionBasicDemo.executor": "Run",
     "应用程序.DateDemo.executor": "Run",
     "应用程序.DelayQueue.executor": "Run",
@@ -155,6 +160,7 @@
     "应用程序.TestDB.executor": "Run",
     "应用程序.TestDemo.executor": "Run",
     "应用程序.TextFileds.executor": "Run",
+    "应用程序.ThreadTest.ThreadPool.test.executor": "Run",
     "应用程序.ThreadTest.executor": "Run",
     "应用程序.ThreadTestDemo2.executor": "Run",
     "应用程序.URLConnectionTest.executor": "Run",
@@ -269,7 +275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759740732965</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="有事烧纸05">
+      <option name="closed" value="true" />
+      <created>1759757609187</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1759757609187</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -299,7 +313,8 @@
     <MESSAGE value="有事烧纸" />
     <MESSAGE value="有事烧纸02" />
     <MESSAGE value="有事烧纸04" />
-    <option name="LAST_COMMIT_MESSAGE" value="有事烧纸04" />
+    <MESSAGE value="有事烧纸05" />
+    <option name="LAST_COMMIT_MESSAGE" value="有事烧纸05" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

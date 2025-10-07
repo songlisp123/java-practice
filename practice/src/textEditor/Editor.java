@@ -14,7 +14,7 @@ public class Editor {
             var terminator = new Terminator(dialog);
             var panel = new panel(new JTextArea());
             frame.setSize(600,500);
-            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.addWindowListener(terminator);
 //            frame.add(panel,BorderLayout.NORTH);
             frame.setVisible(true);

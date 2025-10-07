@@ -175,7 +175,7 @@ public class MenuBar extends JMenuBar {
         var filter = new FileNameExtensionFilter(
                 "txt files", "txt");
         var filter01 = new FileNameExtensionFilter(
-                "image files", "png","jpg","gif");
+                "image files", "png","jpg","gif","jpeg");
         fileChooser.setFileFilter(filter);
         fileChooser.addChoosableFileFilter(filter01);
         //将一级子项目添加到菜单栏上面
