@@ -1,7 +1,6 @@
-package wormsubject;
+package wormsubject.util;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class MenuBar extends JMenuBar {
 //    private Dialog dialog;

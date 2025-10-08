@@ -1,4 +1,7 @@
-package wormsubject;
+package wormsubject.game;
+
+import wormsubject.util.MenuBar;
+import wormsubject.util.WindowHandler;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,5 +24,6 @@ public class practice01 extends SimpleFrame {
         menuBar =  new MenuBar();
         add(panel);
         setJMenuBar(menuBar);
+        setVisible(true);
     }
 }

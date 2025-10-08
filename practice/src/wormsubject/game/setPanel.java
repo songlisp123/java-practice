@@ -1,4 +1,6 @@
-package wormsubject;
+package wormsubject.game;
+
+import wormsubject.util.CustomButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +13,8 @@ public class setPanel extends SimpleFrame {
     private JPanel panel;
     private AboutDialog dialog;
     private D dialog2;
+    private practice01 gamePanel;
+    private static final int GAP = 150;
 
     public setPanel(int width,int height) {
         super(width,height);
@@ -25,23 +29,29 @@ public class setPanel extends SimpleFrame {
         setButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         aboutMNe.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        panel.add(Box.createVerticalStrut(150));  // 顶部留空白
+        panel.add(Box.createVerticalStrut(GAP));  // 顶部留空白
         panel.add(startButton);
-        panel.add(Box.createVerticalStrut(150));  // 间隔
+        panel.add(Box.createVerticalStrut(GAP));  // 间隔
         panel.add(setButton);
-        panel.add(Box.createVerticalStrut(150));  // 间隔
+        panel.add(Box.createVerticalStrut(GAP));  // 间隔
         panel.add(aboutMNe);
         panel.add(Box.createVerticalGlue());     // 底部自动撑开
         panel.setBackground(new Color(30, 31, 34));
         add(panel);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setVisible(true);
 
         startButton.addActionListener(event->{
-            var frame = new practice01();
-            frame.setVisible(true);
-            frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            if (gamePanel == null)
+            {
+                gamePanel = new practice01();
+
+            }
+            else  {
+                gamePanel.setVisible(true);
+            }
             setVisible(false);
+
         });
         setButton.addActionListener(event->{
             if (dialog == null) {

@@ -1,8 +1,8 @@
-package wormsubject;
+package wormsubject.gameElement;
 
-import java.sql.SQLOutput;
+import wormsubject.game.jpanel;
+
 import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class Warms {

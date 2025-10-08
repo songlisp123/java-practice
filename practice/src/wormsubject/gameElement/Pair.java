@@ -1,4 +1,4 @@
-package wormsubject;
+package wormsubject.gameElement;
 
 public class  Pair {
     private int x;

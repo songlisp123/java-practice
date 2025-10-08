@@ -1,10 +1,11 @@
 package textEditor;
 
-import wormsubject.Pair;
-
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * 这个类继承swing弹窗系统，用来关闭当前应用程序
+ */
 public class AboutDialog extends JDialog {
     private JButton jButton;
     private JButton jButton2;

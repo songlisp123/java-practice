@@ -1,5 +1,8 @@
 package wormsubject;
 
+import wormsubject.game.SimpleFrame;
+import wormsubject.game.initPanel;
+
 import javax.swing.*;
 import java.awt.*;
 

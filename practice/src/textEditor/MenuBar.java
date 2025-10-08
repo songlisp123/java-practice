@@ -127,7 +127,7 @@ public class MenuBar extends JMenuBar {
             if (result == JFileChooser.APPROVE_OPTION)
             {
                 String name = file.getPath();
-                if (file.toString().endsWith(".txt")) {
+                if (file.toString().endsWith(".txt") || file.toString().endsWith(".java")) {
                     try {
                         textArea.setText(write(file));
                     } catch (IOException e) {
@@ -152,7 +152,6 @@ public class MenuBar extends JMenuBar {
             fileChooser.setCurrentDirectory(new File("."));
             int result = fileChooser.showDialog(jFrame,"保存");
             File file = fileChooser.getSelectedFile();
-            System.out.println(file);
             if (result == JFileChooser.APPROVE_OPTION) {
                 try {
 //                    System.out.println(textArea.getText());
@@ -172,12 +171,18 @@ public class MenuBar extends JMenuBar {
         jFrame.add(jLabel);
         jFrame.add(label,BorderLayout.SOUTH);
         jFrame.add(new JScrollPane(textArea),BorderLayout.CENTER);
+        //添加文件过滤器
         var filter = new FileNameExtensionFilter(
                 "txt files", "txt");
         var filter01 = new FileNameExtensionFilter(
                 "image files", "png","jpg","gif","jpeg");
+        var javaFilter = new FileNameExtensionFilter("java file",
+                "java","class"
+        );
         fileChooser.setFileFilter(filter);
         fileChooser.addChoosableFileFilter(filter01);
+        fileChooser.addChoosableFileFilter(javaFilter);
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         //将一级子项目添加到菜单栏上面
         this.add(fileMenu);
         this.add(helpMenu);
@@ -189,7 +194,7 @@ public class MenuBar extends JMenuBar {
         textArea.setBackground(new Color(30, 31, 34));
         textArea.setForeground(Color.CYAN);
         textArea.setBorder(border);
-        fileChooser.setAccessory(new ImagePreviewer(fileChooser));
+        fileChooser.setAccessory(new JScrollPane(new ImagePreviewer(fileChooser)));
         fileChooser.setFileView(new imageView(filter01, new ImageIcon(".//palette.gif")));
 
     }
@@ -209,6 +214,8 @@ public class MenuBar extends JMenuBar {
         printWriter.println(out);
         printWriter.close();
     }
+
+
     private class myAction extends AbstractAction {
         private Color c;
         private String name;

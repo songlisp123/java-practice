@@ -1,9 +1,11 @@
-package wormsubject;
+package wormsubject.game;
+
+import wormsubject.gameElement.Pair;
+import wormsubject.util.CustomButton;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
 import static java.awt.Color.*;
@@ -22,6 +24,7 @@ public class initPanel extends JPanel {
     private Pair[] body;
     private Pair food;
     private Login login;
+    private setPanel setPanel;
 
     static {
         listColor = new Color[]{BLACK, BLUE, CYAN, DARK_GRAY, GRAY, GREEN, LIGHT_GRAY,
@@ -41,7 +44,12 @@ public class initPanel extends JPanel {
         addMouseMotionListener(new MouseMotion());
         addMouseListener(new MouseHandler());
         customButton.addActionListener(event -> {
-            if (login == null) login = new Login(jFrame);
+//            if (login == null) login = new Login(jFrame);
+            if (setPanel == null) {
+                setPanel = new setPanel(600,600);
+            }
+            else setPanel.setVisible(true);
+
         });
         timeStamp = System.currentTimeMillis();
         fps = 0;
@@ -58,6 +66,8 @@ public class initPanel extends JPanel {
         super.paintComponent(g);
         this.setLocation();
         Graphics2D g2 = (Graphics2D) g.create();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
         Color color = new Color(10, 10, 10);
         g2.setColor(color);
 
@@ -71,34 +81,29 @@ public class initPanel extends JPanel {
             g2.drawLine(getWidth() - i, 0, 0, getHeight() - i);
             g2.drawLine(getWidth(), i, i, getHeight());
         }
-        Color color1 = new Color(79, 227, 94);
-        int R = color1.getRed();
-        int G = color1.getGreen();
-        int B = color1.getBlue();
-        double factor = 0.45;
-        R = (int) (R * factor);
-        G = (int) (G * factor);
-        B = (int) (B * factor);
-        color1 = new Color(R, G, B);
-        g2.setColor(color1);
-
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-
-        for (int i = 0; i < getWidth()/squareSize; i++) {
-            g2.drawLine(0, i * squareSize, getWidth(), i * squareSize);
-            g2.drawLine(i * squareSize, 0, i * squareSize, getHeight());
-        }
+//        Color color1 = new Color(79, 227, 94);
+//        int R = color1.getRed();
+//        int G = color1.getGreen();
+//        int B = color1.getBlue();
+//        double factor = 0.45;
+//        R = (int) (R * factor);
+//        G = (int) (G * factor);
+//        B = (int) (B * factor);
+//        color1 = new Color(R, G, B);
+//        g2.setColor(color1);
+//        for (int i = 0; i < getWidth()/squareSize; i++) {
+//            g2.drawLine(0, i * squareSize, getWidth(), i * squareSize);
+//            g2.drawLine(i * squareSize, 0, i * squareSize, getHeight());
+//        }
 
         //绘制蛇体
-        g2.setColor(Color.PINK);
-        for (int i = 0; i < body.length; i++) {
-            double x = body[i].getX();
-            double y = body[i].getY();
-            g2.fill(new Rectangle2D.Double(x*squareSize,y*squareSize,squareSize,squareSize));
-        }
-        move();
-
+//        g2.setColor(Color.PINK);
+//        for (int i = 0; i < body.length; i++) {
+//            double x = body[i].getX();
+//            double y = body[i].getY();
+//            g2.fill(new Rectangle2D.Double(x*squareSize,y*squareSize,squareSize,squareSize));
+//        }
+//        move();
         g2.dispose();
         paintChildren(g);
     }
@@ -152,10 +157,10 @@ public class initPanel extends JPanel {
         label.setLocation(x, label.getY());
     }
 
-    public void move() {
-        Pair head = body[2];
-        int x = head.getX();
-        x++;
-        body[2] = new Pair(x,head.getY());
-    }
+//    public void move() {
+//        Pair head = body[2];
+//        int x = head.getX();
+//        x++;
+//        body[2] = new Pair(x,head.getY());
+//    }
 }

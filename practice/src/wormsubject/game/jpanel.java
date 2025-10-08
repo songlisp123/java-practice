@@ -1,4 +1,9 @@
-package wormsubject;
+package wormsubject.game;
+
+import wormsubject.gameElement.Pair;
+import wormsubject.gameElement.Wall;
+import wormsubject.gameElement.Warms;
+import wormsubject.util.CustomButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +34,7 @@ public class jpanel extends JPanel {
     private static int turn = 1;
     private Wall wall;
     private JFrame frame;
+    private setPanel setPanel;
     private static final Logger logger = Logger.getLogger("worms");
 
     public jpanel(int rows, int columns, int width, int height) {
@@ -55,9 +61,12 @@ public class jpanel extends JPanel {
         //按钮
         back = new CustomButton("返回界面");
         back.addActionListener(event->{
-            var frame = new setPanel(1200,800);
-            frame.setVisible(true);
-            frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            if (setPanel == null) {
+                setPanel = new setPanel(600,600);
+            }
+            else {
+                setPanel.setVisible(true);
+            }
             setVisible(false);
         });
         add(back);

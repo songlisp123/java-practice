@@ -1,4 +1,4 @@
-package wormsubject;
+package wormsubject.util;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +17,7 @@ public class WindowHandler extends StreamHandler
 //   private JPanel jPanel;
    private JToolBar jToolBar;
    private JTextArea output;
-   private MenuBar menuBar;
+   private wormsubject.util.MenuBar menuBar;
 
    public WindowHandler()
    {

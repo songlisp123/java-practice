@@ -24,11 +24,9 @@ public class Editor {
     }
 
     private static class Terminator extends WindowAdapter {
-//        private JFrame jFrame;
         private AboutDialog aboutDialog;
         public Terminator(AboutDialog aboutDialog) {
             super();
-//            this.jFrame = jFrame;
             this.aboutDialog = aboutDialog;
         }
 

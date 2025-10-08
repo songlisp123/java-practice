@@ -1,4 +1,4 @@
-package wormsubject;
+package wormsubject.util;
 
 import javax.swing.*;
 import java.awt.*;

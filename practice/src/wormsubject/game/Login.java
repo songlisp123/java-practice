@@ -1,4 +1,6 @@
-package wormsubject;
+package wormsubject.game;
+
+import wormsubject.util.CustomButton;
 
 import javax.swing.*;
 import java.awt.*;
