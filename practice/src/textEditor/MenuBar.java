@@ -179,9 +179,13 @@ public class MenuBar extends JMenuBar {
         var javaFilter = new FileNameExtensionFilter("java file",
                 "java","class"
         );
+        var musicFilter = new FileNameExtensionFilter("audio file",
+                "mp3","flac"
+        );
         fileChooser.setFileFilter(filter);
         fileChooser.addChoosableFileFilter(filter01);
         fileChooser.addChoosableFileFilter(javaFilter);
+        fileChooser.addChoosableFileFilter(musicFilter);
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         //将一级子项目添加到菜单栏上面
         this.add(fileMenu);

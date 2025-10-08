@@ -1,5 +1,7 @@
 package textEditor;
 
+import textEditor.util.audioPlay;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -9,6 +11,7 @@ import java.nio.file.StandardOpenOption;
 import java.time.Instant;
 import java.util.Scanner;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -24,8 +27,10 @@ public class ImagePreviewer extends JPanel
 
    private JLabel label;
    private JTextArea textArea;
+   private JButton play;
+   private JButton stop;
 
-   private final Pattern musicReg = Pattern.compile(".+\\.(mp3|flac)$");
+   private final Pattern musicReg = Pattern.compile(".+\\.(mp3|flac|wav)$");
    private final Pattern txtReg = Pattern.compile(".+\\.(txt|java|class)$");
    private final Pattern wordReg = Pattern.compile(".+\\.(docx|doc)$");
    private final Pattern pictureReg = Pattern.compile(".+\\.(png|gif|jpg|jepg)$");
@@ -48,8 +53,9 @@ public class ImagePreviewer extends JPanel
                File f = (File) event.getNewValue();
                if (f == null)
                {
-                  if (label != null) remove(label);
-                  if (textArea != null) remove(textArea);
+                  remove(label);
+                  remove(textArea);
+                  remove(play);
                   return;
                }
                if (f.getPath().matches(pictureReg.pattern()))
@@ -106,9 +112,21 @@ public class ImagePreviewer extends JPanel
 
                //读取音乐文件
                if (f.getPath().matches(musicReg.pattern())) {
-                  long length = f.length();
-                  int count = 0;
-                  File file = new File("temp.txt");
+                  if (f.getPath().endsWith("wav")) {
+                     if(play == null) play = new JButton("开始播放！");
+                     if (stop == null) stop = new JButton("暂停");
+                     add(play,BorderLayout.NORTH);
+                     add(stop,BorderLayout.SOUTH);
+                     play.addActionListener(e -> {
+                        audioPlay.play(true);
+                        System.out.println("正在播放……");
+                     });
+                     stop.addActionListener(e -> {
+                        audioPlay.play(false);
+                        System.out.println("音乐停止");
+                     });
+
+                  }
 //                  try(FileInputStream inputStream = new FileInputStream(f))
 //                  {
 //                     byte[] bytes = new byte[(int) length];
@@ -123,48 +141,45 @@ public class ImagePreviewer extends JPanel
 //                  } catch (SecurityException | IOException e) {
 //                     e.printStackTrace();
 //                  }
-                  Instant startTime = Instant.now();
-                  Runnable read = () -> {
-                      try(FileInputStream fileInputStream = new FileInputStream(f))
-                      {
-                         byte[] bytes = new byte[(int) length];
-                         int read1 = fileInputStream.read(bytes);//这一步会阻塞
-                         System.out.println(read1);
-                         System.out.println(bytes.length);
-                         for (byte b : bytes) linkedBlockingQueue.put(b+"  ");//这一步也会发生阻塞
-                         linkedBlockingQueue.put("完成");
-                         System.out.println("读取工完毕！");
-                      } catch (FileNotFoundException | InterruptedException e) {
-                          e.printStackTrace();
-                      } catch (IOException e) {
-                          e.printStackTrace();
-                      }
-                  };
-
-                  new Thread(read,"读取者").start();
-
-                  Runnable writr = () ->{
-                     boolean done = false;
-                      try {
-                         while (!done) {
-                            var take = linkedBlockingQueue.take();
-                            if ("完成".equals(take)) {
-                               done = true;
-                               linkedBlockingQueue.put(take);
-                               continue;
-                            }
-                            Files.writeString(file.toPath(),take, StandardOpenOption.APPEND);
-                         }
-                         System.out.println("写入工作完成！");
-
-                      } catch (InterruptedException | IOException e) {
-                          e.printStackTrace();
-                      }
-                  };
-
-                  new Thread(writr,"写入者").start();
-
-
+//                  Runnable read = () -> {
+//                      try(FileInputStream fileInputStream = new FileInputStream(f))
+//                      {
+//                         byte[] bytes = new byte[(int) length];
+//                         int read1 = fileInputStream.read(bytes);//这一步会阻塞
+//                         System.out.println(read1);
+//                         System.out.println(bytes.length);
+//                         for (byte b : bytes) linkedBlockingQueue.put(b+"  ");//这一步也会发生阻塞
+//                         linkedBlockingQueue.put("完成");
+//                         System.out.println("读取工完毕！");
+//                      } catch (FileNotFoundException | InterruptedException e) {
+//                          e.printStackTrace();
+//                      } catch (IOException e) {
+//                          e.printStackTrace();
+//                      }
+//                  };
+//
+//                  new Thread(read,"读取者").start();
+//
+//                  Runnable writr = () ->{
+//                     boolean done = false;
+//                      try {
+//                         while (!done) {
+//                            var take = linkedBlockingQueue.take();
+//                            if ("完成".equals(take)) {
+//                               done = true;
+//                               linkedBlockingQueue.put(take);
+//                               continue;
+//                            }
+//                            Files.writeString(file.toPath(),take, StandardOpenOption.APPEND);
+//                         }
+//                         System.out.println("写入工作完成！");
+//
+//                      } catch (InterruptedException | IOException e) {
+//                          e.printStackTrace();
+//                      }
+//                  };
+//
+//                  new Thread(writr,"写入者").start();
                }
 //               {
 //                  StringBuilder stringBuilder = new StringBuilder();
