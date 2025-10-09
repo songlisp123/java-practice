@@ -21,7 +21,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="audiotest" options="--add-exports java.desktop/javax.sound=ALL-UNNAMED" />
+      <module name="audiotest" options="" />
     </option>
   </component>
 </project>

@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 public class MixerAudio {
     public static void main(String[] args){
         //首先创建输出路径
-        File file = new File("test.wav");
+        File file = new File("录音.wav");
 
         try(AudioInputStream stream = AudioSystem.getAudioInputStream(file)) {
             DataLine.Info info = new DataLine.Info(Clip.class,stream.getFormat());
@@ -35,6 +35,7 @@ public class MixerAudio {
             clip.open(stream);
             clip.start();
             Thread.sleep(100000L);
+            clip.close();
 
         } catch (UnsupportedAudioFileException | LineUnavailableException e) {
             throw new RuntimeException(e);

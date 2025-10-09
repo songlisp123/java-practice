@@ -24,10 +24,18 @@ public class InstalledMix {
 //                System.out.println(info);
 //                System.out.println(info1);
 //            }
-//
+
 //        }
         Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
         Mixer mixer = AudioSystem.getMixer(mixerInfo[19]);
+
+        Mixer mixer1 = AudioSystem.getMixer(mixerInfo[29]);
+        System.out.println(mixer1.getMixerInfo());
+
+//        for (Line.Info info : mixer1.getTargetLineInfo()) {
+//            System.out.println(info);
+//        }
+
 
         Line.Info[] sourceLineInfo = mixer.getSourceLineInfo();
 
@@ -65,8 +73,6 @@ public class InstalledMix {
 
         //使用扬声器混合器
 
-
-
     }
 
     private static class LineEventImpl implements LineListener {
@@ -83,6 +89,10 @@ public class InstalledMix {
 
             if (event.getLine().isOpen()) {
                 System.out.println(LocalDateTime.now());
+            }
+
+            if (event.getType() == LineEvent.Type.CLOSE) {
+                System.out.println("音乐终止！");
             }
         }
     }

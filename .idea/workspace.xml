@@ -4,24 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="有事烧纸07">
-      <change afterPath="$PROJECT_DIR$/audio/pom.xml" afterDir="false" />
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="有事烧纸08">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/genric.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/Editor$Terminator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/Editor$Terminator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/Editor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/Editor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/ImagePreviewer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/ImagePreviewer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/MenuBar$myAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/MenuBar$myAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/textEditor/MenuBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/textEditor/MenuBar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/practice/wormsubject/TestDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/practice/wormsubject/TestDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/textEditor/Editor.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/textEditor/Editor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/textEditor/ImagePreviewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/textEditor/ImagePreviewer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/textEditor/MenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/textEditor/MenuBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/wormsubject/TestDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/wormsubject/TestDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/audio/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/CapturedAudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/CapturedAudio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/InstalledMix.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/InstalledMix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/MixerAudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/MixerAudio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/InstalledMix$LineEventImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/InstalledMix$LineEventImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/InstalledMix.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/InstalledMix.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MixerAudio.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MixerAudio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/测试.txt" beforeDir="false" afterPath="$PROJECT_DIR$/测试.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,12 +82,12 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/songlisp123/java-practice.git",
-    "accountId": "fabc430d-8361-428f-979d-d70c29031170"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/songlisp123/java-practice.git&quot;,
+    &quot;accountId&quot;: &quot;fabc430d-8361-428f-979d-d70c29031170&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$PROJECT_DIR$/../../tools/jdk/jdk-23.0.2/lib/src.zip!/java.desktop/java/awt/event/ActionListener.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$PROJECT_DIR$/../../tools/jdk/jdk-23.0.2/lib/src.zip!/java.desktop/javax/swing/AbstractAction.java" root0="SKIP_INSPECTION" />
@@ -112,108 +107,109 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/java_practice",
-    "onboarding.tips.debug.path": "/home/snl/java/java_code/java_practice/char03/src/Main.java",
-    "project.structure.last.edited": "项目",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.39310345",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "应用程序.ArrayListDemo.executor": "Run",
-    "应用程序.AudioTest.executor": "Run",
-    "应用程序.CalendarDemo.executor": "Run",
-    "应用程序.CharFrequence.executor": "Run",
-    "应用程序.CharSequenceOp.executor": "Run",
-    "应用程序.CollectionBasicDemo.executor": "Run",
-    "应用程序.DateDemo.executor": "Run",
-    "应用程序.DelayQueue.executor": "Run",
-    "应用程序.DelayQueueTest.executor": "Run",
-    "应用程序.DemoTest.executor": "Run",
-    "应用程序.DrawTest.executor": "Run",
-    "应用程序.EchoServer.executor": "Run",
-    "应用程序.Editor.executor": "Run",
-    "应用程序.EmployeeDemo.executor": "Run",
-    "应用程序.FileInputDemo.executor": "Run",
-    "应用程序.Fileinput.executor": "Run",
-    "应用程序.FocusExample.executor": "Run",
-    "应用程序.Frame.executor": "Run",
-    "应用程序.GenericListDemo.executor": "Run",
-    "应用程序.HelloWord.executor": "Run",
-    "应用程序.HelloWorld.executor": "Run",
-    "应用程序.HuiDiao.executor": "Run",
-    "应用程序.ImageTest.executor": "Run",
-    "应用程序.Input.executor": "Run",
-    "应用程序.InstalledMix.executor": "Run",
-    "应用程序.IntContainerDemo.executor": "Run",
-    "应用程序.IntenetTest.executor": "Run",
-    "应用程序.LikeQueue.executor": "Run",
-    "应用程序.ListJvmThreads.executor": "Run",
-    "应用程序.LoggingImageViewer.executor": "Run",
-    "应用程序.MixerAudio.executor": "Run",
-    "应用程序.Model.executor": "Run",
-    "应用程序.MutipleMixer.executor": "Run",
-    "应用程序.NewCalendarDateDemo.executor": "Run",
-    "应用程序.PairTest.executor": "Run",
-    "应用程序.PostTest.executor": "Run",
-    "应用程序.RegPattern.executor": "Run",
-    "应用程序.SetDemo.executor": "Run",
-    "应用程序.Sketch.executor": "Run",
-    "应用程序.SocketTest.executor": "Run",
-    "应用程序.StackTest.executor": "Run",
-    "应用程序.StringCrep.executor": "Run",
-    "应用程序.SwappDemo.executor": "Run",
-    "应用程序.SwingWorkerTest.executor": "Run",
-    "应用程序.TestCompent.executor": "Run",
-    "应用程序.TestDB.executor": "Run",
-    "应用程序.TestDemo.executor": "Run",
-    "应用程序.TextFileds.executor": "Run",
-    "应用程序.ThreadTest.ThreadPool.test.executor": "Run",
-    "应用程序.ThreadTest.executor": "Run",
-    "应用程序.ThreadTestDemo2.executor": "Run",
-    "应用程序.URLConnectionTest.executor": "Run",
-    "应用程序.WrapperDemo.executor": "Run",
-    "应用程序.arrayblockingtest.executor": "Run",
-    "应用程序.arrays.executor": "Run",
-    "应用程序.arraysListDemo.executor": "Run",
-    "应用程序.calendar.executor": "Run",
-    "应用程序.comparator.executor": "Run",
-    "应用程序.currentHashMapComputer.executor": "Run",
-    "应用程序.currentHashMapTest.executor": "Run",
-    "应用程序.demo.executor": "Run",
-    "应用程序.font.executor": "Run",
-    "应用程序.frame.executor": "Run",
-    "应用程序.intefaces.executor": "Run",
-    "应用程序.lamda.executor": "Run",
-    "应用程序.logTest.executor": "Run",
-    "应用程序.logger.executor": "Run",
-    "应用程序.map.executor": "Run",
-    "应用程序.newTest.executor": "Run",
-    "应用程序.test.executor": "Run",
-    "应用程序.test01.executor": "Run",
-    "应用程序.test02.executor": "Run",
-    "应用程序.test03.executor": "Run",
-    "应用程序.test04.executor": "Run",
-    "应用程序.test05.executor": "Run",
-    "应用程序.test06.executor": "Run",
-    "应用程序.test07.executor": "Run",
-    "应用程序.test08.executor": "Run",
-    "应用程序.test09.executor": "Run",
-    "应用程序.test10.executor": "Run",
-    "应用程序.test13.executor": "Run",
-    "应用程序.testFrame.executor": "Run",
-    "应用程序.thread.executor": "Run",
-    "应用程序.wormsubject.test01.executor": "Run"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/java_practice&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/home/snl/java/java_code/java_practice/char03/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.39310345&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;应用程序.ArrayListDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.AudioTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CalendarDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CapturedAudio.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CharFrequence.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CharSequenceOp.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CollectionBasicDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DateDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DelayQueue.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DelayQueueTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DemoTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DrawTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.EchoServer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Editor.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.EmployeeDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.FileInputDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Fileinput.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.FocusExample.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Frame.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.GenericListDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.HelloWord.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.HelloWorld.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.HuiDiao.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ImageTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Input.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.InstalledMix.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.IntContainerDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.IntenetTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.LikeQueue.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ListJvmThreads.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.LoggingImageViewer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.MixerAudio.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Model.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.MutipleMixer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.NewCalendarDateDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.PairTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.PostTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.RegPattern.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SetDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Sketch.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SocketTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.StackTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.StringCrep.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SwappDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SwingWorkerTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.TestCompent.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.TestDB.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.TestDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.TextFileds.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ThreadTest.ThreadPool.test.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ThreadTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ThreadTestDemo2.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.URLConnectionTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.WrapperDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.arrayblockingtest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.arrays.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.arraysListDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.calendar.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.comparator.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.currentHashMapComputer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.currentHashMapTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.demo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.font.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.frame.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.intefaces.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.lamda.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.logTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.logger.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.map.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.newTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test01.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test02.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test03.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test04.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test05.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test06.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test07.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test08.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test09.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test10.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test13.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.testFrame.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.thread.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.wormsubject.test01.executor&quot;: &quot;Run&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.apress.bgn.char006.frame" />
@@ -234,7 +230,7 @@
       <recent name="com.apress.bgn.char006.frame.mouse" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="应用程序.test01">
     <configuration name="Editor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="textEditor.Editor" />
       <module name="practice" />
@@ -334,7 +330,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759900574766</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="有事烧纸08">
+      <option name="closed" value="true" />
+      <created>1759930860805</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1759930860805</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -367,7 +371,8 @@
     <MESSAGE value="有事烧纸05" />
     <MESSAGE value="有事烧纸06" />
     <MESSAGE value="有事烧纸07" />
-    <option name="LAST_COMMIT_MESSAGE" value="有事烧纸07" />
+    <MESSAGE value="有事烧纸08" />
+    <option name="LAST_COMMIT_MESSAGE" value="有事烧纸08" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
