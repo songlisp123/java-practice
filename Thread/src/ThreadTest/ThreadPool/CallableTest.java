@@ -23,6 +23,8 @@ class test {
         Callable<String> task = ()->"你好";
         FutureTask<String> futureTask = new FutureTask<>(task);
 
+        executorService.shutdown();
+        scheduledExecutorService.shutdown();
 
     }
 }

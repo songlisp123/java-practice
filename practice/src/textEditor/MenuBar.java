@@ -180,7 +180,7 @@ public class MenuBar extends JMenuBar {
                 "java","class"
         );
         var musicFilter = new FileNameExtensionFilter("audio file",
-                "mp3","flac"
+                "mp3","flac","wav"
         );
         fileChooser.setFileFilter(filter);
         fileChooser.addChoosableFileFilter(filter01);

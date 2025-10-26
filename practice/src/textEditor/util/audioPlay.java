@@ -3,14 +3,15 @@ package textEditor.util;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 public class audioPlay {
 
-    private static File file = new File("test.wav");
 
-    public static void play(boolean flag) {
 
-         try (AudioInputStream stream = AudioSystem.getAudioInputStream(file)) {
+    public static void play(boolean flag, Path path) {
+
+         try (AudioInputStream stream = AudioSystem.getAudioInputStream(path.toFile())) {
              AudioFormat format = stream.getFormat();
              //我需要一个line对象操作该音乐数据
              DataLine.Info info = new DataLine.Info(Clip.class, format);
@@ -32,5 +33,7 @@ public class audioPlay {
          }
 
     }
+
+
 
 }

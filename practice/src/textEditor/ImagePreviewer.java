@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Executors;
@@ -53,13 +54,12 @@ public class ImagePreviewer extends JPanel
                File f = (File) event.getNewValue();
                if (f == null)
                {
-                  remove(label);
-                  remove(textArea);
-                  remove(play);
+                  task(label,textArea,play,stop);
                   return;
                }
                if (f.getPath().matches(pictureReg.pattern()))
                {
+                  task(textArea,play,stop);
                   if (label == null) label = new JLabel();
                   // read the image into an icon
                   var icon = new ImageIcon(f.getPath());
@@ -76,6 +76,7 @@ public class ImagePreviewer extends JPanel
                }
                if (f.getPath().matches(txtReg.pattern()))
                {
+                  task(label,play,stop);
                   if (textArea == null) textArea = new JTextArea();
                   try {
                       String string = Files.readString(f.toPath(),StandardCharsets.UTF_8);
@@ -112,21 +113,21 @@ public class ImagePreviewer extends JPanel
 
                //读取音乐文件
                if (f.getPath().matches(musicReg.pattern())) {
-                  if (f.getPath().endsWith("wav")) {
-                     if(play == null) play = new JButton("开始播放！");
-                     if (stop == null) stop = new JButton("暂停");
-                     add(play,BorderLayout.NORTH);
-                     add(stop,BorderLayout.SOUTH);
-                     play.addActionListener(e -> {
-                        audioPlay.play(true);
-                        System.out.println("正在播放……");
-                     });
-                     stop.addActionListener(e -> {
-                        audioPlay.play(false);
-                        System.out.println("音乐停止");
-                     });
+                  task(label,textArea);
+                  if(play == null) play = new JButton("开始播放！");
+                  if (stop == null) stop = new JButton("暂停");
+                  add(play,BorderLayout.NORTH);
+                  add(stop,BorderLayout.SOUTH);
+                  play.addActionListener(e -> {
+                     audioPlay.play(true,f.toPath());
+                     System.out.println("正在播放……");
+                  });
+                  stop.addActionListener(e -> {
+                     audioPlay.play(false,f.toPath());
+                     System.out.println("音乐停止");
+                  });
 
-                  }
+
 //                  try(FileInputStream inputStream = new FileInputStream(f))
 //                  {
 //                     byte[] bytes = new byte[(int) length];
@@ -228,5 +229,16 @@ public class ImagePreviewer extends JPanel
             }
          });
 
+   }
+
+   public <T> void task(T...t) {
+      Runnable toDelete = ()->{
+         if (t.length!=0) {
+            for (T item:t) {
+               if (Objects.nonNull(item)) remove((Component) item);
+            }
+         }
+      };
+      new Thread(toDelete,"删除").start();
    }
 }

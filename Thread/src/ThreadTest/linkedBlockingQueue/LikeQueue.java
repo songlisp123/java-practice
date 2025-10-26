@@ -16,7 +16,7 @@ public class LikeQueue {
 
     private static final LinkedBlockingQueue<Integer> linkQueue1 = new LinkedBlockingQueue<>();
     private static final LinkedBlockingQueue<Integer> linkQueue2 = new LinkedBlockingQueue<>();
-    private static final List<Integer> lists = new ArrayList<>(100000);
+    private static final List<Integer> lists = new ArrayList<>(1000);
 
     private static final Random random = new Random();
     private static AtomicLong production = new AtomicLong(0L);

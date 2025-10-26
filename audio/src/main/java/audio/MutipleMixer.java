@@ -92,8 +92,8 @@ public class MutipleMixer {
     }
 
     public static void main(String[] args) {
-//        new Thread(playMusic("爱在西元前.wav"),"爱在西元前").start();
+        new Thread(playMusic(Path.of("爱在西元前.wav")),"爱在西元前").start();
 //        new Thread(playMusic("手写的从前.wav"),"手写的从前").start();
-        new Thread(playMusic(Path.of("test.wav")),"娘子").start();
+//        new Thread(playMusic(Path.of("test.wav")),"娘子").start();
     }
 }

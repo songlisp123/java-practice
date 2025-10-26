@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 public class CharSequenceOp {
     private static Path rootPath = Path.of(".");
-    private static String searchWord = "我";
+    private static final String searchWord = "我";
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         rootPath=(args.length>0)?Path.of(args[0]):rootPath;
         Stream<Path> root = root(rootPath);
@@ -25,7 +25,9 @@ public class CharSequenceOp {
         List<Callable<Path>> searchTasks = new ArrayList<>();
         //每一个文件创建一个任务
         root.forEach(path -> {
+            //创建任务
             Callable<Long> task = () -> occurrences(searchWord,path);
+            //将任务添加到数组中
             tasks.add(task);
             searchTasks.add(searchForTask(searchWord,path));
         });
