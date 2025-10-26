@@ -4,19 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="有事烧纸08">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="有事烧纸09">
+      <change afterPath="$PROJECT_DIR$/娘子.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/手写的从前.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/爱在西元前.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/audio/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scoket/src/urlConnection/URLConnectionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Scoket/src/urlConnection/URLConnectionTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/CapturedAudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/CapturedAudio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/InstalledMix.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/InstalledMix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/MixerAudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/MixerAudio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/InstalledMix$LineEventImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/InstalledMix$LineEventImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/InstalledMix.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/InstalledMix.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MixerAudio.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MixerAudio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/CapturedAudio$LineEventImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/CapturedAudio$LineEventImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/CapturedAudio.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/CapturedAudio.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/测试.txt" beforeDir="false" afterPath="$PROJECT_DIR$/测试.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Scoket/urlConnection/URLConnectionTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Scoket/urlConnection/URLConnectionTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/录音.wav" beforeDir="false" afterPath="$PROJECT_DIR$/录音.wav" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +120,7 @@
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/java_practice&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;/home/snl/java/java_code/java_practice/char03/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.39310345&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
@@ -230,13 +231,52 @@
       <recent name="com.apress.bgn.char006.frame.mouse" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.test01">
+  <component name="RunManager" selected="应用程序.CapturedAudio">
+    <configuration name="CapturedAudio" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="audio.CapturedAudio" />
+      <module name="audiotest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="audio.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Editor" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="textEditor.Editor" />
       <module name="practice" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="textEditor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InstalledMix" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="audio.InstalledMix" />
+      <module name="audiotest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="audio.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MutipleMixer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="audio.MutipleMixer" />
+      <module name="audiotest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="audio.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -265,10 +305,16 @@
     <list>
       <item itemvalue="应用程序.test01" />
       <item itemvalue="应用程序.test" />
+      <item itemvalue="应用程序.CapturedAudio" />
+      <item itemvalue="应用程序.InstalledMix" />
+      <item itemvalue="应用程序.MutipleMixer" />
       <item itemvalue="应用程序.Editor" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.CapturedAudio" />
+        <item itemvalue="应用程序.MutipleMixer" />
+        <item itemvalue="应用程序.InstalledMix" />
         <item itemvalue="应用程序.Editor" />
       </list>
     </recent_temporary>
@@ -338,7 +384,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759930860805</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="有事烧纸09">
+      <option name="closed" value="true" />
+      <created>1759970719587</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1759970719587</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -372,7 +426,8 @@
     <MESSAGE value="有事烧纸06" />
     <MESSAGE value="有事烧纸07" />
     <MESSAGE value="有事烧纸08" />
-    <option name="LAST_COMMIT_MESSAGE" value="有事烧纸08" />
+    <MESSAGE value="有事烧纸09" />
+    <option name="LAST_COMMIT_MESSAGE" value="有事烧纸09" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

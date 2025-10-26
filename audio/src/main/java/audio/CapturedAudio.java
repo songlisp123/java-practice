@@ -9,15 +9,39 @@ import java.time.LocalDateTime;
 
 public class CapturedAudio {
     public static void main(String[] args) throws LineUnavailableException, IOException {
+
+        int total = 0;
+
+        //获取该系统中安装的混音器
+        Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
+        //获取所有安装的混音器
+        int length = mixerInfo.length;
+        //迭代每一个混音器
+        for (Mixer.Info info : mixerInfo) {
+            System.out.println("====================");
+            System.out.println(info);
+            //迭代每一个混音器
+            Mixer mixer = AudioSystem.getMixer(info);
+            total++;
+            //获取混音器的位置
+            System.out.printf("当前混音器的位置是：%d%n", total);
+            //获取混音器的输出，在我们这个例子中，混音器是一个输入型混音器，它的输出端是targetLIne
+            Line.Info[] targetLineInfo = mixer.getTargetLineInfo();
+            for (Line.Info targetLine : targetLineInfo) {
+                System.out.println(targetLine);
+            }
+
+        }
         //此程序演示捕获麦克风的声音
         TargetDataLine line;
         AudioFormat format = new AudioFormat(44100,16,2,true,false);
-        Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
-        Mixer mixer = AudioSystem.getMixer(mixerInfo[29]);
+
+        Mixer mixer = AudioSystem.getMixer(mixerInfo[32]);
         DataLine.Info info = new DataLine.Info(TargetDataLine.class,format);
 
-        if (!mixer.isLineSupported(info)) System.out.println(1);
-
+        if (!mixer.isLineSupported(info)) {
+            throw new IOException("此混音器不能捕获声音");
+        }
         //获取并启东该省道
         line = (TargetDataLine) mixer.getLine(info);
         line.addLineListener(new LineEventImpl());
@@ -25,7 +49,7 @@ public class CapturedAudio {
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         int numByteRead;
-        long total = 0;
+        long totalNumber = 0;
         boolean done = false;
         byte[] byteStorage =  new byte[8192];
 
@@ -36,27 +60,35 @@ public class CapturedAudio {
 
 
 
-        while (System.currentTimeMillis() - startTime < 60000) {
+
+        while (System.currentTimeMillis() - startTime < 6000) {
             //从缓冲器读取字节流
             numByteRead = line.read(byteStorage,0,byteStorage.length);
             //写入到保存流
             stream.write(byteStorage,0,numByteRead);
-            total += numByteRead;
+            totalNumber += numByteRead;
 
         }
+        line.close();
 
-        System.out.println("一共读取到：%d 字节数".formatted(total));
+        System.out.printf("一共读取到：%d 字节数\n",totalNumber);
+
+        //获取二进制流
+        ByteArrayInputStream byteArrayInputStream =
+                new ByteArrayInputStream(stream.toByteArray());
 
         //写入到新的.wav文件中
         AudioInputStream audioStream = new AudioInputStream(
-                new ByteArrayInputStream(stream.toByteArray()),
+                byteArrayInputStream,
                 format,
                 stream.size() / format.getFrameSize()
         );
 
         File outFile = new File("录音.wav");
+        //向新文件写入二进制流
         AudioSystem.write(audioStream, AudioFileFormat.Type.WAVE, outFile);
         System.out.println("保存完成：" + outFile.getAbsolutePath());
+
 
     }
 

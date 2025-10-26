@@ -22,7 +22,7 @@ public class URLConnectionTest
       {
          String urlName;
          if (args.length > 0) urlName = args[0];
-         else urlName = "https://www.jd.com";
+         else urlName = "http://localhost:8060";
 
          var url = new URI(urlName).toURL();
          //获取与给定的url的链接中间价
