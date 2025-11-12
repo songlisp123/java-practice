@@ -1,4 +1,4 @@
-package ThreadTest;
+package ThreadTest.swingWorker;
 
 import java.awt.*;
 import java.io.*;

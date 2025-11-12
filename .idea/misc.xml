@@ -8,6 +8,8 @@
         <option value="$PROJECT_DIR$/JDBC/pom.xml" />
         <option value="$PROJECT_DIR$/genric/pom.xml" />
         <option value="$PROJECT_DIR$/audio/pom.xml" />
+        <option value="$PROJECT_DIR$/System/pom.xml" />
+        <option value="$PROJECT_DIR$/reflection/pom.xml" />
       </list>
     </option>
   </component>

@@ -32,8 +32,6 @@ public class MutipleMixer {
                 line.start();
                 //声音长度
 
-
-
                 boolean stopped = false;
                 var numberByteStore = new byte[4096];
                 int read = stream.read(numberByteStore, 0, 4096);
@@ -41,9 +39,7 @@ public class MutipleMixer {
                     line.write(numberByteStore, 0, read);
                     read = stream.read(numberByteStore, 0, 4096);
                 }
-
-
-                line.close();
+                line.drain();
             } catch (UnsupportedAudioFileException | LineUnavailableException e) {
                 throw new RuntimeException(e);
             } catch (IOException e) {
@@ -86,8 +82,6 @@ public class MutipleMixer {
                 System.out.println("开始播放音乐……");
                 System.out.println(LocalDateTime.now());
             }
-
-
         }
     }
 

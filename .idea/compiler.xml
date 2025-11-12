@@ -9,9 +9,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="jdbc_maven" />
         <module name="genric" />
+        <module name="reflection" />
+        <module name="jdbc_maven" />
         <module name="audiotest" />
+        <module name="System" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

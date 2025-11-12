@@ -88,8 +88,8 @@ public class CharSequenceOp {
             long count = 0L;
             while (in.hasNext()) {
                 String words = in.next();
-                for (int i = 0;i<words.length();i++) {
-                    String c = words.substring(i,i+1);
+                for (int i = 0;i<words.length()-word.length();i++) {
+                    String c = words.substring(i,i+word.length());
                     if (word.equals(c)) count++;
                 }
             }
@@ -111,8 +111,8 @@ public class CharSequenceOp {
             try (Scanner in = new Scanner(path)) {
                 while (in.hasNext()) {
                     String words = in.next();
-                    for (int i=0;i<words.length();i++) {
-                        String c = words.substring(i,i+1);
+                    for (int i=0;i<words.length()-word.length();i++) {
+                        String c = words.substring(i,i+word.length());
                         if (word.equals(c)) return path;
                         if (Thread.currentThread().isInterrupted()) {
                             System.out.println("搜索路径"+path+"终止");
