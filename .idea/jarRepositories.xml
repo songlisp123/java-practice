@@ -16,5 +16,15 @@
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="tedu-releases" />
+      <option name="name" value="Tedu Nexus Release Repository" />
+      <option name="url" value="https://tech-nexus-p.codeboy.com//repository/maven-releases/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="tedu-snapshots" />
+      <option name="name" value="Tedu Snapshot Repository" />
+      <option name="url" value="https://tech-nexus-p.codeboy.com/repository/maven-snapshots/" />
+    </remote-repository>
   </component>
 </project>
