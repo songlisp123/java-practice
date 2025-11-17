@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MutipleMixer {
 
@@ -39,7 +41,7 @@ public class MutipleMixer {
                     line.write(numberByteStore, 0, read);
                     read = stream.read(numberByteStore, 0, 4096);
                 }
-                line.drain();
+                line.stop();
             } catch (UnsupportedAudioFileException | LineUnavailableException e) {
                 throw new RuntimeException(e);
             } catch (IOException e) {
@@ -51,14 +53,17 @@ public class MutipleMixer {
     private static class LineEventImpl implements LineListener {
 
         private LocalDateTime timeStamp;
+        private Thread thread;
 
         public LineEventImpl(LocalDateTime time) {
             this.timeStamp = time;
+            this.thread = Thread.currentThread();
         }
 
         @Override
         public void update(LineEvent event) {
             if (event.getType() == LineEvent.Type.CLOSE) {
+                System.out.printf("当前线程:%s%n",thread.getName());
                 if (event.getFramePosition() >= 19) {
                     System.out.println("音乐正常结束");
                 } else {
@@ -72,13 +77,20 @@ public class MutipleMixer {
 //            }
 
             if (event.getType() == LineEvent.Type.STOP) {
+                System.out.printf("当前线程:%s%n",thread.getName());
                 LocalDateTime now = LocalDateTime.now();
+                try (ExecutorService executorService = Executors.newCachedThreadPool()) {
+                    executorService.submit(playMusic(Path.of("娘子.wav")));
+                }
                 int i = now.getNano() - this.timeStamp.getNano();
+                long framePosition = event.getFramePosition();
+                System.out.printf("当前的位置是:%d%n",framePosition);
                 System.out.println("音乐时长:[%d]纳秒".formatted(i));
                 System.out.println("音乐结束！");
             }
 
             if (event.getType() == LineEvent.Type.OPEN) {
+                System.out.printf("当前线程:%s%n",thread.getName());
                 System.out.println("开始播放音乐……");
                 System.out.println(LocalDateTime.now());
             }
@@ -86,8 +98,13 @@ public class MutipleMixer {
     }
 
     public static void main(String[] args) {
-        new Thread(playMusic(Path.of("爱在西元前.wav")),"爱在西元前").start();
+        try (ExecutorService executorService = Executors.newCachedThreadPool()) {
+            executorService.submit(playMusic(Path.of("爱在西元前.wav")));
+//            executorService.submit(playMusic(Path.of("娘子.wav")));
+        }
+//        new Thread(playMusic(Path.of("爱在西元前.wav")),"爱在西元前").start();
 //        new Thread(playMusic("手写的从前.wav"),"手写的从前").start();
-//        new Thread(playMusic(Path.of("test.wav")),"娘子").start();
+//        new Thread(playMusic(Path.of("娘子.wav")),"娘子").start();
+
     }
 }

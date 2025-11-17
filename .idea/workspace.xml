@@ -4,10 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="完成线程的任务">
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="可完成分未来">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/ArrayDemo/ArrayListDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/ArrayDemo/ArrayListDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/ArrayDemo/arrays.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/ArrayDemo/arrays.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/ArrayDemo/arraysListDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/ArrayDemo/arraysListDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/Map/map.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/Map/map.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/Mian.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/Mian.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/SwappDemo/IntContainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/SwappDemo/IntContainer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/SwappDemo/IntContainerDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/SwappDemo/IntContainerDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/SwappDemo/SwappDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/SwappDemo/SwappDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/Thread/thread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/Thread/thread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/ball/ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/char05/com/apress/bgn/char05/ball/ball.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +124,8 @@
     "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.39310345",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.语言默认设置",
+    "settings.editor.splitter.proportion": "0.38266385",
     "应用程序.ArrayListDemo.executor": "Run",
     "应用程序.AudioTest.executor": "Run",
     "应用程序.CalendarDemo.executor": "Run",
@@ -122,6 +134,8 @@
     "应用程序.CharSequenceOp.executor": "Run",
     "应用程序.CollectionBasicDemo.executor": "Run",
     "应用程序.CompleteFutureDemo.executor": "Run",
+    "应用程序.CountDownLatchTest.executor": "Run",
+    "应用程序.CountDownTestDemo2.executor": "Run",
     "应用程序.DateDemo.executor": "Run",
     "应用程序.DelayQueue.executor": "Run",
     "应用程序.DelayQueueTest.executor": "Run",
@@ -153,6 +167,7 @@
     "应用程序.NewCalendarDateDemo.executor": "Run",
     "应用程序.PairTest.executor": "Run",
     "应用程序.PostTest.executor": "Run",
+    "应用程序.ProxyTest.executor": "Run",
     "应用程序.RegPattern.executor": "Run",
     "应用程序.SetDemo.executor": "Run",
     "应用程序.Sketch.executor": "Run",
@@ -224,13 +239,13 @@
       <recent name="com.apress.bgn.char006.frame.mouse" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.CompleteFutureDemo">
-    <configuration name="CharSequenceOp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ThreadTest.ThreadPool.CharSequenceOp" />
+  <component name="RunManager" selected="应用程序.MutipleMixer">
+    <configuration name="CountDownLatchTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="countDown.CountDownLatchTest" />
       <module name="Thread" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ThreadTest.ThreadPool.*" />
+          <option name="PATTERN" value="countDown.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -238,24 +253,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CompleteFutureDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ThreadTest.completeedFuture.CompleteFutureDemo" />
+    <configuration name="CountDownTestDemo2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="countDown.CountDownTestDemo2" />
       <module name="Thread" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ThreadTest.completeedFuture.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FullScreenFrame1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="book.fullscreen.FullScreenFrame1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="book.fullscreen.*" />
+          <option name="PATTERN" value="countDown.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -276,12 +279,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SystemClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="SystemApi.SystemClass" />
-      <module name="System" />
+    <configuration name="ProxyTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="reflection.proxy.ProxyTest" />
+      <module name="reflection" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="SystemApi.*" />
+          <option name="PATTERN" value="reflection.proxy.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -307,22 +310,35 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="thread" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.apress.bgn.char05.Thread.thread" />
+      <module name="char05" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.apress.bgn.char05.Thread.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="应用程序.test01" />
       <item itemvalue="应用程序.test" />
-      <item itemvalue="应用程序.CompleteFutureDemo" />
-      <item itemvalue="应用程序.CharSequenceOp" />
+      <item itemvalue="应用程序.CountDownLatchTest" />
+      <item itemvalue="应用程序.CountDownTestDemo2" />
+      <item itemvalue="应用程序.ProxyTest" />
+      <item itemvalue="应用程序.thread" />
       <item itemvalue="应用程序.MutipleMixer" />
-      <item itemvalue="应用程序.SystemClass" />
-      <item itemvalue="应用程序.FullScreenFrame1" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.CompleteFutureDemo" />
         <item itemvalue="应用程序.MutipleMixer" />
-        <item itemvalue="应用程序.CharSequenceOp" />
-        <item itemvalue="应用程序.SystemClass" />
-        <item itemvalue="应用程序.FullScreenFrame1" />
+        <item itemvalue="应用程序.CountDownTestDemo2" />
+        <item itemvalue="应用程序.CountDownLatchTest" />
+        <item itemvalue="应用程序.ProxyTest" />
+        <item itemvalue="应用程序.thread" />
       </list>
     </recent_temporary>
   </component>
@@ -431,7 +447,23 @@
       <option name="project" value="LOCAL" />
       <updated>1762959048142</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="可完成分未来">
+      <option name="closed" value="true" />
+      <created>1762994494206</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1762994494206</updated>
+    </task>
+    <task id="LOCAL-00014" summary="可完成分未来">
+      <option name="closed" value="true" />
+      <created>1762994518361</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1762994518361</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -469,7 +501,8 @@
     <MESSAGE value="有事烧纸10" />
     <MESSAGE value="有事烧纸11" />
     <MESSAGE value="完成线程的任务" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成线程的任务" />
+    <MESSAGE value="可完成分未来" />
+    <option name="LAST_COMMIT_MESSAGE" value="可完成分未来" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
