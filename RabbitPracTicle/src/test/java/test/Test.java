@@ -3,7 +3,7 @@ package test;
 import com.rabbitmq.stream.ByteCapacity;
 import com.rabbitmq.stream.Environment;
 import com.rabbitmq.stream.Producer;
-import com.snl.micro.rabbit.demo.RabbitApplication;
+import demo.RabbitApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.test.context.SpringBootTest;
 

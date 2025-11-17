@@ -1,0 +1,8 @@
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      #如果是虚拟机,redis做了一个密码
+      password:
+      database: 0

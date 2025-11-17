@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tedu</groupId>
-    <artifactId>RabbitPracTicle</artifactId>
+    <artifactId>redis</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -15,11 +15,11 @@
     </properties>
 
     <dependencies>
-        <!--流库-->
+        <!--spring-boot-starter-data-redis-->
         <dependency>
-            <groupId>com.rabbitmq</groupId>
-            <artifactId>stream-client</artifactId>
-            <version>0.16.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>3.3.3</version>
         </dependency>
 
         <!--springboot测试框架test-->
@@ -30,13 +30,6 @@
             <version>3.3.3</version>
         </dependency>
 
-        <!--lombok-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.32</version>
-        </dependency>
-
         <!--spring-boot-starter-web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -44,5 +37,11 @@
             <version>3.3.3</version>
         </dependency>
 
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.32</version>
+        </dependency>
     </dependencies>
 </project>

@@ -5,16 +5,18 @@
       <directory url="file://$PROJECT_DIR$/audio/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="genric" />
         <module name="reflection" />
+        <module name="genric" />
         <module name="RabbitPracTicle" />
         <module name="jdbc_maven" />
         <module name="audiotest" />
         <module name="System" />
+        <module name="redis" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

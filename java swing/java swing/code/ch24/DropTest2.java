@@ -18,7 +18,7 @@ public class DropTest2 extends JFrame implements DropTargetListener {
   public DropTest2() {
     super("Drop Test");
     setSize(300,300);
-    addWindowListener(new BasicWindowMonitor());
+//    addWindowListener(new ());
 
     getContentPane().add(
         new JLabel("Drop a list from your file chooser here:"),
