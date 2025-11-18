@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="更新rabbitmq队列功能">
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="创建rabbitMq绑定信息队列的功能">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/queue/NewTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/queue/NewTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/queue/worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/queue/worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/NewTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/NewTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/worker$LineEventImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/worker$LineEventImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/worker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/RecieveLog.class" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/RecieveLog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/RecieveLogDemo01.class" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/RecieveLogDemo01.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,6 +135,8 @@
     "应用程序.EchoServer.executor": "Run",
     "应用程序.Editor.executor": "Run",
     "应用程序.EmitLog.executor": "Run",
+    "应用程序.EmitLogDirect.executor": "Run",
+    "应用程序.EmitLogDirectConsumer.executor": "Run",
     "应用程序.EmployeeDemo.executor": "Run",
     "应用程序.FileInputDemo.executor": "Run",
     "应用程序.Fileinput.executor": "Run",
@@ -243,7 +240,7 @@
       <recent name="com.apress.bgn.char006.frame.mouse" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.EmitLog">
+  <component name="RunManager" selected="应用程序.EmitLogDirect">
     <configuration name="EmitLog" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="demo.queue.EmitLog" />
       <module name="RabbitPracTicle" />
@@ -257,12 +254,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MutipleMixer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="audio.MutipleMixer" />
-      <module name="audiotest" />
+    <configuration name="EmitLogDirect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="demo.queue.EmitLogDirect" />
+      <module name="RabbitPracTicle" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="audio.*" />
+          <option name="PATTERN" value="demo.queue.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -270,8 +267,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NewTask" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="demo.queue.NewTask" />
+    <configuration name="EmitLogDirectConsumer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="demo.queue.EmitLogDirectConsumer" />
       <module name="RabbitPracTicle" />
       <extension name="coverage">
         <pattern>
@@ -331,18 +328,18 @@
       <item itemvalue="应用程序.test01" />
       <item itemvalue="应用程序.test" />
       <item itemvalue="应用程序.EmitLog" />
+      <item itemvalue="应用程序.EmitLogDirect" />
+      <item itemvalue="应用程序.EmitLogDirectConsumer" />
       <item itemvalue="应用程序.RecieveLog" />
       <item itemvalue="应用程序.RecieveLogDemo01" />
-      <item itemvalue="应用程序.NewTask" />
-      <item itemvalue="应用程序.MutipleMixer" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.EmitLogDirect" />
+        <item itemvalue="应用程序.EmitLogDirectConsumer" />
         <item itemvalue="应用程序.EmitLog" />
         <item itemvalue="应用程序.RecieveLog" />
         <item itemvalue="应用程序.RecieveLogDemo01" />
-        <item itemvalue="应用程序.MutipleMixer" />
-        <item itemvalue="应用程序.NewTask" />
       </list>
     </recent_temporary>
   </component>
@@ -499,7 +496,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763445553416</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="创建rabbitMq绑定信息队列的功能">
+      <option name="closed" value="true" />
+      <created>1763477935536</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1763477935536</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -542,7 +547,8 @@
     <MESSAGE value="rabbit延迟信息队列训练" />
     <MESSAGE value="redis序列化练习" />
     <MESSAGE value="更新rabbitmq队列功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新rabbitmq队列功能" />
+    <MESSAGE value="创建rabbitMq绑定信息队列的功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="创建rabbitMq绑定信息队列的功能" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
