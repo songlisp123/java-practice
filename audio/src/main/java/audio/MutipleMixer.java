@@ -99,7 +99,7 @@ public class MutipleMixer {
 
     public static void main(String[] args) {
         try (ExecutorService executorService = Executors.newCachedThreadPool()) {
-            executorService.submit(playMusic(Path.of("爱在西元前.wav")));
+            executorService.submit(playMusic(Path.of("手写的从前.wav")));
 //            executorService.submit(playMusic(Path.of("娘子.wav")));
         }
 //        new Thread(playMusic(Path.of("爱在西元前.wav")),"爱在西元前").start();

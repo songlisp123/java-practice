@@ -33,17 +33,25 @@ public class worker {
              * 第二个参数-false：持久化队列，改参数的作用是：让rabbit记住该队列，这样子尽管rabbit服务器重启，也能保持该队列中的信息
              * 注意的是：你不能在已经存在的队列上重新使用queueDeclare方法
              * 不会发生遗失
-             * 第三个参数-位置
+             * 第三个参数-未知
              * 第四个参数-未知
              * 第五个参数-未知
              */
             boolean durable = false;
-            channel.queueDeclare(TASK_QUEUE_NAME,durable,false,false,null);
+            channel.queueDeclare(
+                    TASK_QUEUE_NAME,
+                    durable,
+                    false,
+                    false,
+                    null);
             System.out.println("[*] 正在接受信息，退出请按ctrl+c");
             /**
              * 表示一次只处理一个未传递的信息,当ack被设置为false时候，此效果无效
              */
             channel.basicQos(1); //这个是什么意思？
+            /**
+             * 信息传递的回调函数
+             */
             DeliverCallback deliverCallback = (consumerTag,delivery)->{
                 String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
@@ -89,7 +97,7 @@ public class worker {
     }
 
     private static void doWork() {
-        new Thread(playMusic(Path.of("娘子.wav")),"音乐播放器").start();
+        new Thread(playMusic(Path.of("手写的从前.wav")),"音乐播放器").start();
     }
 
 

@@ -22,6 +22,13 @@ public class NewTask {
             boolean durable = false;
             channel.queueDeclare(TASK_QUEUE_NAME,durable,false,false,null);
             String message = "play";
+            /**
+             * basciPublish参数分析：
+             * 第一个参数：交换机名称，默认是无名的交换机
+             * 第二个参数：将要发送到的队列名称
+             * 第三个参数：信息的属性
+             * 第四个参数：信息字节流
+             */
             channel.basicPublish("",TASK_QUEUE_NAME,
                     MessageProperties.PERSISTENT_TEXT_PLAIN, //修改此行,确保该队列的信息也会持久化
                     message.getBytes(StandardCharsets.UTF_8));
