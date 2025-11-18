@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.util.NoSuchElementException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -42,6 +41,7 @@ public class MutipleMixer {
                     read = stream.read(numberByteStore, 0, 4096);
                 }
                 line.stop();
+                line.close();
             } catch (UnsupportedAudioFileException | LineUnavailableException e) {
                 throw new RuntimeException(e);
             } catch (IOException e) {
@@ -62,6 +62,12 @@ public class MutipleMixer {
 
         @Override
         public void update(LineEvent event) {
+
+            if (event.getType() == LineEvent.Type.START) {
+                System.out.println("【✅】 开始播放音乐……");
+                System.out.println(LocalDateTime.now());
+            }
+
             if (event.getType() == LineEvent.Type.CLOSE) {
                 System.out.printf("当前线程:%s%n",thread.getName());
                 if (event.getFramePosition() >= 19) {
@@ -78,21 +84,13 @@ public class MutipleMixer {
 
             if (event.getType() == LineEvent.Type.STOP) {
                 System.out.printf("当前线程:%s%n",thread.getName());
-                LocalDateTime now = LocalDateTime.now();
-                try (ExecutorService executorService = Executors.newCachedThreadPool()) {
-                    executorService.submit(playMusic(Path.of("娘子.wav")));
-                }
-                int i = now.getNano() - this.timeStamp.getNano();
                 long framePosition = event.getFramePosition();
-                System.out.printf("当前的位置是:%d%n",framePosition);
-                System.out.println("音乐时长:[%d]纳秒".formatted(i));
+                System.out.printf("音乐时长:[%.2f]纳秒%n",Math.floor(framePosition / 44100.00));
                 System.out.println("音乐结束！");
             }
 
             if (event.getType() == LineEvent.Type.OPEN) {
-                System.out.printf("当前线程:%s%n",thread.getName());
-                System.out.println("开始播放音乐……");
-                System.out.println(LocalDateTime.now());
+                System.out.println("【✅】管道开启");
             }
         }
     }
