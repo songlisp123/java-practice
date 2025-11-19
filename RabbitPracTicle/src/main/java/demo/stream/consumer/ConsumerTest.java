@@ -1,4 +1,4 @@
-package demo.consumer;
+package demo.stream.consumer;
 
 import com.rabbitmq.stream.ByteCapacity;
 import com.rabbitmq.stream.Consumer;

@@ -1,12 +1,10 @@
 package demo.queue;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.DeliverCallback;
+import com.rabbitmq.client.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 public class Rec {
@@ -24,7 +22,13 @@ public class Rec {
             System.out.println("{^}正在接受信息，退出请按crtl+c");
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                 String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-                System.out.println(" [x] 接收 '" + message + "'");
+                AMQP.BasicProperties properties = delivery.getProperties();
+                Map<String, Object> headers = properties.getHeaders();
+                headers.forEach((k,v)->{
+                    System.out.printf("键{%s}->值{%s}%n",k,v);
+                });
+
+                System.out.println(" [√] 接收 '" + message + "'");
             };
             channel.basicConsume(QUEUE_NAME,true,deliverCallback,consumerTag->{});
         } catch (IOException | TimeoutException e) {

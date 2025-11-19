@@ -1,4 +1,4 @@
-package demo.producer;
+package demo.stream.producer;
 
 
 import com.rabbitmq.stream.ByteCapacity;
