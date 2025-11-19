@@ -45,24 +45,37 @@ public class MutipleMixer {
                 sourceDataLine.addLineListener(new LineEventImpl(frameRate));
 
                 sourceDataLine.open(format);
-
-//
+//                fadeIn(sourceDataLine,2000L);
                 sourceDataLine.start();
-                fadeIn(sourceDataLine,2000L);
-                setVolume(sourceDataLine,0.8f);
+//                setVolume(sourceDataLine,0.8f);
                 //声音长度
 
 
 
                 boolean stopped = false;
                 var numberByteStore = new byte[4096];
+                float gain = 0f;
+                float fadeInStep = 1f / (44100 * 10); // 10秒淡入
                 int read = stream.read(numberByteStore, 0, 4096);
                 while (read != -1) {
+//                    System.out.printf("读取字节数：%d%n",read);
+                    for (int i = 0; i < read; i+=2) {
+                        short sample = (short) ((numberByteStore[i + 1] << 8) | (numberByteStore[i] & 0xff));
+//                        System.out.printf("原本样本：%d%n",sample);
+                        float s = sample * gain;
+
+                        short newSample = (short) s;
+//                        System.out.printf("新样本：%d%n",newSample);
+                        numberByteStore[i] = (byte) (newSample & 0xff);
+                        numberByteStore[i+1] = (byte) ((newSample >> 8) & 0xff);
+
+                        if (gain < 1f) gain += fadeInStep;
+                    }
                     sourceDataLine.write(numberByteStore, 0, read);
                     read = stream.read(numberByteStore, 0, 4096);
 
                 }
-                fadeOut(sourceDataLine,2000L);
+                fadeOut(sourceDataLine,10000L);
                 sourceDataLine.stop();
                 sourceDataLine.drain();
                 sourceDataLine.close();
@@ -126,7 +139,7 @@ public class MutipleMixer {
 
     public static void main(String[] args) throws InterruptedException {
         try(ExecutorService executorService = Executors.newCachedThreadPool()) {
-            executorService.submit(playMusic(Path.of("手写的从前.wav")));
+            executorService.submit(playMusic(Path.of("爱在西元前.wav")));
             Thread.sleep(Duration.of(3000L, ChronoUnit.SECONDS));
         }
     }
@@ -148,6 +161,7 @@ public class MutipleMixer {
             float percent =(float) i / step;
             float db = minimum + (maximum -minimum) * percent;
             control.setValue(db);
+//            System.out.println(db);
             try {
 //                System.out.println(Thread.currentThread().getName());
                 Thread.sleep(sleep);

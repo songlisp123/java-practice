@@ -21,6 +21,8 @@ public class Send {
             Channel channel = connection.createChannel())
         {
             channel.queueDeclare(queueName,false,false,false,null);
+            //删除指定队列
+//            channel.queueDelete(queueName);
             String message = "《计算机科学基础》";
             channel.basicPublish("",queueName,null,message.getBytes(StandardCharsets.UTF_8));
             System.out.println("[x] 已发送"+message);

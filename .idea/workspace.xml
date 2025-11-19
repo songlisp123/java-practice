@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="改善混音器的选择和播放渠道的选择">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="增加音量设置">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/queue/EmitLogDirect.java" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/queue/EmitLogDirect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/queue/EmitLogDirectConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/queue/EmitLogDirectConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/queue/Send.java" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/queue/Send.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/EmitLogDirect.class" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/EmitLogDirect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/EmitLogDirectConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/EmitLogDirectConsumer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/Send.class" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/queue/Send.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/error.log" beforeDir="false" afterPath="$PROJECT_DIR$/error.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +117,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/java_practice/redis/src/main/resources",
+    "last_opened_file_path": "D:/java_practice/RabbitPracTicle/src/main/java/demo/queue/emitLogsConsumer",
     "onboarding.tips.debug.path": "/home/snl/java/java_code/java_practice/char03/src/Main.java",
     "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.0",
@@ -140,6 +146,11 @@
     "应用程序.EmitLog.executor": "Run",
     "应用程序.EmitLogDirect.executor": "Run",
     "应用程序.EmitLogDirectConsumer.executor": "Run",
+    "应用程序.EmitLogTopic.executor": "Run",
+    "应用程序.EmitLogsTopicConsumer.executor": "Run",
+    "应用程序.EmitLogsTopicConsumer02.executor": "Run",
+    "应用程序.EmitLogsTopicConsumer03.executor": "Run",
+    "应用程序.EmitLogsTopicConsumer04.executor": "Run",
     "应用程序.EmployeeDemo.executor": "Run",
     "应用程序.FileInputDemo.executor": "Run",
     "应用程序.Fileinput.executor": "Run",
@@ -227,42 +238,30 @@
       <recent name="com.apress.bgn.char006.frame" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\java_practice\RabbitPracTicle\src\main\java\demo\queue\emitLogsConsumer" />
       <recent name="D:\java_practice\redis\src\main\resources" />
       <recent name="D:\java_practice\redis\src\test\java" />
       <recent name="D:\java_practice\RabbitPracTicle\src\test\java" />
       <recent name="D:\java_practice\RabbitPracTicle\src\main\java" />
-      <recent name="D:\java_practice" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\java_practice\JDBC" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="demo.queue.emitLogsConsumer" />
       <recent name="demo.queue" />
       <recent name="textEditor" />
       <recent name="wormsubject" />
       <recent name="com.apress.bgn.char006.frame.mouse" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.MutipleMixer (1)">
-    <configuration name="ChooseBestMixer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="audio.ChooseBestMixer" />
-      <module name="audiotest" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="audio.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="EmitLogDirect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="demo.queue.EmitLogDirect" />
+  <component name="RunManager" selected="应用程序.EmitLogTopic">
+    <configuration name="EmitLogTopic" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="demo.queue.EmitLogTopic" />
       <module name="RabbitPracTicle" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="demo.queue.*" />
+          <option name="PATTERN" value="demo.queue.emitLogsConsumer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -270,12 +269,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EmitLogDirectConsumer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="demo.queue.EmitLogDirectConsumer" />
+    <configuration name="EmitLogsTopicConsumer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="demo.queue.emitLogsConsumer.EmitLogsTopicConsumer" />
       <module name="RabbitPracTicle" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="demo.queue.*" />
+          <option name="PATTERN" value="demo.queue.emitLogsConsumer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -283,12 +282,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MutipleMixer (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="audio.MutipleMixer" />
-      <module name="audiotest" />
+    <configuration name="EmitLogsTopicConsumer02" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="demo.queue.emitLogsConsumer.EmitLogsTopicConsumer02" />
+      <module name="RabbitPracTicle" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="audio.*" />
+          <option name="PATTERN" value="demo.queue.emitLogsConsumer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -296,12 +295,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MutipleMixer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="audio.MutipleMixer" />
-      <module name="audiotest" />
+    <configuration name="EmitLogsTopicConsumer03" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="demo.queue.emitLogsConsumer.EmitLogsTopicConsumer03" />
+      <module name="RabbitPracTicle" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="audio.*" />
+          <option name="PATTERN" value="demo.queue.emitLogsConsumer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmitLogsTopicConsumer04" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="demo.queue.emitLogsConsumer.EmitLogsTopicConsumer04" />
+      <module name="RabbitPracTicle" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="demo.queue.emitLogsConsumer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -330,19 +342,19 @@
     <list>
       <item itemvalue="应用程序.test01" />
       <item itemvalue="应用程序.test" />
-      <item itemvalue="应用程序.ChooseBestMixer" />
-      <item itemvalue="应用程序.MutipleMixer (1)" />
-      <item itemvalue="应用程序.EmitLogDirect" />
-      <item itemvalue="应用程序.EmitLogDirectConsumer" />
-      <item itemvalue="应用程序.MutipleMixer" />
+      <item itemvalue="应用程序.EmitLogTopic" />
+      <item itemvalue="应用程序.EmitLogsTopicConsumer" />
+      <item itemvalue="应用程序.EmitLogsTopicConsumer02" />
+      <item itemvalue="应用程序.EmitLogsTopicConsumer03" />
+      <item itemvalue="应用程序.EmitLogsTopicConsumer04" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.MutipleMixer" />
-        <item itemvalue="应用程序.MutipleMixer (1)" />
-        <item itemvalue="应用程序.ChooseBestMixer" />
-        <item itemvalue="应用程序.EmitLogDirect" />
-        <item itemvalue="应用程序.EmitLogDirectConsumer" />
+        <item itemvalue="应用程序.EmitLogTopic" />
+        <item itemvalue="应用程序.EmitLogsTopicConsumer04" />
+        <item itemvalue="应用程序.EmitLogsTopicConsumer03" />
+        <item itemvalue="应用程序.EmitLogsTopicConsumer02" />
+        <item itemvalue="应用程序.EmitLogsTopicConsumer" />
       </list>
     </recent_temporary>
   </component>
@@ -531,7 +543,23 @@
       <option name="project" value="LOCAL" />
       <updated>1763517935367</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="增加控件调控音量">
+      <option name="closed" value="true" />
+      <created>1763519857931</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1763519857931</updated>
+    </task>
+    <task id="LOCAL-00024" summary="增加音量设置">
+      <option name="closed" value="true" />
+      <created>1763520102619</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1763520102619</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -578,7 +606,9 @@
     <MESSAGE value="更新rabbitMq绑定信息队列的功能&#10;1、使用direct直连交换器发送信息&#10;2、使用路由键绑定队列" />
     <MESSAGE value="更新混音器使用,添加管道事件监听器开启和开始" />
     <MESSAGE value="改善混音器的选择和播放渠道的选择" />
-    <option name="LAST_COMMIT_MESSAGE" value="改善混音器的选择和播放渠道的选择" />
+    <MESSAGE value="增加控件调控音量" />
+    <MESSAGE value="增加音量设置" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加音量设置" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
