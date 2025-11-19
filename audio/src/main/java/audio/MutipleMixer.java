@@ -1,10 +1,12 @@
 package audio;
 
 import javax.sound.sampled.*;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -12,39 +14,50 @@ public class MutipleMixer {
 
     public static Runnable playMusic(Path musicFilePath) {
         return () -> {
-            Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
-            Mixer mixer = AudioSystem.getMixer(mixerInfo[19]);
+//            Mixer.Info[] mixerInfo = AudioSystem.getMixerInfo();
+//            //获取一个合适的混音器
+//            for (Mixer.Info info : mixerInfo) {
+//                System.out.println(info);
+//            }
+//            Mixer mixer = AudioSystem.getMixer(mixerInfo[19]);
 
-            Line.Info[] sourceLineInfo = mixer.getSourceLineInfo();
-            try (AudioInputStream stream = AudioSystem.getAudioInputStream(new File(musicFilePath.toUri()))) {
+            Mixer mixer = ChooseBestMixer.chooseMixer();
+            if (Objects.isNull(mixer)) {
+                return;
+            }
+
+
+            try (AudioInputStream stream = AudioSystem.getAudioInputStream(musicFilePath.toFile())) {
                 AudioFormat format = stream.getFormat();
-                SourceDataLine line = (SourceDataLine) mixer.getLine(sourceLineInfo[0]);
-                DataLine.Info info = new DataLine.Info(Clip.class, format);
-                Clip line2 = (Clip) AudioSystem.getLine(info);
-                line.addLineListener(new LineEventImpl(LocalDateTime.now()));
+                System.out.println("音乐格式："+format);
+                float frameRate = format.getFrameRate();
+//                Line.Info[] sourceLineInfo = mixer.getSourceLineInfo();
+//                SourceDataLine line = (SourceDataLine) mixer.getLine(sourceLineInfo[0]);
+//                DataLine.Info info = new DataLine.Info(Clip.class, format);
+//                Clip line2 = (Clip) AudioSystem.getLine(info);
+//                line.addLineListener(new LineEventImpl(frameRate));
+//                Line[] lines = new Line[]{line, sourceDataLine};
+//                if (!mixer.isSynchronizationSupported(lines, true)) {
+//                    System.out.println("不能并行播放！此混声器不能用于并行播放");
+//                }
 
-                Line[] lines = new Line[]{line, line2};
-
-                if (!mixer.isSynchronizationSupported(lines, true)) {
-                    System.out.println("不能并行播放！此混声器不能用于并行播放");
-                }
-
-                line.open(format);
-                line.start();
+                SourceDataLine sourceDataLine = ChooseSourceLine.chooseLine(mixer);
+                sourceDataLine.addLineListener(new LineEventImpl(frameRate));
+                sourceDataLine.open(format);
+                sourceDataLine.start();
                 //声音长度
 
                 boolean stopped = false;
                 var numberByteStore = new byte[4096];
                 int read = stream.read(numberByteStore, 0, 4096);
                 while (read != -1) {
-                    line.write(numberByteStore, 0, read);
+                    sourceDataLine.write(numberByteStore, 0, read);
                     read = stream.read(numberByteStore, 0, 4096);
                 }
-                line.stop();
-                line.close();
-            } catch (UnsupportedAudioFileException | LineUnavailableException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
+                sourceDataLine.stop();
+                sourceDataLine.drain();
+                sourceDataLine.close();
+            } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
                 throw new RuntimeException(e);
             }
         };
@@ -54,10 +67,19 @@ public class MutipleMixer {
 
         private LocalDateTime timeStamp;
         private Thread thread;
+        private long framePosition;
+        private float frameRate;
 
-        public LineEventImpl(LocalDateTime time) {
-            this.timeStamp = time;
+
+
+        public LineEventImpl() {
+            this.timeStamp = LocalDateTime.now();
             this.thread = Thread.currentThread();
+        }
+
+        public LineEventImpl(float frameRate) {
+            this();
+            this.frameRate = frameRate;
         }
 
         @Override
@@ -66,6 +88,7 @@ public class MutipleMixer {
             if (event.getType() == LineEvent.Type.START) {
                 System.out.println("【✅】 开始播放音乐……");
                 System.out.println(LocalDateTime.now());
+                this.framePosition = event.getFramePosition();
             }
 
             if (event.getType() == LineEvent.Type.CLOSE) {
@@ -77,16 +100,13 @@ public class MutipleMixer {
                 }
             }
 
-//            if (event.getLine().isOpen()) {
-//                System.out.println("开始播放音乐……");
-//                System.out.println(LocalDateTime.now());
-//            }
 
             if (event.getType() == LineEvent.Type.STOP) {
                 System.out.printf("当前线程:%s%n",thread.getName());
                 long framePosition = event.getFramePosition();
-                System.out.printf("音乐时长:[%.2f]纳秒%n",Math.floor(framePosition / 44100.00));
-                System.out.println("音乐结束！");
+                System.out.printf("起始位置：%d",this.framePosition);
+                System.out.printf("当前样本数量：%d%n",framePosition);
+                System.out.printf("音乐时长:[%.2f]秒%n",Math.floor(framePosition / this.frameRate));
             }
 
             if (event.getType() == LineEvent.Type.OPEN) {
@@ -95,14 +115,11 @@ public class MutipleMixer {
         }
     }
 
-    public static void main(String[] args) {
-        try (ExecutorService executorService = Executors.newCachedThreadPool()) {
-            executorService.submit(playMusic(Path.of("手写的从前.wav")));
-//            executorService.submit(playMusic(Path.of("娘子.wav")));
+    public static void main(String[] args) throws InterruptedException {
+        try(ExecutorService executorService = Executors.newCachedThreadPool()) {
+            executorService.submit(playMusic(Path.of("爱在西元前.wav")));
+            Thread.sleep(Duration.of(3000L, ChronoUnit.SECONDS));
         }
-//        new Thread(playMusic(Path.of("爱在西元前.wav")),"爱在西元前").start();
-//        new Thread(playMusic("手写的从前.wav"),"手写的从前").start();
-//        new Thread(playMusic(Path.of("娘子.wav")),"娘子").start();
-
     }
+
 }

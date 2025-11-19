@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="更新rabbitMq绑定信息队列的功能&#10;1、使用direct直连交换器发送信息&#10;2、使用路由键绑定队列" />
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="更新混音器使用,添加管道事件监听器开启和开始">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -118,6 +123,7 @@
     "应用程序.CapturedAudio.executor": "Run",
     "应用程序.CharFrequence.executor": "Run",
     "应用程序.CharSequenceOp.executor": "Run",
+    "应用程序.ChooseBestMixer.executor": "Run",
     "应用程序.CollectionBasicDemo.executor": "Run",
     "应用程序.CompleteFutureDemo.executor": "Run",
     "应用程序.CountDownLatchTest.executor": "Run",
@@ -237,6 +243,19 @@
     </key>
   </component>
   <component name="RunManager" selected="应用程序.MutipleMixer">
+    <configuration name="ChooseBestMixer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="audio.ChooseBestMixer" />
+      <module name="audiotest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="audio.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EmitLog" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="demo.queue.EmitLog" />
       <module name="RabbitPracTicle" />
@@ -289,19 +308,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RecieveLog" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="demo.queue.RecieveLog" />
-      <module name="RabbitPracTicle" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="demo.queue.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="test" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="23" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -323,19 +329,19 @@
     <list>
       <item itemvalue="应用程序.test01" />
       <item itemvalue="应用程序.test" />
+      <item itemvalue="应用程序.ChooseBestMixer" />
       <item itemvalue="应用程序.EmitLog" />
       <item itemvalue="应用程序.EmitLogDirect" />
       <item itemvalue="应用程序.EmitLogDirectConsumer" />
-      <item itemvalue="应用程序.RecieveLog" />
       <item itemvalue="应用程序.MutipleMixer" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="应用程序.MutipleMixer" />
+        <item itemvalue="应用程序.ChooseBestMixer" />
         <item itemvalue="应用程序.EmitLogDirect" />
         <item itemvalue="应用程序.EmitLogDirectConsumer" />
         <item itemvalue="应用程序.EmitLog" />
-        <item itemvalue="应用程序.RecieveLog" />
       </list>
     </recent_temporary>
   </component>
@@ -508,7 +514,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763482056486</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="更新混音器使用,添加管道事件监听器开启和开始">
+      <option name="closed" value="true" />
+      <created>1763482398894</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1763482398894</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -553,7 +567,8 @@
     <MESSAGE value="更新rabbitmq队列功能" />
     <MESSAGE value="创建rabbitMq绑定信息队列的功能" />
     <MESSAGE value="更新rabbitMq绑定信息队列的功能&#10;1、使用direct直连交换器发送信息&#10;2、使用路由键绑定队列" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新rabbitMq绑定信息队列的功能&#10;1、使用direct直连交换器发送信息&#10;2、使用路由键绑定队列" />
+    <MESSAGE value="更新混音器使用,添加管道事件监听器开启和开始" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新混音器使用,添加管道事件监听器开启和开始" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
