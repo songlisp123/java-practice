@@ -44,8 +44,12 @@ public class MutipleMixer {
                 SourceDataLine sourceDataLine = ChooseSourceLine.chooseLine(mixer);
                 sourceDataLine.addLineListener(new LineEventImpl(frameRate));
                 sourceDataLine.open(format);
+                fadeIn(sourceDataLine,2000L);
                 sourceDataLine.start();
+
                 //声音长度
+
+
 
                 boolean stopped = false;
                 var numberByteStore = new byte[4096];
@@ -53,7 +57,9 @@ public class MutipleMixer {
                 while (read != -1) {
                     sourceDataLine.write(numberByteStore, 0, read);
                     read = stream.read(numberByteStore, 0, 4096);
+
                 }
+                fadeOut(sourceDataLine,2000L);
                 sourceDataLine.stop();
                 sourceDataLine.drain();
                 sourceDataLine.close();
@@ -117,8 +123,60 @@ public class MutipleMixer {
 
     public static void main(String[] args) throws InterruptedException {
         try(ExecutorService executorService = Executors.newCachedThreadPool()) {
-            executorService.submit(playMusic(Path.of("爱在西元前.wav")));
+            executorService.submit(playMusic(Path.of("手写的从前.wav")));
             Thread.sleep(Duration.of(3000L, ChronoUnit.SECONDS));
+        }
+    }
+
+    public static void fadeIn(SourceDataLine line,long duration) {
+        if (!line.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+            System.out.println("该管道不能使用空间");
+            return;
+        }
+        FloatControl control = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
+
+        float minimum = control.getMinimum();
+        float maximum = control.getMaximum();
+
+        int step = 200; //步数，越大越丝滑
+        long sleep = duration / step;
+
+        for (int i = 0; i<= step ; i++) {
+            float percent =(float) i / step;
+            float db = minimum + (maximum -minimum) * percent;
+            control.setValue(db);
+            try {
+//                System.out.println(Thread.currentThread().getName());
+                Thread.sleep(sleep);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public static void fadeOut(SourceDataLine line,long duration) {
+        if (!line.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+            System.out.println("该管道不能使用空间");
+            return;
+        }
+        FloatControl control = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
+
+        float minimum = control.getMinimum();
+        float maximum = control.getMaximum();
+        float current = control.getValue();
+
+        int step = 50; //步数，越大越丝滑
+        long sleep = duration / step;
+
+        for (int i = 0; i<= step ; i++) {
+            float percent =(float) i / step;
+            float db = current + (maximum -current) * percent;
+            control.setValue(db);
+            try {
+                Thread.sleep(step);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
