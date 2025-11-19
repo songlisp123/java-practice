@@ -43,10 +43,13 @@ public class MutipleMixer {
 
                 SourceDataLine sourceDataLine = ChooseSourceLine.chooseLine(mixer);
                 sourceDataLine.addLineListener(new LineEventImpl(frameRate));
-                sourceDataLine.open(format);
-                fadeIn(sourceDataLine,2000L);
-                sourceDataLine.start();
 
+                sourceDataLine.open(format);
+
+//
+                sourceDataLine.start();
+                fadeIn(sourceDataLine,2000L);
+                setVolume(sourceDataLine,0.8f);
                 //声音长度
 
 
@@ -179,5 +182,25 @@ public class MutipleMixer {
             }
         }
     }
+
+    public static void setVolume(SourceDataLine line, float volumePercent) {
+        if (volumePercent < 0f || volumePercent > 1f) {
+            throw new IllegalArgumentException("音量范围必须是 0.0 ~ 1.0");
+        }
+
+        if (line.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
+            FloatControl gain = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
+
+            // 将百分比映射到 dB
+            float min = gain.getMinimum(); // 通常是 -80.0 dB
+            float max = gain.getMaximum(); // 通常是 +6.0 dB
+
+            // 线性映射（0→min，1→max）
+            float dB = min + (max - min) * volumePercent;
+
+            gain.setValue(dB);
+        }
+    }
+
 
 }
