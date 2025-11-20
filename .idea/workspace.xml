@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="完成消息确认机制&#10;1、生产者生产机制&#10;2、消费者确认机制">
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="完成死信队列&#10;1、延迟信息发送队列&#10;2、死信队列的多种形成方式&#10;3、如何使用死信队列实现延迟发送">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/System/src/main/java/Util/CountCodeNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/System/src/main/java/Util/CountCodeNumber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/System/target/classes/Util/CountCodeNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/System/target/classes/Util/CountCodeNumber.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/count.txt" beforeDir="false" afterPath="$PROJECT_DIR$/count.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,13 +265,13 @@
       <recent name="com.apress.bgn.char006.frame.mouse" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.DeadMessageTest">
-    <configuration name="DeadMessageConsumer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="demo.queue.deadLineImplement.consumer.DeadMessageConsumer" />
-      <module name="RabbitPracTicle" />
+  <component name="RunManager" selected="应用程序.CountCodeNumber">
+    <configuration name="CountCodeNumber" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Util.CountCodeNumber" />
+      <module name="System" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="demo.queue.deadLineImplement.consumer.*" />
+          <option name="PATTERN" value="Util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -276,12 +279,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeadMessageQueue" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="demo.queue.deadLineImplement.DeadMessageQueue" />
+    <configuration name="DeadMessageConsumer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="demo.queue.deadLineImplement.consumer.DeadMessageConsumer" />
       <module name="RabbitPracTicle" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="demo.queue.deadLineImplement.*" />
+          <option name="PATTERN" value="demo.queue.deadLineImplement.consumer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -350,18 +353,18 @@
       <item itemvalue="应用程序.test01" />
       <item itemvalue="应用程序.test" />
       <item itemvalue="应用程序.DeadMessageConsumer" />
-      <item itemvalue="应用程序.DeadMessageQueue" />
       <item itemvalue="应用程序.DeadMessageTest" />
       <item itemvalue="应用程序.DeadTestDemo" />
       <item itemvalue="应用程序.MutipleMixer" />
+      <item itemvalue="应用程序.CountCodeNumber" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.CountCodeNumber" />
+        <item itemvalue="应用程序.MutipleMixer" />
         <item itemvalue="应用程序.DeadMessageTest" />
         <item itemvalue="应用程序.DeadMessageConsumer" />
-        <item itemvalue="应用程序.MutipleMixer" />
         <item itemvalue="应用程序.DeadTestDemo" />
-        <item itemvalue="应用程序.DeadMessageQueue" />
       </list>
     </recent_temporary>
   </component>
@@ -598,7 +601,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763623729327</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="完成死信队列&#10;1、延迟信息发送队列&#10;2、死信队列的多种形成方式&#10;3、如何使用死信队列实现延迟发送">
+      <option name="closed" value="true" />
+      <created>1763633877816</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1763633877816</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -625,7 +636,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="有事烧纸02" />
     <MESSAGE value="有事烧纸04" />
     <MESSAGE value="有事烧纸05" />
     <MESSAGE value="有事烧纸06" />
@@ -650,7 +660,8 @@
     <MESSAGE value="完成rabbitmq的教程学习【100%】&#10;下一步开始开始学习day10" />
     <MESSAGE value="测试代码总量工具完成" />
     <MESSAGE value="完成消息确认机制&#10;1、生产者生产机制&#10;2、消费者确认机制" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成消息确认机制&#10;1、生产者生产机制&#10;2、消费者确认机制" />
+    <MESSAGE value="完成死信队列&#10;1、延迟信息发送队列&#10;2、死信队列的多种形成方式&#10;3、如何使用死信队列实现延迟发送" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成死信队列&#10;1、延迟信息发送队列&#10;2、死信队列的多种形成方式&#10;3、如何使用死信队列实现延迟发送" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
