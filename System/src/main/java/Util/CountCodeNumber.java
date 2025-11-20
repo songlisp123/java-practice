@@ -1,11 +1,13 @@
 package Util;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -37,15 +39,33 @@ public class CountCodeNumber {
 
 
     public static void main(String[] args) throws InterruptedException, IOException {
+        //todo
+        Path totalNumberPath = createTotalNumberPath();
+        //todo 查找总代码
+        Long lastTotalCode = countTotalCode(totalNumberPath);
+        String message = "";
         findStaticPath(null);
         Thread.sleep(2000L);
         queue.put(Path.of("null"));
         PlanB();
         Thread.sleep(5000L); //逻辑非常脆弱，万一睡眠时间过了，其他线程没有执行完呢？
+        //获取当前代码
         long countNUmber = codeNumber.get();
-        String message = "["+LocalDateTime.now() + "]: " +
-                "一共写了%d行代码%n".formatted(countNUmber);
-        Files.writeString(targetPath,message,StandardOpenOption.APPEND);
+        if(lastTotalCode == null) {
+            lastTotalCode = 0L;
+        }else {
+            if (countNUmber > lastTotalCode) {
+                 message = "["+LocalDateTime.now() + "]: " +
+                        "一共写了%d行代码  ".formatted(countNUmber) + "比上次 "+
+                        "+ %d%n".formatted(countNUmber - lastTotalCode);
+            }else {
+                 message = "["+LocalDateTime.now() + "]: " +
+                        "一共写了%d行代码  ".formatted(countNUmber) + "比上次 "+
+                        "- %d%n".formatted(lastTotalCode - countNUmber);
+            }
+
+        }
+        Files.writeString(totalNumberPath,message,StandardOpenOption.APPEND);
     }
 
     public static void findStaticPath(Path searchPath)  {
@@ -133,6 +153,50 @@ public class CountCodeNumber {
             }
         }
         executorService.shutdown();
+    }
+
+    /**
+     * 创建新文件存放总代码量数字
+     * @return 新路径
+     * @throws IOException 如果创建文件失败或者写入失败
+     */
+    private static Path createTotalNumberPath() throws IOException {
+        Path countTotalNumberPath = Path.of(rootPath,"countTotalNumber.txt");
+        if (!countTotalNumberPath.toFile().exists()) {
+            Files.createFile(countTotalNumberPath);
+        }
+        return countTotalNumberPath;
+    }
+
+    /**
+     * 统计总代码量
+     * @param path 统计路径
+     * @return 当前总代码量
+     */
+    private static Long countTotalCode(Path path) {
+        Long counts = null;
+        try(Stream<String> stream = Files.lines(path, StandardCharsets.UTF_8);) {
+            List<String> streamList = stream.toList();
+            if ( !streamList.isEmpty()) {
+                //获取最新的总代码量
+                String last = streamList.getLast();
+                counts = toGetTotalNumber(last);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return counts;
+    }
+
+    /**
+     * 判断总代码量
+     * @param last 最后一次的代码片段
+     * @return 当前总代码量
+     */
+    private static Long toGetTotalNumber(String last) {
+        String string = last.split("了")[1];
+        String stringNumber = string.split("行")[0];
+        return Long.valueOf(stringNumber);
     }
 }
 

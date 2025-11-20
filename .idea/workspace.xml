@@ -7,7 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="完成死信队列&#10;1、延迟信息发送队列&#10;2、死信队列的多种形成方式&#10;3、如何使用死信队列实现延迟发送">
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="完善记录代码量的工具">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/System/src/main/java/Util/CountCodeNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/System/src/main/java/Util/CountCodeNumber.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/System/target/classes/Util/CountCodeNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/System/target/classes/Util/CountCodeNumber.class" afterDir="false" />
@@ -609,7 +609,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763633877816</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="完善记录代码量的工具">
+      <option name="closed" value="true" />
+      <created>1763637042757</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1763637042757</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -623,7 +631,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -636,7 +644,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="有事烧纸04" />
     <MESSAGE value="有事烧纸05" />
     <MESSAGE value="有事烧纸06" />
     <MESSAGE value="有事烧纸07" />
@@ -661,7 +668,8 @@
     <MESSAGE value="测试代码总量工具完成" />
     <MESSAGE value="完成消息确认机制&#10;1、生产者生产机制&#10;2、消费者确认机制" />
     <MESSAGE value="完成死信队列&#10;1、延迟信息发送队列&#10;2、死信队列的多种形成方式&#10;3、如何使用死信队列实现延迟发送" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成死信队列&#10;1、延迟信息发送队列&#10;2、死信队列的多种形成方式&#10;3、如何使用死信队列实现延迟发送" />
+    <MESSAGE value="完善记录代码量的工具" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善记录代码量的工具" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
