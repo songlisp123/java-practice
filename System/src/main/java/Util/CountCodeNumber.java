@@ -24,6 +24,8 @@ public class CountCodeNumber {
 
     private static final BlockingQueue<Path> queue = new LinkedBlockingQueue<>();
 
+    private static final String rootPath = System.getProperty("user.dir");
+
     private static AtomicLong codeNumber = new AtomicLong(0L);
 
     public static void main(String[] args) throws InterruptedException {
@@ -38,7 +40,6 @@ public class CountCodeNumber {
     public static void findStaticPath(Path searchPath)  {
 
         if (Objects.isNull(searchPath)) {
-            String rootPath = System.getProperty("user.dir");
             searchPath  =  Path.of(rootPath);
         }
 
@@ -90,14 +91,12 @@ public class CountCodeNumber {
                     count++;
                 }
                 codeNumber.getAndAdd(count);
-                String property = System.getProperty("user.dir");
-                Path targetPath = Path.of(property,"count.txt");
+                Path targetPath = Path.of(rootPath,"count.txt");
                 String message = path.toString() + "   总行数："+"[" + count + "]\n";
                 if (!targetPath.toFile().exists()) {
                     Files.createFile(targetPath);
                 }
                 lock.lock();
-
                 Files.write(targetPath,message.getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -113,8 +112,8 @@ public class CountCodeNumber {
      */
 
     private static void PlanB() {
-        while (queue.remainingCapacity() > 1) {
-
+//        while (queue.remainingCapacity() > 1) { //死循环，不推荐
+        while (true) { //死循环，不推荐
             try {
                 Path path = queue.take();
                 if (Objects.equals(path.toString(),"null")) {
@@ -128,3 +127,22 @@ public class CountCodeNumber {
         executorService.shutdown();
     }
 }
+
+//AI给的建议：
+/**
+ * 1、并发设计线程判断结束不合理，判断条件不合理（死循环风险）
+ * 2、锁使用有严重问题，如果io层出现异常，锁永远不会被释放
+ * 3、io扫描低效
+ * 4、文件遍历存在重复递归
+ * 5、（重要）控制流程不明显--不能调用thread。sleep这是不可靠的做法，因为你不能确定是否线程都做完了
+ * 6、静态变量太多
+ * 7、程序结构可优化
+ * 8、可读性问题
+ */
+
+/**
+ * 优化思路：
+ * 1、线程并发使用计数们
+ * 2、模块分层
+ * 3、结构优化
+ */

@@ -1,16 +1,33 @@
 package audio;
 
+import audio.util.WindowHandler;
+
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class MutipleMixer {
+
+    private static final Logger logger = Logger.getLogger("music.player");
+    private static final WindowHandler handler = new WindowHandler();
+    private static final CountDownLatch startSignal = new CountDownLatch(1);
+    private static final CountDownLatch endSignal = new CountDownLatch(1);
+    private static final ReentrantLock lock = new ReentrantLock();
+
+    static {
+        logger.setLevel(Level.ALL);
+        logger.setUseParentHandlers(false);
+        handler.setLevel(Level.ALL);
+        handler.setFormatter(new SimpleFormatter());
+        logger.addHandler(handler);
+    }
 
     public static Runnable playMusic(Path musicFilePath) {
         return () -> {
@@ -28,6 +45,7 @@ public class MutipleMixer {
 
 
             try (AudioInputStream stream = AudioSystem.getAudioInputStream(musicFilePath.toFile())) {
+                startSignal.await();
                 AudioFormat format = stream.getFormat();
                 System.out.println("音乐格式："+format);
                 float frameRate = format.getFrameRate();
@@ -49,14 +67,12 @@ public class MutipleMixer {
                 sourceDataLine.start();
 //                setVolume(sourceDataLine,0.8f);
                 //声音长度
-
-
-
                 boolean stopped = false;
                 var numberByteStore = new byte[4096];
                 float gain = 0f;
                 float fadeInStep = 1f / (44100 * 10); // 10秒淡入
                 int read = stream.read(numberByteStore, 0, 4096);
+                lock.lock();
                 while (read != -1) {
 //                    System.out.printf("读取字节数：%d%n",read);
                     for (int i = 0; i < read; i+=2) {
@@ -79,8 +95,13 @@ public class MutipleMixer {
                 sourceDataLine.stop();
                 sourceDataLine.drain();
                 sourceDataLine.close();
+
             } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
                 throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }finally {
+                if (lock.isLocked()) lock.unlock();
             }
         };
     }
@@ -108,39 +129,45 @@ public class MutipleMixer {
         public void update(LineEvent event) {
 
             if (event.getType() == LineEvent.Type.START) {
-                System.out.println("【✅】 开始播放音乐……");
-                System.out.println(LocalDateTime.now());
+                logger.info("【✅】 开始播放音乐……");
+                logger.info(LocalDateTime.now()+"");
                 this.framePosition = event.getFramePosition();
             }
 
             if (event.getType() == LineEvent.Type.CLOSE) {
-                System.out.printf("当前线程:%s%n",thread.getName());
+                logger.info("当前线程:%s%n".formatted(thread.getName()));
                 if (event.getFramePosition() >= 19) {
-                    System.out.println("音乐正常结束");
+                    logger.info("音乐正常结束");
                 } else {
-                    System.out.println("音乐被暂停或者终止");
+                    logger.info("音乐被暂停或者终止");
                 }
+                endSignal.countDown();
             }
 
 
             if (event.getType() == LineEvent.Type.STOP) {
-                System.out.printf("当前线程:%s%n",thread.getName());
+                logger.info("当前线程:%s%n".formatted(thread.getName()));
                 long framePosition = event.getFramePosition();
-                System.out.printf("起始位置：%d",this.framePosition);
-                System.out.printf("当前样本数量：%d%n",framePosition);
-                System.out.printf("音乐时长:[%.2f]秒%n",Math.floor(framePosition / this.frameRate));
+                logger.info("音乐时长:[%.2f]秒%n".formatted(Math.floor(framePosition / this.frameRate)));
             }
 
             if (event.getType() == LineEvent.Type.OPEN) {
-                System.out.println("【✅】管道开启");
+               logger.info("【✅】管道开启");
             }
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
-        try(ExecutorService executorService = Executors.newCachedThreadPool()) {
-            executorService.submit(playMusic(Path.of("爱在西元前.wav")));
-            Thread.sleep(Duration.of(3000L, ChronoUnit.SECONDS));
+        try(ScheduledExecutorService executorService = Executors.newScheduledThreadPool(10)) {
+            executorService.scheduleAtFixedRate(playMusic(Path.of("test.wav")),
+                    1000L,
+                    5000L,
+                    TimeUnit.MILLISECONDS);
+            logger.info("程序开启");
+            startSignal.countDown();
+            endSignal.await();
+            logger.info("程序结束");
+
         }
     }
 
@@ -187,10 +214,10 @@ public class MutipleMixer {
 
         for (int i = 0; i<= step ; i++) {
             float percent =(float) i / step;
-            float db = current + (maximum -current) * percent;
+            float db = current - (maximum -current) * percent;
             control.setValue(db);
             try {
-                Thread.sleep(step);
+                Thread.sleep(sleep);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -218,3 +245,18 @@ public class MutipleMixer {
 
 
 }
+
+/**
+ * 音乐的问题：
+ * 重大问题：淡入淡出算法是错的
+ * ❌ 2. Byte → PCM sample 转换可能错误（大小端）
+ * ❌ 3. 淡出（fadeOut）算法逻辑完全错误
+ * ❌ 4. 在回放线程中使用 Thread.sleep() 阻塞音频回放线程
+ * ❌ 5. 执行器使用 cachedThreadPool 存在高风险
+ * ❌ 6. 你的 LineListener 中使用 Thread.currentThread
+ * ❌ 7. 播放结束判断逻辑不正确
+ * ❌ 9. fadeOut 中 sleep 错误写成了 Thread.sleep(step)
+ * ❌ 11. LineEventImpl 内部变量未按用途命名
+ * 变量 framePosition、frameRate 没有清晰用途，日志也不准确
+ * 评分：6.5分
+ */
