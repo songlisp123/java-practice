@@ -33,7 +33,7 @@ public class CountCodeNumber {
         Thread.sleep(2000L);
         queue.put(Path.of("null"));
         PlanB();
-        Thread.sleep(5000L);
+        Thread.sleep(5000L); //逻辑非常脆弱，万一睡眠时间过了，其他线程没有执行完呢？
         System.out.printf("一共写了%d行代码%n",codeNumber.get());
     }
 

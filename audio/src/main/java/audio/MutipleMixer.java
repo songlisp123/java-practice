@@ -159,7 +159,7 @@ public class MutipleMixer {
 
     public static void main(String[] args) throws InterruptedException {
         try(ScheduledExecutorService executorService = Executors.newScheduledThreadPool(10)) {
-            executorService.scheduleAtFixedRate(playMusic(Path.of("test.wav")),
+            executorService.scheduleAtFixedRate(playMusic(Path.of("爱在西元前.wav")),
                     1000L,
                     5000L,
                     TimeUnit.MILLISECONDS);
