@@ -1,7 +1,7 @@
 package demo.queue.confirm;
 
 import com.rabbitmq.client.*;
-import demo.queue.util.WindowHandler;
+import demo.util.WindowHandler;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

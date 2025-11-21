@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="v1ch12">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/v1ch12/parsson-1.1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/v1ch12/jakarta.json-api-2.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/v1ch12/commons-csv-1.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/v1ch12/commons-csv-1.10.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/v1ch12/yasson-3.0.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/v1ch12/jakarta.json.bind-api-3.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

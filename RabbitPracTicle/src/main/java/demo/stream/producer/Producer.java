@@ -3,9 +3,8 @@ package demo.stream.producer;
 
 import com.rabbitmq.stream.ByteCapacity;
 import com.rabbitmq.stream.Environment;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
 public class Producer {
     public static void main(String[] args) {
         try{
@@ -29,7 +28,8 @@ public class Producer {
 //            environment.close();
         }
         catch (Exception e) {
-            log.info("发生异常,{}",e.getMessage());
+//            log.info("发生异常,{}",e.getMessage());
+            throw new RuntimeException("发生异常");
         }
     }
 }

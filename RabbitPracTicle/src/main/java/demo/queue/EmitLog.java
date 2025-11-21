@@ -5,14 +5,12 @@ import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
 
 /**
  * 演示信息从生产者发送到交换机的例子
  */
-@Slf4j
 public class EmitLog {
     /**
      * 交换机名称
@@ -36,7 +34,7 @@ public class EmitLog {
             channel.basicPublish(EX_CHANGE,"",null,message.getBytes(StandardCharsets.UTF_8));
             System.out.println("【x】 发送信息："+message);
         }catch (Exception e) {
-            log.error("创建连接失败,{}",e.getMessage());
+//            log.error("创建连接失败,{}",e.getMessage());
         }
     }
 }

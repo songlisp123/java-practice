@@ -26,6 +26,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="RabbitPracTicle" options="-parameters" />
       <module name="audiotest" options="" />
     </option>
   </component>

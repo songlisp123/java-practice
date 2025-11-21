@@ -4,14 +4,13 @@ package demo.stream.producer;
 import com.rabbitmq.stream.ByteCapacity;
 import com.rabbitmq.stream.Environment;
 import com.rabbitmq.stream.Producer;
-import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-@Slf4j
+
 public class OffsetTrackingTest {
     public static void main(String[] args) {
         //获取流

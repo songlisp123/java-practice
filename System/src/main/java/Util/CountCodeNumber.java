@@ -24,17 +24,29 @@ import java.util.stream.Stream;
  */
 public class CountCodeNumber {
 
+    /**
+     * 可重入锁
+     */
     private static final ReentrantLock lock = new ReentrantLock();
 
+    /**
+     * 执行器
+     */
     private static final ExecutorService  executorService = Executors.newScheduledThreadPool(
             Runtime.getRuntime().availableProcessors());
 
+    /**
+     * 阻塞队列
+     */
     private static final BlockingQueue<Path> queue = new LinkedBlockingQueue<>();
 
     private static final String rootPath = System.getProperty("user.dir");
 
     private static final Path  targetPath = Path.of(rootPath,"count.txt");
 
+    /**
+     * 多线程原子性递增数字
+     */
     private static AtomicLong codeNumber = new AtomicLong(0L);
 
 
@@ -54,7 +66,7 @@ public class CountCodeNumber {
         if(lastTotalCode == null) {
             lastTotalCode = 0L;
         }else {
-            if (countNUmber > lastTotalCode) {
+            if (countNUmber >= lastTotalCode) {
                  message = "["+LocalDateTime.now() + "]: " +
                         "一共写了%d行代码  ".formatted(countNUmber) + "比上次 "+
                         "+ %d%n".formatted(countNUmber - lastTotalCode);
@@ -68,6 +80,10 @@ public class CountCodeNumber {
         Files.writeString(totalNumberPath,message,StandardOpenOption.APPEND);
     }
 
+    /**
+     * 查找以。java为扩展的文件，并写入到阻塞队列里面
+     * @param searchPath 搜索扫描的文件路径
+     */
     public static void findStaticPath(Path searchPath)  {
 
         if (Objects.isNull(searchPath)) {

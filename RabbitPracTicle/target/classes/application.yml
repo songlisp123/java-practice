@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: rabbit-demo
+
+server:
+  port: 8800
+
+  #rabbitmq连接属性有关 host port username password
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+logging:
+  level:
+    root: info
+    demo: debug
