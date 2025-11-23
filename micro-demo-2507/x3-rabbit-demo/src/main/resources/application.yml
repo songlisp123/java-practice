@@ -1,0 +1,4 @@
+logging:
+  level:
+    root: info
+    com.snl.x3.rabbit.demo: debug

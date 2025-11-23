@@ -1,0 +1,42 @@
+#web容器端口号
+server:
+  port: 8000
+spring:
+  #cloud nacos服务发现配置
+  cloud:
+    nacos:
+      discovery:
+        #nacos-client需要连接服务端nacos-server 需要给client告知server地址
+        server-addr: localhost:8848
+        #客户端连接到服务端之后 提供客户端名称,一般名称和业务有关
+        service: device-service
+  #应用名称
+  application:
+    name: micro-demo-device
+  #数据源
+  datasource:
+    url: jdbc:mysql://localhost:3306/micro_demo_db?useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+#持久层框架
+mybatis-plus:
+  #映射扫描
+  mapper-locations: classpath:mapper/*.xml
+  #开启关闭二级缓存
+  configuration:
+    cache-enabled: false
+    #打印执行sql日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #开启驼峰和下划线的命名对应关系
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: info
+    com.tedu.micro.demo.order: debug
+
+  file:
+    path: ./logs/device.log

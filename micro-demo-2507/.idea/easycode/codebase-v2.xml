@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/micro-demo-device/src/main/java/com/tedu/micro/demo/device/mapper/DeviceMapper.java;I:/20250820/micro-demo-2507/micro-demo-device/src/main/java/com/tedu/micro/demo/device/pojo/po/GunInfoPo.java;I:/20250820/micro-demo-2507/micro-demo-device/src/main/java/com/tedu/micro/demo/device/DeviceApplication.java;I:/20250820/micro-demo-2507/micro-demo-device/src/test/java/com/tedu/micro/demo/device/DeviceTest.java;I:/20250820/micro-demo-2507/data.sql" />
+  </component>
+</project>

@@ -1,0 +1,19 @@
+server:
+  #user车主 10000 device设备11000 order订单12000 cost计价13000
+  port: 7780
+spring:
+  application:
+    name: emqx
+  #激活开启的多环境文件 local jsd 激活local
+
+#纯自定义，没有提示
+charging:
+  emqx:
+    address: tcp://localhost:1883
+    username: admin
+    password: public
+    group: demo02
+#项目在业务代码中要输出一些日志 all debug info warn error off
+logging:
+  level:
+    cn.tedu: debug

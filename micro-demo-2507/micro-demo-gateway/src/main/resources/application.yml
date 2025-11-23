@@ -1,0 +1,28 @@
+server:
+  port: 9000
+spring:
+  cloud:
+    gateway:
+      #路由
+      routes:
+        #每转发一个业务 一个功能 一个接口 都可以定义一个路由
+        - id: order-route
+#          uri: lb#http://localhost:8100
+          uri: lb://order-service
+          predicates:
+            #断言是路由中最核心的功能之一 能够决定什么样的请求可以被当前路由处理
+            - Path=/charge_api/order/**
+          filters:
+            - StripPrefix=1
+        - id: device-route
+          uri: lb://device-service
+          predicates:
+              - Path=/charge_api/device/**
+          filters:
+              - StripPrefix=1
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        service: gateway-entry
+  application:
+    name: gateway

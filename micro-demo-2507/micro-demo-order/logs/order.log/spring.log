@@ -1,0 +1,57 @@
+2025-10-25T14:37:21.366+08:00  INFO 89280 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Starting SaveOrderTest using Java 21.0.7 with PID 89280 (started by snl19 in I:\20250820\micro-demo-2507\micro-demo-order)
+2025-10-25T14:37:21.380+08:00 DEBUG 89280 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2025-10-25T14:37:21.381+08:00  INFO 89280 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : No active profile set, falling back to 1 default profile: "default"
+2025-10-25T14:37:22.001+08:00  INFO 89280 --- [micro-demo-order] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=1f3603d4-78a0-3ab3-9fde-9dc7cffa8588
+2025-10-25T14:37:22.976+08:00  INFO 89280 --- [micro-demo-order] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-10-25T14:37:22.976+08:00  INFO 89280 --- [micro-demo-order] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-10-25T14:37:22.978+08:00  INFO 89280 --- [micro-demo-order] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2025-10-25T14:37:23.028+08:00  INFO 89280 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Started SaveOrderTest in 1.987 seconds (process running for 2.845)
+2025-10-25T14:37:23.698+08:00 DEBUG 89280 --- [micro-demo-order] [main] c.t.m.d.o.controller.OrderController     : 控制器入参：用户id=1,抢id=2
+2025-10-25T14:37:23.699+08:00 DEBUG 89280 --- [micro-demo-order] [main] c.t.m.d.o.s.imp.OrderServiceImplement    : 业务层入参：用户id=1,墙编号：2
+2025-10-25T14:37:46.595+08:00  INFO 90732 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Starting SaveOrderTest using Java 21.0.7 with PID 90732 (started by snl19 in I:\20250820\micro-demo-2507\micro-demo-order)
+2025-10-25T14:37:46.595+08:00 DEBUG 90732 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2025-10-25T14:37:46.596+08:00  INFO 90732 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : No active profile set, falling back to 1 default profile: "default"
+2025-10-25T14:37:47.191+08:00  INFO 90732 --- [micro-demo-order] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=1f3603d4-78a0-3ab3-9fde-9dc7cffa8588
+2025-10-25T14:37:48.211+08:00  INFO 90732 --- [micro-demo-order] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-10-25T14:37:48.212+08:00  INFO 90732 --- [micro-demo-order] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-10-25T14:37:48.213+08:00  INFO 90732 --- [micro-demo-order] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-10-25T14:37:48.275+08:00  INFO 90732 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Started SaveOrderTest in 1.963 seconds (process running for 2.741)
+2025-10-25T14:37:48.967+08:00 DEBUG 90732 --- [micro-demo-order] [main] c.t.m.d.o.controller.OrderController     : 控制器入参：用户id=1,抢id=2
+2025-10-25T14:37:48.969+08:00 DEBUG 90732 --- [micro-demo-order] [main] c.t.m.d.o.s.imp.OrderServiceImplement    : 业务层入参：用户id=1,墙编号：2
+2025-10-25T14:38:11.865+08:00  INFO 26860 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Starting SaveOrderTest using Java 21.0.7 with PID 26860 (started by snl19 in I:\20250820\micro-demo-2507\micro-demo-order)
+2025-10-25T14:38:11.866+08:00 DEBUG 26860 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2025-10-25T14:38:11.866+08:00  INFO 26860 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : No active profile set, falling back to 1 default profile: "default"
+2025-10-25T14:38:12.463+08:00  INFO 26860 --- [micro-demo-order] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=1f3603d4-78a0-3ab3-9fde-9dc7cffa8588
+2025-10-25T14:38:13.422+08:00  INFO 26860 --- [micro-demo-order] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-10-25T14:38:13.423+08:00  INFO 26860 --- [micro-demo-order] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-10-25T14:38:13.424+08:00  INFO 26860 --- [micro-demo-order] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-10-25T14:38:13.472+08:00  INFO 26860 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Started SaveOrderTest in 1.886 seconds (process running for 2.617)
+2025-10-25T14:38:14.113+08:00 DEBUG 26860 --- [micro-demo-order] [main] c.t.m.d.o.controller.OrderController     : 控制器入参：用户id=1,抢id=2
+2025-10-25T14:38:14.114+08:00 DEBUG 26860 --- [micro-demo-order] [main] c.t.m.d.o.s.imp.OrderServiceImplement    : 业务层入参：用户id=1,墙编号：2
+2025-10-25T14:38:14.428+08:00 DEBUG 26860 --- [micro-demo-order] [main] c.t.m.d.o.d.r.i.OrderRepositoryImplement : 仓库层入参:OrderInfoPo(id=null, billId=369e35d61e5d43d8a9c75c05df9f68e6, userId=1, gunId=2, createTime=2025-10-25T14:38:14.427606300, updateTime=2025-10-25T14:38:14.427606300)
+2025-10-25T14:38:14.464+08:00  INFO 26860 --- [micro-demo-order] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-25T14:38:14.576+08:00  INFO 26860 --- [micro-demo-order] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@593f7d2e
+2025-10-25T14:38:14.578+08:00  INFO 26860 --- [micro-demo-order] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-25T14:38:14.663+08:00  INFO 26860 --- [micro-demo-order] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-25T14:38:14.670+08:00  INFO 26860 --- [micro-demo-order] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-25T14:43:53.730+08:00  INFO 97700 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Starting SaveOrderTest using Java 21.0.7 with PID 97700 (started by snl19 in I:\20250820\micro-demo-2507\micro-demo-order)
+2025-10-25T14:43:53.730+08:00 DEBUG 97700 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2025-10-25T14:43:53.732+08:00  INFO 97700 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : No active profile set, falling back to 1 default profile: "default"
+2025-10-25T14:43:54.320+08:00  INFO 97700 --- [micro-demo-order] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=1f3603d4-78a0-3ab3-9fde-9dc7cffa8588
+2025-10-25T14:43:55.331+08:00  INFO 97700 --- [micro-demo-order] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-10-25T14:43:55.331+08:00  INFO 97700 --- [micro-demo-order] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-10-25T14:43:55.332+08:00  INFO 97700 --- [micro-demo-order] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-10-25T14:43:55.390+08:00  INFO 97700 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Started SaveOrderTest in 1.942 seconds (process running for 2.718)
+2025-10-25T14:43:56.061+08:00 DEBUG 97700 --- [micro-demo-order] [main] c.t.m.d.o.controller.OrderController     : 控制器入参：用户id=1,抢id=3
+2025-10-25T14:43:56.062+08:00 DEBUG 97700 --- [micro-demo-order] [main] c.t.m.d.o.s.imp.OrderServiceImplement    : 业务层入参：用户id=1,墙编号：3
+2025-10-25T14:44:04.922+08:00  INFO 76492 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Starting SaveOrderTest using Java 21.0.7 with PID 76492 (started by snl19 in I:\20250820\micro-demo-2507\micro-demo-order)
+2025-10-25T14:44:04.924+08:00 DEBUG 76492 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Running with Spring Boot v3.3.3, Spring v6.1.12
+2025-10-25T14:44:04.924+08:00  INFO 76492 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : No active profile set, falling back to 1 default profile: "default"
+2025-10-25T14:44:05.520+08:00  INFO 76492 --- [micro-demo-order] [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=1f3603d4-78a0-3ab3-9fde-9dc7cffa8588
+2025-10-25T14:44:06.478+08:00  INFO 76492 --- [micro-demo-order] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-10-25T14:44:06.478+08:00  INFO 76492 --- [micro-demo-order] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-10-25T14:44:06.480+08:00  INFO 76492 --- [micro-demo-order] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2025-10-25T14:44:06.532+08:00  INFO 76492 --- [micro-demo-order] [main] c.t.m.d.o.test.webMvcTest.SaveOrderTest  : Started SaveOrderTest in 1.935 seconds (process running for 2.688)
+2025-10-25T14:44:07.147+08:00 DEBUG 76492 --- [micro-demo-order] [main] c.t.m.d.o.controller.OrderController     : 控制器入参：用户id=1,抢id=3
+2025-10-25T14:44:07.148+08:00 DEBUG 76492 --- [micro-demo-order] [main] c.t.m.d.o.s.imp.OrderServiceImplement    : 业务层入参：用户id=1,墙编号：3
+2025-10-25T14:44:07.453+08:00 DEBUG 76492 --- [micro-demo-order] [main] c.t.m.d.o.s.imp.OrderServiceImplement    : 发生异常

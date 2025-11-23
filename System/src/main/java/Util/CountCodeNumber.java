@@ -65,7 +65,7 @@ public class CountCodeNumber {
         long countNUmber = codeNumber.get();
         if(lastTotalCode == null) {
             lastTotalCode = 0L;
-        }else {
+        }else { //不推荐，硬编码太多
             if (countNUmber >= lastTotalCode) {
                  message = "["+LocalDateTime.now() + "]: " +
                         "一共写了%d行代码  ".formatted(countNUmber) + "比上次 "+
@@ -137,7 +137,7 @@ public class CountCodeNumber {
                  */
                 count = stream.count();
                 codeNumber.getAndAdd(count);
-                String message = path.toString() + "   总行数："+"[" + count + "]\n";
+                String message = path + "   总行数："+"[" + count + "]\n";
                 lock.lock();
                 Files.writeString(targetPath, message,StandardOpenOption.APPEND);
             } catch (IOException e) {
@@ -205,7 +205,7 @@ public class CountCodeNumber {
     }
 
     /**
-     * 判断总代码量
+     * 判断总代码量,硬编码非常不推荐
      * @param last 最后一次的代码片段
      * @return 当前总代码量
      */

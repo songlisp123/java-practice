@@ -12,6 +12,15 @@
         <option value="$PROJECT_DIR$/reflection/pom.xml" />
         <option value="$PROJECT_DIR$/RabbitPracTicle/pom.xml" />
         <option value="$PROJECT_DIR$/redis/pom.xml" />
+        <option value="$PROJECT_DIR$/charging-subject/pom.xml" />
+        <option value="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/pom.xml" />
+        <option value="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/pom.xml" />
+        <option value="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/pom.xml" />
+        <option value="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/pom.xml" />
+        <option value="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/pom.xml" />
+        <option value="$PROJECT_DIR$/charging-subject/charging-app-2507/pom.xml" />
+        <option value="$PROJECT_DIR$/micro-demo-2507/pom.xml" />
       </list>
     </option>
   </component>

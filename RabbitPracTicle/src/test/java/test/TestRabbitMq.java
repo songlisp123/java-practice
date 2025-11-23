@@ -10,6 +10,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -24,9 +25,10 @@ public class TestRabbitMq {
 
     @Test
     public void  test() throws Exception {
-        String urlPath = "/send";
+        String urlPath = "/send/delay";
+
         mockMvc.perform(get(urlPath).queryParam(
-                "message","床前明月光，疑是地上霜?"
+                "message",""+ LocalDateTime.now()
                 ))
 
                 .andExpect(status().isOk())
