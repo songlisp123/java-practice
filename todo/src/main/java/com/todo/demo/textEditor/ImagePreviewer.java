@@ -1,0 +1,239 @@
+package com.todo.demo.textEditor;
+
+import com.todo.demo.textEditor.util.audioPlay;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.Objects;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.regex.Pattern;
+
+/**
+ * A file chooser accessory that previews images.
+ */
+public class ImagePreviewer extends JPanel
+{
+
+   private final LinkedBlockingQueue<String> linkedBlockingQueue
+           = new LinkedBlockingQueue<>();
+
+   private JLabel label;
+   private JTextArea textArea;
+   private JButton play;
+   private JButton stop;
+
+   private final Pattern musicReg = Pattern.compile(".+\\.(mp3|flac|wav)$");
+   private final Pattern txtReg = Pattern.compile(".+\\.(txt|java|class)$");
+   private final Pattern wordReg = Pattern.compile(".+\\.(docx|doc)$");
+   private final Pattern pictureReg = Pattern.compile(".+\\.(png|gif|jpg|jepg)$");
+   /**
+    * 构建一个图像预览图
+    * @param chooser the file chooser whose property changes trigger an image
+    *        change in this previewer
+    */
+   public   ImagePreviewer(JFileChooser chooser)
+   {
+
+      setPreferredSize(new Dimension(300, 200));
+      setBorder(BorderFactory.createEtchedBorder());
+      setLayout(new BorderLayout(20,20));
+      chooser.addPropertyChangeListener(event ->
+         {
+            if (event.getPropertyName() == JFileChooser.SELECTED_FILE_CHANGED_PROPERTY)
+            {
+               // the user has selected a new file
+               File f = (File) event.getNewValue();
+               if (f == null)
+               {
+                  task(label,textArea,play,stop);
+                  return;
+               }
+               if (f.getPath().matches(pictureReg.pattern()))
+               {
+                  task(textArea,play,stop);
+                  if (label == null) label = new JLabel();
+                  // read the image into an icon
+                  var icon = new ImageIcon(f.getPath());
+                  // if the icon is too large to fit, scale it
+                  if (icon.getIconWidth() > getWidth())
+                     icon = new ImageIcon(icon.getImage().getScaledInstance(
+                             getWidth(), -1, Image.SCALE_SMOOTH));
+                  else {
+                     icon = new ImageIcon(icon.getImage().getScaledInstance(
+                             getWidth(), -1, Image.SCALE_SMOOTH));
+                  }
+                  label.setIcon(icon);
+                  add(label);
+               }
+               if (f.getPath().matches(txtReg.pattern()))
+               {
+                  task(label,play,stop);
+                  if (textArea == null) textArea = new JTextArea();
+                  try {
+                      String string = Files.readString(f.toPath(),StandardCharsets.UTF_8);
+                      textArea.setText(string);
+                      textArea.setEditable(false);
+                      textArea.setBackground(new Color(30,30,30));
+                      textArea.setForeground(Color.WHITE);
+                      add(textArea,BorderLayout.CENTER);
+                   } catch (IOException e) {
+                       e.printStackTrace();
+                       textArea.setText(e.getMessage());
+                   }
+               }
+
+               //失败的读取.docx文件类型，我还是不太明白这个东西，不过，等我以后再学
+//               if (f.getPath().matches(wordReg.pattern())) {
+//                  long len = f.length();
+//                  if (textArea == null) textArea = new JTextArea();
+//                  try(InputStreamReader reader = new InputStreamReader(
+//                             new BufferedInputStream(new FileInputStream(f))))
+//                     {
+//                        char[] chars = new char[(int) len];
+//                        int read = reader.read(chars);
+//                        String s= new String(chars);
+//                        textArea.setText(s);
+//                        textArea.setEditable(false);
+//                        textArea.setBackground(new Color(30,30,30));
+//                        textArea.setForeground(Color.WHITE);
+//                        add(textArea,BorderLayout.CENTER);
+//                     } catch (IOException e) {
+//                        e.printStackTrace();
+//                     }
+//               }
+
+               //读取音乐文件
+               if (f.getPath().matches(musicReg.pattern())) {
+                  task(label,textArea);
+                  if(play == null) play = new JButton("开始播放！");
+                  if (stop == null) stop = new JButton("暂停");
+                  add(play,BorderLayout.NORTH);
+                  add(stop,BorderLayout.SOUTH);
+                  play.addActionListener(e -> {
+                     audioPlay.play(true,f.toPath());
+                     System.out.println("正在播放……");
+                  });
+                  stop.addActionListener(e -> {
+                     audioPlay.play(false,f.toPath());
+                     System.out.println("音乐停止");
+                  });
+
+
+//                  try(FileInputStream inputStream = new FileInputStream(f))
+//                  {
+//                     byte[] bytes = new byte[(int) length];
+//                     inputStream.read(bytes);
+//                     for (byte b : bytes) {
+//                        if (count <30) {
+//                           System.out.printf(b+"  ");
+//                           count++;
+//                        }
+//
+//                     }
+//                  } catch (SecurityException | IOException e) {
+//                     e.printStackTrace();
+//                  }
+//                  Runnable read = () -> {
+//                      try(FileInputStream fileInputStream = new FileInputStream(f))
+//                      {
+//                         byte[] bytes = new byte[(int) length];
+//                         int read1 = fileInputStream.read(bytes);//这一步会阻塞
+//                         System.out.println(read1);
+//                         System.out.println(bytes.length);
+//                         for (byte b : bytes) linkedBlockingQueue.put(b+"  ");//这一步也会发生阻塞
+//                         linkedBlockingQueue.put("完成");
+//                         System.out.println("读取工完毕！");
+//                      } catch (FileNotFoundException | InterruptedException e) {
+//                          e.printStackTrace();
+//                      } catch (IOException e) {
+//                          e.printStackTrace();
+//                      }
+//                  };
+//
+//                  new Thread(read,"读取者").start();
+//
+//                  Runnable writr = () ->{
+//                     boolean done = false;
+//                      try {
+//                         while (!done) {
+//                            var take = linkedBlockingQueue.take();
+//                            if ("完成".equals(take)) {
+//                               done = true;
+//                               linkedBlockingQueue.put(take);
+//                               continue;
+//                            }
+//                            Files.writeString(file.toPath(),take, StandardOpenOption.APPEND);
+//                         }
+//                         System.out.println("写入工作完成！");
+//
+//                      } catch (InterruptedException | IOException e) {
+//                          e.printStackTrace();
+//                      }
+//                  };
+//
+//                  new Thread(writr,"写入者").start();
+               }
+//               {
+//                  StringBuilder stringBuilder = new StringBuilder();
+//                  String string="";
+//                  Runnable reader = () -> {
+//                      try(var in = new Scanner(f))
+//                      {
+//                          in.useDelimiter(reg);
+//                          while (in.hasNext()) {
+//                             String words = in.next();
+//                             linkedBlockingQueue.put(words);
+//                          }
+//                          linkedBlockingQueue.put("完成");
+//                      } catch (FileNotFoundException | InterruptedException e) {
+//                          e.printStackTrace();
+//                      }
+//                  };
+//
+//                  new Thread(reader,"文件读取者").start();
+//
+//                  Runnable writer = () -> {
+//                     boolean done = false;
+//                      try {
+//                         while (!done) {
+//                            String take = linkedBlockingQueue.take();
+//                            if ("完成".equals(take)) {
+//                               done = true;
+//                               linkedBlockingQueue.put(take);
+//                               continue;
+//                            }
+//                            stringBuilder.append(take+"\n");
+//                         }
+//                         setText(stringBuilder.toString());
+//                         setAutoscrolls(true);
+//                      } catch (InterruptedException e) {
+//                          e.printStackTrace();
+//                          setText(e.getMessage());
+//                      }
+//                  };
+//
+//                  new Thread(writer,"写入者").start();
+//
+//               }
+
+
+            }
+         });
+
+   }
+
+   public <T> void task(T...t) {
+      Runnable toDelete = ()->{
+         if (t.length!=0) {
+            for (T item:t) {
+               if (Objects.nonNull(item)) remove((Component) item);
+            }
+         }
+      };
+      new Thread(toDelete,"删除").start();
+   }
+}

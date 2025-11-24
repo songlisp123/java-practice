@@ -34,6 +34,15 @@
         <module name="X5-XXL-JOB" />
         <module name="charging-user" />
       </profile>
+      <profile name="Annotation profile for todo" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar" />
+        </processorPath>
+        <module name="todo" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="audio" target="1.8" />
@@ -58,6 +67,7 @@
       <module name="micro-demo-device" options="-parameters" />
       <module name="micro-demo-gateway" options="-parameters" />
       <module name="micro-demo-order" options="-parameters" />
+      <module name="todo" options="-parameters" />
       <module name="x3-rabbit-demo" options="-parameters" />
     </option>
   </component>

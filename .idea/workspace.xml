@@ -7,246 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="完成rabbit与springboot集成，完成一次生产消费的短小例子">
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/constant/AmqpDeclareConst.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/constant/AppAuthConst.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/constant/CacheKeyConst.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/constant/MqttTopicConst.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/constant/XxlJobAuthConst.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/enums/DelayName.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/enums/GunStatusEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/enums/VehicleUserBindEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/dto/XxlJobGroup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/message/CheckResultMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/message/DelayCheckMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/message/ProgressData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/message/ProgressMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/message/StartCheckMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/param/ChargeParam.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/param/OrderAddParam.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/param/ProgressCostParam.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/param/VehicleBindParam.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/param/VehicleUnbindParam.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/param/WxLoginParam.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/query/NearStationsQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/vo/BalanceVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/vo/GunInfoVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/vo/ProgressCostVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/vo/StationDetailVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/vo/StationInfoVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/vo/VehicleVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/vo/WxLoginVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/protocol/JsonResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/protocol/WebSocketMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/utils/CronUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/utils/NickNameGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/utils/SnowflakeIdGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/utils/TimeConverterUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/utils/XxlJobTaskUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/test/java/cn/tedu/test/charging/cron/CronTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/java/cn/tedu/charging/cost/CostApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/java/cn/tedu/charging/cost/controller/CostController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/java/cn/tedu/charging/cost/dao/mapper/CostRuleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/java/cn/tedu/charging/cost/dao/repository/CostRuleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/java/cn/tedu/charging/cost/pojo/po/ChargingCostRulePO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/java/cn/tedu/charging/cost/service/CostService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/resources/application-jsd.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/resources/application-local.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/DeviceApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/config/RedisConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/controller/DeviceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/dao/mapper/GunMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/dao/mapper/StationMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/dao/repository/DeviceRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/dao/repository/impl/DeviceRepositoryImplement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/pojo/po/ChargingGunInfoPO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/pojo/po/ChargingOperatorInfoPO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/pojo/po/ChargingPileInfoPO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/pojo/po/ChargingStationPO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/pojo/po/StationCanalPO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/pojo/po/StationGeoPO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/service/DeviceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/service/WormUpService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/service/impl/DeviceServiceImplement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/service/impl/WarmUpServiceImplement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/warmUp/WarmUp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/resources/application-jsd.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/resources/application-local.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-gateway/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-gateway/src/main/java/cn/tedu/charging/gateway/GatewayApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-gateway/src/main/resources/application-jsd.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-gateway/src/main/resources/application-local.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/AMQP/AmqpConsumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/AMQP/AmqpDelayProducer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/OrderApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/cilent/DeviceClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/cilent/UserClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/config/DeclareConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/config/SnowFlakeConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/controller/OrderController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/mapper/BillExceptionMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/mapper/BillFailMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/mapper/BillSuccessMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/repository/BillRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/repository/ProcessEsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/repository/impl/BillRepositoryImplement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/mqtt/callBack/MqttCallBack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/mqtt/client/MqttConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/mqtt/producer/MqttProducer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/pojo/po/ChargingBillExceptionPO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/pojo/po/ChargingBillFailPO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/pojo/po/ChargingBillSuccessPO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/pojo/po/ChargingProgressEsPO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/ConsumerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/OrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/impl/ConsumerServiceImplement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/impl/OrderServiceImplement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/resources/application-jsd.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/resources/application-local.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/test/java/order/test/mqttTest/MqttTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/UserApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/dao/mapper/UserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/dao/mapper/UserVehicleBindMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/dao/mapper/VehicleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/dao/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/dao/repository/impl/UserRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/pojo/dto/WxLoginDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/pojo/po/ChargingUserInfoPO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/pojo/po/ChargingUserVehicleBindPO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/pojo/po/ChargingVehiclePO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/utils/WxOpenIdUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/resources/application-jsd.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/resources/application-local.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/doc/charging.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/.idea/easycode.ignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/.idea/easycode/codebase-v2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/.idea/git_toolbox_prj.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-EMQX-DEMO/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-EMQX-DEMO/src/main/java/com/snl/micro/emqx/demo/EmqxApplcaition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-EMQX-DEMO/src/main/java/com/snl/micro/emqx/demo/client/EmqxClientConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-EMQX-DEMO/src/main/java/com/snl/micro/emqx/demo/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-EMQX-DEMO/src/main/java/com/snl/micro/emqx/demo/producer/MqttClientCallBack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-EMQX-DEMO/src/main/java/com/snl/micro/emqx/demo/producer/MqttProducer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-EMQX-DEMO/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-EMQX-DEMO/src/main/resources/application_instance02.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-EMQX-DEMO/src/main/resources/application_instance03.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-EMQX-DEMO/src/main/resources/application_instance04.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-EMQX-DEMO/src/test/java/com/snl/micro/emax/demo/ckientTest/TestClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-REDIS-DEMO/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-REDIS-DEMO/src/main/java/com/snl/x1/redis/demo/RedisApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-REDIS-DEMO/src/main/resources/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-REDIS-DEMO/src/test/java/com/snl/x/redis/demo/RedisGeoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-REDIS-DEMO/src/test/java/com/snl/x/redis/demo/TestRedisDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X1-REDIS-DEMO/src/test/java/com/snl/x/redis/demo/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/main/java/com/snl/micro/rabbit/demo/RabbitApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/main/java/com/snl/micro/rabbit/demo/config/DeclareConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/main/java/com/snl/micro/rabbit/demo/consumer/ConsumerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/main/java/com/snl/micro/rabbit/demo/consumer/OffsetConsumerTestDemo02.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/main/java/com/snl/micro/rabbit/demo/consumer/OffsetRecievedTestDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/main/java/com/snl/micro/rabbit/demo/consumerInpl/Consumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/main/java/com/snl/micro/rabbit/demo/controler/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/main/java/com/snl/micro/rabbit/demo/producer/OffsetTrackingTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/main/java/com/snl/micro/rabbit/demo/producer/Producer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/test/java/com/snl/micro/rabbit/demo/test/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/test/java/com/snl/micro/rabbit/demo/test/TestRabbitMq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X4-RABBITMQ-DEMO/src/test/java/com/snl/micro/rabbit/demo/test/producerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X5-XXL-JOB/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/data.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/logs/device.log/spring.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/logs/device.log/spring.log.2025-10-25.0.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/logs/order.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/logs/order/order.log/spring.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/logs/order/order.log/spring.log.2025-10-25.0.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-common/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-common/src/main/java/com/tedu/micro/demo/common/protocol/JsonResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-common/src/main/java/com/tedu/micro/demo/common/vo/GunInfoVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/main/java/com/tedu/micro/demo/device/DeviceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/main/java/com/tedu/micro/demo/device/controller/DeviceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/main/java/com/tedu/micro/demo/device/controller/HelloController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/main/java/com/tedu/micro/demo/device/dao/mapper/GunMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/main/java/com/tedu/micro/demo/device/dao/repository/DeviceRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/main/java/com/tedu/micro/demo/device/dao/repository/impl/DeviceRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/main/java/com/tedu/micro/demo/device/pojo/po/GunInfoPo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/main/java/com/tedu/micro/demo/device/service/DeviceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/main/java/com/tedu/micro/demo/device/service/impl/DeviceServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/main/resources/application_instance2.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/main/resources/application_instance3.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-device/src/test/java/com/tedu/micro/demo/device/DeviceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-gateway/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-gateway/src/main/java/com/tedu/micro/demo/gateway/GateWayApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/logs/order.log/spring.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/logs/order.log/spring.log.2025-10-24.0.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/logs/order/order.log/spring.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/java/com/tedu/micro/demo/order/OrderApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/java/com/tedu/micro/demo/order/clients/DeviceClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/java/com/tedu/micro/demo/order/controller/HelloController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/java/com/tedu/micro/demo/order/controller/OrderController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/java/com/tedu/micro/demo/order/dao/mapper/OrderMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/java/com/tedu/micro/demo/order/dao/repository/OrderRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/java/com/tedu/micro/demo/order/dao/repository/imp/OrderRepositoryImplement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/java/com/tedu/micro/demo/order/pojo/po/OrderInfoPo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/java/com/tedu/micro/demo/order/service/OrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/java/com/tedu/micro/demo/order/service/imp/OrderServiceImplement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/resources/application_instance2.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/main/resources/application_instance3.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/test/java/com/tedu/micro/demo/order/test/Ordertest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/micro-demo-order/src/test/java/com/tedu/micro/demo/order/test/webMvcTest/SaveOrderTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/nacos.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/x3-rabbit-demo/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/x3-rabbit-demo/src/main/java/com/snl/x3/rabbit/demo/RabbitApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/x3-rabbit-demo/src/main/java/com/snl/x3/rabbit/demo/RabbitChanelManger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/x3-rabbit-demo/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/x3-rabbit-demo/src/test/java/x3/rabbit/demo/test/Consumer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/x3-rabbit-demo/src/test/java/x3/rabbit/demo/test/TestRabbit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="开始学习xxl-job短小精悍的项目列子">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/config/DeclareConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/config/DeclareConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/consumer/MessageConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/consumer/MessageConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/src/main/java/demo/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/src/test/java/test/TestRabbitMq.java" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/src/test/java/test/TestRabbitMq.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/config/DeclareConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/config/DeclareConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/consumer/MessageConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/consumer/MessageConsumer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/target/classes/demo/controller/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RabbitPracTicle/target/test-classes/test/TestRabbitMq.class" beforeDir="false" afterPath="$PROJECT_DIR$/RabbitPracTicle/target/test-classes/test/TestRabbitMq.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/System/src/main/java/Util/CountCodeNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/System/src/main/java/Util/CountCodeNumber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/System/target/classes/Util/CountCodeNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/System/target/classes/Util/CountCodeNumber.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/count.txt" beforeDir="false" afterPath="$PROJECT_DIR$/count.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/countTotalNumber.txt" beforeDir="false" afterPath="$PROJECT_DIR$/countTotalNumber.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/java_practice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/java_practice.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-demo-2507/X5-XXL-JOB/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/micro-demo-2507/X5-XXL-JOB/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,155 +106,157 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.RedisGeoTest.test.executor": "Run",
-    "JUnit.TestRabbitMq.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/java_practice",
-    "onboarding.tips.debug.path": "/home/snl/java/java_code/java_practice/char03/src/Main.java",
-    "project.structure.last.edited": "模块",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.28045976",
-    "settings.editor.selected.configurable": "File.Encoding",
-    "settings.editor.splitter.proportion": "0.38266385",
-    "应用程序.ArrayListDemo.executor": "Run",
-    "应用程序.AsynchronousPublishConfirm.executor": "Run",
-    "应用程序.AudioTest.executor": "Run",
-    "应用程序.CalendarDemo.executor": "Run",
-    "应用程序.CapturedAudio.executor": "Run",
-    "应用程序.CharFrequence.executor": "Run",
-    "应用程序.CharSequenceOp.executor": "Run",
-    "应用程序.ChooseBestMixer.executor": "Run",
-    "应用程序.CollectionBasicDemo.executor": "Run",
-    "应用程序.CompleteFutureDemo.executor": "Run",
-    "应用程序.CountCodeNumber.executor": "Run",
-    "应用程序.CountDownLatchTest.executor": "Run",
-    "应用程序.CountDownTestDemo2.executor": "Run",
-    "应用程序.DateDemo.executor": "Run",
-    "应用程序.DeadMessageConsumer.executor": "Run",
-    "应用程序.DeadMessageQueue.executor": "Run",
-    "应用程序.DeadMessageTest.executor": "Run",
-    "应用程序.DeadTestDemo.executor": "Run",
-    "应用程序.DelayQueue.executor": "Run",
-    "应用程序.DelayQueueTest.executor": "Run",
-    "应用程序.DemoTest.executor": "Run",
-    "应用程序.DeviceApp.executor": "Run",
-    "应用程序.DragTest.executor": "Run",
-    "应用程序.DrawTest.executor": "Run",
-    "应用程序.EchoServer.executor": "Run",
-    "应用程序.Editor.executor": "Run",
-    "应用程序.EmitLog.executor": "Run",
-    "应用程序.EmitLogDirect.executor": "Run",
-    "应用程序.EmitLogDirectConsumer.executor": "Run",
-    "应用程序.EmitLogTopic.executor": "Run",
-    "应用程序.EmitLogsTopicConsumer.executor": "Run",
-    "应用程序.EmitLogsTopicConsumer02.executor": "Run",
-    "应用程序.EmitLogsTopicConsumer03.executor": "Run",
-    "应用程序.EmitLogsTopicConsumer04.executor": "Run",
-    "应用程序.EmployeeDemo.executor": "Run",
-    "应用程序.FileInputDemo.executor": "Run",
-    "应用程序.Fileinput.executor": "Run",
-    "应用程序.FocusExample.executor": "Run",
-    "应用程序.Frame.executor": "Run",
-    "应用程序.GatewayApp.executor": "Run",
-    "应用程序.GenericListDemo.executor": "Run",
-    "应用程序.HelloWord.executor": "Run",
-    "应用程序.HelloWorld.executor": "Run",
-    "应用程序.HuiDiao.executor": "Run",
-    "应用程序.ImageTest.executor": "Run",
-    "应用程序.Input.executor": "Run",
-    "应用程序.InstalledMix.executor": "Run",
-    "应用程序.IntContainerDemo.executor": "Run",
-    "应用程序.IntenetTest.executor": "Run",
-    "应用程序.LikeQueue.executor": "Run",
-    "应用程序.ListJvmThreads.executor": "Run",
-    "应用程序.LoggingImageViewer.executor": "Run",
-    "应用程序.MixerAudio.executor": "Run",
-    "应用程序.Model.executor": "Run",
-    "应用程序.MutipleMixer (1).executor": "Run",
-    "应用程序.MutipleMixer.executor": "Run",
-    "应用程序.NewCalendarDateDemo.executor": "Run",
-    "应用程序.NewTask.executor": "Run",
-    "应用程序.OrderApp.executor": "Run",
-    "应用程序.PairTest.executor": "Run",
-    "应用程序.PostTest.executor": "Run",
-    "应用程序.ProxyTest.executor": "Run",
-    "应用程序.PublisherConfirms.executor": "Run",
-    "应用程序.RabbitApplication.executor": "Run",
-    "应用程序.ReadConfiguration.executor": "Run",
-    "应用程序.ReadConfigurationFile.executor": "Run",
-    "应用程序.ReadProperties.executor": "Run",
-    "应用程序.ReadYml.executor": "Run",
-    "应用程序.Rec.executor": "Run",
-    "应用程序.RecieveLog.executor": "Run",
-    "应用程序.RecieveLogDemo01.executor": "Run",
-    "应用程序.RegPattern.executor": "Run",
-    "应用程序.Send.executor": "Run",
-    "应用程序.SetDemo.executor": "Run",
-    "应用程序.Sketch.executor": "Run",
-    "应用程序.SocketTest.executor": "Run",
-    "应用程序.StackTest.executor": "Run",
-    "应用程序.StringCrep.executor": "Run",
-    "应用程序.SwappDemo.executor": "Run",
-    "应用程序.SwingWorkerTest.executor": "Run",
-    "应用程序.SystemClass.executor": "Run",
-    "应用程序.TestCompent.executor": "Run",
-    "应用程序.TestDB.executor": "Run",
-    "应用程序.TestDemo.executor": "Run",
-    "应用程序.TextFileds.executor": "Run",
-    "应用程序.ThreadTest.ThreadPool.test.executor": "Run",
-    "应用程序.ThreadTest.executor": "Run",
-    "应用程序.ThreadTestDemo2.executor": "Run",
-    "应用程序.URLConnectionTest.executor": "Run",
-    "应用程序.UserApp.executor": "Run",
-    "应用程序.WrapperDemo.executor": "Run",
-    "应用程序.XxlJobApplication.executor": "Run",
-    "应用程序.arrayblockingtest.executor": "Run",
-    "应用程序.arrays.executor": "Run",
-    "应用程序.arraysListDemo.executor": "Run",
-    "应用程序.calendar.executor": "Run",
-    "应用程序.comparator.executor": "Run",
-    "应用程序.currentHashMapComputer.executor": "Run",
-    "应用程序.currentHashMapTest.executor": "Run",
-    "应用程序.demo.executor": "Run",
-    "应用程序.font.executor": "Run",
-    "应用程序.frame.executor": "Run",
-    "应用程序.intefaces.executor": "Run",
-    "应用程序.lamda.executor": "Run",
-    "应用程序.logTest.executor": "Run",
-    "应用程序.logger.executor": "Run",
-    "应用程序.map.executor": "Run",
-    "应用程序.newTest.executor": "Run",
-    "应用程序.test.executor": "Run",
-    "应用程序.test01.executor": "Run",
-    "应用程序.test02.executor": "Run",
-    "应用程序.test03.executor": "Run",
-    "应用程序.test04.executor": "Run",
-    "应用程序.test05.executor": "Run",
-    "应用程序.test06.executor": "Run",
-    "应用程序.test07.executor": "Run",
-    "应用程序.test08.executor": "Run",
-    "应用程序.test09.executor": "Run",
-    "应用程序.test10.executor": "Run",
-    "应用程序.test13.executor": "Run",
-    "应用程序.testFrame.executor": "Run",
-    "应用程序.thread.executor": "Run",
-    "应用程序.worker.executor": "Run",
-    "应用程序.wormsubject.test01.executor": "Run"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.RedisGeoTest.test.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TestRabbitMq.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.micro-demo-2507 [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.micro-demo-2507 [compile].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/java_practice&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/home/snl/java/java_code/java_practice/char03/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.28045976&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.38266385&quot;,
+    &quot;应用程序.ArrayListDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.AsynchronousPublishConfirm.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.AudioTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CalendarDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CapturedAudio.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CharFrequence.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CharSequenceOp.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ChooseBestMixer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CollectionBasicDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CompleteFutureDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CountCodeNumber.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CountDownLatchTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.CountDownTestDemo2.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DateDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DeadMessageConsumer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DeadMessageQueue.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DeadMessageTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DeadTestDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DelayQueue.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DelayQueueTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DemoTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DeviceApp.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DragTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.DrawTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.EchoServer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Editor.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.EmitLog.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.EmitLogDirect.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.EmitLogDirectConsumer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.EmitLogTopic.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.EmitLogsTopicConsumer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.EmitLogsTopicConsumer02.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.EmitLogsTopicConsumer03.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.EmitLogsTopicConsumer04.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.EmployeeDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.FileInputDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Fileinput.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.FocusExample.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Frame.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.GatewayApp.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.GenericListDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.HelloWord.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.HelloWorld.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.HuiDiao.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ImageTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Input.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.InstalledMix.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.IntContainerDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.IntenetTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.LikeQueue.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ListJvmThreads.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.LoggingImageViewer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.MixerAudio.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Model.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.MutipleMixer (1).executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.MutipleMixer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.NewCalendarDateDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.NewTask.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.OrderApp.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.PairTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.PostTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ProxyTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.PublisherConfirms.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.RabbitApplication.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ReadConfiguration.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ReadConfigurationFile.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ReadProperties.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ReadYml.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Rec.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.RecieveLog.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.RecieveLogDemo01.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.RegPattern.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Send.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SetDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.Sketch.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SocketTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.StackTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.StringCrep.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SwappDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SwingWorkerTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.SystemClass.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.TestCompent.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.TestDB.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.TestDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.TextFileds.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ThreadTest.ThreadPool.test.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ThreadTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.ThreadTestDemo2.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.URLConnectionTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.UserApp.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.WrapperDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.XxlJobApplication.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.arrayblockingtest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.arrays.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.arraysListDemo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.calendar.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.comparator.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.currentHashMapComputer.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.currentHashMapTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.demo.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.font.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.frame.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.intefaces.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.lamda.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.logTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.logger.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.map.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.newTest.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test01.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test02.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test03.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test04.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test05.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test06.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test07.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test08.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test09.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test10.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.test13.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.testFrame.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.thread.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.worker.executor&quot;: &quot;Run&quot;,
+    &quot;应用程序.wormsubject.test01.executor&quot;: &quot;Run&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.apress.bgn.char006.frame" />
@@ -511,7 +279,7 @@
       <recent name="wormsubject" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.XxlJobApplication">
+  <component name="RunManager" selected="应用程序.GatewayApp">
     <configuration name="CountCodeNumber" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Util.CountCodeNumber" />
       <module name="System" />
@@ -525,12 +293,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DeviceApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cn.tedu.charging.device.DeviceApp" />
-      <module name="charging-device" />
+    <configuration name="GatewayApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.tedu.charging.gateway.GatewayApp" />
+      <module name="charging-gateway" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cn.tedu.charging.device.*" />
+          <option name="PATTERN" value="cn.tedu.charging.gateway.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -538,12 +306,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GatewayApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cn.tedu.charging.gateway.GatewayApp" />
-      <module name="charging-gateway" />
+    <configuration name="MutipleMixer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="audio.MutipleMixer" />
+      <module name="audiotest" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cn.tedu.charging.gateway.*" />
+          <option name="PATTERN" value="audio.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -598,19 +366,19 @@
     <list>
       <item itemvalue="应用程序.test01" />
       <item itemvalue="应用程序.test" />
-      <item itemvalue="应用程序.DeviceApp" />
       <item itemvalue="应用程序.GatewayApp" />
       <item itemvalue="应用程序.UserApp" />
       <item itemvalue="应用程序.XxlJobApplication" />
+      <item itemvalue="应用程序.MutipleMixer" />
       <item itemvalue="应用程序.CountCodeNumber" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.XxlJobApplication" />
-        <item itemvalue="应用程序.CountCodeNumber" />
-        <item itemvalue="应用程序.UserApp" />
-        <item itemvalue="应用程序.DeviceApp" />
         <item itemvalue="应用程序.GatewayApp" />
+        <item itemvalue="应用程序.CountCodeNumber" />
+        <item itemvalue="应用程序.MutipleMixer" />
+        <item itemvalue="应用程序.XxlJobApplication" />
+        <item itemvalue="应用程序.UserApp" />
       </list>
     </recent_temporary>
   </component>
@@ -879,7 +647,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763707966162</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="开始学习xxl-job短小精悍的项目列子">
+      <option name="closed" value="true" />
+      <created>1763879264538</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1763879264538</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -906,7 +682,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="有事烧纸07" />
     <MESSAGE value="有事烧纸08" />
     <MESSAGE value="有事烧纸09" />
     <MESSAGE value="有事烧纸10" />
@@ -931,7 +706,8 @@
     <MESSAGE value="完善记录代码量的工具" />
     <MESSAGE value="继续完善记录代码量的工具" />
     <MESSAGE value="完成rabbit与springboot集成，完成一次生产消费的短小例子" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成rabbit与springboot集成，完成一次生产消费的短小例子" />
+    <MESSAGE value="开始学习xxl-job短小精悍的项目列子" />
+    <option name="LAST_COMMIT_MESSAGE" value="开始学习xxl-job短小精悍的项目列子" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

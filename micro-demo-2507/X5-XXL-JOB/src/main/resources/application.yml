@@ -4,3 +4,25 @@ server:
 spring:
   application:
     name: xxl-job-demo
+xxl:
+  job:
+    #当前执行器进程连接调度中心的必要属性
+    admin:
+      #调度中心连接地址
+      addresses: http://127.0.0.1:8080/xxl-job-admin
+      #连接调度中心 注册 发送请求 权限票据
+      accessToken: default_token
+    #当前执行器进程的信息
+    executor:
+      #执行器名称
+      appname: xxl-job-executor-sample
+      #注册ip 让调度中心可以通过ip连接当前执行器 如果不配置ip 程序启动会选择默认ip
+      ip: 127.0.0.1
+      #注册端口 让调度中心可以通过port连接当前执行器 底层通信协议端口
+      port: 19999
+      #日志路径 当前进程打印日志文件夹
+      logpath: /logs
+      #日志保存天数
+      logretentiondays: 30
+      #执行器地址
+      address:

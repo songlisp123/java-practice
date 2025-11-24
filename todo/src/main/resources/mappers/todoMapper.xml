@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.todo.demo.todo.mapper.ToDoMapper">
+    <insert id="save">
+        INSERT INTO todo(title,status,message_level,tag,description,message,create_time)
+        VALUES(#{title},#{status},#{messageLevel},#{tag},#{description},#{message},#{createTime})
+    </insert>
+
+    <select id="query" resultType="com.todo.demo.todo.pojo.vo.ToDoVo">
+        SELECT td.id,td.title,td.status,td.message_level as messageLevel ,
+        td.tag,td.description,td.message,td.create_time as createTime,
+        td.expire_time as expireTime,td.complete_time as completeTime,
+        td.update_time as updateTime,ta.code AS tagCode
+        FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code
+        <where>
+            <if test="id != null">
+                AND td.id = #{id}
+            </if>
+            <if test="title != null and title != '' ">
+                AND title LIKE CONCAT('%', #{title},'%')
+            </if>
+            <if test="status != null and status != '' ">
+                AND status = #{status}
+            </if>
+            <if test="messageLevel != null and messageLevel != '' ">
+                AND message_level = #{messageLevel}
+            </if>
+            <if test="message != null and message != '' ">
+                AND message LIKE CONCAT('%', #{message},'%')
+            </if>
+            <if test="tagCode != null and tagCode != '' ">
+                AND tag = #{tagCode}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+        <if test="pageNumber != null and pageSize != null">
+            LIMIT #{pageNumber},#{pageSize}
+        </if>
+    </select>
+
+    <update id="update">
+        UPDATE todo
+        <set>
+            <if test="id == null">
+                id  = #{id},
+            </if>
+            <if test="status != null and status != '' ">
+                status  = #{status},
+            </if>
+            <if test="updateTime != null">
+                update_time  = #{updateTime},
+            </if>
+            <if test="expireTime != null">
+                expire_time  = #{expireTime}
+            </if>
+            <if test="completeTime != null">
+                complete_time  = #{completeTime}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <select id="countAll" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM todo
+        <where>
+            <if test="id != null">
+                AND id = #{id}
+            </if>
+            <if test="title != null and title != '' ">
+                AND title LIKE CONCAT('%', #{title},'%')
+            </if>
+            <if test="status != null and status != '' ">
+                AND status = #{status}
+            </if>
+            <if test="message != null and message != '' ">
+                AND message LIKE CONCAT('%', #{message},'%')
+            </if>
+            <if test="tagCode != null and tagCode != '' ">
+                AND tag = #{tagCode}
+            </if>
+        </where>
+    </select>
+
+    <select id="loadTags" resultType="com.todo.demo.todo.pojo.vo.TagVo">
+        SELECT id , code ,message
+        FROM tag
+    </select>
+
+    <delete id="delete">
+        DELETE FROM todo
+        WHERE id = #{id}
+    </delete>
+</mapper>
