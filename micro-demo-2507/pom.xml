@@ -24,6 +24,7 @@
         <module>x3-rabbit-demo</module>
         <module>X4-RABBITMQ-DEMO</module>
         <module>X5-XXL-JOB</module>
+        <module>X6-WEBSOCKET-demo</module>
     </modules>
 
     <dependencies>

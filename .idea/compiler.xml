@@ -20,6 +20,7 @@
         <module name="System" />
         <module name="redis" />
         <module name="charging-device" />
+        <module name="X6-WEBSOCKET-demo" />
         <module name="micro-demo-common" />
         <module name="micro-demo-device" />
         <module name="charging-order" />
@@ -40,6 +41,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar" />
         </processorPath>
         <module name="todo" />
       </profile>
@@ -56,6 +58,7 @@
       <module name="X1-REDIS-DEMO" options="-parameters" />
       <module name="X4-RABBITMQ-DEMO" options="-parameters" />
       <module name="X5-XXL-JOB" options="-parameters" />
+      <module name="X6-WEBSOCKET-demo" options="-parameters" />
       <module name="audiotest" options="" />
       <module name="charging-common" options="-parameters" />
       <module name="charging-cost" options="-parameters" />

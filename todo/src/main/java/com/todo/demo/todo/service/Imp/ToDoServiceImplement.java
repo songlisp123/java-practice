@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.TimerTask;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -40,7 +41,6 @@ public class ToDoServiceImplement implements ToDoService {
 
     private ToDoMapper toDoMapper;
 
-
     private WarningMusic warningMusic;
 
     private AtomicInteger atomicInteger;
@@ -50,6 +50,7 @@ public class ToDoServiceImplement implements ToDoService {
     private static final ScheduledExecutorService service  =
             Executors.newScheduledThreadPool(3);
 
+
     public ToDoServiceImplement(ToDoMapper toDoMapper) throws InterruptedException {
         this.toDoMapper = toDoMapper;
         this.warningMusic = new WarningMusic();
@@ -57,11 +58,10 @@ public class ToDoServiceImplement implements ToDoService {
         this.atomicInteger = new AtomicInteger(0);
         this.toTalToDoTask = new AtomicLong();
 
-        service.scheduleAtFixedRate(this::timeToUpdate,10L,10,TimeUnit.SECONDS);
-        service.scheduleAtFixedRate(this::total,5L,10,TimeUnit.SECONDS);
-        service.scheduleAtFixedRate(this::timeToDelete,15L,10,TimeUnit.SECONDS);
+        service.scheduleAtFixedRate(timeToUpdate(),10,60,TimeUnit.SECONDS);
+        service.scheduleAtFixedRate(timeToDelete(),0,60 * 24,TimeUnit.MINUTES);
+        service.scheduleAtFixedRate(total(),0,10,TimeUnit.SECONDS);
     }
-
     @Override
     public void save(TodoSave save) throws InterruptedException {
         log.debug("进入到参数是:{}",save);
@@ -196,16 +196,16 @@ public class ToDoServiceImplement implements ToDoService {
 //        }
     }
 
-    public Runnable timeToUpdate() {
-        return ()->{
+    public  Runnable timeToUpdate() {
+        return () -> {
             ToDoQuery toDoQuery = new ToDoQuery();
             toDoQuery.setStatus(Status.TODO.getCode());
             List<ToDoVo> toDoVoList = toDoMapper.query(toDoQuery);
-            toDoVoList.forEach(vo->{
+            toDoVoList.forEach(vo-> {
                 Date createTime = vo.getCreateTime();
                 Date date = new Date();
                 long l = date.getTime() - createTime.getTime();
-                if (l>3600*1000*24*EXPIRE_DAY) {
+                if (l > 3600 * 1000 * EXPIRE_DAY) {
                     warningMusic.play();
                     ToDo toDo = new ToDo();
                     toDo.setId(vo.getId());
@@ -225,46 +225,40 @@ public class ToDoServiceImplement implements ToDoService {
                 }
             });
         };
-    }
+    };
 
     private void play() throws InterruptedException {
         if (!this.linkedBlockingQueue.isEmpty())  {
             linkedBlockingQueue.take();
             warningMusic.play();
-
         }
     }
 
-    private void total() {
-        ToDoQuery toDoQuery = new ToDoQuery();
-        toDoQuery.setStatus(Status.TODO.getCode());
-        Runnable totalTask = () -> this.toTalToDoTask.set(toDoMapper.countAll(toDoQuery));
+    private Runnable total() {
+        return () -> {
+            ToDoQuery toDoQuery = new ToDoQuery();
+            toDoQuery.setStatus(Status.TODO.getCode());
+            this.toTalToDoTask.set(toDoMapper.countAll(toDoQuery));
+        };
     }
-
 
     private Runnable timeToDelete() {
         return () -> {
             ToDoQuery toDoQuery = new ToDoQuery();
             toDoQuery.setStatus(Status.EXPIRED.getCode());
-            Runnable task = () -> {
-                List<ToDoVo> query = toDoMapper.query(toDoQuery);
-                if (query.size() >= 4) {
-                    for (int i = 0; i < query.size(); i++) {
-                        if (i >= query.size() - 4) {
-                            ToDoVo toDoVo = query.get(i);
-                            toDoMapper.delete(toDoVo.getId());
-                            Action action = new Action();
-                            action.setTitle("移除过期任务:[%s]".formatted(toDoVo.getTitle()));
-                            action.setCreateTime(new Date());
-                            try {
-                                timerSch.addAction(action);
-                            } catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                    }
+            List<ToDoVo> query = toDoMapper.query(toDoQuery);
+            if (Objects.nonNull(query) && !query.isEmpty()) {
+                ToDoVo toDoVo = query.getLast();
+                toDoMapper.delete(toDoVo.getId());
+                Action action = new Action();
+                action.setTitle("移除过期任务:[%s]".formatted(toDoVo.getTitle()));
+                action.setCreateTime(new Date());
+                try {
+                    timerSch.addAction(action);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
-            };
+            }
         };
-    }
+    };
 }
