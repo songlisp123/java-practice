@@ -4,4 +4,6 @@ import cn.tedu.charging.common.pojo.param.OrderAddParam;
 
 public interface OrderService {
     String createOrder(OrderAddParam param);
+
+    void orderStatusCheck(String billId);
 }

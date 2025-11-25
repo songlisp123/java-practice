@@ -7,12 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="开始学习xxl-job短小精悍的项目列子">
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="添加todo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/System/target/classes/Util/CountCodeNumber.class" beforeDir="false" afterPath="$PROJECT_DIR$/System/target/classes/Util/CountCodeNumber.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/repository/BillRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/repository/BillRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/repository/impl/BillRepositoryImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/repository/impl/BillRepositoryImplement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/impl/OrderServiceImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/impl/OrderServiceImplement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/resources/application-local.yml" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/resources/application-local.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/count.txt" beforeDir="false" afterPath="$PROJECT_DIR$/count.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/countTotalNumber.txt" beforeDir="false" afterPath="$PROJECT_DIR$/countTotalNumber.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/micro-demo-2507/X5-XXL-JOB/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/micro-demo-2507/X5-XXL-JOB/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/todo/src/main/java/com/todo/demo/todo/service/Imp/ToDoServiceImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/todo/src/main/java/com/todo/demo/todo/service/Imp/ToDoServiceImplement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,14 +276,14 @@
       <recent name="D:\java_practice\JDBC" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.tedu.charging.order.config" />
       <recent name="test" />
       <recent name="demo.queue.emitLogsConsumer" />
       <recent name="demo.queue" />
       <recent name="textEditor" />
-      <recent name="wormsubject" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.GatewayApp">
+  <component name="RunManager" selected="应用程序.MutipleMixer">
     <configuration name="CountCodeNumber" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Util.CountCodeNumber" />
       <module name="System" />
@@ -293,12 +297,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GatewayApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cn.tedu.charging.gateway.GatewayApp" />
-      <module name="charging-gateway" />
+    <configuration name="DeviceApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.tedu.charging.device.DeviceApp" />
+      <module name="charging-device" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cn.tedu.charging.gateway.*" />
+          <option name="PATTERN" value="cn.tedu.charging.device.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -319,12 +323,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cn.tedu.charging.user.UserApp" />
-      <module name="charging-user" />
+    <configuration name="OrderApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.tedu.charging.order.OrderApp" />
+      <module name="charging-order" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cn.tedu.charging.user.*" />
+          <option name="PATTERN" value="cn.tedu.charging.order.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -332,12 +336,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="XxlJobApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.snl.xxl.job.demo.XxlJobApplication" />
-      <module name="X5-XXL-JOB" />
+    <configuration name="UserApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.tedu.charging.user.UserApp" />
+      <module name="charging-user" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.snl.xxl.job.demo.*" />
+          <option name="PATTERN" value="cn.tedu.charging.user.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -366,19 +370,19 @@
     <list>
       <item itemvalue="应用程序.test01" />
       <item itemvalue="应用程序.test" />
-      <item itemvalue="应用程序.GatewayApp" />
-      <item itemvalue="应用程序.UserApp" />
-      <item itemvalue="应用程序.XxlJobApplication" />
       <item itemvalue="应用程序.MutipleMixer" />
+      <item itemvalue="应用程序.OrderApp" />
+      <item itemvalue="应用程序.DeviceApp" />
+      <item itemvalue="应用程序.UserApp" />
       <item itemvalue="应用程序.CountCodeNumber" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.GatewayApp" />
-        <item itemvalue="应用程序.CountCodeNumber" />
         <item itemvalue="应用程序.MutipleMixer" />
-        <item itemvalue="应用程序.XxlJobApplication" />
+        <item itemvalue="应用程序.OrderApp" />
         <item itemvalue="应用程序.UserApp" />
+        <item itemvalue="应用程序.DeviceApp" />
+        <item itemvalue="应用程序.CountCodeNumber" />
       </list>
     </recent_temporary>
   </component>
@@ -655,7 +659,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763879264538</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="添加todo">
+      <option name="closed" value="true" />
+      <created>1763970016964</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1763970016964</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -682,7 +694,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="有事烧纸08" />
     <MESSAGE value="有事烧纸09" />
     <MESSAGE value="有事烧纸10" />
     <MESSAGE value="有事烧纸11" />
@@ -707,7 +718,8 @@
     <MESSAGE value="继续完善记录代码量的工具" />
     <MESSAGE value="完成rabbit与springboot集成，完成一次生产消费的短小例子" />
     <MESSAGE value="开始学习xxl-job短小精悍的项目列子" />
-    <option name="LAST_COMMIT_MESSAGE" value="开始学习xxl-job短小精悍的项目列子" />
+    <MESSAGE value="添加todo" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加todo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

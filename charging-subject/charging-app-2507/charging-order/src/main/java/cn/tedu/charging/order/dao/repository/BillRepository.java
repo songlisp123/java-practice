@@ -11,4 +11,10 @@ public interface BillRepository {
     long countSuccessOrder(String orderNo);
 
     long countFailOrder(String orderNo);
+
+    ChargingBillSuccessPO selectSuccessByBillid(String billId);
+
+    void updateSuccessBill(String billId,Integer status);
+
+    void saveExeptionalBill(ChargingBillSuccessPO successPO);
 }

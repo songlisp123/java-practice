@@ -6,11 +6,15 @@ import cn.tedu.charging.common.pojo.message.DelayCheckMessage;
 import cn.tedu.charging.common.pojo.message.StartCheckMessage;
 import cn.tedu.charging.common.pojo.param.OrderAddParam;
 import cn.tedu.charging.common.protocol.JsonResult;
+import cn.tedu.charging.common.utils.CronUtil;
 import cn.tedu.charging.common.utils.SnowflakeIdGenerator;
+import cn.tedu.charging.common.utils.XxlJobTaskUtil;
 import cn.tedu.charging.order.AMQP.AmqpDelayProducer;
 import cn.tedu.charging.order.cilent.DeviceClient;
 import cn.tedu.charging.order.cilent.UserClient;
+import cn.tedu.charging.order.dao.repository.BillRepository;
 import cn.tedu.charging.order.mqtt.producer.MqttProducer;
+import cn.tedu.charging.order.pojo.po.ChargingBillSuccessPO;
 import cn.tedu.charging.order.service.OrderService;
 import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -18,9 +22,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Slf4j
 @Service
 public class OrderServiceImplement implements OrderService {
+
+    @Autowired
+    private BillRepository billRepository;
 
     @Autowired
     private DeviceClient deviceClient;
@@ -45,7 +54,6 @@ public class OrderServiceImplement implements OrderService {
         JsonResult<Boolean> gunStatusResult = deviceClient.checkGun(param.getGunId());
         if (gunStatusResult.getData()) {
             //如果枪可用
-//            todo
             log.debug("充电枪可用，充电枪状态:{}",param.getGunId());
         }
         else {
@@ -75,8 +83,28 @@ public class OrderServiceImplement implements OrderService {
                 60000
         );
 
-        //TODO 计算该订单的最长执行充电时间 发布定时任务
+        //TODO 修改抢状态【✅  完成】
+        //TODO 计算该订单的最长执行充电时间 发布定时任务【✅  完成】
+        XxlJobTaskUtil.createJobTask(CronUtil.delayCron(1000*60*2),"order-executor",billId);
         return billId;
+    }
+
+    @Override
+    public void orderStatusCheck(String billId) {
+        //调用仓库层
+        ChargingBillSuccessPO successPO =
+                billRepository.selectSuccessByBillid(billId);
+        if (Objects.nonNull(successPO)) {
+            Integer billStatus = successPO.getBillStatus();
+            if (Objects.nonNull(billStatus) && billStatus == 1) {
+                log.info("订单正在充电中……,到达最长时间，发生异常");
+                billRepository.updateSuccessBill(billId,3);
+                //设置异常订单
+                billRepository.saveExeptionalBill(successPO);
+            }
+        }else {
+            log.error("没有成功订单");
+        }
     }
 
     private void CheckUserAvailable(Integer userId, Integer gunId) {
