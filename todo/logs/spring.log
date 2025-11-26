@@ -3343,3 +3343,916 @@
 2025-11-26T02:29:16.773+08:00 DEBUG 40136 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
 2025-11-26T02:29:16.773+08:00 DEBUG 40136 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
 2025-11-26T02:29:16.773+08:00 DEBUG 40136 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:20:07.007+08:00  INFO 16264 --- [todo] [restartedMain] com.todo.demo.TodoApplication            : Starting TodoApplication using Java 21.0.7 with PID 16264 (D:\java_practice\todo\target\classes started by snl19 in D:\java_practice)
+2025-11-26T10:20:07.009+08:00 DEBUG 16264 --- [todo] [restartedMain] com.todo.demo.TodoApplication            : Running with Spring Boot v3.3.3, Spring v6.1.12
+2025-11-26T10:20:07.009+08:00  INFO 16264 --- [todo] [restartedMain] com.todo.demo.TodoApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-11-26T10:20:07.051+08:00  INFO 16264 --- [todo] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-11-26T10:20:07.051+08:00  INFO 16264 --- [todo] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-11-26T10:20:08.036+08:00  INFO 16264 --- [todo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8065 (http)
+2025-11-26T10:20:08.049+08:00  INFO 16264 --- [todo] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-11-26T10:20:08.049+08:00  INFO 16264 --- [todo] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2025-11-26T10:20:08.095+08:00  INFO 16264 --- [todo] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-11-26T10:20:08.095+08:00  INFO 16264 --- [todo] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1043 ms
+2025-11-26T10:20:08.355+08:00  INFO 16264 --- [todo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-11-26T10:20:08.494+08:00  INFO 16264 --- [todo] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@441594d3
+2025-11-26T10:20:08.495+08:00  INFO 16264 --- [todo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-11-26T10:20:08.563+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:20:08.563+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:20:08.591+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:20:08.591+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 30(String)
+2025-11-26T10:20:08.643+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:20:08.645+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 3
+2025-11-26T10:20:08.647+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.delete   : ==>  Preparing: DELETE FROM todo WHERE id = ?
+2025-11-26T10:20:08.648+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.delete   : ==> Parameters: 223(Long)
+2025-11-26T10:20:08.653+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.delete   : <==    Updates: 1
+2025-11-26T10:20:08.837+08:00  INFO 16264 --- [todo] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-11-26T10:20:08.864+08:00  INFO 16264 --- [todo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8065 (http) with context path '/'
+2025-11-26T10:20:08.873+08:00  INFO 16264 --- [todo] [restartedMain] com.todo.demo.TodoApplication            : Started TodoApplication in 2.246 seconds (process running for 2.608)
+2025-11-26T10:20:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:20:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:20:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:20:18.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:20:18.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:20:18.534+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 0
+2025-11-26T10:20:20.192+08:00  INFO 16264 --- [todo] [http-nio-8065-exec-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-26T10:20:20.193+08:00  INFO 16264 --- [todo] [http-nio-8065-exec-5] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-11-26T10:20:20.196+08:00  INFO 16264 --- [todo] [http-nio-8065-exec-5] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2025-11-26T10:20:20.254+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.d.todo.mapper.ToDoMapper.loadTags    : ==>  Preparing: SELECT id , code ,message FROM tag
+2025-11-26T10:20:20.256+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.d.todo.mapper.ToDoMapper.loadTags    : ==> Parameters: 
+2025-11-26T10:20:20.259+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.d.todo.mapper.ToDoMapper.loadTags    : <==      Total: 10
+2025-11-26T10:20:20.271+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-8] c.t.demo.todo.controller.ToDoController  : 查询参数:ToDoQuery(id=null, title=, tag=null, messageLevel=null, message=, tagCode=null, status=10, pageNumber=1, pageSize=2)
+2025-11-26T10:20:20.276+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-8] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC LIMIT ?,?
+2025-11-26T10:20:20.277+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-8] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String), 0(Integer), 2(Integer)
+2025-11-26T10:20:20.279+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-8] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 0
+2025-11-26T10:20:20.280+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-8] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:20:20.280+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-8] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:20:20.281+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-8] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:20:26.151+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.demo.todo.controller.ToDoController  : 查询参数:ToDoQuery(id=null, title=, tag=null, messageLevel=null, message=, tagCode=null, status=30, pageNumber=1, pageSize=2)
+2025-11-26T10:20:26.154+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC LIMIT ?,?
+2025-11-26T10:20:26.156+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 30(String), 0(Integer), 2(Integer)
+2025-11-26T10:20:26.159+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 2
+2025-11-26T10:20:26.161+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:20:26.162+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 30(String)
+2025-11-26T10:20:26.165+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:20:28.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:20:28.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:20:28.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:20:38.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:20:38.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:20:38.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:20:48.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:20:48.534+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:20:48.535+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:20:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:20:58.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:20:58.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:21:00.393+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-2] c.t.demo.todo.controller.ToDoController  : 查询参数:ToDoQuery(id=null, title=, tag=null, messageLevel=null, message=, tagCode=null, status=10, pageNumber=1, pageSize=2)
+2025-11-26T10:21:00.395+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC LIMIT ?,?
+2025-11-26T10:21:00.396+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String), 0(Integer), 2(Integer)
+2025-11-26T10:21:00.398+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 0
+2025-11-26T10:21:00.398+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:21:00.398+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:21:00.399+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:21:08.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:21:08.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:21:08.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:21:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:21:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:21:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:21:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:21:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:21:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 0
+2025-11-26T10:21:28.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:21:28.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:21:28.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:21:35.466+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-8] c.t.demo.todo.controller.ToDoController  : 保存参数:TodoSave(title=继续学习es数据库, messageLevel=30, tag=40, description=不能拖压了, message=要努力，就要付出)
+2025-11-26T10:21:35.466+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-8] c.t.d.t.s.Imp.ToDoServiceImplement       : 进入到参数是:TodoSave(title=继续学习es数据库, messageLevel=30, tag=40, description=不能拖压了, message=要努力，就要付出)
+2025-11-26T10:21:35.467+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-8] c.todo.demo.todo.mapper.ToDoMapper.save  : ==>  Preparing: INSERT INTO todo(title,status,message_level,tag,description,message,create_time) VALUES(?,?,?,?,?,?,?)
+2025-11-26T10:21:35.469+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-8] c.todo.demo.todo.mapper.ToDoMapper.save  : ==> Parameters: 继续学习es数据库(String), 10(String), 30(String), 40(String), 不能拖压了(String), 要努力，就要付出(String), 2025-11-26 10:21:35.467(Timestamp)
+2025-11-26T10:21:35.476+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-8] c.todo.demo.todo.mapper.ToDoMapper.save  : <==    Updates: 1
+2025-11-26T10:21:35.485+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.demo.todo.controller.ToDoController  : 查询参数:ToDoQuery(id=null, title=, tag=null, messageLevel=null, message=, tagCode=null, status=10, pageNumber=1, pageSize=2)
+2025-11-26T10:21:35.486+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC LIMIT ?,?
+2025-11-26T10:21:35.487+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String), 0(Integer), 2(Integer)
+2025-11-26T10:21:35.488+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:21:35.488+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:21:35.488+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:21:35.489+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:21:38.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:21:38.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:21:38.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:21:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:21:48.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:21:48.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:21:58.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:21:58.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:21:58.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:22:08.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:22:08.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:22:08.534+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:22:18.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:22:18.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:22:18.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:22:18.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:22:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:22:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:22:28.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:22:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:22:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:22:38.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:22:38.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:22:38.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:22:48.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:22:48.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:22:48.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:22:58.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:22:58.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:22:58.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:23:08.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:23:08.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:23:08.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:23:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:23:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:23:18.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:23:18.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:23:18.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:23:18.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:23:28.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:23:28.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:23:28.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:23:38.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:23:38.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:23:38.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:23:48.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:23:48.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:23:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:23:58.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:23:58.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:23:58.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:24:08.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:24:08.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:24:08.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:24:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:24:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:24:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:24:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:24:18.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:24:18.534+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:24:28.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:24:28.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:24:28.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:24:38.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:24:38.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:24:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:24:48.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:24:48.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:24:48.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:24:58.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:24:58.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:24:58.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:25:08.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:25:08.534+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:25:08.536+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:25:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:25:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:25:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:25:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:25:18.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:25:18.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:25:20.121+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.demo.todo.controller.ToDoController  : 查询参数:ToDoQuery(id=null, title=, tag=null, messageLevel=null, message=, tagCode=null, status=10, pageNumber=1, pageSize=2)
+2025-11-26T10:25:20.122+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC LIMIT ?,?
+2025-11-26T10:25:20.123+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String), 0(Integer), 2(Integer)
+2025-11-26T10:25:20.125+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:25:20.125+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:25:20.126+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:25:20.126+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-6] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:25:28.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:25:28.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:25:28.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:25:38.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:25:38.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:25:38.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:25:48.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:25:48.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:25:48.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:25:58.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:25:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:25:58.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:26:08.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:26:08.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:26:08.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:26:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:26:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:26:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:26:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:26:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:26:18.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:26:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:26:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:26:28.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:26:38.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:26:38.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:26:38.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:26:48.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:26:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:26:48.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:26:58.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:26:58.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:26:58.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:27:08.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:27:08.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:27:08.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:27:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:27:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:27:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:27:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:27:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:27:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:27:28.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:27:28.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:27:28.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:27:38.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:27:38.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:27:38.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:27:48.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:27:48.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:27:48.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:27:58.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:27:58.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:27:58.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:28:08.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:28:08.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:28:08.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:28:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:28:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:28:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:28:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:28:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:28:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:28:28.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:28:28.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:28:28.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:28:38.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:28:38.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:28:38.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:28:48.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:28:48.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:28:48.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:28:58.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:28:58.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:28:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:29:08.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:29:08.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:29:08.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:29:18.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:29:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:29:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:29:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:29:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:29:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:29:28.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:29:28.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:29:28.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:29:38.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:29:38.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:29:38.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:29:48.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:29:48.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:29:48.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:29:58.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:29:58.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:29:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:30:08.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:30:08.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:30:08.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:30:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:30:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:30:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:30:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:30:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:30:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:30:20.249+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.demo.todo.controller.ToDoController  : 查询参数:ToDoQuery(id=null, title=, tag=null, messageLevel=null, message=, tagCode=null, status=10, pageNumber=1, pageSize=2)
+2025-11-26T10:30:20.249+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC LIMIT ?,?
+2025-11-26T10:30:20.249+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String), 0(Integer), 2(Integer)
+2025-11-26T10:30:20.252+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:30:20.252+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:30:20.253+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:30:20.253+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-5] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:30:28.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:30:28.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:30:28.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:30:38.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:30:38.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:30:38.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:30:48.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:30:48.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:30:48.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:30:58.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:30:58.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:30:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:31:08.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:31:08.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:31:08.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:31:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:31:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:31:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:31:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:31:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:31:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:31:28.516+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:31:28.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:31:28.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:31:38.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:31:38.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:31:38.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:31:48.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:31:48.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:31:48.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:31:58.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:31:58.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:31:58.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:32:08.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:32:08.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:32:08.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:32:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:32:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:32:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:32:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:32:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:32:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:32:28.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:32:28.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:32:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:32:38.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:32:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:32:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:32:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:32:48.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:32:48.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:32:58.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:32:58.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:32:58.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:33:08.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:33:08.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:33:08.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:33:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:33:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:33:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:33:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:33:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:33:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:33:28.534+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:33:28.534+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:33:28.535+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:33:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:33:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:33:38.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:33:48.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:33:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:33:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:33:58.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:33:58.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:33:58.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:34:08.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:34:08.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:34:08.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:34:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:34:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:34:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:34:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:34:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:34:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:34:28.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:34:28.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:34:28.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:34:38.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:34:38.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:34:38.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:34:48.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:34:48.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:34:48.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:34:58.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:34:58.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:34:58.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:35:08.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:35:08.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:35:08.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:35:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:35:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:35:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:35:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:35:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:35:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:35:20.243+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-9] c.t.demo.todo.controller.ToDoController  : 查询参数:ToDoQuery(id=null, title=, tag=null, messageLevel=null, message=, tagCode=null, status=10, pageNumber=1, pageSize=2)
+2025-11-26T10:35:20.243+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-9] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC LIMIT ?,?
+2025-11-26T10:35:20.243+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-9] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String), 0(Integer), 2(Integer)
+2025-11-26T10:35:20.244+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-9] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:35:20.244+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-9] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:35:20.244+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-9] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:35:20.245+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-9] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:35:28.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:35:28.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:35:28.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:35:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:35:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:35:38.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:35:48.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:35:48.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:35:48.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:35:58.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:35:58.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:35:58.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:36:08.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:36:08.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:36:08.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:36:18.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:36:18.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:36:18.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:36:18.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:36:18.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:36:18.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:36:28.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:36:28.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:36:28.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:36:38.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:36:38.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:36:38.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:36:48.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:36:48.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:36:48.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:36:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:36:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:36:58.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:37:08.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:37:08.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:37:08.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:37:18.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:37:18.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:37:18.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:37:18.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:37:18.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:37:18.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:37:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:37:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:37:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:37:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:37:38.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:37:38.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:37:48.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:37:48.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:37:48.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:37:58.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:37:58.534+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:37:58.535+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:38:08.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:38:08.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:38:08.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:38:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:38:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:38:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:38:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:38:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:38:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:38:28.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:38:28.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:38:28.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:38:38.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:38:38.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:38:38.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:38:48.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:38:48.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:38:48.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:38:58.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:38:58.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:38:58.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:39:08.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:39:08.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:39:08.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:39:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:39:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:39:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:39:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:39:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:39:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:39:28.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:39:28.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:39:28.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:39:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:39:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:39:38.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:39:48.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:39:48.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:39:48.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:39:58.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:39:58.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:39:58.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:40:08.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:40:08.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:40:08.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:40:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:40:18.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:40:18.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:40:18.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:40:18.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:40:18.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:40:20.233+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.demo.todo.controller.ToDoController  : 查询参数:ToDoQuery(id=null, title=, tag=null, messageLevel=null, message=, tagCode=null, status=10, pageNumber=1, pageSize=2)
+2025-11-26T10:40:20.234+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC LIMIT ?,?
+2025-11-26T10:40:20.234+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String), 0(Integer), 2(Integer)
+2025-11-26T10:40:20.234+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:40:20.235+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:40:20.235+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:40:20.235+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:40:28.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:40:28.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:40:28.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:40:38.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:40:38.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:40:38.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:40:48.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:40:48.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:40:48.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:40:58.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:40:58.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:40:58.534+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:41:08.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:41:08.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:41:08.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:41:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:41:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:41:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:41:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:41:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:41:18.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:41:28.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:41:28.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:41:28.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:41:38.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:41:38.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:41:38.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:41:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:41:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:41:48.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:41:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:41:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:41:58.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:42:08.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:42:08.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:42:08.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:42:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:42:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:42:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:42:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:42:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:42:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:42:28.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:42:28.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:42:28.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:42:38.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:42:38.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:42:38.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:42:48.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:42:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:42:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:42:58.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:42:58.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:42:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:43:08.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:43:08.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:43:08.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:43:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:43:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:43:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:43:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:43:18.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:43:18.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:43:28.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:43:28.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:43:28.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:43:38.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:43:38.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:43:38.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:43:48.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:43:48.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:43:48.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:43:58.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:43:58.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:43:58.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:44:08.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:44:08.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:44:08.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:44:18.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:44:18.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:44:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:44:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:44:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:44:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:44:28.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:44:28.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:44:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:44:38.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:44:38.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:44:38.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:44:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:44:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:44:48.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:44:58.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:44:58.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:44:58.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:45:08.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:45:08.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:45:08.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:45:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:45:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:45:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:45:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:45:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:45:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:45:20.242+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.demo.todo.controller.ToDoController  : 查询参数:ToDoQuery(id=null, title=, tag=null, messageLevel=null, message=, tagCode=null, status=10, pageNumber=1, pageSize=2)
+2025-11-26T10:45:20.243+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC LIMIT ?,?
+2025-11-26T10:45:20.243+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String), 0(Integer), 2(Integer)
+2025-11-26T10:45:20.247+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:45:20.247+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:45:20.247+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:45:20.248+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:45:28.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:45:28.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:45:28.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:45:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:45:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:45:38.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:45:48.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:45:48.536+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:45:48.536+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:45:58.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:45:58.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:45:58.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:46:08.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:46:08.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:46:08.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:46:18.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:46:18.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:46:18.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:46:18.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:46:18.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:46:18.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:46:28.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:46:28.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:46:28.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:46:38.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:46:38.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:46:38.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:46:48.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:46:48.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:46:48.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:46:58.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:46:58.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:46:58.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:47:08.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:47:08.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:47:08.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:47:18.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:47:18.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:47:18.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:47:18.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:47:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:47:18.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:47:28.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:47:28.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:47:28.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:47:38.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:47:38.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:47:38.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:47:48.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:47:48.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:47:48.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:47:58.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:47:58.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:47:58.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:48:08.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:48:08.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:48:08.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:48:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:48:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:48:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:48:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:48:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:48:18.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:48:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:48:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:48:28.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:48:38.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:48:38.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:48:38.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:48:48.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:48:48.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:48:48.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:48:58.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:48:58.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:48:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:49:08.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:49:08.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:49:08.534+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:49:18.534+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:49:18.535+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:49:18.536+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:49:18.537+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:49:18.537+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:49:18.538+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:49:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:49:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:49:28.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:49:38.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:49:38.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:49:38.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:49:48.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:49:48.518+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:49:48.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:49:58.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:49:58.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:49:58.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:50:08.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:50:08.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:50:08.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:50:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:50:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:50:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:50:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:50:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:50:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:50:20.227+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.demo.todo.controller.ToDoController  : 查询参数:ToDoQuery(id=null, title=, tag=null, messageLevel=null, message=, tagCode=null, status=10, pageNumber=1, pageSize=2)
+2025-11-26T10:50:20.228+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC LIMIT ?,?
+2025-11-26T10:50:20.228+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String), 0(Integer), 2(Integer)
+2025-11-26T10:50:20.229+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:50:20.229+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:50:20.229+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:50:20.229+08:00 DEBUG 16264 --- [todo] [http-nio-8065-exec-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:50:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:50:28.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:50:28.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:50:38.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:50:38.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:50:38.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:50:48.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:50:48.533+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:50:48.535+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:50:58.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:50:58.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:50:58.517+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:51:08.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:51:08.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:51:08.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:51:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:51:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:51:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:51:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:51:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:51:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:51:28.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:51:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:51:28.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:51:38.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:51:38.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:51:38.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:51:48.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:51:48.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:51:48.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:51:58.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:51:58.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:51:58.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:52:08.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:52:08.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:52:08.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:52:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:52:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:52:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:52:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:52:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:52:18.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:52:28.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:52:28.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:52:28.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:52:38.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:52:38.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:52:38.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:52:48.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:52:48.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:52:48.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:52:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:52:58.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:52:58.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:53:08.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:53:08.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:53:08.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:53:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:53:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:53:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:53:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:53:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:53:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:53:28.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:53:28.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:53:28.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:53:38.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:53:38.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:53:38.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:53:48.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:53:48.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:53:48.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:53:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:53:58.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:53:58.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:54:08.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:54:08.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:54:08.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:54:18.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:54:18.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:54:18.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:54:18.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:54:18.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:54:18.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:54:28.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:54:28.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:54:28.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:54:38.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:54:38.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:54:38.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:54:48.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:54:48.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:54:48.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:54:58.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:54:58.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:54:58.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:55:08.524+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:55:08.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:55:08.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:55:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:55:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:55:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:55:18.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:55:18.538+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:55:18.539+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:55:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:55:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:55:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:55:38.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:55:38.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:55:38.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:55:48.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:55:48.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:55:48.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:55:58.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:55:58.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:55:58.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:56:08.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:56:08.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:56:08.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:56:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:56:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:56:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:56:18.529+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:56:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:56:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:56:28.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:56:28.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:56:28.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:56:38.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:56:38.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:56:38.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:56:48.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:56:48.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:56:48.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:56:58.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:56:58.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:56:58.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:57:08.527+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:57:08.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:57:08.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:57:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:57:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:57:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:57:18.519+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:57:18.520+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:57:18.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:57:28.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:57:28.528+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:57:28.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:57:38.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:57:38.525+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:57:38.526+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:57:48.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:57:48.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:57:48.523+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:57:58.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:57:58.521+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:57:58.522+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:58:08.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:58:08.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:58:08.532+08:00 DEBUG 16264 --- [todo] [pool-1-thread-3] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:58:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==>  Preparing: SELECT td.id,td.title,td.status,td.message_level as messageLevel , td.tag,td.description,td.message,td.create_time as createTime, td.expire_time as expireTime,td.complete_time as completeTime, td.update_time as updateTime,ta.code AS tagCode FROM todo AS td INNER JOIN tag AS ta ON td.tag = ta.code WHERE status = ? ORDER BY create_time DESC
+2025-11-26T10:58:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:58:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:58:18.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : ==> Parameters: 10(String)
+2025-11-26T10:58:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
+2025-11-26T10:58:18.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-2] c.t.demo.todo.mapper.ToDoMapper.query    : <==      Total: 1
+2025-11-26T10:58:28.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==>  Preparing: SELECT COUNT(*) FROM todo WHERE status = ?
+2025-11-26T10:58:28.530+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : ==> Parameters: 10(String)
+2025-11-26T10:58:28.531+08:00 DEBUG 16264 --- [todo] [pool-1-thread-1] c.t.d.todo.mapper.ToDoMapper.countAll    : <==      Total: 1
