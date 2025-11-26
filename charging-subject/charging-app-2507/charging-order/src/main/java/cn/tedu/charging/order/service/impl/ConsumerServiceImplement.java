@@ -2,11 +2,14 @@ package cn.tedu.charging.order.service.impl;
 
 import cn.tedu.charging.common.pojo.message.CheckResultMessage;
 import cn.tedu.charging.common.pojo.message.DelayCheckMessage;
+import cn.tedu.charging.common.protocol.WebSocketResult;
 import cn.tedu.charging.order.cilent.DeviceClient;
 import cn.tedu.charging.order.dao.repository.BillRepository;
+import cn.tedu.charging.order.points.WebSocketServerPoint;
 import cn.tedu.charging.order.pojo.po.ChargingBillFailPO;
 import cn.tedu.charging.order.pojo.po.ChargingBillSuccessPO;
 import cn.tedu.charging.order.service.ConsumerService;
+import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +26,15 @@ public class ConsumerServiceImplement implements ConsumerService {
     @Autowired
     private DeviceClient deviceClient;
 
+    @Autowired
+    private WebSocketServerPoint webSocketServerPoint;
+
     @Override
     public void handleCheckNoRes(DelayCheckMessage msg) {
         //TODO 延迟信息消费业务 【✅ 完成】
         //获取订单信息
         String orderNo = msg.getOrderNo();
+
         //查询成功订单
         long countSuccessOrder = billRepository.countSuccessOrder(orderNo);
         if (countSuccessOrder == 0) {
@@ -47,6 +54,18 @@ public class ConsumerServiceImplement implements ConsumerService {
                 billRepository.saveFailOrder(chargingBillFailPO);
                 //TODO 更新抢状态 【✅ 完成】
                 deviceClient.updateGunStatus(msg.getGunId());
+                //TODO 推送信息
+                WebSocketResult<String> stringWebSocketResult = new WebSocketResult<>();
+                stringWebSocketResult.setState(1);
+                stringWebSocketResult.setMessage("设备自检失败");
+                String data = "设备无响应,请换枪";
+                stringWebSocketResult.setData(data);
+                String message = JSON.toJSONString(stringWebSocketResult);
+                try {
+                    webSocketServerPoint.pushMessage(message, msg.getUserId());
+                }catch (Exception e) {
+                    log.error("发生异常，异常原因:{}",e.getMessage());
+                }
             }
         }
 
@@ -55,7 +74,11 @@ public class ConsumerServiceImplement implements ConsumerService {
     @Override
     public void handlerCheckResult(CheckResultMessage msg) {
         ///从信息对象解析result
+        //TODO 发送消息【✅ 完成】
         Boolean result = msg.getResult();
+        WebSocketResult<String> stringWebSocketResult = new WebSocketResult<>();
+        stringWebSocketResult.setState(1);
+        stringWebSocketResult.setMessage("设备自检反馈的信息");
         if (result) {
             //根据订单id查询当前订单
             long count = billRepository.countSuccessOrder(msg.getOrderNo());
@@ -87,7 +110,9 @@ public class ConsumerServiceImplement implements ConsumerService {
             chargingBillSuccessPO.setDeleted(0);
             //持久化数据
             saveSuccessOrder(chargingBillSuccessPO);
-            //TODO 组织成功启动后订单的信息对象
+            //TODO 组织成功启动后订单的信息对象【✅ 完成】
+            String data = "订单创建成功！开始充电";
+            stringWebSocketResult.setData(data);
         } else {
             log.debug("设备自检失败");
             //TODO 储存失败订单信息 【✅ 完成】
@@ -116,6 +141,16 @@ public class ConsumerServiceImplement implements ConsumerService {
             chargingBillFailPO.setDeleted(0);
             //持久化数据
             saveFailBill(chargingBillFailPO);
+            //TODO 储存失败订单信息 【✅ 完成】
+            String data = "您的订单创建失败,送你一张优惠卷";
+            stringWebSocketResult.setData(data);
+        }
+        //推送信息
+        String message = JSON.toJSONString(stringWebSocketResult);
+        try {
+            webSocketServerPoint.pushMessage(message,msg.getUserId());
+        }catch (Exception exception) {
+            log.error("发生异常：{}",exception.getMessage());
         }
     }
 

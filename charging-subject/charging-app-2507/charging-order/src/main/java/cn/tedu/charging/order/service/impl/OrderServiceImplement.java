@@ -6,6 +6,7 @@ import cn.tedu.charging.common.pojo.message.DelayCheckMessage;
 import cn.tedu.charging.common.pojo.message.StartCheckMessage;
 import cn.tedu.charging.common.pojo.param.OrderAddParam;
 import cn.tedu.charging.common.protocol.JsonResult;
+import cn.tedu.charging.common.protocol.WebSocketResult;
 import cn.tedu.charging.common.utils.CronUtil;
 import cn.tedu.charging.common.utils.SnowflakeIdGenerator;
 import cn.tedu.charging.common.utils.XxlJobTaskUtil;
@@ -14,6 +15,7 @@ import cn.tedu.charging.order.cilent.DeviceClient;
 import cn.tedu.charging.order.cilent.UserClient;
 import cn.tedu.charging.order.dao.repository.BillRepository;
 import cn.tedu.charging.order.mqtt.producer.MqttProducer;
+import cn.tedu.charging.order.points.WebSocketServerPoint;
 import cn.tedu.charging.order.pojo.po.ChargingBillSuccessPO;
 import cn.tedu.charging.order.service.OrderService;
 import com.alibaba.fastjson2.JSON;
@@ -42,6 +44,9 @@ public class OrderServiceImplement implements OrderService {
 
     @Autowired
     private MqttProducer producer;
+
+    @Autowired
+    private WebSocketServerPoint socketServerPoint;
 
     @Autowired
     private AmqpDelayProducer delayProducer;
@@ -101,6 +106,17 @@ public class OrderServiceImplement implements OrderService {
                 billRepository.updateSuccessBill(billId,3);
                 //设置异常订单
                 billRepository.saveExeptionalBill(successPO);
+                //TODO 推送信息
+                WebSocketResult<String> stringWebSocketResult = new WebSocketResult<>();
+                stringWebSocketResult.setState(1);
+                stringWebSocketResult.setMessage("设备超过指定时间");
+                stringWebSocketResult.setData("充电超过指定时间");
+                String message = JSON.toJSONString(stringWebSocketResult);
+                try {
+                    socketServerPoint.pushMessage(message, successPO.getUserId());
+                } catch (Exception e) {
+                    log.error("发生异常，异常原因;{}",e.getMessage());
+                }
             }
         }else {
             log.error("没有成功订单");

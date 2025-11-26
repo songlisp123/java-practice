@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
  */
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class WebSocketMessage<T> {
+public class WebSocketResult<T> {
 
     /**
      * 消息类型
