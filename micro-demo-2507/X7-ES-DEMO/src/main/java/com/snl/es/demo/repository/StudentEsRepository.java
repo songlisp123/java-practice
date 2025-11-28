@@ -10,4 +10,6 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  * Integer Long String
  */
 public interface StudentEsRepository extends ElasticsearchRepository<StudentEsPO,String> {
+
+
 }

@@ -53,7 +53,8 @@ public class MqttConfiguration {
             client.connect(options);
             //订阅主题
             client.subscribe("$share/order/"+ MqttTopicConst.GUN_CHECK_RESULT_TOPIC);
-            client.subscribe("consumer");
+            //订阅充电进度数据信息
+            client.subscribe("$share/order/"+ MqttTopicConst.CHARGING_PROGRESS_TOPIC);
             log.debug("客户端创建成功");
         } catch (MqttException e) {
             log.debug("创建客户端失败，失败原因;{}",e.getMessage());

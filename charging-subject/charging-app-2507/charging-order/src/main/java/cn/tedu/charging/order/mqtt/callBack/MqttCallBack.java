@@ -2,6 +2,7 @@ package cn.tedu.charging.order.mqtt.callBack;
 
 import cn.tedu.charging.common.constant.MqttTopicConst;
 import cn.tedu.charging.common.pojo.message.CheckResultMessage;
+import cn.tedu.charging.common.pojo.message.ProgressMessage;
 import cn.tedu.charging.order.service.ConsumerService;
 import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -81,7 +82,11 @@ public class MqttCallBack implements MqttCallbackExtended {
             }finally {
                 redisTemplate.delete(lockingKey);
             }
+        } else if (Objects.nonNull(s) && Objects.equals(s,MqttTopicConst.CHARGING_PROGRESS_TOPIC)) {
+            ProgressMessage progressMessage = JSON.parseObject(mqttMessage.toString(), ProgressMessage.class);
+            consumerService.handleChargingProgress(progressMessage);
         }
+
     }
 
     /**

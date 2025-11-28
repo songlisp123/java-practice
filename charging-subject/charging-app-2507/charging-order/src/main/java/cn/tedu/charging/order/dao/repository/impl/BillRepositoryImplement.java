@@ -8,12 +8,14 @@ import cn.tedu.charging.order.pojo.po.ChargingBillExceptionPO;
 import cn.tedu.charging.order.pojo.po.ChargingBillFailPO;
 import cn.tedu.charging.order.pojo.po.ChargingBillSuccessPO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Repository
 public class BillRepositoryImplement implements BillRepository {
 
@@ -77,5 +79,15 @@ public class BillRepositoryImplement implements BillRepository {
         chargingBillExceptionPO.setBillStarttime(successPO.getChargingStartTime());
         chargingBillExceptionPO.setDeleted(0);
         exceptionMapper.insert(chargingBillExceptionPO);
+    }
+
+    @Override
+    public void updateSuccess(ChargingBillSuccessPO success) {
+        //1.where 条件 billId
+        //2.其他非空属性 都是set
+        QueryWrapper<ChargingBillSuccessPO> queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("bill_id",success.getBillId());
+        success.setBillId(null);
+        billSuccessMapper.update(success,queryWrapper);
     }
 }

@@ -7,9 +7,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="创建es模块">
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="整合springboot和es操作数据库">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/micro-demo-2507/X7-ES-DEMO/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/micro-demo-2507/X7-ES-DEMO/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/message/ProgressMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-common/src/main/java/cn/tedu/charging/common/pojo/message/ProgressMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/java/cn/tedu/charging/cost/controller/CostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/java/cn/tedu/charging/cost/controller/CostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/config/DeclareConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/config/DeclareConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/repository/BillRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/repository/BillRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/repository/impl/BillRepositoryImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/dao/repository/impl/BillRepositoryImplement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/mqtt/callBack/MqttCallBack.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/mqtt/callBack/MqttCallBack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/mqtt/client/MqttConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/mqtt/client/MqttConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/ConsumerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/ConsumerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/impl/ConsumerServiceImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/impl/ConsumerServiceImplement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/count.txt" beforeDir="false" afterPath="$PROJECT_DIR$/count.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/countTotalNumber.txt" beforeDir="false" afterPath="$PROJECT_DIR$/countTotalNumber.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/micro-demo-2507/X7-ES-DEMO/src/main/java/com/snl/es/demo/repository/StudentEsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/micro-demo-2507/X7-ES-DEMO/src/main/java/com/snl/es/demo/repository/StudentEsRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo/logs/spring.log" beforeDir="false" afterPath="$PROJECT_DIR$/todo/logs/spring.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -107,6 +118,11 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.DemoTest.deleteOne.executor": "Run",
+    "JUnit.DemoTest.findAll.executor": "Run",
+    "JUnit.DemoTest.findOne.executor": "Run",
+    "JUnit.DemoTest.saveAll.executor": "Run",
+    "JUnit.DemoTest.saveOne.executor": "Run",
     "JUnit.RedisGeoTest.test.executor": "Run",
     "JUnit.TestDemo.executor": "Run",
     "JUnit.TestDemo.test.executor": "Run",
@@ -143,6 +159,7 @@
     "应用程序.ChooseBestMixer.executor": "Run",
     "应用程序.CollectionBasicDemo.executor": "Run",
     "应用程序.CompleteFutureDemo.executor": "Run",
+    "应用程序.CostApp.executor": "Run",
     "应用程序.CountCodeNumber.executor": "Run",
     "应用程序.CountDownLatchTest.executor": "Run",
     "应用程序.CountDownTestDemo2.executor": "Run",
@@ -284,13 +301,13 @@
       <recent name="textEditor" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.EsApplication">
-    <configuration name="CountCodeNumber" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Util.CountCodeNumber" />
-      <module name="System" />
+  <component name="RunManager" selected="应用程序.CountCodeNumber">
+    <configuration name="ClassTree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.snl.swing.treeRender.ClassTree" />
+      <module name="swing" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Util.*" />
+          <option name="PATTERN" value="com.snl.swing.treeRender.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -298,12 +315,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EsApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.snl.es.demo.EsApplication" />
-      <module name="X7-ES-DEMO" />
+    <configuration name="CountCodeNumber" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Util.CountCodeNumber" />
+      <module name="System" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.snl.es.demo.*" />
+          <option name="PATTERN" value="Util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -324,12 +341,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cn.tedu.charging.order.OrderApp" />
-      <module name="charging-order" />
+    <configuration name="ObjectInspectorTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.snl.swing.treeModel.ObjectInspectorTest" />
+      <module name="swing" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cn.tedu.charging.order.*" />
+          <option name="PATTERN" value="com.snl.swing.treeModel.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -337,12 +354,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TodoApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.todo.demo.TodoApplication" />
-      <module name="todo" />
+    <configuration name="TreeEditTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.snl.swing.treeEdit.TreeEditTest" />
+      <module name="swing" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.todo.demo.*" />
+          <option name="PATTERN" value="com.snl.swing.treeEdit.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -371,19 +388,19 @@
     <list>
       <item itemvalue="应用程序.test01" />
       <item itemvalue="应用程序.test" />
+      <item itemvalue="应用程序.ClassTree" />
       <item itemvalue="应用程序.CountCodeNumber" />
-      <item itemvalue="应用程序.EsApplication" />
-      <item itemvalue="应用程序.TodoApplication" />
+      <item itemvalue="应用程序.ObjectInspectorTest" />
+      <item itemvalue="应用程序.TreeEditTest" />
       <item itemvalue="应用程序.MutipleMixer" />
-      <item itemvalue="应用程序.OrderApp" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.EsApplication" />
-        <item itemvalue="应用程序.MutipleMixer" />
-        <item itemvalue="应用程序.TodoApplication" />
         <item itemvalue="应用程序.CountCodeNumber" />
-        <item itemvalue="应用程序.OrderApp" />
+        <item itemvalue="应用程序.ClassTree" />
+        <item itemvalue="应用程序.ObjectInspectorTest" />
+        <item itemvalue="应用程序.TreeEditTest" />
+        <item itemvalue="应用程序.MutipleMixer" />
       </list>
     </recent_temporary>
   </component>
@@ -692,7 +709,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764125910582</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="整合springboot和es操作数据库">
+      <option name="closed" value="true" />
+      <created>1764126625340</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1764126625340</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -719,7 +744,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="完成线程的任务" />
     <MESSAGE value="可完成分未来" />
     <MESSAGE value="更新代理和计数门" />
     <MESSAGE value="rabbit延迟信息队列训练" />
@@ -744,7 +768,8 @@
     <MESSAGE value="完成订单超时预警" />
     <MESSAGE value="学习websocket指南" />
     <MESSAGE value="创建es模块" />
-    <option name="LAST_COMMIT_MESSAGE" value="创建es模块" />
+    <MESSAGE value="整合springboot和es操作数据库" />
+    <option name="LAST_COMMIT_MESSAGE" value="整合springboot和es操作数据库" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

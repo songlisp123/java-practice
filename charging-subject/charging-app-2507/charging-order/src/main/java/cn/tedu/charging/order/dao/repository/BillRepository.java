@@ -17,4 +17,6 @@ public interface BillRepository {
     void updateSuccessBill(String billId,Integer status);
 
     void saveExeptionalBill(ChargingBillSuccessPO successPO);
+
+    void updateSuccess(ChargingBillSuccessPO message);
 }

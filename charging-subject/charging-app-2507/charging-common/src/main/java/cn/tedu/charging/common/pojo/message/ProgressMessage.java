@@ -16,6 +16,7 @@ public class ProgressMessage {
     private Double totalCapacity;
     //是否充满
     private Boolean isFull;
+    private Double temperature;
     /**
      * {
      *     "orderNo":"123",

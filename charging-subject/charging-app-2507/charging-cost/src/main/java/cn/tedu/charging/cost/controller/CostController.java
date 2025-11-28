@@ -17,7 +17,8 @@ public class CostController {
 
     @PostMapping("/cost/bill/calculate")
     public JsonResult<ProgressCostVO> calculateCost(@RequestBody ProgressCostParam cost){
-        //TODO 计算价格
-        return JsonResult.ok(null);
+        //TODO 计算价格【✅ 完成】
+        ProgressCostVO progressCostVO = costService.calculateCost(cost);
+        return JsonResult.ok(progressCostVO);
     }
 }
