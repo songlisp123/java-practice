@@ -17,9 +17,8 @@ public class MutipleMixer {
 
     private static final Logger logger = Logger.getLogger("music.player");
     private static final WindowHandler handler = new WindowHandler();
-    private static final CountDownLatch startSignal = new CountDownLatch(1);
-    private static final CountDownLatch endSignal = new CountDownLatch(1);
     private static final ReentrantLock lock = new ReentrantLock();
+    private static double musicLength;
 
     static {
         logger.setLevel(Level.ALL);
@@ -45,9 +44,7 @@ public class MutipleMixer {
 
 
             try (AudioInputStream stream = AudioSystem.getAudioInputStream(musicFilePath.toFile())) {
-                startSignal.await();
                 AudioFormat format = stream.getFormat();
-                System.out.println("音乐格式："+format);
                 float frameRate = format.getFrameRate();
 //                Line.Info[] sourceLineInfo = mixer.getSourceLineInfo();
 //                SourceDataLine line = (SourceDataLine) mixer.getLine(sourceLineInfo[0]);
@@ -70,9 +67,9 @@ public class MutipleMixer {
                 boolean stopped = false;
                 var numberByteStore = new byte[4096];
                 float gain = 0f;
-                float fadeInStep = 1f / (44100 * 10); // 10秒淡入
+                float fadeInStep = 1f / (44100 * 20); // 100秒淡入
                 int read = stream.read(numberByteStore, 0, 4096);
-                lock.lock();
+//                lock.lock();
                 while (read != -1) {
 //                    System.out.printf("读取字节数：%d%n",read);
                     for (int i = 0; i < read; i+=2) {
@@ -98,10 +95,6 @@ public class MutipleMixer {
 
             } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
                 throw new RuntimeException(e);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }finally {
-                if (lock.isLocked()) lock.unlock();
             }
         };
     }
@@ -141,14 +134,14 @@ public class MutipleMixer {
                 } else {
                     logger.info("音乐被暂停或者终止");
                 }
-                endSignal.countDown();
             }
 
 
             if (event.getType() == LineEvent.Type.STOP) {
                 logger.info("当前线程:%s%n".formatted(thread.getName()));
                 long framePosition = event.getFramePosition();
-                logger.info("音乐时长:[%.2f]秒%n".formatted(Math.floor(framePosition / this.frameRate)));
+                musicLength = Math.floor(framePosition / this.frameRate);
+                logger.info("音乐时长:[%.2f]秒%n".formatted(musicLength));
             }
 
             if (event.getType() == LineEvent.Type.OPEN) {
@@ -158,16 +151,18 @@ public class MutipleMixer {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        try(ScheduledExecutorService executorService = Executors.newScheduledThreadPool(10)) {
-            executorService.scheduleAtFixedRate(playMusic(Path.of("爱在西元前.wav")),
-                    1000L,
-                    5000L,
-                    TimeUnit.MILLISECONDS);
-            logger.info("程序开启");
-            startSignal.countDown();
-            endSignal.await();
-            logger.info("程序结束");
-
+        try {
+            ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+            if (musicLength == 0f) musicLength = 250f;
+            executorService.scheduleAtFixedRate(
+                    playMusic(Path.of("爱在西元前.wav")),
+                    1L,
+                    (long) musicLength,
+                    TimeUnit.SECONDS);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            logger.severe("当前音乐长度是:%.2f".formatted(musicLength));
         }
     }
 

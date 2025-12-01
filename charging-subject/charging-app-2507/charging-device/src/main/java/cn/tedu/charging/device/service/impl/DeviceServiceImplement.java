@@ -36,7 +36,7 @@ public class DeviceServiceImplement implements DeviceService {
         //查询附近场站
         List<StationGeoPO> stationGeoPOS = deviceRepository.nearStations(query);
         if (Objects.nonNull(stationGeoPOS) && !stationGeoPOS.isEmpty()) {
-            //TODO
+            //TODO【✅ 完成】
             vos = new ArrayList<>();
             for (StationGeoPO stationGeoPO : stationGeoPOS) {
                 //获取场站ID

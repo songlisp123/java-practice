@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录界面</title>
+    <style>
+
+        :root {
+            --valid-color: green;
+            --invalid-color: red;
+        }
+        input:valid,
+        textarea:valid {
+            border-bottom-color: var(--valid-color);
+        }
+        input:invalid,
+        textarea:invalid {
+            border-bottom-color: var(--invalid-color);
+        }
+
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 75px;
+        }
+        
+        div {
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        label span {
+            color: red;
+        }
+
+        input,
+        textarea {
+            border: 0;
+            border-bottom: 1px solid grey;
+            padding: 10px 0;
+            width: 200px;
+        }
+
+        select {
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            border-bottom: 1px solid grey;
+            box-shadow: none;
+            color: #666;
+            -webkit-appearance: none;
+            padding: 10px 0;
+            width: 200px;
+        }
+
+        .wrapper {
+            position: relative;
+            width: 200px;
+        }
+
+        .wrapper:after {
+            content: '<>';
+            color: #666;
+            font-size: 14px;
+            top: 8px;
+            right: 0;
+            transform: rotate(90deg);
+            position: absolute;
+            z-index: -1;
+        }
+
+        fieldset {
+            width: 500px;
+            padding: 30px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        fieldset {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            background-color: #666;
+            border: 0;
+            color: white;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            transition: 0.5s;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background-color: orange;
+        }
+
+        fieldset>.top  {
+            margin-top: 25px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>注册</h1>
+    <form action="#" method="get">
+        <fieldset>
+            <div class="top">
+                <label for="username">用户名：<span>*</span></label> <br>
+                <input type="text" id="username"
+                name="username" placeholder="请输入用户名称" required>
+            </div>
+            <div>
+                <label for="counties">城市：<span>*</span></label><br>
+                <input type="text" id="counties"
+                name="counties" placeholder="请输入居住地址" required>
+            </div>
+            <div>
+                <label for="phone">手机号码：</label><br>
+                <input type="text" id="phone" 
+                name="phone" placeholder="输入手机号">
+            </div>
+            <div>
+                <label for="email">电子邮箱：</label><br>
+                <input type="text" id="email" 
+                name="email" placeholder="输入邮箱号">
+            </div>
+            <div>
+                <label for="gender">性别：</label><br>
+                <div class="wrapper">
+                    <select name="gender" id="gender">
+                        <!-- <option value="none">-请选择您的性别-</option> -->
+                        <!-- <option value="dog">出生</option>
+                        <option value="cat">猫娘</option> -->
+                        <option value="男" selected>男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+            </div>
+            <!-- <div>
+                <label for="message">简短介绍</label> <br>
+                <textarea name="message" id="message"
+                rows="5" cols="20" placeholder="介绍你自己……">
+                </textarea>
+            </div> -->
+            <div>
+                <button type="submit">提交</button>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

@@ -45,10 +45,10 @@ public class initPanel extends JPanel {
         addMouseListener(new MouseHandler());
         customButton.addActionListener(event -> {
 //            if (login == null) login = new Login(jFrame);
-            if (setPanel == null) {
-                setPanel = new setPanel(600,600);
+            if (this.setPanel == null) {
+                this.setPanel = new setPanel(600,400);
             }
-            else setPanel.setVisible(true);
+            else this.setPanel.setVisible(true);
 
         });
         timeStamp = System.currentTimeMillis();

@@ -106,7 +106,7 @@ public class OrderServiceImplement implements OrderService {
                 billRepository.updateSuccessBill(billId,3);
                 //设置异常订单
                 billRepository.saveExeptionalBill(successPO);
-                //TODO 推送信息
+                //TODO 推送信息【✅  完成】
                 WebSocketResult<String> stringWebSocketResult = new WebSocketResult<>();
                 stringWebSocketResult.setState(1);
                 stringWebSocketResult.setMessage("设备超过指定时间");

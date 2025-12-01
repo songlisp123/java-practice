@@ -28,18 +28,18 @@ public class UserController {
     private UserService userService;
     @PostMapping("/sms/code/verify")
     public JsonResult<String> verifyCode(String phone){
-        //调用业务层实现验证码的业务 TODO
+        //调用业务层实现验证码的业务 TODO【❌ 未完成】
         return JsonResult.ok(null);
     }
     @PostMapping("/sms/send")
     public JsonResult<String> sendSms(String phone){
-        //调用业务层实现发送短信的业务 TODO
+        //调用业务层实现发送短信的业务 TODO【❌ 未完成】
         return JsonResult.ok(null);
     }
     //小程序用户微信登录
     @PostMapping("/user/wx/login")
     public JsonResult<WxLoginVO> wxLogin(@RequestBody WxLoginParam code){
-        //调用业务层实现登录返回凭证的业务 TODO
+        //调用业务层实现登录返回凭证的业务 TODO【✅ 完成】
         log.debug("当前js代码，{}",code);
         WxLoginVO wxLoginVO = userService.wxLogin(code);
         return JsonResult.ok(wxLoginVO);

@@ -71,5 +71,8 @@ public class CustomButton extends JButton {
         }
     }
 
+    public int getDefaultHeight() {
+        return HEIGHT;
+    }
 
 }

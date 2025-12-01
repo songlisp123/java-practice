@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-public class jpanel extends JPanel {
+public class jpanel<T extends JFrame> extends JPanel {
     public static int rows;
     public static int columns;
     public int width;
@@ -33,9 +33,14 @@ public class jpanel extends JPanel {
     private List<Pair> pairs;
     private static int turn = 1;
     private Wall wall;
-    private JFrame frame;
+    private T frame;
     private setPanel setPanel;
+    private Timer timer;
     private static final Logger logger = Logger.getLogger("worms");
+
+    public Timer getTimer() {
+        return timer;
+    }
 
     public jpanel(int rows, int columns, int width, int height) {
 //        setBackground(new Color(30, 31, 34));   //界面颜色
@@ -54,20 +59,26 @@ public class jpanel extends JPanel {
         jLabel = new JLabel("当前分数：[%d]分".formatted(score));
         jLabel02 = new JLabel("当前回合：第[%d]回合".formatted(turn));
         jTextField = new JTextField("当前分数：[%d]分".formatted(score));
-        System.out.println(jLabel.getForeground());
         jLabel.setForeground(Color.WHITE);
         jLabel02.setForeground(Color.WHITE);
 
         //按钮
         back = new CustomButton("返回界面");
         back.addActionListener(event->{
+
+            if (this.timer != null) {
+                this.timer.cancel();
+                this.timer = null;
+            }
             if (setPanel == null) {
-                setPanel = new setPanel(600,600);
+                setPanel = new setPanel(600,400);
             }
             else {
                 setPanel.setVisible(true);
             }
+            //TODO 暂停游戏
             setVisible(false);
+
         });
         add(back);
         //设置墙体
@@ -77,11 +88,17 @@ public class jpanel extends JPanel {
 
         setBackground(new Color(30, 34, 32));
         //创建蛇
-        logger.info("创建蛇体成功");
         add(jLabel,FlowLayout.LEFT);
         add(jLabel02,FlowLayout.CENTER);
+    }
 
+    public jpanel(int rows, int columns, int width, int height,T frame) {
+        this(rows, columns, width, height);
+        this.frame = frame;
+        this.frame.add(this);
+        this.frame.setVisible(true);
         this.action();
+
     }
 
     @Override
@@ -185,7 +202,7 @@ public class jpanel extends JPanel {
 
     //程序主逻辑
     private void action() {
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {

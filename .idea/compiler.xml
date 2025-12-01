@@ -30,6 +30,7 @@
         <module name="X6-WEBSOCKET-demo" />
         <module name="micro-demo-device" />
         <module name="charging-order" />
+        <module name="swing" />
         <module name="charging-gateway" />
         <module name="genric" />
         <module name="micro-demo-gateway" />

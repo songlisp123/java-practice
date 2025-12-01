@@ -158,7 +158,7 @@ public class DeviceRepositoryImplement implements DeviceRepository {
 
     @Override
     public void saveGeo(List<ChargingStationPO> pos) {
-        //TODO
+        //TODO【✅ 完成】
         log.debug("开始向reids数据库写入数据");
         //首先获取redis操作模版
         GeoOperations<String,Integer> geoOperations = redisTemplate.opsForGeo();

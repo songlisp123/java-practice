@@ -25,7 +25,7 @@ public class UserRepositoryImpl implements UserRepository {
     private UserVehicleBindMapper userVehicleBindMapper;//user_vehicle_bind
 
     public ChargingUserInfoPO getUserByOpenId(String openId) {
-        //TODO
+        //TODO 【✅ 完成】
         QueryWrapper<ChargingUserInfoPO> wrapper = new QueryWrapper<>();
         wrapper.eq("wx_open_id",openId);
         return userMapper.selectOne(wrapper);

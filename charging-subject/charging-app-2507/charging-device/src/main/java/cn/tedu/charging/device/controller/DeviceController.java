@@ -35,7 +35,7 @@ public class DeviceController {
      */
     @GetMapping("/device/station/near")
     public JsonResult<List<StationInfoVO>> nearStations(NearStationsQuery query){
-        //TODO
+        //TODO【✅ 完成】
         log.debug("入参:{}",query);
         List<StationInfoVO> stationInfoVOS = deviceService.nearStations(query);
         return JsonResult.ok(stationInfoVOS);
@@ -43,7 +43,7 @@ public class DeviceController {
     //查询某个充电站详情包括站场信息以及站场关联的枪数据
     @GetMapping("/device/station/detail/{stationId}")
     public JsonResult<StationDetailVO> detailStation(@PathVariable Integer stationId){
-        //TODO
+        //TODO【✅ 完成】
         log.debug("查询的当前充电站的id是：{}",stationId);
         StationDetailVO stationDetailVO = deviceService.detailStation(stationId);
         return JsonResult.ok(stationDetailVO);
@@ -51,7 +51,7 @@ public class DeviceController {
     //订单调用设备检查枪是否可用
     @GetMapping("/device/gun/check")
     public JsonResult<Boolean> checkGun(@RequestParam("gunId") Integer gunId){
-        //TODO
+        //TODO【✅ 完成】
         Boolean aBoolean = deviceService.checkGunAvailable(gunId);
         return JsonResult.ok(aBoolean);
     }
@@ -60,7 +60,7 @@ public class DeviceController {
     @PostMapping("/device/gun/error")
     public JsonResult<Boolean> updateGunStatus(
             @RequestParam("gunId")Integer gunId){
-        //TODO 枪状态故障
+        //TODO 枪状态故障【❌ 胃完成】
         log.error("强状态异常");
         return JsonResult.ok();
     }

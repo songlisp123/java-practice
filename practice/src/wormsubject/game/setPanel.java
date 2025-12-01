@@ -4,20 +4,24 @@ import wormsubject.util.CustomButton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 import java.util.Hashtable;
+import java.util.Objects;
 
 public class setPanel extends SimpleFrame {
     private CustomButton startButton;
+    private CustomButton resumeButton;
     private CustomButton setButton;
     private CustomButton aboutMNe;
     private JPanel panel;
     private AboutDialog dialog;
     private D dialog2;
-    private practice01 gamePanel;
+    private jpanel<practice01> jpanel;
     private static final int GAP = 150;
 
     public setPanel(int width,int height) {
         super(width,height);
+        this.setResizable(false);
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS)); // 垂直排列
 
@@ -29,11 +33,13 @@ public class setPanel extends SimpleFrame {
         setButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         aboutMNe.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        panel.add(Box.createVerticalStrut(GAP));  // 顶部留空白
+        //平均分配空间
+        int gap = allocateSpace(height,startButton,setButton,aboutMNe);
+        panel.add(Box.createVerticalGlue());    // 顶部留空白
         panel.add(startButton);
-        panel.add(Box.createVerticalStrut(GAP));  // 间隔
+        panel.add(Box.createVerticalStrut(gap));  // 间隔
         panel.add(setButton);
-        panel.add(Box.createVerticalStrut(GAP));  // 间隔
+        panel.add(Box.createVerticalStrut(gap));  // 间隔
         panel.add(aboutMNe);
         panel.add(Box.createVerticalGlue());     // 底部自动撑开
         panel.setBackground(new Color(30, 31, 34));
@@ -42,31 +48,52 @@ public class setPanel extends SimpleFrame {
         setVisible(true);
 
         startButton.addActionListener(event->{
-            if (gamePanel == null)
-            {
-                gamePanel = new practice01();
-
-            }
-            else  {
-                gamePanel.setVisible(true);
+            practice01 practice01 = new practice01();
+            if (Objects.isNull(jpanel)) {
+                jpanel = new jpanel<>(40,40,800,800,practice01);
+            }else {
+                if (jpanel.getTimer() == null ) {
+                    //程序暂停
+                }
             }
             setVisible(false);
 
         });
         setButton.addActionListener(event->{
             if (dialog == null) {
+                System.out.println("新建设置弹窗");
                 dialog = new AboutDialog(this);
             }
             dialog.setVisible(true);
         });
         aboutMNe.addActionListener(event->{
             if (dialog2 == null) {
+                System.out.println("新建关于弹窗");
                 dialog2 = new D(this);
             }
             dialog2.setVisible(true);
         });
 
     }
+
+    private int allocateSpace(int height, CustomButton...buttons) {
+        int totalHeightOfButtons = 0;
+        int gap = 0;
+        if (Objects.isNull(buttons) || buttons.length == 0) {
+            gap = GAP;
+        }else {
+            for (CustomButton button : buttons) {
+                int buttonHeight = button.getDefaultHeight();
+                totalHeightOfButtons += buttonHeight;
+            }
+            System.out.println("总高度="+totalHeightOfButtons);
+            gap = (height - totalHeightOfButtons) / (buttons.length + 1);
+        }
+        System.out.println("间隔式："+gap);
+        return gap;
+    }
+
+
     private class AboutDialog extends JDialog {
         private JSlider audioSlider;
         private JSlider lightSlider;
@@ -77,7 +104,7 @@ public class setPanel extends SimpleFrame {
 
         public AboutDialog(JFrame owner) {
             super(owner,"设置",true);
-            setSize(500,400);
+            setBounds(owner.getX(),owner.getY(),owner.getWidth(),owner.getWidth());
             audioSlider = new JSlider(0,100);
             lightSlider = new JSlider(0,100);
 //            audioSlider.set
@@ -144,12 +171,12 @@ public class setPanel extends SimpleFrame {
                     , SwingConstants.CENTER);
 
             button = new CustomButton("确定");
-            setSize(500,400);
+            setBounds(owner.getX(),owner.getY(),owner.getWidth(),owner.getWidth());
             jPanel.add(label);
             add(jPanel);
             add(button,BorderLayout.SOUTH);
             button.addActionListener(event->{
-                setVisible(false);
+                this.setVisible(false);
             });
         }
     }

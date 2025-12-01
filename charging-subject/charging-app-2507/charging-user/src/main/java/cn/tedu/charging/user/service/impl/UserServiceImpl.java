@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public WxLoginVO wxLogin(WxLoginParam code) {
-        //TODO
+        //TODO 【✅ 完成】
         //调用第三方？
         //获取openId
         String openId = getOpenId(code.getCode());
@@ -172,5 +172,6 @@ public class UserServiceImpl implements UserService {
     }
     private void checkVehicleInfo(VehicleBindParam param) {
         //调用相关单位接口 如果数据信息有错误 异常结束 拒绝向后流转业务
+        //TODO 调用设备服务接口，实现绑定车辆活动
     }
 }
