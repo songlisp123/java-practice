@@ -73,7 +73,7 @@ public class TextSamplerDemo  extends JPanel implements ActionListener {
         JLabel[] labels = new JLabel[]{jTextLabel,passwordLabel,formattedLabel};
         JTextField[] fields = new JTextField[]{jTextField,jPasswordField,jFormattedTextField};
 
-        //TODO 布局设置
+        //TODO 布局设置[✅ 完成]
         addLabelTextRows(labels,fields,gridBagLayout,textControlsPanel);
 
         //TODO 添加label信息
@@ -137,8 +137,13 @@ public class TextSamplerDemo  extends JPanel implements ActionListener {
 //        ));
 
         //把所有事情都放在一起
+        //TODO 可代优化,使用url读取互联网上面的地址
         JPanel centerPanel = new JPanel(new BorderLayout());
         centerPanel.add(editScrollPanel);
+        centerPanel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder("html文件阅读器"),
+                BorderFactory.createEmptyBorder(5,5,5,5)
+        ));
         JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.add(textControlsPanel,BorderLayout.PAGE_START);
         leftPanel.add(jScrollPaneTextArea,BorderLayout.CENTER);
@@ -207,7 +212,7 @@ public class TextSamplerDemo  extends JPanel implements ActionListener {
         s = document.addStyle("icon",regular);
         StyleConstants.setAlignment(s,StyleConstants.ALIGN_CENTER);
         //TODO 2
-        ImageIcon pigIcon = createIcon("images/Pig.gif","一个可爱的🐷");
+        ImageIcon pigIcon = createIcon("images/test.jpg","一个可爱的🐷");
         if (pigIcon != null) {
             StyleConstants.setIcon(s,pigIcon);
         }
@@ -252,7 +257,7 @@ public class TextSamplerDemo  extends JPanel implements ActionListener {
         editorPane.setEditable(false);
         URL helpUrl = null;
         try {
-            helpUrl = Path.of("html/table.html").toUri().toURL();
+//            helpUrl = Path.of("html/table.html").toUri().toURL();
             if (Objects.nonNull(helpUrl)) {
                 editorPane.setPage(helpUrl);
             }
@@ -276,6 +281,7 @@ public class TextSamplerDemo  extends JPanel implements ActionListener {
         c.anchor = GridBagConstraints.EAST;
         int numbers = labels.length;
 
+        //搞定
         for (int i = 0;i<numbers;i++) {
             c.gridwidth = GridBagConstraints.RELATIVE;
             c.fill = GridBagConstraints.NONE;

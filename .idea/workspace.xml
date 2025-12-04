@@ -7,57 +7,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="xxx">
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/java/cn/tedu/charging/cost/dao/repository/imle/CostRepositoryImplement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-cost/src/main/java/cn/tedu/charging/cost/service/impl/CosyServiceImplement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/cilent/CostClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/micro-demo-2507/X7-ES-DEMO/src/test/java/es/demo/test/DemoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/treeEdit/TreeEditFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/treeEdit/TreeEditTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/treeModel/ObjectInspectorFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/treeModel/ObjectInspectorTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/treeModel/ObjectTreeModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/treeModel/Variable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/treeRender/ClassNameTreeCellRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/treeRender/ClassTree.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/treeRender/ClassTreeFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/treeRender/blue-ball.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/treeRender/red-ball.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/treeRender/yellow-ball.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/turial/HelloWordTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/treeEdit/TreeEditFrame.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/treeEdit/TreeEditTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/treeModel/ObjectInspectorFrame.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/treeModel/ObjectInspectorTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/treeModel/ObjectTreeModel.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/treeModel/Variable.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/treeRender/ClassNameTreeCellRenderer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/treeRender/ClassTree.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/treeRender/ClassTreeFrame.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo/logs/spring.log.2025-11-26.0.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/todo/logs/spring.log.2025-11-27.0.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="学习swing实战+理论">
+      <change afterPath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/TestActions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/controller/DeviceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/controller/DeviceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/dao/repository/impl/DeviceRepositoryImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/dao/repository/impl/DeviceRepositoryImplement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/service/impl/DeviceServiceImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-device/src/main/java/cn/tedu/charging/device/service/impl/DeviceServiceImplement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/impl/OrderServiceImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-order/src/main/java/cn/tedu/charging/order/service/impl/OrderServiceImplement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/dao/repository/impl/UserRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/dao/repository/impl/UserRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/charging-subject/charging-app-2507/charging-user/src/main/java/cn/tedu/charging/user/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/count.txt" beforeDir="false" afterPath="$PROJECT_DIR$/count.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/countTotalNumber.txt" beforeDir="false" afterPath="$PROJECT_DIR$/countTotalNumber.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/wormsubject/game/initPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/wormsubject/game/initPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/wormsubject/game/jpanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/wormsubject/game/jpanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/wormsubject/game/practice01.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/wormsubject/game/practice01.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/wormsubject/game/setPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/wormsubject/game/setPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice/src/wormsubject/util/CustomButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/practice/src/wormsubject/util/CustomButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/components/TextSamplerDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/components/TextSamplerDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/components/html/TextSamplerDemoHelp.html" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/html/TextSamplerDemoHelp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/components/html/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/html/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/components/html/table.html" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/html/table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/components/TextSamplerDemo$MyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/components/TextSamplerDemo$MyListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/components/TextSamplerDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/components/TextSamplerDemo.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +141,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/java_practice/swing/src/main/java/com/snl/swing/components/html",
+    "last_opened_file_path": "D:/java_practice",
     "onboarding.tips.debug.path": "/home/snl/java/java_code/java_practice/char03/src/Main.java",
     "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.15",
@@ -188,13 +151,16 @@
     "应用程序.ArrayListDemo.executor": "Run",
     "应用程序.AsynchronousPublishConfirm.executor": "Run",
     "应用程序.AudioTest.executor": "Run",
+    "应用程序.BorderLayoutDemo.executor": "Run",
     "应用程序.CalendarDemo.executor": "Run",
     "应用程序.CapturedAudio.executor": "Run",
+    "应用程序.CaretListenerTest.executor": "Run",
     "应用程序.CharFrequence.executor": "Run",
     "应用程序.CharSequenceOp.executor": "Run",
     "应用程序.ChooseBestMixer.executor": "Run",
     "应用程序.ClassTree.executor": "Run",
     "应用程序.CollectionBasicDemo.executor": "Run",
+    "应用程序.ColorChooserTestDemo.executor": "Run",
     "应用程序.CompleteFutureDemo.executor": "Run",
     "应用程序.CostApp.executor": "Run",
     "应用程序.CountCodeNumber.executor": "Run",
@@ -209,9 +175,12 @@
     "应用程序.DelayQueueTest.executor": "Run",
     "应用程序.DemoTest.executor": "Run",
     "应用程序.DeviceApp.executor": "Run",
+    "应用程序.DocumentListenerTest.executor": "Run",
+    "应用程序.DocumentTest.executor": "Run",
     "应用程序.DragTest.executor": "Run",
     "应用程序.DrawTest.executor": "Run",
     "应用程序.EchoServer.executor": "Run",
+    "应用程序.EditDocumentTest.executor": "Run",
     "应用程序.Editor.executor": "Run",
     "应用程序.EmitLog.executor": "Run",
     "应用程序.EmitLogDirect.executor": "Run",
@@ -229,6 +198,7 @@
     "应用程序.Frame.executor": "Run",
     "应用程序.GatewayApp.executor": "Run",
     "应用程序.GenericListDemo.executor": "Run",
+    "应用程序.GridBagLayoutDemo.executor": "Run",
     "应用程序.HelloWord.executor": "Run",
     "应用程序.HelloWordTest (1).executor": "Run",
     "应用程序.HelloWordTest.executor": "Run",
@@ -239,6 +209,7 @@
     "应用程序.InstalledMix.executor": "Run",
     "应用程序.IntContainerDemo.executor": "Run",
     "应用程序.IntenetTest.executor": "Run",
+    "应用程序.KeyEventDemo.executor": "Run",
     "应用程序.LikeQueue.executor": "Run",
     "应用程序.ListJvmThreads.executor": "Run",
     "应用程序.LoggingImageViewer.executor": "Run",
@@ -249,7 +220,7 @@
     "应用程序.MutipleMixer.executor": "Run",
     "应用程序.NewCalendarDateDemo.executor": "Run",
     "应用程序.NewTask.executor": "Run",
-    "应用程序.ObjectInspectorTest.executor": "Debug",
+    "应用程序.ObjectInspectorTest.executor": "Run",
     "应用程序.OrderApp.executor": "Run",
     "应用程序.PairTest.executor": "Run",
     "应用程序.PostTest.executor": "Run",
@@ -271,12 +242,18 @@
     "应用程序.SocketTest.executor": "Run",
     "应用程序.StackTest.executor": "Run",
     "应用程序.StringCrep.executor": "Run",
+    "应用程序.StyleDocument.executor": "Run",
+    "应用程序.StyleDocumentTest.executor": "Run",
     "应用程序.SwappDemo.executor": "Run",
     "应用程序.SwingWorkerTest.executor": "Run",
     "应用程序.SystemClass.executor": "Run",
+    "应用程序.TestActions.executor": "Run",
     "应用程序.TestCompent.executor": "Run",
     "应用程序.TestDB.executor": "Run",
     "应用程序.TestDemo.executor": "Run",
+    "应用程序.TextBoot.executor": "Run",
+    "应用程序.TextComponentDemo (1).executor": "Run",
+    "应用程序.TextComponentDemo (2).executor": "Run",
     "应用程序.TextComponentDemo.executor": "Run",
     "应用程序.TextFileds.executor": "Run",
     "应用程序.TextSamplerDemo.executor": "Run",
@@ -330,25 +307,38 @@
       <recent name="com.apress.bgn.char006.frame" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\java_practice" />
+      <recent name="D:\java_practice\swing\src\main\java\com\snl\swing\components\images" />
       <recent name="D:\java_practice\swing\src\main\java\com\snl\swing\components\html" />
       <recent name="D:\java_practice\swing\src\main\java\com\snl\swing\components\musics" />
-      <recent name="D:\java_practice\swing\src\main\java\com\snl\swing\components\images" />
       <recent name="D:\java_practice\swing\src\main\java\com\snl\swing\components" />
-      <recent name="D:\java_practice\swing\src\main\java\com\snl\swing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\java_practice\swing\src\main\java\com\snl\swing\components\html" />
       <recent name="D:\java_practice\JDBC" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.snl.swing.practice" />
       <recent name="cn.tedu.charging.order.config" />
       <recent name="test" />
       <recent name="demo.queue.emitLogsConsumer" />
       <recent name="demo.queue" />
-      <recent name="textEditor" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.CountCodeNumber">
+  <component name="RunManager" selected="应用程序.TextBoot">
+    <configuration name="ColorChooserTestDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.snl.test.ColorChooserTestDemo" />
+      <module name="swing" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.snl.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CountCodeNumber" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Util.CountCodeNumber" />
       <module name="System" />
@@ -362,12 +352,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HelloWordTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.snl.swing.turial.HelloWordTest" />
+    <configuration name="StyleDocumentTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.snl.test.StyleDocumentTest" />
       <module name="swing" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.snl.swing.components.*" />
+          <option name="PATTERN" value="com.snl.test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -375,36 +365,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TextComponentDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="TextBoot" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.snl.swing.practice.TextBoot" />
+      <module name="swing" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.snl.swing.practice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TextComponentDemo (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.snl.swing.components.TextComponentDemo" />
       <module name="swing" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.snl.swing.components.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TextSamplerDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.snl.swing.TextSamplerDemo" />
-      <module name="swing" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.snl.swing.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="com.snl.swing.components.TextSamplerDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.snl.swing.components.TextSamplerDemo" />
-      <module name="swing" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/components" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.snl.swing.components.*" />
@@ -436,19 +412,19 @@
     <list>
       <item itemvalue="应用程序.test01" />
       <item itemvalue="应用程序.test" />
-      <item itemvalue="应用程序.HelloWordTest (1)" />
-      <item itemvalue="应用程序.TextComponentDemo" />
-      <item itemvalue="应用程序.TextSamplerDemo" />
-      <item itemvalue="应用程序.com.snl.swing.components.TextSamplerDemo" />
+      <item itemvalue="应用程序.ColorChooserTestDemo" />
+      <item itemvalue="应用程序.StyleDocumentTest" />
+      <item itemvalue="应用程序.TextBoot" />
+      <item itemvalue="应用程序.TextComponentDemo (1)" />
       <item itemvalue="应用程序.CountCodeNumber" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.com.snl.swing.components.TextSamplerDemo" />
+        <item itemvalue="应用程序.TextBoot" />
+        <item itemvalue="应用程序.ColorChooserTestDemo" />
         <item itemvalue="应用程序.CountCodeNumber" />
-        <item itemvalue="应用程序.TextSamplerDemo" />
-        <item itemvalue="应用程序.TextComponentDemo" />
-        <item itemvalue="应用程序.HelloWordTest (1)" />
+        <item itemvalue="应用程序.TextComponentDemo (1)" />
+        <item itemvalue="应用程序.StyleDocumentTest" />
       </list>
     </recent_temporary>
   </component>
@@ -781,7 +757,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764335931174</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="学习swing实战+理论">
+      <option name="closed" value="true" />
+      <created>1764583651884</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1764583651884</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -808,7 +792,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="redis序列化练习" />
     <MESSAGE value="更新rabbitmq队列功能" />
     <MESSAGE value="创建rabbitMq绑定信息队列的功能" />
     <MESSAGE value="更新rabbitMq绑定信息队列的功能&#10;1、使用direct直连交换器发送信息&#10;2、使用路由键绑定队列" />
@@ -833,7 +816,8 @@
     <MESSAGE value="村北" />
     <MESSAGE value="完成充电站学习开始准备建简历" />
     <MESSAGE value="xxx" />
-    <option name="LAST_COMMIT_MESSAGE" value="xxx" />
+    <MESSAGE value="学习swing实战+理论" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习swing实战+理论" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

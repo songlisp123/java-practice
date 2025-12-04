@@ -46,6 +46,11 @@ public class MutipleMixer {
             try (AudioInputStream stream = AudioSystem.getAudioInputStream(musicFilePath.toFile())) {
                 AudioFormat format = stream.getFormat();
                 float frameRate = format.getFrameRate();
+//                System.out.println("frameRate = " + frameRate);
+//                float sampleRate = format.getSampleRate();
+//                System.out.println("sampleRate = " + sampleRate);
+//                int frameSize = format.getFrameSize();
+//                System.out.println("frameSize = " + frameSize);
 //                Line.Info[] sourceLineInfo = mixer.getSourceLineInfo();
 //                SourceDataLine line = (SourceDataLine) mixer.getLine(sourceLineInfo[0]);
 //                DataLine.Info info = new DataLine.Info(Clip.class, format);
