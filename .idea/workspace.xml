@@ -7,20 +7,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="学习swing实战+理论">
-      <change afterPath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/TestActions.java" afterDir="false" />
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="继续学习文本组件，我有了一点点理解了">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/count.txt" beforeDir="false" afterPath="$PROJECT_DIR$/count.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/countTotalNumber.txt" beforeDir="false" afterPath="$PROJECT_DIR$/countTotalNumber.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/components/TextSamplerDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/components/TextSamplerDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/components/html/TextSamplerDemoHelp.html" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/html/TextSamplerDemoHelp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/components/html/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/html/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/components/html/table.html" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/html/table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/components/TextSamplerDemo$MyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/components/TextSamplerDemo$MyListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/components/TextSamplerDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/components/TextSamplerDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/ColorChooserDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/ColorChooserDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/CustomBoxTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/CustomBoxTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/CustomMenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/CustomMenuBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/EditTextPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/EditTextPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/FontComBoxDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/FontComBoxDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/TextBoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/TextBoot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/ColorChooserDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/ColorChooserDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/CustomBoxTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/CustomBoxTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/EditTextPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/EditTextPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/FontComBoxDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/FontComBoxDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/MainPanel$MyListenImplement.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/MainPanel$MyListenImplement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/MainPanel$OpenFileChooser.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/MainPanel$OpenFileChooser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/MainPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/MainPanel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -325,7 +329,7 @@
       <recent name="demo.queue" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.TextBoot">
+  <component name="RunManager" selected="应用程序.CountCodeNumber">
     <configuration name="ColorChooserTestDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.snl.test.ColorChooserTestDemo" />
       <module name="swing" />
@@ -421,8 +425,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="应用程序.TextBoot" />
-        <item itemvalue="应用程序.ColorChooserTestDemo" />
         <item itemvalue="应用程序.CountCodeNumber" />
+        <item itemvalue="应用程序.ColorChooserTestDemo" />
         <item itemvalue="应用程序.TextComponentDemo (1)" />
         <item itemvalue="应用程序.StyleDocumentTest" />
       </list>
@@ -765,7 +769,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764583651884</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="继续学习文本组件，我有了一点点理解了">
+      <option name="closed" value="true" />
+      <created>1764862021631</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1764862021631</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -792,7 +804,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="更新rabbitmq队列功能" />
     <MESSAGE value="创建rabbitMq绑定信息队列的功能" />
     <MESSAGE value="更新rabbitMq绑定信息队列的功能&#10;1、使用direct直连交换器发送信息&#10;2、使用路由键绑定队列" />
     <MESSAGE value="更新混音器使用,添加管道事件监听器开启和开始" />
@@ -817,7 +828,8 @@
     <MESSAGE value="完成充电站学习开始准备建简历" />
     <MESSAGE value="xxx" />
     <MESSAGE value="学习swing实战+理论" />
-    <option name="LAST_COMMIT_MESSAGE" value="学习swing实战+理论" />
+    <MESSAGE value="继续学习文本组件，我有了一点点理解了" />
+    <option name="LAST_COMMIT_MESSAGE" value="继续学习文本组件，我有了一点点理解了" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

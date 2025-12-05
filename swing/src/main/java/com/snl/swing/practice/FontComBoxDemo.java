@@ -85,10 +85,7 @@ public class FontComBoxDemo<T extends JTextComponent> extends JComboBox<String> 
             //TODO 更改文字类型属性
             StyledDocument styledDocument = ((JTextPane) t).getStyledDocument();
             Style regular = styledDocument.getStyle("regular");
-            if (regular == null) {
-                regular = styledDocument.addStyle("regular",null);
-            }
-            StyleConstants.setFontFamily(regular,(String) u);
+            StyleConstants.setFontFamily(regular,u);
             //应用到整个文档
             styledDocument.setCharacterAttributes(start,end-start,regular,false);
         }else {

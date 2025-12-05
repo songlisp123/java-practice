@@ -69,13 +69,8 @@ public class CustomBoxTest<T extends JTextComponent> extends JComboBox<String> i
             System.out.println("改变文本大小："+u);
             StyledDocument styledDocument = ((JTextPane) t).getStyledDocument();
             Style regular = styledDocument.getStyle("regular");
-            if (regular == null) {
-                regular = styledDocument.addStyle("regular",null);
-            }
             StyleConstants.setFontSize(regular,Integer.parseInt(u));
             //应用到整个文档
-            System.out.println("start="+start);
-            System.out.println("end="+end);
             styledDocument.setCharacterAttributes(start,end-start,regular,true);
         }else {
             System.err.println("改组件并不支持风格化文档！");

@@ -5,16 +5,13 @@ import audio.MutipleMixer;
 import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
+import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.nio.file.Path;
-import java.sql.SQLOutput;
 import java.util.Objects;
 
 public class MainPanel extends JPanel implements ActionListener, CaretListener {
@@ -30,11 +27,15 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
     protected int port;
     protected JButton insertPictureButton;
     protected JFileChooserDemo jFileChooserDemo;
+    protected CaretDemo caretDemo;
+    protected TitleDemo titleDemo;
 
     public MainPanel() {
         super(new BorderLayout());
         alignPanel();
         initComponents();
+        //添加键绑定
+        addBindings();
     }
 
     private void alignPanel() {
@@ -61,8 +62,13 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
 
         insertPictureButton = new JButton("插入图片");
 
+        titleDemo = new TitleDemo();
+        JLabel titleTabel = new JLabel("文字标题");
+        titleTabel.setLabelFor(titleDemo);
+
 
         constraints.anchor = GridBagConstraints.EAST;
+
 
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -70,8 +76,24 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
         constraints.gridheight = 1;
         constraints.weightx = 0.0;
         constraints.fill = GridBagConstraints.NONE;
-        jPanel.add(fontSizeLabel,constraints);
+        jPanel.add(titleTabel,constraints);
         constraints.gridx = 1;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        constraints.gridheight = 1;
+        constraints.weightx = 0.5;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.insets = new Insets(0,10,0,10);
+        jPanel.add(titleDemo,constraints);
+
+        constraints.gridx = 2;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        constraints.gridheight = 1;
+        constraints.weightx = 0.0;
+        constraints.fill = GridBagConstraints.NONE;
+        jPanel.add(fontSizeLabel,constraints);
+        constraints.gridx = 3;
         constraints.gridy = 0;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
@@ -80,14 +102,14 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
         constraints.insets = new Insets(0,10,0,10);
         jPanel.add(customBoxTest,constraints);
 
-        constraints.gridx = 2;
+        constraints.gridx = 4;
         constraints.gridy = 0;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
         constraints.weightx = 0.0;
         constraints.fill = GridBagConstraints.NONE;
         jPanel.add(fontTypeLabel,constraints);
-        constraints.gridx = 3;
+        constraints.gridx = 5;
         constraints.gridy = 0;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
@@ -107,7 +129,7 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
 //        constraints.fill = GridBagConstraints.HORIZONTAL;
 //        jPanel.add(iInsertComponents,constraints);
 
-        constraints.gridx = 4;
+        constraints.gridx = 6;
         constraints.weightx = 1.0;
         constraints.insets = new Insets(0,5,0,5);
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -115,7 +137,7 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
         jPanel.add(button,constraints);
 
 
-        constraints.gridx = 5;
+        constraints.gridx = 7;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.insets = new Insets(0,5,0,5);
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -146,6 +168,11 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
 
 
         editTextPanel = new EditTextPanel();
+        if (caretDemo == null) {
+            caretDemo = new CaretDemo(2);
+        }
+        editTextPanel.getPane().setCaretColor(Color.WHITE);
+        editTextPanel.getPane().setCaret(caretDemo);
         editTextPanel.setBorder(
                 BorderFactory.createTitledBorder("书写区")
         );
@@ -155,10 +182,13 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
         editTextPanel.getPane().addCaretListener(fontComBoxDemo);
         editTextPanel.getPane().addCaretListener(colorChooserDemo);
         editTextPanel.getPane().addCaretListener(this);
+        editTextPanel.getPane().addCaretListener(titleDemo);
+
         customBoxTest.setT(editTextPanel.getPane());
         fontComBoxDemo.setT(editTextPanel.getPane());
         iInsertComponents.setPane(editTextPanel.getPane());
         colorChooserDemo.setPane(editTextPanel.getPane());
+        titleDemo.setPane(editTextPanel.getPane());
 
 
 
@@ -199,7 +229,7 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
 //        System.out.println("点击按钮");
         //TODO 点击事件
 //        new Thread(MutipleMixer.playMusic(Path.of("爱在西元前.wav")),"音乐播放者").start();
-        Object[] pos = {"button","textArea","_NULL_"};
+        Object[] pos = {"button","textArea","textFiled","_NULL_"};
          answer = (String)JOptionPane.showInputDialog(
                 this,
                 "请选择要添加的组件",
@@ -232,6 +262,10 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
                 );
                 jScrollPane.setPreferredSize(new Dimension(200,200));
                 StyleConstants.setComponent(style,jScrollPane);
+            } else if (answer.equals(pos[2])) {
+                JTextField jTextField = new JTextField(10);
+                StyleConstants.setAlignment(style,StyleConstants.ALIGN_CENTER);
+                StyleConstants.setComponent(style,jTextField);
             }
             try {
                 styledDocument.insertString(port, " ", style);
@@ -272,6 +306,26 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
     @Override
     public void caretUpdate(CaretEvent e) {
         port = e.getDot();
+    }
+
+    private void addBindings() {
+        //获取文本组件的输入映射
+        InputMap inputMap = editTextPanel.getPane().getInputMap();
+        //ctrl-b退回一个
+        KeyStroke keyStroke =
+                KeyStroke.getKeyStroke(KeyEvent.VK_B, Event.CTRL_MASK);
+        inputMap.put(keyStroke, DefaultEditorKit.backwardAction);
+        //ctrl-f回到下一个
+        keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_F, Event.CTRL_MASK);
+        inputMap.put(keyStroke,DefaultEditorKit.forwardAction);
+
+        //ctrl-p跳到上一行
+        keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_P,Event.CTRL_MASK);
+        inputMap.put(keyStroke,DefaultEditorKit.upAction);
+
+        //ctrl-n 调到下一行
+        keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_N,Event.CTRL_MASK);
+        inputMap.put(keyStroke,DefaultEditorKit.downAction);
     }
 
     protected class MyListenImplement implements ActionListener {

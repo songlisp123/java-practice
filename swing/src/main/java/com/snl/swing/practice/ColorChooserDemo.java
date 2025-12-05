@@ -43,9 +43,6 @@ public class ColorChooserDemo extends JColorChooser implements ChangeListener, C
     private void updateStyle(JTextPane pane, Color color) {
         StyledDocument styledDocument = pane.getStyledDocument();
         Style style = styledDocument.getStyle("regular");
-        if (style == null) {
-            style = styledDocument.addStyle("regular",null);
-        }
         StyleConstants.setForeground(style,color);
         styledDocument.setCharacterAttributes(start,end-start,style,true);
     }

@@ -1,7 +1,10 @@
 package com.snl.swing.practice;
 
 import javax.swing.*;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
 import javax.swing.text.StyledEditorKit;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +17,10 @@ public class CustomMenuBar extends JMenuBar implements ActionListener {
     protected final String EDITMENU = "编辑";
     protected final String EXITMENU = "退出";
     protected final String STYLEMENU = "风格";
+    protected UndoAction undoAction;
+    protected RedoAction redoAction;
+    protected UndoManager undo = new UndoManager();
+    protected JTextPane textPane;
 
     //预定义几个选项卡文件?
     //1,文件
@@ -30,6 +37,7 @@ public class CustomMenuBar extends JMenuBar implements ActionListener {
     }
 
     private void initComponents() {
+
         //初始化菜单组件
         //TODO 添加文件
         fileMenu = new JMenu(FILEMENU);
@@ -88,5 +96,64 @@ public class CustomMenuBar extends JMenuBar implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JMenuItem source = (JMenuItem) e.getSource();
         System.out.println("source = " + source);
+    }
+
+    protected class UndoAction extends AbstractAction {
+        public UndoAction() {
+            super("撤销");
+            setEnabled(false);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            undo.undo();
+            updateUndoState();
+            redoAction.updateRedoState();
+        }
+
+        private void updateUndoState() {
+            if (undo.canUndo()) {
+                setEnabled(true);
+                putValue(Action.NAME,undo.getUndoPresentationName());
+            }else {
+                setEnabled(false);
+                putValue(Action.NAME,"撤销");
+            }
+        }
+    }
+
+    protected class RedoAction extends AbstractAction {
+
+        public RedoAction() {
+            super("重做");
+            setEnabled(false);
+            undoAction.updateUndoState();
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            undo.redo();
+            updateRedoState();
+        }
+
+        private void updateRedoState() {
+            if (undo.canRedo()) {
+                setEnabled(true);
+                putValue(Action.NAME,undo.getRedoPresentationName());
+            }else {
+                setEnabled(false);
+                putValue(Action.NAME,"重做");
+            }
+        }
+    }
+
+    protected class MyUndoableEditListener implements UndoableEditListener {
+
+        @Override
+        public void undoableEditHappened(UndoableEditEvent e) {
+            undo.addEdit(e.getEdit());
+            undoAction.updateUndoState();
+            redoAction.updateRedoState();
+        }
     }
 }
