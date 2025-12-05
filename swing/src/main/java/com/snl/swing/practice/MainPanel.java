@@ -17,7 +17,7 @@ import java.util.Objects;
 public class MainPanel extends JPanel implements ActionListener, CaretListener {
 
     protected JPanel jPanel;
-    protected JButton button;
+    protected CustomButton button;
     protected CustomBoxTest customBoxTest;
     protected FontComBoxDemo fontComBoxDemo;
     protected IInsertComponents iInsertComponents;
@@ -25,7 +25,7 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
     protected String answer;
     protected EditTextPanel editTextPanel;
     protected int port;
-    protected JButton insertPictureButton;
+    protected CustomButton insertPictureButton;
     protected JFileChooserDemo jFileChooserDemo;
     protected CaretDemo caretDemo;
     protected TitleDemo titleDemo;
@@ -53,14 +53,14 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
         JLabel fontTypeLabel = new JLabel("字体类型:");
         fontTypeLabel.setLabelFor(fontComBoxDemo);
 
-        button = new JButton("插入组件");
+        button = new CustomButton("插入组件");
         iInsertComponents = new IInsertComponents();
         JLabel componentType = new JLabel("组件类型:");
         componentType.setLabelFor(iInsertComponents);
 
         colorChooserDemo = new ColorChooserDemo();
 
-        insertPictureButton = new JButton("插入图片");
+        insertPictureButton = new CustomButton("插入图片");
 
         titleDemo = new TitleDemo();
         JLabel titleTabel = new JLabel("文字标题");
@@ -247,7 +247,7 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
         if (Objects.nonNull(answer)) {
             if (answer.equals(pos[0])) {
                 ImageIcon icon = createIcon("sound.gif");
-                JButton button = new JButton("播放音乐🎵", icon);
+                CustomButton button = new CustomButton("播放音乐🎵", icon);
                 button.setCursor(Cursor.getPredefinedCursor(
                         Cursor.HAND_CURSOR
                 ));

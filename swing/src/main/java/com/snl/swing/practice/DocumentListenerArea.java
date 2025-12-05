@@ -15,7 +15,7 @@ public class DocumentListenerArea extends JPanel implements DocumentListener, Ac
     protected static final int COLUMNS = 30;
     protected static final String DEFAULT_TEXT = "这是一个默认的文本";
     protected static final String newline = System.lineSeparator();
-    protected JButton button;
+    protected CustomButton button;
     protected JTextArea area;
     protected JLabel label;
 
@@ -29,7 +29,7 @@ public class DocumentListenerArea extends JPanel implements DocumentListener, Ac
         area.setEditable(false);
         area.setForeground(Color.GREEN);
         area.setBackground(Color.black);
-        button = new JButton("清空");
+        button = new CustomButton("清空");
         button.addActionListener(this);
         label = new JLabel("这是默认文本");
         add(area,BorderLayout.CENTER);

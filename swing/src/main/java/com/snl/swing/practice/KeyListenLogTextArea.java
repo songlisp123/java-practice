@@ -14,7 +14,7 @@ import static com.snl.swing.practice.DocumentListenerArea.*;
 
 public class KeyListenLogTextArea  extends JPanel implements KeyListener, ActionListener {
 
-    protected JButton button;
+    protected CustomButton button;
     protected JTextArea area;
 
     public KeyListenLogTextArea() {
@@ -27,7 +27,7 @@ public class KeyListenLogTextArea  extends JPanel implements KeyListener, Action
         area.setEditable(false);
         area.setForeground(Color.CYAN);
         area.setBackground(Color.black);
-        button = new JButton("清空");
+        button = new CustomButton("清空");
         button.addActionListener(this);
         add(area,BorderLayout.CENTER);
         add(button,BorderLayout.PAGE_END);

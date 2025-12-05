@@ -58,7 +58,7 @@ public class IInsertComponents extends JComboBox<String> implements ItemListener
             if (item.equals(options[0])) {
                 //是按钮
                 ImageIcon icon = createIcon("jack.gif");
-                JButton button = new JButton("播放音乐🎵", icon);
+                CustomButton button = new CustomButton("播放音乐🎵", icon);
                 button.setCursor(Cursor.getPredefinedCursor(
                         Cursor.HAND_CURSOR
                 ));

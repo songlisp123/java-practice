@@ -16,9 +16,6 @@ public class ImagePreviewer extends JPanel
            = new LinkedBlockingQueue<>();
 
    private JLabel label;
-   private JTextArea textArea;
-   private JButton play;
-   private JButton stop;
 
    private final Pattern pictureReg = Pattern.compile(".+\\.(png|gif|jpg|jepg)$");
    /**
