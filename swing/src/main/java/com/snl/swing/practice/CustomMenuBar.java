@@ -38,7 +38,6 @@ public class CustomMenuBar extends JMenuBar implements ActionListener {
 
     private void initComponents() {
 
-        //初始化菜单组件
         //TODO 添加文件
         fileMenu = new JMenu(FILEMENU);
         //TODO 添加编辑文件
@@ -58,7 +57,6 @@ public class CustomMenuBar extends JMenuBar implements ActionListener {
         exitMenu.add(forumItem);
         exitMenu.addSeparator();
         exitMenu.add(quitMenu);
-
 
         Action action = new StyledEditorKit.BoldAction();
         action.putValue(Action.NAME,"粗体");

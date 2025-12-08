@@ -136,7 +136,6 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
         button.addActionListener(this);
         jPanel.add(button,constraints);
 
-
         constraints.gridx = 7;
         constraints.gridwidth = GridBagConstraints.REMAINDER;
         constraints.insets = new Insets(0,5,0,5);
@@ -162,11 +161,8 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
                 new DocumentListenerArea();
         KeyListenLogTextArea keyListenLogTextArea =
                 new KeyListenLogTextArea();
-
         JScrollPane jScrollPane = wrapToScrollPanel(documentListenerArea);
         JScrollPane jScrollPane2 = wrapToScrollPanel(keyListenLogTextArea);
-
-
         editTextPanel = new EditTextPanel();
         if (caretDemo == null) {
             caretDemo = new CaretDemo(2);
@@ -189,8 +185,6 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
         iInsertComponents.setPane(editTextPanel.getPane());
         colorChooserDemo.setPane(editTextPanel.getPane());
         titleDemo.setPane(editTextPanel.getPane());
-
-
 
         JScrollPane wrappedToScrollPanel = wrapToScrollPanel(editTextPanel);
         wrappedToScrollPanel.setHorizontalScrollBarPolicy(

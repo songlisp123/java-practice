@@ -1,10 +1,25 @@
 package com.snl.swing.practice;
 
+import audio.util.WindowHandler;
+
 import javax.swing.*;
-import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class TextBoot  {
 
+
+    private static final Logger logger = Logger.getLogger("TextEditor");
+    private static final WindowHandler handler = new WindowHandler();
+
+    static {
+        logger.setUseParentHandlers(false);
+        logger.setLevel(Level.ALL);
+        handler.setFormatter(new SimpleFormatter());
+        handler.setLevel(Level.ALL);
+        logger.addHandler(handler);
+    }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("文本编辑器");

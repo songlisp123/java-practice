@@ -3,14 +3,14 @@ package com.snl.swing.practice;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 public class DocumentListenerArea extends JPanel implements DocumentListener, ActionListener {
+
     protected static final int ROWS = 5;
     protected static final int COLUMNS = 30;
     protected static final String DEFAULT_TEXT = "这是一个默认的文本";
@@ -18,6 +18,8 @@ public class DocumentListenerArea extends JPanel implements DocumentListener, Ac
     protected CustomButton button;
     protected JTextArea area;
     protected JLabel label;
+
+    private static final Logger logger = Logger.getLogger("TextEditor");
 
     public DocumentListenerArea() {
         super(new BorderLayout());
@@ -34,24 +36,49 @@ public class DocumentListenerArea extends JPanel implements DocumentListener, Ac
         label = new JLabel("这是默认文本");
         add(area,BorderLayout.CENTER);
         add(button,BorderLayout.PAGE_END);
-
     }
 
     @Override
     public void insertUpdate(DocumentEvent e) {
         updateLog(e,"插入");
+        //TODO 搜索复杂
     }
 
     @Override
     public void removeUpdate(DocumentEvent e) {
         updateLog(e,"删除");
+        // TODO 搜索复杂
     }
 
     @Override
     public void changedUpdate(DocumentEvent e) {
         //风格变化后调用此方法，但是这个例子中不会发生
-        //TODO 风格变化
-        System.out.println("风格发生变化");
+        //TODO 风格变化实现的逻辑更复杂
+        updateStyle(e);
+//        System.out.println("风格发生变化");
+    }
+
+    private void updateStyle(DocumentEvent e) {
+        StyledDocument document = (StyledDocument) e.getDocument();
+        Element rootElement = document.getDefaultRootElement();
+        if(e.getType() == DocumentEvent.EventType.CHANGE) {
+            findElement(rootElement);
+        }
+
+    }
+
+    private <T extends Element> void findElement(T t) {
+
+        if (t instanceof AbstractDocument.BranchElement) {
+            //如果有分支,获取所有分分支数量
+            int elementCount = t.getElementCount();
+            for (int i =0;i<elementCount;i++) {
+                //便利所有子分值
+                findElement(t.getElement(i));
+            }
+        }else {
+            logger.info("子分枝是："+t);
+        }
     }
 
     private void updateLog(DocumentEvent e, String state) {

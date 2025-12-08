@@ -28,9 +28,9 @@ public class ClosedWindowDemo extends JDialog implements PropertyChangeListener,
                 "你想要退出吗",
                 JOptionPane.QUESTION_MESSAGE,
                 JOptionPane.YES_NO_OPTION,
-                null,
-                options,
-                options[1]);
+                null,//默认试图
+                options,//按钮文本选项
+                options[1]);//默认焦点处于哪一个按钮上面？
         optionPane.addPropertyChangeListener(this);
     }
 
@@ -38,6 +38,10 @@ public class ClosedWindowDemo extends JDialog implements PropertyChangeListener,
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String newValue = evt.getNewValue().toString();
+        //获取操作
+        var source =(JOptionPane) evt.getSource();
+        Object value1 = source.getValue();
+        System.out.println("value1 = " + value1);
         if (options[0].equals(newValue)) {
             System.exit(0);
         }

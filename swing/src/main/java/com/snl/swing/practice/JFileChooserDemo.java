@@ -1,24 +1,24 @@
 package com.snl.swing.practice;
 
+import com.snl.swing.practice.filefilter.*;
+
 import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class JFileChooserDemo extends JFileChooser {
 
-    protected final FileFilter filter = new FileNameExtensionFilter(
-            "图像文件","png","ipg","gif","jpeg");
-
-    protected final FileFilter musicFilter = new FileNameExtensionFilter("音乐文件",
-            "mp3","flac","wav"
-    );
+    protected ImageFilter imageFilter;
 
     public JFileChooserDemo() {
         super(".");
-        setFileFilter(filter);
-        addChoosableFileFilter(musicFilter);
+        imageFilter = new ImageFilter();
+        addChoosableFileFilter(imageFilter);
+        addChoosableFileFilter(new MusicFilter());
+        addChoosableFileFilter(new TextFileFilter());
+        //TODO 定制更多过滤器
+
         setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         setAccessory(new JScrollPane(new ImagePreviewer(this)));
-        setFileView(new imageView(filter, new ImageIcon(".//palette.gif")));
+        setFileView(new FileViewFilter());
+
     }
 }
