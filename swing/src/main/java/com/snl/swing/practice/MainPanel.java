@@ -1,6 +1,7 @@
 package com.snl.swing.practice;
 
 import audio.MutipleMixer;
+import com.snl.swing.practice.table.SimpleTableDemo;
 
 import javax.swing.*;
 import javax.swing.event.CaretEvent;
@@ -223,7 +224,7 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
 //        System.out.println("点击按钮");
         //TODO 点击事件
 //        new Thread(MutipleMixer.playMusic(Path.of("爱在西元前.wav")),"音乐播放者").start();
-        Object[] pos = {"button","textArea","textFiled","_NULL_"};
+        Object[] pos = {"button","textArea","textFiled","表格","_NULL_"};
          answer = (String)JOptionPane.showInputDialog(
                 this,
                 "请选择要添加的组件",
@@ -260,6 +261,10 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
                 JTextField jTextField = new JTextField(10);
                 StyleConstants.setAlignment(style,StyleConstants.ALIGN_CENTER);
                 StyleConstants.setComponent(style,jTextField);
+            } else if (answer.equals(pos[3])) {
+                SimpleTableDemo simpleTableDemo = new SimpleTableDemo();
+                StyleConstants.setAlignment(style,StyleConstants.ALIGN_CENTER);
+                StyleConstants.setComponent(style,simpleTableDemo);
             }
             try {
                 styledDocument.insertString(port, " ", style);

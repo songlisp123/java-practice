@@ -1,4 +1,4 @@
-package com.snl.swing.practice;
+package com.snl.swing.practice.filefilter;
 
 import javax.swing.*;
 import java.awt.*;
