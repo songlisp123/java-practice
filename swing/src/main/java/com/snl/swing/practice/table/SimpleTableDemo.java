@@ -3,6 +3,7 @@ package com.snl.swing.practice.table;
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
@@ -14,6 +15,7 @@ public class SimpleTableDemo extends JPanel implements TableModelListener {
     protected TableRowSorter<SimpleTableModelDemo> tableRowSorter;
     protected SimpleFilter<SimpleTableModelDemo> filter;
     protected TableCellRenderer renderer;
+    protected TableCellEditor editor;
 
     public SimpleTableDemo() {
         super(new BorderLayout());
@@ -25,14 +27,17 @@ public class SimpleTableDemo extends JPanel implements TableModelListener {
         tableModel.addTableModelListener(this);
         tableRowSorter = new TableRowSorter<>(tableModel);
         filter = new SimpleFilter<>(tableRowSorter);
-        renderer = new SimpleRenderDemo("难顶");
+//        renderer = new SimpleRenderDemo("难顶");
+        renderer = new CustomRenderDemo();
+        editor = new CustomEditorDemo();
         table = new JTable(tableModel);
         table.setPreferredScrollableViewportSize(new Dimension(200,150));
         table.setFillsViewportHeight(true);
+        table.setRowHeight(50);
         table.setAutoCreateRowSorter(true);
         table.setRowSorter(tableRowSorter);
         table.getColumn(table.getColumnName(2)).setCellRenderer(renderer);
-
+        table.getColumn(table.getColumnName(2)).setCellEditor(editor);
 
         add(table.getTableHeader(),BorderLayout.PAGE_START);
         add(table,BorderLayout.CENTER);

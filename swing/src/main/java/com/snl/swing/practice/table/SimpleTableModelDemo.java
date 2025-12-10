@@ -1,24 +1,24 @@
 package com.snl.swing.practice.table;
 
-import com.snl.swing.practice.CustomButton;
-
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.stream.Stream;
 
-public class SimpleTableModelDemo implements TableModel {
+public class SimpleTableModelDemo implements TableModel , PropertyChangeListener {
 
     protected Object[][] rowData;
     protected String[] columnNames;
@@ -34,14 +34,15 @@ public class SimpleTableModelDemo implements TableModel {
         columnNames = new String[] {
                 "序号","文件名","播放/试听"
         };
-        //TODO 如何获取文件夹信息？
-        findMusicPath(rootPath);
-//        try {
-//            //TODO 逻辑非常糟糕！
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        //TODO 如何获取文件夹信息?可以优
+        Task task = new Task();
+        task.execute();
+        try {
+            //TODO 逻辑非常糟糕！
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         init();
 
     }
@@ -159,5 +160,31 @@ public class SimpleTableModelDemo implements TableModel {
        } catch (IOException e) {
            throw new RuntimeException(e);
        }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        Object newValue = evt.getNewValue();
+        if (newValue instanceof SwingWorker.StateValue) {
+            if (newValue  == SwingWorker.StateValue.STARTED) {
+                System.out.println("后台任务开始");
+            }else {
+                System.out.println("后台任务结束");
+            }
+        }
+    }
+
+    class Task extends SwingWorker<Void,Path> {
+
+        @Override
+        protected Void doInBackground() throws Exception {
+            findMusicPath(rootPath);
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            Toolkit.getDefaultToolkit().beep();
+        }
     }
 }

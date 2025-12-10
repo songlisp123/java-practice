@@ -8,6 +8,11 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.regex.PatternSyntaxException;
 
+
+/**
+ *
+ * @param <T>
+ */
 public class SimpleFilter<T extends TableModel> extends JPanel implements DocumentListener {
 
     protected TableRowSorter<T> sorter;
@@ -49,7 +54,7 @@ public class SimpleFilter<T extends TableModel> extends JPanel implements Docume
     private void newFilter() {
         RowFilter<T,Object> rowFilter = null;
         try {
-            rowFilter = RowFilter.regexFilter(textField.getText(),1);
+            rowFilter = RowFilter.regexFilter(textField.getText(),1); //硬编码，不好
         }catch (PatternSyntaxException e) {
             return;
         }
