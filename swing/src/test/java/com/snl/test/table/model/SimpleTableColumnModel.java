@@ -25,7 +25,14 @@ public class SimpleTableColumnModel implements TableColumnModel {
         setSelectionModel(createSelectionMode());
         setColumnMargin(50);
         setColumnSelectionAllowed(true);
+    }
 
+    public SimpleTableColumnModel(ListSelectionModel selectionModel) {
+        super();
+        this.selectionModel = selectionModel;
+        tableColumns = new Vector<>();
+        setColumnMargin(50);
+        setColumnSelectionAllowed(true);
     }
 
     @Override
@@ -181,15 +188,6 @@ public class SimpleTableColumnModel implements TableColumnModel {
             throw new IllegalArgumentException("异常！");
         }
         ListSelectionModel oldModel = selectionModel;
-
-        if (newModel != oldModel) {
-            if (oldModel != null) {
-//                oldModel.removeListSelectionListener(this);
-            }
-
-            selectionModel= newModel;
-//            newModel.addListSelectionListener(this);
-        }
         selectionModel = newModel;
     }
 
@@ -207,8 +205,6 @@ public class SimpleTableColumnModel implements TableColumnModel {
     public void removeColumnModelListener(TableColumnModelListener x) {
         listeners.remove(x);
     }
-
-
 
     private ListSelectionModel createSelectionMode() {
         return new DefaultListSelectionModel();

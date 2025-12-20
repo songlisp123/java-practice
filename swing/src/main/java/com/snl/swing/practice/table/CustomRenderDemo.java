@@ -1,7 +1,5 @@
 package com.snl.swing.practice.table;
 
-import com.snl.swing.practice.CustomButton;
-
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
@@ -23,6 +21,8 @@ public class CustomRenderDemo extends JLabel implements TableCellRenderer {
                                                    boolean isSelected, boolean hasFocus, int row, int column) {
 
         if (table == null) throw new IllegalArgumentException("表格不存在!");
+        setIcon(icon);
+        icon = new ImageIcon(String.valueOf(value));
         if (isSelected) {
             setBackground(new Color(184, 207, 229));
         }else {
@@ -38,9 +38,7 @@ public class CustomRenderDemo extends JLabel implements TableCellRenderer {
         return this;
     }
 
-    private void init() {
-        icon = new ImageIcon("sound.gif");
-//        button = new CustomButton("播放",new ImageIcon("sound.gif"));
+    private void init() {//        button = new CustomButton("播放",new ImageIcon("sound.gif"));
 //        bar = new JProgressBar(0,100);
 //        bar.setStringPainted(true);
 //        bar.setForeground(Color.GREEN);
@@ -51,7 +49,6 @@ public class CustomRenderDemo extends JLabel implements TableCellRenderer {
 //        }else {
 //            layout = (GridBagLayout) getLayout();
 //        }
-        setIcon(icon);
         alignSpace();
     }
 

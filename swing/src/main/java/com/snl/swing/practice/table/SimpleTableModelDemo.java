@@ -79,7 +79,7 @@ public class SimpleTableModelDemo implements TableModel , PropertyChangeListener
                 result[i] = path.getFileName();
             }else {
                 //TODO 这里面有点逻辑
-                result[i] = "todo";
+                result[i] = new ImageIcon("sound.gif");
             }
         }
         return result;
@@ -116,7 +116,7 @@ public class SimpleTableModelDemo implements TableModel , PropertyChangeListener
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         //默认不可编辑
-        return false;
+        return true;
     }
 
     @Override

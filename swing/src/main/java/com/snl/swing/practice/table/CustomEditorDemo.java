@@ -1,6 +1,6 @@
 package com.snl.swing.practice.table;
 
-import com.snl.swing.practice.CustomButton;
+import com.snl.swing.practice.button.CustomButton;
 
 import javax.swing.*;
 import javax.swing.event.CellEditorListener;
@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.EventObject;
 import java.util.List;
 
 public class CustomEditorDemo extends AbstractCellEditor implements TableCellEditor, ActionListener {
@@ -17,7 +16,7 @@ public class CustomEditorDemo extends AbstractCellEditor implements TableCellEdi
     private CustomButton button;
     protected final List<CellEditorListener> listeners =
             new ArrayList<>();
-    protected String currentString;
+    protected Icon current;
     protected JFileChooser chooser;
 
     public CustomEditorDemo() {
@@ -38,13 +37,13 @@ public class CustomEditorDemo extends AbstractCellEditor implements TableCellEdi
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value,
                                                  boolean isSelected, int row, int column) {
-        currentString = (String) value;
+        current = (Icon) value;
         System.out.println("value = " + value);
         return button;
     }
 
     @Override
     public Object getCellEditorValue() {
-        return currentString;
+        return current;
     }
 }

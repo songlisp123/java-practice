@@ -36,12 +36,10 @@ public class MutipleMixer {
 //                System.out.println(info);
 //            }
 //            Mixer mixer = AudioSystem.getMixer(mixerInfo[19]);
-
             Mixer mixer = ChooseBestMixer.chooseMixer();
             if (Objects.isNull(mixer)) {
                 return;
             }
-
 
             try (AudioInputStream stream = AudioSystem.getAudioInputStream(musicFilePath.toFile())) {
                 AudioFormat format = stream.getFormat();
@@ -60,33 +58,24 @@ public class MutipleMixer {
 //                if (!mixer.isSynchronizationSupported(lines, true)) {
 //                    System.out.println("不能并行播放！此混声器不能用于并行播放");
 //                }
-
                 SourceDataLine sourceDataLine = ChooseSourceLine.chooseLine(mixer);
                 sourceDataLine.addLineListener(new LineEventImpl(frameRate));
 
                 sourceDataLine.open(format);
-//                fadeIn(sourceDataLine,2000L);
                 sourceDataLine.start();
-//                setVolume(sourceDataLine,0.8f);
                 //声音长度
                 boolean stopped = false;
                 var numberByteStore = new byte[4096];
                 float gain = 0f;
-                float fadeInStep = 1f / (44100 * 20); // 100秒淡入
+                float fadeInStep = 1f / (44100 * 50); // 100秒淡入
                 int read = stream.read(numberByteStore, 0, 4096);
-//                lock.lock();
                 while (read != -1) {
-//                    System.out.printf("读取字节数：%d%n",read);
                     for (int i = 0; i < read; i+=2) {
                         short sample = (short) ((numberByteStore[i + 1] << 8) | (numberByteStore[i] & 0xff));
-//                        System.out.printf("原本样本：%d%n",sample);
                         float s = sample * gain;
-
                         short newSample = (short) s;
-//                        System.out.printf("新样本：%d%n",newSample);
                         numberByteStore[i] = (byte) (newSample & 0xff);
                         numberByteStore[i+1] = (byte) ((newSample >> 8) & 0xff);
-
                         if (gain < 1f) gain += fadeInStep;
                     }
                     sourceDataLine.write(numberByteStore, 0, read);
@@ -158,9 +147,9 @@ public class MutipleMixer {
     public static void main(String[] args) throws InterruptedException {
         try {
             ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
-            if (musicLength == 0f) musicLength = 250f;
+            if (musicLength == 0f) musicLength = 170;
             executorService.scheduleAtFixedRate(
-                    playMusic(Path.of("爱在西元前.wav")),
+                    playMusic(Path.of("oct.wav")),
                     1L,
                     (long) musicLength,
                     TimeUnit.SECONDS);

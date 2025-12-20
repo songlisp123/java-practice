@@ -17,8 +17,6 @@ public class TextAreaDemo extends JFrame  implements DocumentListener {
     JTextArea area;
 
     protected static final String COMMIT_COMMAND = "commit";
-
-
     private enum Model {
         INSERT,COMPLETION
     };
@@ -36,7 +34,7 @@ public class TextAreaDemo extends JFrame  implements DocumentListener {
         //获取影射
         InputMap inputMap = area.getInputMap();
         ActionMap actionMap = area.getActionMap();
-        inputMap.put(KeyStroke.getKeyStroke("enter"),COMMIT_COMMAND);
+        inputMap.put(KeyStroke.getKeyStroke("ENTER"),COMMIT_COMMAND);
         actionMap.put(COMMIT_COMMAND,new CommitAction());
 
         words = new ArrayList<>(5);
@@ -48,14 +46,14 @@ public class TextAreaDemo extends JFrame  implements DocumentListener {
     }
 
     private void initComponents() {
-        label = new JLabel("尝试按下xx");
+        label = new JLabel("尝试按下s开头的单词");
         area = new JTextArea(5,30);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         area.setLineWrap(true);
         area.setWrapStyleWord(true);
 
         pane = new JScrollPane(area);
-        pane.setVerticalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         /*
         以下程序我没看懂，但是我还是把它写出来了
@@ -105,39 +103,51 @@ public class TextAreaDemo extends JFrame  implements DocumentListener {
 
     @Override
     public void insertUpdate(DocumentEvent e) {
+
         //TODO逻辑
-        if (e.getLength() == 0) {
+        if (e.getLength() != 1) {
             //没有修改
             return;
         };
+
         int pos = e.getOffset();
+        System.out.println("pos = " + pos);
         String content = null;
         try {
-            area.getText(0,pos + 1) ;
+            content = area.getText(0,pos + 1) ;
         } catch (BadLocationException ex) {
             ex.printStackTrace();
         }
         //查找字开始的位置
         int w;
         for (w = pos; w >=0;w--) {
-            if (Character.isLetter(content.charAt(w))) {
+            if ( ! Character.isLetter(content.charAt(w))) {
+                //TODO 逻辑太烂,如果是中文写作呢?英文写作有空格键,但是中文写作没有空格键
                 break;
             }
         }
         if (pos - w < 2) {
+            //字符太少
             return;
         }
 
         //前嘴
         String prefix = content.substring(w + 1).toLowerCase();
+        System.out.println("content = " + content);
+        System.out.println("prefix = " + prefix);
         int n = Collections.binarySearch(words, prefix);
         if (n < 0 && -n <= words.size()) {
             String match = words.get(-n-1);
             if (match.startsWith(prefix)) {
                 //找到单词
                 String completion = match.substring(pos - w);
+                System.out.println("completion = " + completion);
                 //不能再这个逻辑中更改
-                //TODO 我实现不下去了
+                //TODO 这个又是什么东西?
+                SwingUtilities.invokeLater(new CompletionTask(completion,pos + 1));
+            }else {
+                //如果全没找到
+                model = Model.INSERT;
             }
         }
 
@@ -158,6 +168,7 @@ public class TextAreaDemo extends JFrame  implements DocumentListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (model == Model.COMPLETION) {
+                System.out.println("为什么不调用这个东西?");
                 int selectionEnd = area.getSelectionEnd();
                 area.insert(" ",selectionEnd);
                 area.setCaretPosition(selectionEnd + 1);
@@ -166,6 +177,33 @@ public class TextAreaDemo extends JFrame  implements DocumentListener {
                 area.replaceSelection(System.lineSeparator());
             }
         }
+    }
+
+    private class CompletionTask implements Runnable {
+        String completion;
+        int position;
+
+        CompletionTask(String completion, int position) {
+            this.completion = completion;
+            this.position = position;
+        }
+
+        public void run() {
+            area.insert(completion, position);
+            area.setCaretPosition(position + completion.length());
+            area.moveCaretPosition(position);
+            model = Model.COMPLETION;
+        }
+    }
+
+    public static void main(String...args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                //Turn off metal's use of bold fonts
+                UIManager.put("swing.boldMetal", Boolean.FALSE);
+                new TextAreaDemo("测试框架").setVisible(true);
+            }
+        });
     }
 }
 

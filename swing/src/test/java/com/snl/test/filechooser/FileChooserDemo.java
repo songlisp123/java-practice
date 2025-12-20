@@ -1,6 +1,6 @@
 package com.snl.test.filechooser;
 
-import com.snl.swing.practice.CustomButton;
+import com.snl.swing.practice.button.CustomButton;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,9 +1,20 @@
 package com.snl.swing.practice;
 
 import audio.MutipleMixer;
+import com.snl.swing.practice.button.CustomButton;
+import com.snl.swing.practice.caret.CaretDemo;
+import com.snl.swing.practice.colorchooser.ColorChooserDemo;
+import com.snl.swing.practice.combox.app.IInsertComponents;
 import com.snl.swing.practice.combox.app.SimpleFontComBoxDemo;
+import com.snl.swing.practice.combox.app.SimpleFontSizeComBoxModel;
+import com.snl.swing.practice.combox.app.TitleDemo;
+import com.snl.swing.practice.filefilter.JFileChooserDemo;
+import com.snl.swing.practice.layUi.SpotLightLayerUiDemo;
+import com.snl.swing.practice.listener.DocumentListenerArea;
+import com.snl.swing.practice.listener.KeyListenLogTextArea;
 import com.snl.swing.practice.processBar.ProcessBarDemo;
 import com.snl.swing.practice.table.SimpleTableDemo;
+import com.snl.swing.practice.textComponents.EditTextPanel;
 
 import javax.swing.*;
 import javax.swing.event.CaretEvent;
@@ -21,7 +32,7 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
 
     protected JPanel jPanel;
     protected CustomButton button;
-    protected CustomBoxTest customBoxTest;
+    protected SimpleFontSizeComBoxModel customBoxTest;
     protected SimpleFontComBoxDemo fontComBoxDemo;
     protected IInsertComponents iInsertComponents;
     protected ColorChooserDemo colorChooserDemo;
@@ -32,6 +43,7 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
     protected JFileChooserDemo jFileChooserDemo;
     protected CaretDemo caretDemo;
     protected TitleDemo titleDemo;
+    protected final String INSERT = "INSERT";
 
     public MainPanel() {
         super(new BorderLayout());
@@ -48,7 +60,7 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
         GridBagConstraints constraints = new GridBagConstraints();
         jPanel.setLayout(gridBagLayout);
 
-        customBoxTest = new CustomBoxTest();
+        customBoxTest = new SimpleFontSizeComBoxModel();
         JLabel fontSizeLabel = new JLabel("文字大小: ");
         fontSizeLabel.setLabelFor(customBoxTest);
 
@@ -57,6 +69,13 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
         fontTypeLabel.setLabelFor(fontComBoxDemo);
 
         button = new CustomButton("插入组件");
+        /**
+         * 获取按钮的绑定
+         */
+        InputMap insertComponents = button.getInputMap();
+        insertComponents.put(KeyStroke.getKeyStroke(KeyEvent.VK_N,KeyEvent.CTRL_MASK),INSERT);
+        ActionMap actionMap = button.getActionMap();
+        actionMap.put(INSERT,new MyAction());
         iInsertComponents = new IInsertComponents();
         JLabel componentType = new JLabel("组件类型:");
         componentType.setLabelFor(iInsertComponents);
@@ -191,7 +210,7 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
 
         JScrollPane wrappedToScrollPanel = wrapToScrollPanel(editTextPanel);
         wrappedToScrollPanel.setHorizontalScrollBarPolicy(
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         );
         JSplitPane splitPanel02 =
                 new JSplitPane(JSplitPane.VERTICAL_SPLIT, jPanel, wrappedToScrollPanel);
@@ -223,69 +242,7 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-//        System.out.println("点击按钮");
-        //TODO 点击事件
-//        new Thread(MutipleMixer.playMusic(Path.of("爱在西元前.wav")),"音乐播放者").start();
-        Object[] pos = {"button","textArea","textFiled","表格","滚动条","_NULL_"};
-         answer = (String)JOptionPane.showInputDialog(
-                this,
-                "请选择要添加的组件",
-                "选择组件",
-                JOptionPane.PLAIN_MESSAGE,
-                new ImageIcon("music.png"),
-                pos,
-                pos[0]
-        );
-        StyledDocument styledDocument = editTextPanel.getPane().getStyledDocument();
-        Style style = styledDocument.getStyle("music");
-        if (style==null) {
-            style = styledDocument.addStyle("music",null);
-        }
-        if (Objects.nonNull(answer)) {
-            if (answer.equals(pos[0])) {
-                ImageIcon icon = createIcon("sound.gif");
-                CustomButton button = new CustomButton("播放音乐🎵", icon);
-                button.setCursor(Cursor.getPredefinedCursor(
-                        Cursor.HAND_CURSOR
-                ));
-                button.addActionListener(new MyListenImplement());
-                StyleConstants.setAlignment(style, StyleConstants.ALIGN_CENTER);
-                StyleConstants.setComponent(style, button);
-            } else if (answer.equals(pos[1])) {
-                JTextArea jTextArea = new JTextArea(5, 30);
-                JScrollPane jScrollPane = new JScrollPane(jTextArea);
-                jScrollPane.setHorizontalScrollBarPolicy(
-                        JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
-                );
-                jScrollPane.setPreferredSize(new Dimension(200,200));
-                StyleConstants.setComponent(style,jScrollPane);
-            } else if (answer.equals(pos[2])) {
-                JTextField jTextField = new JTextField(10);
-                StyleConstants.setAlignment(style,StyleConstants.ALIGN_CENTER);
-                StyleConstants.setComponent(style,jTextField);
-            } else if (answer.equals(pos[3])) {
-                SimpleTableDemo simpleTableDemo = new SimpleTableDemo();
-                StyleConstants.setAlignment(style,StyleConstants.ALIGN_CENTER);
-                StyleConstants.setComponent(style,simpleTableDemo);
-            } else if (answer.equals(pos[4])) {
-                ProcessBarDemo processBarDemo = new ProcessBarDemo();
-                StyleConstants.setComponent(style,processBarDemo);
-            }
-            try {
-                styledDocument.insertString(port, " ", style);
-            } catch (BadLocationException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
-//        else {
-//            JColorChooser jColorChooser = new JColorChooser(Color.RED);
-//            jColorChooser.setCursor(Cursor.getPredefinedCursor(
-//                    Cursor.HAND_CURSOR
-//            ));
-//            StyleConstants.setComponent(style,jColorChooser);
-
-//        }
-
+        doAction();
     }
 
     private ImageIcon createIcon(String path) {
@@ -369,6 +326,7 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
             if (answer == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = jFileChooserDemo.getSelectedFile();
                 if (selectedFile != null) {
+                    //TODO 很明显这是一个错误的写法，为什么么？因为没有办法处理gif对象？
                     ImageIcon icon = createIcon(selectedFile.getPath());
                     StyleConstants.setIcon(style,icon);
                     try {
@@ -379,6 +337,68 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
                 }
             }else {
                 System.out.println("取消");
+            }
+        }
+    }
+
+    protected class MyAction extends AbstractAction {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            doAction();
+        }
+    }
+
+    private void doAction() {
+        Object[] pos = {"button","textArea","textFiled","表格","滚动条","_NULL_"};
+        answer = (String)JOptionPane.showInputDialog(
+                this,
+                "请选择要添加的组件",
+                "选择组件",
+                JOptionPane.PLAIN_MESSAGE,
+                new ImageIcon("music.png"),
+                pos,
+                pos[0]
+        );
+        StyledDocument styledDocument = editTextPanel.getPane().getStyledDocument();
+        Style style = styledDocument.getStyle("music");
+        if (style==null) {
+            style = styledDocument.addStyle("music",null);
+        }
+        if (Objects.nonNull(answer)) {
+            if (answer.equals(pos[0])) {
+                ImageIcon icon = createIcon("sound.gif");
+                CustomButton button = new CustomButton("播放音乐🎵", icon);
+                button.setCursor(Cursor.getPredefinedCursor(
+                        Cursor.HAND_CURSOR
+                ));
+                button.addActionListener(new MyListenImplement());
+                StyleConstants.setAlignment(style, StyleConstants.ALIGN_CENTER);
+                StyleConstants.setComponent(style, button);
+            } else if (answer.equals(pos[1])) {
+                JTextArea jTextArea = new JTextArea(5, 30);
+                JScrollPane jScrollPane = new JScrollPane(jTextArea);
+                jScrollPane.setHorizontalScrollBarPolicy(
+                        JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
+                );
+                jScrollPane.setPreferredSize(new Dimension(200,200));
+                StyleConstants.setComponent(style,jScrollPane);
+            } else if (answer.equals(pos[2])) {
+                JTextField jTextField = new JTextField(10);
+                StyleConstants.setAlignment(style,StyleConstants.ALIGN_CENTER);
+                StyleConstants.setComponent(style,jTextField);
+            } else if (answer.equals(pos[3])) {
+                SimpleTableDemo simpleTableDemo = new SimpleTableDemo();
+                StyleConstants.setAlignment(style,StyleConstants.ALIGN_CENTER);
+                StyleConstants.setComponent(style,simpleTableDemo);
+            } else if (answer.equals(pos[4])) {
+                ProcessBarDemo processBarDemo = new ProcessBarDemo();
+                StyleConstants.setComponent(style,processBarDemo);
+            }
+            try {
+                styledDocument.insertString(port, " ", style);
+            } catch (BadLocationException ex) {
+                throw new RuntimeException(ex);
             }
         }
     }

@@ -1,6 +1,6 @@
 package com.snl.swing.practice.processBar;
 
-import com.snl.swing.practice.CustomButton;
+import com.snl.swing.practice.button.CustomButton;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

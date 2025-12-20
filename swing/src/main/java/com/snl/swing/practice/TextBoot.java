@@ -1,6 +1,8 @@
 package com.snl.swing.practice;
 
 import audio.util.WindowHandler;
+import com.snl.swing.practice.menu.CustomMenuBar;
+import com.snl.swing.practice.window.ClosedWindowDemo;
 
 import javax.swing.*;
 import java.util.logging.Level;

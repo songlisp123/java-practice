@@ -25,6 +25,7 @@
         <module name="reflection" />
         <module name="X1-EMQX-DEMO" />
         <module name="X7-ES-DEMO" />
+        <module name="dataStructure" />
         <module name="jdbc_maven" />
         <module name="audiotest" />
         <module name="X6-WEBSOCKET-demo" />
