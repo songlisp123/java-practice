@@ -58,4 +58,10 @@ public  interface List<T> {
      * 清空数据
      */
     void clear();
+
+    /**
+     * 移除特定的项目
+     * @param items 项目
+     */
+    void removeAll(Iterable<? extends T> items);
 }

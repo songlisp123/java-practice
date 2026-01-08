@@ -1,6 +1,6 @@
 package com.snl.data.array;
 
-public interface MyArrayImplement<T> {
+public interface MyArrayImplement<T>  {
 
     /**
      * 这个程序要求插入数据到额外的空间,默认为最后一个元素
@@ -54,4 +54,6 @@ public interface MyArrayImplement<T> {
      * @return 修改前的值
      */
     T modify(int index,T t);
+
+    T get(int index);
 }

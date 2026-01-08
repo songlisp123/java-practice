@@ -106,6 +106,7 @@ public class Problem06 extends JPanel {
     }
 
     public void permute(String text) {
+        //TODO 待做
         return;
     }
 

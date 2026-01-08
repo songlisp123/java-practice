@@ -4,14 +4,14 @@ import java.util.Objects;
 
 public class NoReplicateArrayDemo<T>  implements MyArrayImplement<T>{
 
-    protected Object[] data;
+    protected T[] data;
     /**
      * 这是下一个可插入的元素
      */
     protected int currentIndex;
 
     public NoReplicateArrayDemo(int number) {
-        data = new Object[number];
+        data = (T[]) new Object[number];
         currentIndex = 0;
     }
 
@@ -29,7 +29,7 @@ public class NoReplicateArrayDemo<T>  implements MyArrayImplement<T>{
     @Override
     public T remove() {
         int lastIndex = currentIndex - 1;
-        T d = (T) data[lastIndex];
+        T d = data[lastIndex];
         data[lastIndex] = null;
         currentIndex--;
         return d;
@@ -40,7 +40,7 @@ public class NoReplicateArrayDemo<T>  implements MyArrayImplement<T>{
         if (index < 0 || index >= currentIndex) {
             throw new IndexOutOfBoundsException("超出索引边界！");
         }
-        T t = (T) data[index];
+        T t = data[index];
         int lastIndex = currentIndex - 1;
         for (int i = index;i<lastIndex;i++) {
             data[i] = data[i + 1];
@@ -75,11 +75,11 @@ public class NoReplicateArrayDemo<T>  implements MyArrayImplement<T>{
         T f;
         for (int i = index;i<currentIndex;i++) {
             if ( d== null) {
-                d = (T) data[i +1];
+                d = data[i +1];
                 data[i+1] = data[i];
                 continue;
             }
-            f = (T) data[i +1];
+            f = data[i +1];
             data[i + 1] = d;
             d = f;
         }
@@ -97,9 +97,17 @@ public class NoReplicateArrayDemo<T>  implements MyArrayImplement<T>{
         if (index <0 || index > currentIndex) {
             throw new IndexOutOfBoundsException("超出索引边界");
         }
-        T old = (T) data[index];
+        T old = data[index];
         data[index] = t;
         return old;
+    }
+
+    @Override
+    public T get(int index) {
+        if (index < 0 || index > length()) {
+            throw new IndexOutOfBoundsException("索引超出边界");
+        }
+        return data[index];
     }
 
     @Override

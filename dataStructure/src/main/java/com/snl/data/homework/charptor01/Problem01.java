@@ -172,7 +172,7 @@ public class Problem01 extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(800,700);
+        return new Dimension(600,500);
     }
 
     @Override
@@ -423,7 +423,7 @@ public class Problem01 extends JPanel {
 
         @Override
         protected void process(List<Void> chunks) {
-            repaint();
+            repaint(table.getBounds());
         }
 
         @Override

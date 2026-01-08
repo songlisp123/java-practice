@@ -219,4 +219,14 @@ public class SingleLinkedListImplement<T> implements List<T> {
         previous.next = node;
         modCount++;
     }
+
+    public void removeAll(Iterable<? extends T> items) {
+        //首先需要判断是否为null
+        if (Objects.isNull(items)) {
+            return;
+        }
+        for (T t : items) {
+
+        }
+    }
 }

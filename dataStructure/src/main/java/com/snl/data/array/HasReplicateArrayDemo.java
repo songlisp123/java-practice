@@ -1,5 +1,6 @@
 package com.snl.data.array;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class HasReplicateArrayDemo<T> implements MyArrayImplement<T> {
@@ -7,7 +8,7 @@ public class HasReplicateArrayDemo<T> implements MyArrayImplement<T> {
     /**
      * 数据模型
      */
-    private Object[] data;
+    private T[] data;
     /**
      * 总是指向最后元素的下一个索引
      */
@@ -19,7 +20,7 @@ public class HasReplicateArrayDemo<T> implements MyArrayImplement<T> {
     private int maxCount;
 
     public HasReplicateArrayDemo(int number) {
-        data = new Object[number];
+        data = (T[])new Object[number];
         this.currentIndex = 0;
         this.maxCount = number;
     }
@@ -39,7 +40,7 @@ public class HasReplicateArrayDemo<T> implements MyArrayImplement<T> {
         if (currentIndex < 1) {
             throw new RuntimeException("暂无更多数据要删除");
         }
-        T removeItem = (T) data[currentIndex-1];
+        T removeItem = data[currentIndex-1];
         data[currentIndex - 1] = null;
         currentIndex--;
         return removeItem;
@@ -50,7 +51,7 @@ public class HasReplicateArrayDemo<T> implements MyArrayImplement<T> {
         if (index < 0 || index >= currentIndex) {
             throw new IndexOutOfBoundsException("超出索引边界！");
         }
-        T t = (T) data[index];
+        T t = data[index];
         for (int i = index;i<currentIndex - 1;i++) {
             data[i] = data[i + 1];
         }
@@ -64,7 +65,7 @@ public class HasReplicateArrayDemo<T> implements MyArrayImplement<T> {
         //复杂逻辑
         int j = -1;
         for (int i=0;i<currentIndex;i++) {
-            T result = (T) data[i];
+            T result = data[i];
             if (Objects.equals(t,result)) {
                 j = i;
                 break;
@@ -98,11 +99,11 @@ public class HasReplicateArrayDemo<T> implements MyArrayImplement<T> {
         T f;
         for (int i = index;i<currentIndex;i++) {
             if ( d== null) {
-                d = (T) data[i +1];
+                d = data[i +1];
                 data[i+1] = data[i];
                 continue;
             }
-            f = (T) data[i +1];
+            f = data[i +1];
             data[i + 1] = d;
             d = f;
         }
@@ -120,8 +121,21 @@ public class HasReplicateArrayDemo<T> implements MyArrayImplement<T> {
         if (index <0 || index > currentIndex) {
             throw new IndexOutOfBoundsException("超出索引边界");
         }
-        T old = (T) data[index];
+        T old = data[index];
         data[index] = t;
         return old;
+    }
+
+    @Override
+    public T get(int index) {
+        if (index <0 || index > length()) {
+            throw new IndexOutOfBoundsException("超出索引边界");
+        }
+        return data[index];
+    }
+
+
+    public void sort() {
+        Arrays.sort(data);
     }
 }

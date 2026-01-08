@@ -7,87 +7,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="继续完善富文本编辑器,组合了进度条和面板">
-      <change afterPath="$PROJECT_DIR$/dataStructure/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="学习数据结构&#10;列表，栈，队列，数组&#10;day01">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/audio/src/main/java/audio/MutipleMixer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer$LineEventImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" beforeDir="false" afterPath="$PROJECT_DIR$/audio/target/classes/audio/MutipleMixer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/count.txt" beforeDir="false" afterPath="$PROJECT_DIR$/count.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/countTotalNumber.txt" beforeDir="false" afterPath="$PROJECT_DIR$/countTotalNumber.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/CaretDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/caret/CaretDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/ClosedWindowDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/window/ClosedWindowDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/ColorChooserDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/colorchooser/ColorChooserDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/CustomBoxTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/combox/app/CustomBoxTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/CustomButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/button/CustomButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/CustomMenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/menu/CustomMenuBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/DocumentListenerArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/listener/DocumentListenerArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/EditTextPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/textComponents/EditTextPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/FontComBoxDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/combox/app/FontComBoxDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/IInsertComponents.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/combox/app/IInsertComponents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/JFileChooserDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/filefilter/JFileChooserDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/KeyListenLogTextArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/listener/KeyListenLogTextArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/TextBoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/TextBoot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/TitleDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/combox/app/TitleDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/filefilter/ImagePreviewer.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/filefilter/ImagePreviewer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/processBar/ProcessBarDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/processBar/ProcessBarDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/table/CustomEditorDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/table/CustomEditorDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/table/CustomRenderDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/table/CustomRenderDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/table/SimpleTableDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/table/SimpleTableDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/table/SimpleTableModelDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/main/java/com/snl/swing/practice/table/SimpleTableModelDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/filechooser/FileChooserDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/filechooser/FileChooserDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/processBar/ProgressBarDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/processBar/ProgressBarDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/processBar/SimpleProgressDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/processBar/SimpleProgressDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/table/UserSimpleTableModelDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/table/UserSimpleTableModelDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/table/model/SimpleTableColumnModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/table/model/SimpleTableColumnModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/table/model/SimpleTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/table/model/SimpleTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/textarea/TextAreaDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/swing/src/test/java/com/snl/test/textarea/TextAreaDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/CaretDemo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/ClosedWindowDemo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/ColorChooserDemo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/CustomBoxTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/CustomButton$MouseHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/CustomButton$MouseMotion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/CustomButton.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/CustomMenuBar$MyUndoableEditListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/CustomMenuBar$RedoAction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/CustomMenuBar$UndoAction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/CustomMenuBar.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/DocumentListenerArea.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/EditTextPanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/FontComBoxDemo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/IInsertComponents.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/JFileChooserDemo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/KeyListenLogTextArea.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/MainPanel$MyListenImplement.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/MainPanel$MyListenImplement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/MainPanel$OpenFileChooser.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/MainPanel$OpenFileChooser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/MainPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/MainPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/TextBoot.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/TextBoot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/TitleDemo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/combox/app/SimpleFontComBoxDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/combox/app/SimpleFontComBoxDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/combox/model/FontComboxModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/combox/model/FontComboxModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/filefilter/ImagePreviewer.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/filefilter/ImagePreviewer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/processBar/ProcessBarDemo$Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/processBar/ProcessBarDemo$Task.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/processBar/ProcessBarDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/processBar/ProcessBarDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/table/CustomEditorDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/table/CustomEditorDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/table/CustomRenderDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/table/CustomRenderDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/table/SimpleTableDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/table/SimpleTableDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/table/SimpleTableModelDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/classes/com/snl/swing/practice/table/SimpleTableModelDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/filechooser/FileChooserDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/filechooser/FileChooserDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/processBar/ProgressBarDemo$Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/processBar/ProgressBarDemo$Task.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/processBar/ProgressBarDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/processBar/ProgressBarDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/processBar/SimpleProgressDemo$Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/processBar/SimpleProgressDemo$Task.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/processBar/SimpleProgressDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/processBar/SimpleProgressDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/table/UserSimpleTableModelDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/table/UserSimpleTableModelDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/table/model/SimpleTableColumnModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/table/model/SimpleTableColumnModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/table/model/SimpleTableModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/table/model/SimpleTableModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/textarea/TextAreaDemo$CommitAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/textarea/TextAreaDemo$CommitAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/textarea/TextAreaDemo$Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/textarea/TextAreaDemo$Model.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/textarea/TextAreaDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/swing/target/test-classes/com/snl/test/textarea/TextAreaDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/array/HasReplicateArrayDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/array/HasReplicateArrayDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/array/MyArrayImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/array/MyArrayImplement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/array/NoReplicateArrayDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/array/NoReplicateArrayDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor01/Problem01.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor01/Problem01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor01/Problem02.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor01/Problem02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor01/Problem06.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor01/Problem06.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor02/Problem09.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor02/Problem09.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/Problem02.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/Problem02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/Problem04.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/Problem04.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/linkedList/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/linkedList/List.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/linkedList/MyLinedListImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/linkedList/MyLinedListImplement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/linkedList/SingleLinkedListImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/linkedList/SingleLinkedListImplement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/linkedList/StartApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/linkedList/StartApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/queue/LinkedImplementOfSingle.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/queue/LinkedImplementOfSingle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/queue/StartApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/queue/StartApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/stack/ArrayStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/stack/ArrayStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/stack/LinkedListStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/stack/LinkedListStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/stack/StartApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/stack/StartApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/stack/stackpractice/practice01.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/stack/stackpractice/practice01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/array/HasReplicateArrayDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/array/HasReplicateArrayDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/array/MyArrayImplement.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/array/MyArrayImplement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/array/NoReplicateArrayDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/array/NoReplicateArrayDemo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor01/Problem01$Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor01/Problem01$Task.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor01/Problem01.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor01/Problem01.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor01/Problem06.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor01/Problem06.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/Problem02.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/Problem02.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/List.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/List.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/MyLinedListImplement$LinkedListIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/MyLinedListImplement$LinkedListIterator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/MyLinedListImplement$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/MyLinedListImplement$Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/MyLinedListImplement.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/MyLinedListImplement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/SingleLinkedListImplement$ListIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/SingleLinkedListImplement$ListIterator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/SingleLinkedListImplement$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/SingleLinkedListImplement$Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/SingleLinkedListImplement.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/SingleLinkedListImplement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/StartApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/linkedList/StartApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/queue/LinkedImplementOfSingle$ListIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/queue/LinkedImplementOfSingle$ListIterator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/queue/LinkedImplementOfSingle$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/queue/LinkedImplementOfSingle$Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/queue/LinkedImplementOfSingle.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/queue/LinkedImplementOfSingle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/queue/StartApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/queue/StartApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/ArrayStack.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/ArrayStack.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/LinkedListStack$LinkedListIterator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/LinkedListStack$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/LinkedListStack$Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/LinkedListStack.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/LinkedListStack.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/StartApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/StartApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/stackpractice/practice01$ChooseFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/stackpractice/practice01$ChooseFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/stackpractice/practice01$Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/stackpractice/practice01$Task.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/stackpractice/practice01.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/stack/stackpractice/practice01.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,11 +177,12 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/java_practice",
+    "last_opened_file_path": "D:/网络下载/JavaGame-1.8.7",
     "onboarding.tips.debug.path": "/home/snl/java/java_code/java_practice/char03/src/Main.java",
     "project.structure.last.edited": "问题",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.28045976",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "File.Encoding",
     "settings.editor.splitter.proportion": "0.38266385",
     "应用程序.AbstactPanelDemo (1).executor": "Run",
@@ -220,7 +190,10 @@
     "应用程序.ArrayListDemo.executor": "Run",
     "应用程序.AsynchronousPublishConfirm.executor": "Run",
     "应用程序.AudioTest.executor": "Run",
+    "应用程序.BinaryTreeDemo (1).executor": "Run",
+    "应用程序.BinaryTreeDemo.executor": "Run",
     "应用程序.BorderLayoutDemo.executor": "Run",
+    "应用程序.ButtonDemo.executor": "Run",
     "应用程序.CalendarDemo.executor": "Run",
     "应用程序.CapturedAudio.executor": "Run",
     "应用程序.CaretListenerTest.executor": "Run",
@@ -320,13 +293,21 @@
     "应用程序.Practice02.executor": "Run",
     "应用程序.Problem01.executor": "Run",
     "应用程序.Problem03.executor": "Run",
+    "应用程序.Problem04.executor": "Run",
     "应用程序.Problem05 (1).executor": "Run",
     "应用程序.Problem05.executor": "Run",
+    "应用程序.Problem06 (1).executor": "Run",
+    "应用程序.Problem06 (2).executor": "Run",
+    "应用程序.Problem06 (3).executor": "Run",
+    "应用程序.Problem06 (4).executor": "Run",
+    "应用程序.Problem06 (5).executor": "Run",
     "应用程序.Problem06.executor": "Run",
     "应用程序.Problem08.executor": "Run",
     "应用程序.Problem09 (1).executor": "Run",
     "应用程序.Problem09.executor": "Run",
     "应用程序.Problem10.executor": "Run",
+    "应用程序.Problem26 (1).executor": "Run",
+    "应用程序.Problem26.executor": "Run",
     "应用程序.ProgressBarDemo.executor": "Run",
     "应用程序.ProxyTest.executor": "Run",
     "应用程序.PublisherConfirms.executor": "Run",
@@ -366,6 +347,15 @@
     "应用程序.TestCompent.executor": "Run",
     "应用程序.TestDB.executor": "Run",
     "应用程序.TestDemo.executor": "Run",
+    "应用程序.TestProblem08.executor": "Run",
+    "应用程序.TestProblem19.executor": "Run",
+    "应用程序.TestProblem21 (1).executor": "Run",
+    "应用程序.TestProblem21 (2).executor": "Run",
+    "应用程序.TestProblem21 (3).executor": "Run",
+    "应用程序.TestProblem21 (4).executor": "Run",
+    "应用程序.TestProblem21.executor": "Run",
+    "应用程序.TestProblem24.executor": "Run",
+    "应用程序.TestProblem25.executor": "Run",
     "应用程序.TextAreaDemo (1).executor": "Run",
     "应用程序.TextAreaDemo.executor": "Run",
     "应用程序.TextBoot.executor": "Run",
@@ -380,6 +370,8 @@
     "应用程序.TodoApplication.executor": "Run",
     "应用程序.TransformationDemo.executor": "Run",
     "应用程序.TreeEditTest.executor": "Run",
+    "应用程序.TreeSwing (1).executor": "Run",
+    "应用程序.TreeSwing.executor": "Run",
     "应用程序.URLConnectionTest.executor": "Run",
     "应用程序.UserApp.executor": "Run",
     "应用程序.UserSimpleTableModelDemo.executor": "Run",
@@ -390,8 +382,10 @@
     "应用程序.arrays.executor": "Run",
     "应用程序.arraysListDemo.executor": "Run",
     "应用程序.calendar.executor": "Run",
+    "应用程序.com.snl.data.homework.charptor02.Problem08 (1).executor": "Run",
     "应用程序.com.snl.data.homework.charptor02.Problem08.executor": "Run",
     "应用程序.com.snl.data.linkedList.StartApp.executor": "Run",
+    "应用程序.com.snl.data.queue.StartApp.executor": "Run",
     "应用程序.com.snl.data.stack.StartApp.executor": "Run",
     "应用程序.com.snl.swing.components.TextSamplerDemo.executor": "Run",
     "应用程序.com.snl.test.table.editor.pratice02.TableDialogEditDemo.executor": "Run",
@@ -447,20 +441,20 @@
       <recent name="D:\java_practice\JDBC" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.snl.data.tree" />
       <recent name="com.snl.test.music.processBar" />
       <recent name="com.snl.test.TwoDimensionDemo.layerUi" />
       <recent name="com.snl.swing.practice.combox.app" />
       <recent name="com.snl.test.table.editor.prictice" />
-      <recent name="com.snl.test.table.editor.pratice02" />
     </key>
   </component>
   <component name="RunManager" selected="应用程序.CountCodeNumber">
-    <configuration name="CharSequenceOp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ThreadTest.ThreadPool.CharSequenceOp" />
-      <module name="Thread" />
+    <configuration name="BinaryTreeDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.snl.data.tree.BinaryTreeDemo" />
+      <module name="dataStructure" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ThreadTest.ThreadPool.*" />
+          <option name="PATTERN" value="com.snl.data.tree.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -481,12 +475,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CountDownLatchTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="countDown.CountDownLatchTest" />
-      <module name="Thread" />
+    <configuration name="Problem26" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.snl.data.homework.charptor03.Problem26" />
+      <module name="dataStructure" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="countDown.*" />
+          <option name="PATTERN" value="com.snl.data.homework.charptor03.practice01.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -494,12 +488,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CountDownTestDemo2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="countDown.CountDownTestDemo2" />
-      <module name="Thread" />
+    <configuration name="Problem26" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.snl.data.homework.charptor03.Problem26" />
+      <module name="dataStructure" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="countDown.*" />
+          <option name="PATTERN" value="com.snl.data.homework.charptor03.practice01.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -507,12 +501,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ThreadTest.ThreadPool.test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ThreadTest.ThreadPool.test" />
-      <module name="Thread" />
+    <configuration name="StartApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.snl.data.homework.charptor03.practice01.StartApplication" />
+      <module name="dataStructure" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ThreadTest.ThreadPool.*" />
+          <option name="PATTERN" value="com.snl.data.homework.charptor03.practice01.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -541,19 +535,19 @@
     <list>
       <item itemvalue="应用程序.test01" />
       <item itemvalue="应用程序.test" />
-      <item itemvalue="应用程序.CharSequenceOp" />
-      <item itemvalue="应用程序.CountDownLatchTest" />
-      <item itemvalue="应用程序.CountDownTestDemo2" />
-      <item itemvalue="应用程序.ThreadTest.ThreadPool.test" />
+      <item itemvalue="应用程序.Problem26" />
+      <item itemvalue="应用程序.Problem26 (1)" />
+      <item itemvalue="应用程序.StartApplication" />
+      <item itemvalue="应用程序.BinaryTreeDemo" />
       <item itemvalue="应用程序.CountCodeNumber" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="应用程序.CountCodeNumber" />
-        <item itemvalue="应用程序.CountDownLatchTest" />
-        <item itemvalue="应用程序.CountDownTestDemo2" />
-        <item itemvalue="应用程序.ThreadTest.ThreadPool.test" />
-        <item itemvalue="应用程序.CharSequenceOp" />
+        <item itemvalue="应用程序.StartApplication" />
+        <item itemvalue="应用程序.Problem26" />
+        <item itemvalue="应用程序.BinaryTreeDemo" />
+        <item itemvalue="应用程序.Problem26 (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -942,7 +936,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765348290957</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="学习数据结构&#10;列表，栈，队列，数组&#10;day01">
+      <option name="closed" value="true" />
+      <created>1766244795625</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1766244795625</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -975,7 +977,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="增加音量设置" />
     <MESSAGE value="完成交换机的教程学习" />
     <MESSAGE value="完成rabbitmq的教程学习【100%】&#10;下一步开始开始学习day10" />
     <MESSAGE value="测试代码总量工具完成" />
@@ -1000,7 +1001,8 @@
     <MESSAGE value="学习table和颜色选择器和进度条" />
     <MESSAGE value="学习表格组件，继续完善富文本结构" />
     <MESSAGE value="继续完善富文本编辑器,组合了进度条和面板" />
-    <option name="LAST_COMMIT_MESSAGE" value="继续完善富文本编辑器,组合了进度条和面板" />
+    <MESSAGE value="学习数据结构&#10;列表，栈，队列，数组&#10;day01" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习数据结构&#10;列表，栈，队列，数组&#10;day01" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -13,7 +13,7 @@ public class ArrayStack<T> {
 
     public void  push(T t) {
         topOfStack++;
-        data = Arrays.copyOf(data,topOfStack+1);
+        data = Arrays.copyOf(data,length());
         data[topOfStack] = t;
     }
 

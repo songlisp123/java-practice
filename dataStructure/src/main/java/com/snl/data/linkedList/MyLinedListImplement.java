@@ -1,9 +1,6 @@
 package com.snl.data.linkedList;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 普通的双向链表实现
@@ -56,6 +53,9 @@ public class MyLinedListImplement<T> implements List<T> {
     }
 
     public T remove(Node p) {
+        if (size == 0) {
+            throw new NoSuchElementException("暂无元素修改");
+        }
         p.prev.next = p.next;
         p.next.prev = p.prev;
         this.size--;
@@ -99,15 +99,76 @@ public class MyLinedListImplement<T> implements List<T> {
         modCount++;
     }
 
-    public Iterator<T> iterator() {
-        return new LinkedListIterator();
+    @Override
+    public void removeAll(Iterable<? extends T> items) {
+        //我不太确定，但是这种实现可能很耗费时间
+
     }
 
+    public Iterator<T> iterator() {
+        return new LinkListAdvancedIterator();
+    }
+
+    private Node first() {
+        return beginMarker.next;
+    }
+
+    private Node last() {
+        return endMarker.prev;
+    }
+
+    public void addFirst(T t) {
+        addAfter(beginMarker,t);
+    }
+
+    public void addLast(T t) {
+        addBefore(endMarker,t);
+    }
+
+    public T removeFirst() {
+       return  remove(beginMarker.next);
+    }
+
+    public T removeLast() {
+       return remove(endMarker.prev);
+    }
+
+
+    public T getFirst() {
+        if (size() == 0) return null;
+        return beginMarker.next.data;
+    }
+
+    public T getLast() {
+        if (size() == 0) {
+            return endMarker.data;
+        }
+        return endMarker.prev.data;
+    }
+
+    /**
+     * 在节点p之间插入新街店
+     * @param p 节点
+     * @param t 类型参数
+     */
     private void addBefore(Node p,T t) {
         Node newNode = new Node(t,p.prev,p);
         newNode.prev.next = newNode;
         p.prev = newNode;
         this.size++;
+        modCount++;
+    }
+
+    /**
+     * 在节点p之后添加节点
+     * @param p 节点
+     * @param t 类型参数
+     */
+    private void addAfter(Node p ,T t) {
+        Node r = new Node(t,p,p.next);
+        p.next = r;
+        p.next.prev = r;
+        size++;
         modCount++;
     }
 
@@ -148,7 +209,6 @@ public class MyLinedListImplement<T> implements List<T> {
         }
         System.out.println("tail");
     }
-
 
     private class Node {
         private T data;
@@ -220,5 +280,119 @@ public class MyLinedListImplement<T> implements List<T> {
 
         modCount++;
 
+    }
+
+    /**
+     * 拼接索引
+     * @param iterator 当前列表的迭代器
+     * @param lst 拼接列表
+     */
+    public void splice(ListIterator<T> iterator,MyLinedListImplement<? extends T> lst) {
+        int length = lst.size();
+        if (length == 0) return;
+        var i = (LinkListAdvancedIterator) iterator;
+        Node currentNode = i.getCurrentNode();
+        var pre = currentNode.prev;
+        Node first = (Node) lst.first();
+        Node last = (Node) lst.last();
+        /**
+         * 拼接
+         */
+        pre.next =  first;
+        last.next = currentNode;
+        first.prev = pre;
+        currentNode.prev = last;
+
+    }
+
+    /**
+     * 继承ListIterator接口的对象，提供了更多的方法
+     * //TODO 问题14完成
+     */
+    class LinkListAdvancedIterator implements ListIterator<T> {
+
+        private Node currentNode = beginMarker.next;
+        private int exceptedCount = modCount;
+        private Node skip = currentNode;
+        private boolean okToRemove = false;
+
+        @Override
+        public boolean hasNext() {
+            return currentNode != endMarker;
+        }
+
+        @Override
+        public T next() {
+            if (exceptedCount != modCount) {
+                throw new ConcurrentModificationException("并发修改异常");
+            }
+            if (!hasNext()) {
+                throw new NoSuchElementException("暂无更多元素");
+            }
+            T data = currentNode.data;
+            skip = currentNode;
+            currentNode = currentNode.next;
+            okToRemove = true;
+            return data;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return currentNode != beginMarker;
+        }
+
+        @Override
+        public T previous() {
+            if (exceptedCount != modCount) {
+                throw new ConcurrentModificationException("并发修改异常");
+            }
+            if (!hasPrevious()) {
+                throw new NoSuchElementException("暂无更多元素");
+            }
+            skip = currentNode;
+            currentNode = currentNode.prev;
+            T data = currentNode.data;
+            okToRemove = false;
+            return data;
+        }
+
+        @Override
+        public int nextIndex() {
+            return - 1;
+        }
+
+        @Override
+        public int previousIndex() {
+            return -1;
+        }
+
+        @Override
+        public void remove() {
+            if (exceptedCount != modCount) {
+                throw new ConcurrentModificationException("并发修改异常");
+            }
+            if (!okToRemove) {
+                throw new IllegalStateException("非法删除异常");
+            }
+            MyLinedListImplement.this.remove(currentNode.prev);
+            exceptedCount++;
+            okToRemove = false;
+        }
+
+        @Override
+        public void add(T t) {
+            addBefore(currentNode,t);
+            exceptedCount++;
+        }
+
+        @Override
+        public void set(T t) {
+            skip.data = t;
+            exceptedCount++;
+        }
+
+        public Node getCurrentNode() {
+            return currentNode;
+        }
     }
 }

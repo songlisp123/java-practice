@@ -12,6 +12,7 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class practice01 extends JPanel {
@@ -135,35 +136,34 @@ public class practice01 extends JPanel {
 
         @Override
         protected Void doInBackground() throws Exception {
-
+            AtomicInteger line = new AtomicInteger(0);
             try(Stream<String> lines =  Files.lines(currentSelectedFile.toPath(), StandardCharsets.UTF_8)) {
                 lines.forEach(string -> {
+                    line.getAndIncrement();
                     if (task.isCancelled()) {
                         return;
                     }
                     for (int i=0;i<string.length();i++) {
-                        if (string.charAt(i) == '(' || string.charAt(i) == '{') {
-                            stack.push(string.charAt(i));
-                        }
-                        if (string.charAt(i) == ')') {
-                            if (stack.isEmpty()) {
-                                System.err.println("语法错误");
-                                return;
-                            }
-                            Character pop = stack.pop();
-                            if (pop == '(') continue;
-                            System.err.println("语法错误");
-                            return;
-                        }
-                        if (string.charAt(i) == '}') {
-                            if (stack.isEmpty()) {
-                                System.err.println("语法错误");
-                                return;
-                            }
-                            Character pop = stack.pop();
-                            if (pop == '{') continue;
-                            System.err.println("语法错误");
-                            return;
+                        char c = string.charAt(i);
+                        switch (c) {
+                            case '(' :
+                            case '[' :
+                            case '{' :
+                                stack.push(c);
+                                break;
+                            case ')' :
+                            case ']' :
+                            case '}' :
+                                if (stack.isEmpty())
+                                    printErrorMessage(line,i);
+                                Character pop = stack.pop();
+                                if ((c == ')' && pop != '(') ||
+                                        (c == ']' && pop != '[') ||
+                                        (c == '}' && pop != '{'))
+                                    printErrorMessage(line,i);
+                                break;
+                            default:
+                                break;//默认无操作
                         }
                     }
                     publish(string);
@@ -184,5 +184,10 @@ public class practice01 extends JPanel {
             Toolkit.getDefaultToolkit().beep();
             if (!stack.isEmpty()) System.err.println("语法错误发生在最后一行");
         }
+
+        private void printErrorMessage(AtomicInteger line, int i) {
+            System.err.printf("第 [%d] 行 索引 [%d] 处发生语法错误%n",line.get(),i);
+        }
     }
+
 }

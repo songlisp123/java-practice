@@ -1,14 +1,12 @@
 package com.snl.data.queue;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 对于单向列表有两个操作我无法实现O（1）的运行时间，为什么？
  * @param <T> 泛型参数
  */
-public class LinkedImplementOfSingle<T> {
+public class LinkedImplementOfSingle<T> extends AbstractQueue<T> {
 
     /**
      * 这是队列中等待时间最长的节点
@@ -16,6 +14,7 @@ public class LinkedImplementOfSingle<T> {
     private Node head;
     private Node tail;
     private int size;
+    private int modCount;
 
     class Node {
         private T data;
@@ -27,95 +26,154 @@ public class LinkedImplementOfSingle<T> {
     }
 
     public LinkedImplementOfSingle() {
-        head = new Node(null,null);
-        tail = new Node(null,null);
-        head.next = tail;
         size = 0;
+        modCount = 0;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ListIterator();
+    }
+
+    /**
+     * 内部方法，移除头部
+     * @return 移除元素
+     */
+    private T removeFirst() {
+        Node h = head;
+        Node next = h.next;
+        T data = h.data;
+        h.data = null;
+        h.next = null;
+        head = next;
+        if (next == null)
+            //如果只存在一个节点
+            tail = null;
+        size--;
+        modCount++;
+        return data;
     }
 
     public int size() {
         return size;
     }
 
-    public void push(T t) {
-        head.next = new Node(t,head.next);
+    public   boolean isEmpty() {
+        return size() == 0;
+    }
+
+    /**
+     * 将指定元素插入到队列中，如果当前没有空间则抛出{@code IllegalStateException }异常
+     * @param t 插入元素
+     * @return 插入成为返回 {@code true} 否则为{@code false}
+     */
+    public boolean add(T t) {
+        Node last = tail;
+        Node aNode = new Node(t,null);
+        tail = aNode;
+        if (last == null)
+            //插入第一个元素
+            head = aNode;
+        else {
+            //否则……
+            last.next = aNode;
+        }
         size++;
+        modCount++;
+        return true;
     }
 
-    public T pop() {
-        if (size == 0){
-            throw new NoSuchElementException("暂未存在该元素");
-        }
-        /**
-         * 以下两个方法的运行时间是O（N）的，
-         * 为什么书上说对于任何操作都可能在O（1）时间运行？
-         * 链表和数组实现都为每个操作提供快速的 O(1) 运行时间
-         */
-        Node longest = getNode();
-        Node larggerNode = getLarggerNode();
-        larggerNode.next = tail;
-        size--;
-        return longest.data;
+    /**
+     * 将指定元素插入到队列中
+     * @param t 插入元素
+     * @return 插入成为返回 {@code true} 否则为{@code false}
+     */
+    public boolean offer(T t) {
+        return add(t);
+    }
+
+    /**
+     * 获取并移除此队列的头部。
+     * @return 移除元素
+     */
+    public T remove() {
+        if (isEmpty())
+            throw new NoSuchElementException("暂无更多元素");
+        return removeFirst();
     }
 
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
-    //单链接并不搞笑，为什么呢？因为单链接并不能保证最后一个元素他需要遍历所有的节点
-
-    public Node getNode() {
-        Node p = head;
-        for (int i=0;i<size;i++) p = p.next;
-        return p;
-    }
-
-    public Node getLarggerNode() {
-        Node p = head;
-        for (int i = 0;i<size-1;i++) p = p.next;
-        return p;
+    /**
+     * 获取并移除此队列的头部。
+     * @return 移除元素
+     */
+    public T poll() {
+        if (isEmpty())
+            return null;
+        return removeFirst();
     }
 
-    public Iterator<T> iterator() {
-        return new ListIterator();
+    /**
+     * 获取但不移除此队列的头部
+     * @return 头部元素
+     */
+    public T element() {
+        if (isEmpty())
+            throw new NoSuchElementException("暂无更多元素");
+        return head.data;
     }
 
-    public boolean contains(T t) {
-        var i = this.iterator();
-        while (i.hasNext()) {
-            T next = i.next();
-            if (Objects.equals(next,t)) return true;
-        }
-        return false;
+    /**
+     *获取此队列的头部元素，但不移除它
+     * @return 队列为空是返回 {@code null} 否则返回头部元素
+     */
+    public T peek() {
+        if (isEmpty())
+            return null;
+        return head.data;
     }
 
-    public void show() {
-        var i = iterator();
-        System.out.print("head-->");
-        while (i.hasNext()) {
-            T next = i.next();
-            System.out.print(next + "-->");
-        }
-        System.out.println("tail");
-    }
 
     class ListIterator implements Iterator<T> {
 
-        private Node node = head.next;
+        private Node node = head;
+        private int exceptedCount = modCount;
+        boolean toRemoved = false;
+        int count = 0;
+        int removeCount = 0;
 
         @Override
         public boolean hasNext() {
-            return node != tail;
+            return node != null;
         }
 
         @Override
         public T next() {
+            checkConcurrent();
             if (!hasNext()) {
                 throw new NoSuchElementException("暂无跟多元素");
             }
             T data = node.data;
             node = node.next;
+            toRemoved = true;
+            count++;
             return data;
+        }
+
+        private void checkConcurrent() {
+            if (exceptedCount != modCount)
+                throw new ConcurrentModificationException("并发修改异常");
+        }
+
+        @Override
+        public void remove() {
+            checkConcurrent();
+            if (!toRemoved)
+                throw new IllegalStateException("非法操作");
+            removeFirst();
+            removeCount++;
+            exceptedCount++;
+            toRemoved  = removeCount != count;
         }
     }
 }
