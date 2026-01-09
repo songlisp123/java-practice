@@ -47,9 +47,9 @@ public class Boom extends Sprite {
         }
     }
 
-    public void update(double delta, InputState state, Group group,Group destory) {
+    public void update(double delta, InputState state, Group group,Group destory,Group wall) {
         this.update(delta,state);
-        Collection data = group.getData();
+        Collection data = group.getData(); //敌人数据
         Iterator<Sprite> iterator;
         for (iterator = data.iterator();iterator.hasNext();)
         {
@@ -64,7 +64,17 @@ public class Boom extends Sprite {
                 destory.add(next);
             }
         }
-        handleTouchWall(GameConstants.Weight,GameConstants.Height);
+        data = wall.getData();
+        for (iterator = data.iterator();iterator.hasNext();) {
+            //遍历组中元素判断是否与炸弹碰撞
+            Sprite next = iterator.next();
+            if (this.isCrash(next))
+            {
+                //子弹与墙相撞
+                setDead(true);
+            }
+        }
+        handleBeyondScene(GameConstants.Weight,GameConstants.Height);
     }
 
     @Override
@@ -94,16 +104,8 @@ public class Boom extends Sprite {
     }
 
     @Override
-    public void handleTouchWall(int weight, int height) {
-        //先不急
-        if (isTouchWall(weight,height))
+    public void handleBeyondScene(int width, int height) {
+        if (isBeyondScene(width,height))
             setDead(true);
     }
-
-    @Override
-    public void reset() {
-        //也不急
-    }
-
-
 }

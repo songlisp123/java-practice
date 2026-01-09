@@ -50,6 +50,6 @@ public interface Group<T extends Sprite> {
     /**
      * 获取数据模型
      */
-    Collection<? extends T> getData();
+    Collection<? super T> getData();
 
 }

@@ -31,14 +31,14 @@ public class BoomGroup implements Group {
         //空实现
     }
 
-    public void update(double delta,Group aGroup,Group destory) {
+    public void update(double delta,Group aGroup,Group destory,Group wall) {
         if(isEmpty())
             return;
         Iterator<Sprite> iterator;
         for (iterator = boomQueue.iterator();iterator.hasNext();)
         {
             Boom next = (Boom) iterator.next();
-            next.update(delta,null,aGroup,destory);
+            next.update(delta,null,aGroup,destory,wall);
             if (next.isDead()) iterator.remove();
         }
     }

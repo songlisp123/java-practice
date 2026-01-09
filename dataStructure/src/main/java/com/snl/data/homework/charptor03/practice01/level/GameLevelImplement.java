@@ -1,5 +1,6 @@
 package com.snl.data.homework.charptor03.practice01.level;
 
+import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.entity.player.Player;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
@@ -23,7 +24,8 @@ public class GameLevelImplement {
 
     private void initData() {
         level = 0;
-        player = new Player(10,10,20,20);
+        player = new Player(10,10,
+                GameConstants.squreWidth,GameConstants.squreHeight);
         panel = new LevelImplement<>(player);
     }
 

@@ -1,15 +1,21 @@
 package com.snl.data.homework.charptor03.practice01.entity.player;
 
+import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
+import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.entity.booms.Boom;
 import com.snl.data.homework.charptor03.practice01.entity.booms.BoomGroup;
 import com.snl.data.homework.charptor03.practice01.entity.booms.BoomShape;
+import com.snl.data.homework.charptor03.practice01.entity.enmry.Enemy;
+import com.snl.data.homework.charptor03.practice01.entity.wall.Wall;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class Player extends Sprite implements PlayerAction {
 
@@ -22,6 +28,9 @@ public class Player extends Sprite implements PlayerAction {
 
     private final int boomCounts = 5;
     private BoomGroup group;
+
+    private  double Y_SPEED;
+    private boolean onGround;
 
     public Player() {
         super();
@@ -36,30 +45,80 @@ public class Player extends Sprite implements PlayerAction {
     private void initData() {
         color = Color.CYAN;
         group = new BoomGroup(boomCounts);
+        onGround = true;
         resetPoint();
     }
 
+    //*********************  更新  *******************//
     @Override
     public void update(double delta, InputState state) {
-        if (state.up)
-            move(0,-SPEED);
-        if (state.down)
-            move(0,SPEED);
-        if (state.left)
-            move(-SPEED,0);
-        if (state.right)
-            move(SPEED,0);
+
+    }
+
+    public void update(double delta,InputState state,Group aGroup,Group destory,Group wall) {
+        if (state.up && onGround) {
+            Y_SPEED = -15;
+            onGround = false;
+        }
+        double dx = 0.0f;
+        if (state.left) dx -= SPEED;
+        if (state.right) dx += SPEED;
+
+        Y_SPEED += GameConstants.GRAVITY * 0.15; //重力
+
+        //先处理y
+        movesY(Y_SPEED,wall);
+        //处理x
+        movesX(dx,wall);
+
         if (state.attackPressed) {
             shoot(group,state);
         }
-    }
-
-    public void update(double delta,InputState state,Group aGroup,Group destory) {
-        this.update(delta,state);
         changePosition(state);
-        group.update(delta,aGroup,destory);
+        //更新子弹
+        group.update(delta,aGroup,destory,wall);
     }
 
+    private void movesX(double dx,Group wall) {
+        int steps = (int) Math.ceil(Math.abs(dx));
+        double step = Math.signum(dx);
+
+        for (int i=0;i<steps;i++) {
+            move(step,0);
+            if (isTouch(wall.getData())) {
+                //如果发生碰撞
+                move(-step,0);
+                return;
+            }
+        }
+    }
+
+    /**
+     * 垂直距离移动
+     */
+    private void movesY(double dy,Group wall) {
+        //获取每次行走的步数
+        int steps = (int) Math.ceil(Math.abs(dy));
+        //判断方向，step为-1表示向上，step为1表示向下
+        double step = Math.signum(dy);
+
+        //逐步数修改状态
+        for (int i=0;i<steps;i++) {
+            move(0,step);
+            if (isTouch(wall.getData())) {
+                //如果发生碰撞，y轴速度变为0
+                move(0,-step);
+                Y_SPEED = 0;
+                if (step > 0) {
+                    //如果发生的碰撞代表着落入地面
+                    onGround = true;
+                }
+                return;
+            }
+        }
+    }
+
+    //*********************  绘制  *******************//
     @Override
     public void paint(Graphics g, InputState state) {
         Graphics2D g2 = (Graphics2D) g.create();
@@ -136,28 +195,7 @@ public class Player extends Sprite implements PlayerAction {
         resetPoint(x,y);
     }
 
-    @Override
-    public void handleTouchWall(int weight, int height) {
-        if (touchLeftBounder())
-            setxPos(Math.max(0,getxPos()));
-        if (touchUpBounder())
-            setyPos(Math.max(0,getyPos()));
-        if (touchRightBounder(weight))
-            setxPos(Math.min(weight - getWEIGHT(),getxPos()));
-        if (touchBottomBounder(height))
-            setyPos(Math.min(height - getHEIGHT(),getyPos()));
-        resetPoint();
-    }
-
-    public boolean isCrash(Collection<? extends Sprite> collection) {
-        for (Sprite sprite : collection)
-        {
-            if (super.isCrash(sprite)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    //*************************  碰撞  ********************************//
 
     public <T extends Sprite> T eat(Collection<T> collection) {
         for (T sprite : collection)
@@ -170,19 +208,52 @@ public class Player extends Sprite implements PlayerAction {
         return null;
     }
 
-    private boolean touchLeftBounder() {
-        return getxPos() <= 0;
+    @Override
+    public boolean isTouch(Collection<? extends Sprite> sprites) {
+        boolean touched =false;
+        if (sprites == null || sprites.isEmpty() )
+            return touched;
+        for (Sprite sprite : sprites)
+            if (isCrash(sprite))
+            {
+                touched = true;
+                break;
+            }
+        return touched;
     }
 
-    private boolean touchRightBounder(int weight) {
+    //************************* 处理触碰屏幕 *************************//
+    @Override
+    public void handleBeyondScene(int width,int height) {
+        if (touchLeftBounder(0))
+            setxPos(Math.max(0,getxPos()));
+        if (touchUpBounder(0))
+            setyPos(Math.max(0,getyPos()));
+        if (touchRightBounder(width))
+            setxPos(Math.min(width - getWEIGHT(),getxPos()));
+        if (touchBottomBounder(height))
+            setyPos(Math.min(height - getHEIGHT(),getyPos()));
+        resetPoint();
+    }
+
+    /**
+     * 撞到左边界
+     * @param x 左边界的值，对于屏幕来说是{@code 0}
+     * @return 发生碰撞，返回{@code true} ,否则返回{@code false}
+     */
+    private boolean touchLeftBounder(double x) {
+        return getxPos() <= x;
+    }
+
+    private boolean touchRightBounder(double weight) {
         return (getxPos()+getWEIGHT()) >= weight;
     }
 
-    private boolean touchUpBounder() {
-        return getyPos() <= 0;
+    private boolean touchUpBounder(double y) {
+        return getyPos() <= y;
     }
 
-    private boolean touchBottomBounder(int height) {
+    private boolean touchBottomBounder(double height) {
         return (getyPos()+getHEIGHT()) >= height;
     }
 
@@ -199,12 +270,13 @@ public class Player extends Sprite implements PlayerAction {
         rightDownConor = new Point2D.Double(x+getWEIGHT() , y + getHEIGHT()); //右下角
     }
 
+    //*********************  射击动作  *******************//
     @Override
     public void shoot(BoomGroup group,InputState state) {
         if (group.size() >= boomCounts)
             return;
         group.add(createBoom(state));
-//        Music.shoot();
+        Music.shoot();
     }
 
     private Sprite createBoom(InputState state) {
@@ -224,5 +296,28 @@ public class Player extends Sprite implements PlayerAction {
                     10,10, state.direction,BoomShape.CIRCLE);
         }
         return boom;
+    }
+
+    public void handleCollide(Sprite sprite) {
+        if (sprite == null)
+            return;
+        double dxLeft   = Math.abs(getRight() - sprite.getLeft());
+        double dxRight  = Math.abs(getLeft() - sprite.getRight());
+        double dyTop    = Math.abs(getBottom() - sprite.getTop());
+        double dyBottom = Math.abs(getTop() - sprite.getBottom());
+
+        double min = Math.min(Math.min(dxLeft, dxRight), Math.min(dyTop, dyBottom));
+
+        if (min == dxLeft) {
+            setxPos(sprite.getLeft() - getWEIGHT());
+        } else if (min == dxRight) {
+            setxPos(sprite.getRight());
+        } else if (min == dyTop) {
+            Y_SPEED = 0;
+            setyPos(sprite.getTop() - getHEIGHT());
+        } else {
+            Y_SPEED = 0;
+            setyPos(sprite.getBottom());
+        }
     }
 }

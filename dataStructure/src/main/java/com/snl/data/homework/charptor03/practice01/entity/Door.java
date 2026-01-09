@@ -39,13 +39,4 @@ public class Door extends Sprite {
         g2.dispose();
     }
 
-    @Override
-    public void move(double xPos, double yPos) {
-        //无实现
-    }
-
-    @Override
-    public void handleTouchWall(int weight, int height) {
-        //无实现
-    }
 }

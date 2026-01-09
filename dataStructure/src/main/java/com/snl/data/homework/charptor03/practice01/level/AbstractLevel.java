@@ -8,6 +8,7 @@ import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.entity.enmry.Enemy;
 import com.snl.data.homework.charptor03.practice01.entity.goods.Coin;
 import com.snl.data.homework.charptor03.practice01.entity.player.Player;
+import com.snl.data.homework.charptor03.practice01.entity.wall.Wall;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 import java.awt.*;
@@ -19,6 +20,7 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
     private GroupImplement<Coin> coins;
     private GroupImplement<Coin> eated;
     private GroupImplement<Sprite> destoryedSprite;
+    private GroupImplement<Wall> walls;
 
     private Door door;
     private boolean showDoor;
@@ -38,8 +40,10 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         eated = new GroupImplement<>();
         door = new Door(400,400,25,25);
         destoryedSprite = new GroupImplement<>();
+        walls = new GroupImplement<>();
         showDoor = false;
         //填充精灵
+        fillSprite();
     }
 
     @Override
@@ -57,6 +61,7 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
 
     @Override
     public void render(Graphics g) {
+        walls.render(g);
         player.paint(g);
         enmries.render(g);
         coins.render(g);
@@ -71,11 +76,13 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
 
     @Override
     public void update(double delta, InputState state, int weight, int height) {
-        player.update(delta,state,enmries,destoryedSprite);
-        enmries.update(delta);
+        player.update(delta,state,enmries,destoryedSprite,walls);
+        enmries.update(delta,walls);
         coins.update(delta);
-        if (player.isTouchWall(weight,height))
-            player.handleTouchWall(weight,height);
+        //实现有待完善
+        if (player.isBeyondScene(weight,height))
+            player.handleBeyondScene(weight,height);
+        //如果玩家碰到墙壁
         //判断元素是否消失
         eatCoin();
         //玩家与物体相撞逻辑
@@ -107,14 +114,11 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
      * @return 是装机，否则我不是
      */
     public boolean isCrash() {
-        return (player.isCrash(enmries.getData()));
+        return (player.isTouch(enmries.getData()));
     }
 
     public boolean completed() {
-        if (showDoor)
-            //吃完硬币
-            return player.isCrash(door);
-        return false;
+        return showDoor && player.isCrash(door);
     }
 
     protected GroupImplement<Enemy> getEnmries() {
@@ -123,5 +127,13 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
 
     protected GroupImplement<Coin> getCoins() {
         return coins;
+    }
+
+    protected GroupImplement<Wall> getWalls() {
+        return walls;
+    }
+
+    protected void setPlayer(Player player) {
+        this.player = player;
     }
 }

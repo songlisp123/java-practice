@@ -9,7 +9,6 @@ import java.awt.*;
 /**
  * 实现类必须维护该关卡内的所有元素
  * 这其中包括：已存在的，死亡的精灵元素
- * (在目前的版本中，因为没有其他系统，所有只有银币能被吃到，只需要维护一个被吃掉的硬币即可)
  */
 public interface Level<T extends Sprite> {
 
@@ -31,16 +30,9 @@ public interface Level<T extends Sprite> {
     Player getPlayer();
 
     /**
-     * 更新该关卡的所有精灵元素(不包括精灵元素）
+     * 更新该关卡的所有精灵元素(不包括已损坏精灵元素）
      */
     void update(double delta , InputState state,int weight,int height);
-
-    /**
-     * 返回下一个关卡
-     * @return 下一个关卡
-     */
-    Level<T> next();
-
 
     /**
      * 关卡内玩家元素是否相撞
@@ -48,11 +40,15 @@ public interface Level<T extends Sprite> {
      */
     boolean isCrash();
 
-
     /**
      * 当前关卡是否同欢
      * @return 通关与否
      */
     boolean completed();
+
+    /**
+     * 填充精灵
+     */
+    void fillSprite();
 
 }

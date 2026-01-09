@@ -21,5 +21,5 @@ public interface PlayerAction {
      */
 //    void gainGoods();
 
-    void update(double delta, InputState state, Group aGroup, Group destory);
+    void update(double delta, InputState state, Group aGroup, Group destory,Group wall);
 }

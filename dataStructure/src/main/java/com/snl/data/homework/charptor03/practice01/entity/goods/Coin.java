@@ -23,24 +23,20 @@ public class Coin extends Sprite {
 
     @Override
     public void update(double delta, InputState state) {
+        double sin = Math.sin(Math.random() * Math.PI);
 
     }
 
     @Override
     public void paint(Graphics g, InputState state) {
         Graphics2D g2 = (Graphics2D) g.create();
-        g2.setColor(Color.yellow);
+        g2.setColor(Color.GREEN);
         g2.fillOval((int) getxPos(), (int) getyPos(),getWEIGHT(),getHEIGHT());
     }
 
     @Override
     public void move(double xPos, double yPos) {
         //需要用到波函数
-    }
-
-    @Override
-    public void handleTouchWall(int weight, int height) {
-        //不用实现
     }
 
 }

@@ -1,10 +1,12 @@
 package com.snl.data.homework.charptor03.practice01.entity.enmry;
 
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
+import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 import java.awt.*;
+import java.util.Collection;
 
 public class Enemy extends Sprite {
 
@@ -20,8 +22,13 @@ public class Enemy extends Sprite {
     @Override
     public void update(double delta, InputState state) {
         //空实现
+    }
+
+    public void update(double delta,InputState state, Group group) {
         move(0,SPEED);
-        handleTouchWall(GameConstants.Weight,GameConstants.Height);
+        //与墙体的关系
+        touchWall(group.getData());
+        handleBeyondScene(GameConstants.Weight,GameConstants.Height);
     }
 
     @Override
@@ -39,8 +46,8 @@ public class Enemy extends Sprite {
     }
 
     @Override
-    public void handleTouchWall(int weight, int height) {
-        //TODO
+    public void handleBeyondScene(int width, int height) {
+        //TODO 仅仅是一个简单的实现
         if (touchUpBounder())
         {
             //到达上边界
@@ -60,12 +67,39 @@ public class Enemy extends Sprite {
         return (getyPos()+getHEIGHT()) >= height;
     }
 
-    public double getSPEED() {
-        return SPEED;
+    public void touchWall(Collection<? extends Sprite> sprites) {
+        if (sprites == null || sprites.isEmpty())
+            return;
+        for (Sprite sprite : sprites)
+        {
+            if (isCrash(sprite))
+            {
+                this.handleCollide(sprite);
+            }
+        }
     }
 
-    public void setSPEED(double SPEED) {
-        this.SPEED = SPEED;
+    public void handleCollide(Sprite sprite) {
+        if (sprite == null)
+            return;
+        double dxLeft   = Math.abs(getRight() - sprite.getLeft());
+        double dxRight  = Math.abs(getLeft() - sprite.getRight());
+        double dyTop    = Math.abs(getBottom() - sprite.getTop());
+        double dyBottom = Math.abs(getTop() - sprite.getBottom());
+
+        double min = Math.min(Math.min(dxLeft, dxRight), Math.min(dyTop, dyBottom));
+
+        if (min == dxLeft) {
+            SPEED = -SPEED;;
+        } else if (min == dxRight) {
+            SPEED = -SPEED;;
+        } else if (min == dyTop) {
+            SPEED = -SPEED;
+        } else {
+            SPEED = -SPEED;
+        }
     }
+
+
 
 }

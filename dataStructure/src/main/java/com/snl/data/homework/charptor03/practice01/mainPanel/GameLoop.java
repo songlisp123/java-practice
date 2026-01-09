@@ -1,7 +1,6 @@
 package com.snl.data.homework.charptor03.practice01.mainPanel;
 
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
-import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.level.*;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
@@ -74,12 +73,13 @@ public class GameLoop extends JPanel {
                 levelPanel = null;
             gameLevel.update(delta, state, GameConstants.Weight, GameConstants.Height);
             if (gameLevel.isCrash())
+                //发生碰撞,重置状态
                 reset();
             if (gameLevel.completed()) {
                 //关卡增加
                 gameLevel.update();
                 //如果通关：播放音乐
-                Music.crash();
+
                 //暂时重置
                 reset();
             }

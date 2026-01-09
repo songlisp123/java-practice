@@ -1,11 +1,13 @@
 package com.snl.data.homework.charptor03.practice01.entity;
 
+import com.snl.data.homework.charptor03.practice01.entity.wall.Wall;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.Collection;
 
-public abstract class Sprite {
+public abstract class Sprite implements AbstractSprite {
 
     private double xPos;
     private double yPos;
@@ -38,8 +40,9 @@ public abstract class Sprite {
         this.HEIGHT = HEIGHT;
     }
 
+//************************* 碰撞逻辑 ******************************//
     /**
-     * 测试元素是相撞
+     * 测试元素是否相撞
      * @param sprite 其他的精灵
      * @return 如果两个精灵相撞，则为true；否则返回false;
      */
@@ -51,16 +54,36 @@ public abstract class Sprite {
     }
 
     /**
-     * 判断精灵是否触及"墙壁",注意这个函数可以优化，墙壁可以是固定的场景元素
-     * 目前为止，这主要是屏幕宽高度
-     * @param wight  屏幕宽度
-     * @param height 屏幕高度
-     * @return 如果发生相撞，返回true；否则返回false；
+     * 判断是否该精灵触碰其他精灵元素
+     * @param sprites 墙壁元素集合
+     * @return 如果发生碰撞，返回{@code true} ，否则f返回{@code false}
+     * @apiNote 注意：对于静态元素，你保持默认实现就行，对于动态元素，则有不同的实现
      */
-    public boolean isTouchWall(double wight,double height) {
-        return xPos <= 0 || xPos + this.WEIGHT >= wight ||
+    public boolean isTouch(Collection<? extends Sprite> sprites) {
+        return false;
+    }
+
+    /**
+     * 判断该元素是否到达屏幕边界
+     * @return 如果元素触碰到屏幕边界，返回 {@code true} ,否则，返回"{@code false}
+     */
+    public boolean isBeyondScene(double width,double height) {
+        return xPos <= 0 || xPos + this.WEIGHT >= width ||
                 yPos <= 0 || yPos + this.HEIGHT >= height;
     }
+
+
+    /**
+     * 实现该函数，确保不同的精灵实现不同
+     * 目前为空实现，你需要为不同精灵实现此方法
+     * @apiNote 对于静态元素，不用实现此方法
+     */
+    public void handleBeyondScene(int width,int height) {
+        //不同子类实现
+    }
+
+
+    //****************************** 处理接口 ****************************//
 
     /**
      * 这个方法是重载的paint方法，主要是因为除了角色外，所有的精灵都不更随输入状态
@@ -95,23 +118,19 @@ public abstract class Sprite {
      */
     public abstract void paint(Graphics g ,InputState state);
 
-    public boolean isDead() {
-        return isDead;
-    }
 
     /**
      * 此函数在第一帧移动以给定的距离异动精灵
      * @param xPos x轴位移
      * @param yPos y轴位移
      */
-    public abstract void move(double xPos, double yPos);
+    public void move(double xPos, double yPos) {
+        //空实现，你必须为不同精灵实现不同
+    }
 
-    /**
-     * 该抽象方法让实现该方法的类处理边界问题
-     * @param weight 屏幕宽度
-     * @param height 屏幕高度
-     */
-    public abstract void handleTouchWall(int weight, int height);
+    public boolean isDead() {
+        return isDead;
+    }
 
     public Point2D getPoint() {
         return new Point2D.Double(getxPos(),getyPos());
@@ -145,15 +164,26 @@ public abstract class Sprite {
         isDead = dead;
     }
 
+    //******************  边界线  *******************//
+
     @Override
-    public String toString() {
-        return "Sprite{" +
-                "xOrigin=" + xOrigin +
-                ", yOrigin=" + yOrigin +
-                ", xPos=" + xPos +
-                ", yPos=" + yPos +
-                ", WEIGHT=" + WEIGHT +
-                ", HEIGHT=" + HEIGHT +
-                '}';
+    public double getLeft() {
+        return getxPos();
     }
+
+    @Override
+    public double getRight() {
+        return getxPos() + getWEIGHT();
+    }
+
+    @Override
+    public double getTop() {
+        return getyPos();
+    }
+
+    @Override
+    public double getBottom() {
+        return getyPos() + getHEIGHT();
+    }
+
 }
