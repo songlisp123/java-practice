@@ -1,6 +1,5 @@
 package com.snl.data.homework.charptor03.practice01.entity;
 
-import com.snl.data.homework.charptor03.practice01.entity.wall.Wall;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 import java.awt.*;
@@ -17,6 +16,8 @@ public abstract class Sprite implements AbstractSprite {
     private double xOrigin;
     private double yOrigin;
     private boolean isDead;
+    private int originalWeight;
+    private int originalHeight;
 
     /**
      * 无参构造函数
@@ -38,6 +39,8 @@ public abstract class Sprite implements AbstractSprite {
         this.yPos = yPos;
         this.WEIGHT = WEIGHT;
         this.HEIGHT = HEIGHT;
+        this.originalWeight = WEIGHT;
+        this.originalHeight = HEIGHT;
     }
 
 //************************* 碰撞逻辑 ******************************//
@@ -94,8 +97,7 @@ public abstract class Sprite implements AbstractSprite {
     }
 
     /**
-     * 失败后，将当前精灵重置为初始状态，
-     * 注意对于硬币来说有点难
+     * 失败后，将当前精灵重置为初始位置（暂时不实现状态）
      */
     public  void reset() {
         isDead = false;
@@ -186,4 +188,19 @@ public abstract class Sprite implements AbstractSprite {
         return getyPos() + getHEIGHT();
     }
 
+    public void setWEIGHT(int WEIGHT) {
+        this.WEIGHT = WEIGHT;
+    }
+
+    public void setHEIGHT(int HEIGHT) {
+        this.HEIGHT = HEIGHT;
+    }
+
+    public int getOriginalWeight() {
+        return originalWeight;
+    }
+
+    public int getOriginalHeight() {
+        return originalHeight;
+    }
 }

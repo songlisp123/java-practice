@@ -41,14 +41,14 @@ public interface Level<T extends Sprite> {
     boolean isCrash();
 
     /**
-     * 当前关卡是否同欢
-     * @return 通关与否
+     * 当前关卡是否完成
+     * @return 关卡完成与否
      */
     boolean completed();
 
     /**
-     * 填充精灵
+     * 填充当前关卡的精灵
      */
-    void fillSprite();
+    void fillSprite(int index);
 
 }

@@ -13,6 +13,10 @@ public class Music {
     private static Mixer mixer;
     private static SourceDataLine line;
 
+    static {
+        mixer = getMixer();
+    }
+
 
     public static Mixer getMixer() {
         Line.Info targetInfo = new Line.Info(SourceDataLine.class);
@@ -49,22 +53,19 @@ public class Music {
         Toolkit.getDefaultToolkit().beep();
     }
 
-    public static void crash() {
-        Path path = Path.of(".","娘子.wav");
-        crash(path);
-    }
-
-    private static void crash(Path path) {
-        new Thread(run(path),"音乐播放者").start();
-    }
-
-    public static void shoot() {
-        Path path = Path.of(".","wav","决意.wav");
+    public static void sniparShoot() {
+        Path path = Path.of(".","wav","狙击步枪.wav");
         shoot(path);
     }
 
-    private static void shoot(Path path) {
-        new Thread(run(path),"音乐播放者").start();
+    public static void assaultShoot() {
+        Path path = Path.of(".","wav","突击步枪.wav");
+        shoot(path);
+    }
+
+    public static void pistolShoot() {
+        Path path = Path.of(".","wav","手枪射击.wav");
+        shoot(path);
     }
 
     public static void backGroundMusic() {
@@ -72,15 +73,32 @@ public class Music {
         shoot(path);
     }
 
-    private static void backGroundMusic(Path path) {
+    public static void subMacheingShoot() {
+        Path path = Path.of(".","wav","冲锋枪射击.wav");
+        shoot(path);
+    }
+
+    public static void bulletsCrashWall() {
+        Path path = Path.of(".","wav","子弹撞墙.wav");
+        shoot(path);
+    }
+
+    public static void reload() {
+        Path path = Path.of(".","wav","装弹.wav");
+        shoot(path);
+    }
+
+    public static void emptyBullets() {
+        Path path = Path.of(".","wav","空弹.wav");
+        shoot(path);
+    }
+
+    private static void shoot(Path path) {
         new Thread(run(path),"音乐播放者").start();
     }
 
     private static Runnable run(Path path) {
         return ()->{
-            mixer = getMixer();
-            if (mixer == null)
-                return;
             try(AudioInputStream stream = AudioSystem.getAudioInputStream(path.toFile())) {
                 SourceDataLine sourceDataLine = ChooseSourceLine.chooseLine(mixer);
                 AudioFormat format = stream.getFormat();
@@ -105,6 +123,7 @@ public class Music {
             } catch (LineUnavailableException e) {
                 throw new RuntimeException(e);
             }
+
         };
     }
 

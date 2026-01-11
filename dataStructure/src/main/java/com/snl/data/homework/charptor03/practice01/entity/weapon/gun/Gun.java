@@ -1,10 +1,8 @@
 package com.snl.data.homework.charptor03.practice01.entity.weapon.gun;
 
-import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.booms.Boom;
 import com.snl.data.homework.charptor03.practice01.entity.booms.BoomGroup;
-import com.snl.data.homework.charptor03.practice01.entity.weapon.GunWeapon;
 
 import java.awt.*;
 
@@ -31,6 +29,9 @@ public abstract class Gun implements GunWeapon {
     //武器名字
     private String name;
 
+    private long shootTime;
+    private boolean isReload;
+
     /**
      * 子弹袋
      */
@@ -40,7 +41,8 @@ public abstract class Gun implements GunWeapon {
         group = new BoomGroup(maxBullets);
     }
 
-    public Gun(double originShootSpeed, double originHearingRangle, int originRecoil, double originKillDamage, String name,int maxBullets) {
+    public Gun(double originShootSpeed, double originHearingRangle, int originRecoil,
+               double originKillDamage, String name,int maxBullets) {
         this.originShootSpeed = originShootSpeed;
         this.currentShootSpeed = originShootSpeed;
 
@@ -53,8 +55,8 @@ public abstract class Gun implements GunWeapon {
         this.originRecoil = originRecoil;
         this.currentRecoil = originRecoil;
         this.name = name;
-        group = new BoomGroup(maxBullets);
 
+        group = new BoomGroup(maxBullets);
     }
 
     @Override
@@ -74,7 +76,6 @@ public abstract class Gun implements GunWeapon {
     }
 
     public boolean isEmpty() {
-        Music.beep();
         return group.isEmpty();
     }
 
@@ -146,5 +147,21 @@ public abstract class Gun implements GunWeapon {
     public String getInfo() {
         return "[%s]:枪管直径5mm,杀伤力：%.2f,听力范围: %.2fm,射速:%.2fm/s,适合高精尖暗杀".formatted(getName(),
                 getKillDamage(),hearingrange(),shootSpeed());
+    }
+
+    public boolean isReload() {
+        return isReload;
+    }
+
+    public long getShootTime() {
+        return shootTime;
+    }
+
+    public void setShootTime(long shootTime) {
+        this.shootTime = shootTime;
+    }
+
+    public void setReload(boolean reload) {
+        isReload = reload;
     }
 }

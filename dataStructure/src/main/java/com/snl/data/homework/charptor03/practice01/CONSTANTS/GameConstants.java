@@ -22,5 +22,16 @@ public class GameConstants {
     public static final char PLAYER = 'p';
     public static final char ENMRY = 'e';
     public static final char COIN = 'c';
+    public static final char DOOR = 'd';
+
+    public static final int PLAYERLIFES = 3;
+    public static final int GAINT = 5;
+
+
+    public static final int pistolKill = 56;
+    public static final double PISTOL_ORIGIN_SHOOT_SPEED = 3.5;
+    public static final double PISTOL_ORIGIN_HEARING_RANGE = 36.7;
+    public static final double PISTOL_ORIGIN_KILL_DAMAGE = 10.5;
+    public static final int PISTOL_ORIGIN_RECOIL = 200;
 
 }

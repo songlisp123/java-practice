@@ -9,15 +9,27 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * 小型弹药架
+ */
 public class BoomGroup implements Group {
 
     private List<Sprite> boomQueue;
+
+    //当前弹药夹数量
+    private int boomSize;
+
+    //弹药总量
+    private int boomMaxSize;
+
 
     /**
      * 空构造函数
      */
     public BoomGroup(int size) {
         boomQueue = new ArrayList<>(size);
+        this.boomSize = size;
+        boomMaxSize = boomSize;
     }
 
     @Override
@@ -32,13 +44,14 @@ public class BoomGroup implements Group {
     }
 
     public void update(double delta,Group aGroup,Group destory,Group wall) {
-        if(isEmpty())
-            return;
         Iterator<Sprite> iterator;
         for (iterator = boomQueue.iterator();iterator.hasNext();)
         {
+            //遍历迭代器，获取子弹
             Boom next = (Boom) iterator.next();
+            //更新子弹
             next.update(delta,null,aGroup,destory,wall);
+            //如果子弹生命周期已过，移除
             if (next.isDead()) iterator.remove();
         }
     }
@@ -51,21 +64,23 @@ public class BoomGroup implements Group {
     @Override
     public void add(Sprite sprite) {
         boomQueue.add(sprite);
+        boomSize--;
     }
 
     @Override
     public int size() {
-        return boomQueue.size();
+       return boomSize;
     }
 
+    //重新
     @Override
     public void reset() {
-        clear();
+        //空实现
     }
 
     @Override
     public boolean isEmpty() {
-        return boomQueue.isEmpty();
+        return boomSize == 0;
     }
 
     @Override
@@ -75,6 +90,10 @@ public class BoomGroup implements Group {
 
     @Override
     public Collection getData() {
-        return null;
+        return boomQueue;
+    }
+
+    public int getBoomMaxSize() {
+        return boomMaxSize;
     }
 }

@@ -15,4 +15,5 @@ public class InputState {
 
     // 边沿状态（只一帧）
     public boolean attackPressed;
+    public static char c;
 }

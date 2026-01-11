@@ -1,8 +1,8 @@
 package com.snl.data.homework.charptor03.practice01.level;
 
+import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.entity.Door;
-import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.GroupImplement;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.entity.enmry.Enemy;
@@ -15,22 +15,16 @@ import java.awt.*;
 
 public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
 
-    private Player player;
+    private static Player player;
     private GroupImplement<Enemy> enmries;
     private GroupImplement<Coin> coins;
     private GroupImplement<Coin> eated;
     private GroupImplement<Sprite> destoryedSprite;
     private GroupImplement<Wall> walls;
-
     private Door door;
     private boolean showDoor;
 
     public AbstractLevel() {
-        this(null);
-    }
-
-    public AbstractLevel(Player player) {
-        this.player = player;
         initData();
     }
 
@@ -38,14 +32,13 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         enmries = new GroupImplement<>();
         coins = new GroupImplement<>();
         eated = new GroupImplement<>();
-        door = new Door(400,400,25,25);
         destoryedSprite = new GroupImplement<>();
         walls = new GroupImplement<>();
         showDoor = false;
         //填充精灵
-        fillSprite();
     }
 
+    // ********************  重置  ***************************//
     @Override
     public void reset() {
         //发生碰撞该怎么办？
@@ -54,11 +47,12 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         player.reset();
         enmries.reset();
         coins.reset();
-        destoryedSprite.reset();
         if (showDoor)
             showDoor = false;
     }
 
+
+    // ********************  渲染  ***************************//
     @Override
     public void render(Graphics g) {
         walls.render(g);
@@ -69,11 +63,7 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
             door.paint(g);
     }
 
-    @Override
-    public Player getPlayer() {
-        return player;
-    }
-
+    // ********************  更新  ***************************//
     @Override
     public void update(double delta, InputState state, int weight, int height) {
         player.update(delta,state,enmries,destoryedSprite,walls);
@@ -85,7 +75,6 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         //如果玩家碰到墙壁
         //判断元素是否消失
         eatCoin();
-        //玩家与物体相撞逻辑
         //检查是否成功
         checkEmpty();
     }
@@ -100,10 +89,14 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
             return null;
         }
         Music.beep();
+        player.addScore(GameConstants.GAINT);
         eated.add(eat);
         return eat;
     }
 
+    /**
+     * 判断玩家是否全部搜集硬币
+     */
     private void checkEmpty() {
         if (coins.isEmpty())
             showDoor = true;
@@ -111,12 +104,23 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
 
     /**
      * 判断是否与敌人相撞
-     * @return 是装机，否则我不是
+     * @return 如果发生碰撞则返回 {@code true}，否则返回 {@code false}
      */
     public boolean isCrash() {
         return (player.isTouch(enmries.getData()));
     }
 
+
+    @Override
+    public Player getPlayer() {
+        return player;
+    }
+
+    /**
+     * 是否完成当前关卡
+     * @return 是则返回 {@code true} ,否则返回 {@code false}
+     * @apiNote 判断逻辑是否出现传送门以及玩家是否触碰到床送门
+     */
     public boolean completed() {
         return showDoor && player.isCrash(door);
     }
@@ -134,6 +138,11 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
     }
 
     protected void setPlayer(Player player) {
-        this.player = player;
+        AbstractLevel.player = player;
     }
+
+    public void setDoor(Door door) {
+        this.door = door;
+    }
+
 }

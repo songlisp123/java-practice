@@ -13,7 +13,6 @@ public interface AbstractSprite {
     void reset();
 
     //以下程序获取精灵的边界线
-
     double getLeft();
     double getRight();
     double getTop();

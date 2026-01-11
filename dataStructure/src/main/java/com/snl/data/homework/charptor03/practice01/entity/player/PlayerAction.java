@@ -1,20 +1,18 @@
 package com.snl.data.homework.charptor03.practice01.entity.player;
 
 import com.snl.data.homework.charptor03.practice01.entity.Group;
-import com.snl.data.homework.charptor03.practice01.entity.booms.BoomGroup;
+import com.snl.data.homework.charptor03.practice01.entity.weapon.Weapon;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 public interface PlayerAction {
 
-    /**
-     * 发射子弹
-     * @param group 子弹组
-     */
-    void shoot(BoomGroup group, InputState state);
 
-    default void shoot(BoomGroup group) {
-        shoot(group,null);
-    }
+    /**
+     * 攻击行为
+     * @param weapon 攻击武器
+     * @param state 当前输入状态
+     */
+    void attack(Weapon weapon,InputState state);
 
     /**
      * 获取硬币等游戏物体

@@ -5,32 +5,79 @@ import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.entity.booms.Boom;
-import com.snl.data.homework.charptor03.practice01.entity.booms.BoomGroup;
-import com.snl.data.homework.charptor03.practice01.entity.booms.BoomShape;
-import com.snl.data.homework.charptor03.practice01.entity.enmry.Enemy;
-import com.snl.data.homework.charptor03.practice01.entity.wall.Wall;
+import com.snl.data.homework.charptor03.practice01.entity.booms.TimerBoom;
+import com.snl.data.homework.charptor03.practice01.entity.weapon.Weapon;
+import com.snl.data.homework.charptor03.practice01.entity.weapon.gun.*;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
+import javax.swing.plaf.PanelUI;
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.logging.Logger;
 
 public class Player extends Sprite implements PlayerAction {
 
+    /**
+     * 颜色
+     */
     private Color color;
     private Point2D leftUpConor;
     private Point2D rightUpConor;
     private Point2D leftDownConor;
     private Point2D rightDownConor;
+    /**
+     * x轴速度
+     */
     private final double SPEED = 3.5;
+    /**
+     * 子弹袋最大容积
+     */
+    private final int boomCounts = 6;
 
-    private final int boomCounts = 5;
-    private BoomGroup group;
-
+    /**
+     * y轴速度
+     */
     private  double Y_SPEED;
+    /**
+     * 是否落入到地面？？
+     */
     private boolean onGround;
+
+    /**
+     * 玩家生命
+     */
+    private int life;
+
+    /**
+     * 玩家得分
+     */
+    private int score;
+
+    //还有其他的属性……
+    /**
+     * 炸弹背包
+     */
+    //TODO
+    private Group<Sprite> Grenade;
+
+    /**
+     * 当前枪械
+     */
+    private Weapon currentWeapon;
+
+    /**
+     * 对旧武器的引用
+     */
+    private Weapon pistol;
+
+    private Weapon submachingGun;
+
+    private Weapon sniperRifle;
+
+    private Weapon assaultRifle;
+
+    public static Logger logger = Logger.getLogger("game");
 
     public Player() {
         super();
@@ -44,8 +91,14 @@ public class Player extends Sprite implements PlayerAction {
 
     private void initData() {
         color = Color.CYAN;
-        group = new BoomGroup(boomCounts);
         onGround = true;
+        life = GameConstants.PLAYERLIFES;
+        score = 0;
+        currentWeapon = new AssaultRifle(300,"AK 47突击步枪");
+        assaultRifle = currentWeapon;
+        pistol = new Pistol(boomCounts,"小手枪");
+        submachingGun = new SubmachineGun(120,"Mp40冲锋枪");
+        sniperRifle = new SniperRifle(15,"98K 狙击步枪");
         resetPoint();
     }
 
@@ -56,6 +109,8 @@ public class Player extends Sprite implements PlayerAction {
     }
 
     public void update(double delta,InputState state,Group aGroup,Group destory,Group wall) {
+//        Thread thread = Thread.currentThread();
+//        System.out.println("thread.getName() = " + thread.getName());
         if (state.up && onGround) {
             Y_SPEED = -15;
             onGround = false;
@@ -71,12 +126,35 @@ public class Player extends Sprite implements PlayerAction {
         //处理x
         movesX(dx,wall);
 
+        //发送子弹
         if (state.attackPressed) {
-            shoot(group,state);
+            attack(currentWeapon,state);
         }
         changePosition(state);
+        //更新武器
+        updateWeapon();
         //更新子弹
-        group.update(delta,aGroup,destory,wall);
+        ((Gun) currentWeapon).update(delta,aGroup,destory,wall);
+        //更新装填
+        if (((Gun) currentWeapon).isReload()) {
+            long now  = System.currentTimeMillis();
+            if (now - ((Gun) currentWeapon).getShootTime() >= 1000) {
+                Music.reload();
+                ((Gun) currentWeapon).setReload(false);
+                logger.info("装填成功");
+            }
+        }
+
+    }
+
+    private void updateWeapon() {
+        switch (InputState.c) {
+            case '1' -> currentWeapon = assaultRifle;
+            case '2' -> currentWeapon = pistol;
+            case '3' -> currentWeapon = submachingGun;
+            case '4' -> currentWeapon = sniperRifle;
+
+        }
     }
 
     private void movesX(double dx,Group wall) {
@@ -118,6 +196,15 @@ public class Player extends Sprite implements PlayerAction {
         }
     }
 
+    @Override
+    public void move(double xPos, double yPos) {
+        double x = getxPos() + xPos;
+        double y = getyPos() + yPos;
+        super.setxPos(x);
+        super.setyPos(y);
+        resetPoint(x,y);
+    }
+
     //*********************  绘制  *******************//
     @Override
     public void paint(Graphics g, InputState state) {
@@ -137,12 +224,11 @@ public class Player extends Sprite implements PlayerAction {
         ));
         drawLine(g2);
         g2.setPaint(paint);
-        g2.fillOval(0,0,200,200);
         g2.fillOval(300,250,200,200);
         g2.fillOval(125,400,60,80);
         g2.fillOval(400,50,100,100);
         //绘制子弹
-        group.render(g);
+        currentWeapon.render(g);
         g2.dispose();
     }
 
@@ -182,17 +268,7 @@ public class Player extends Sprite implements PlayerAction {
     public void reset() {
         super.reset();
         resetPoint();
-        //重置弹药
-        group.reset();
-    }
-
-    @Override
-    public void move(double xPos, double yPos) {
-        double x = getxPos() + xPos;
-        double y = getyPos() + yPos;
-        super.setxPos(x);
-        super.setyPos(y);
-        resetPoint(x,y);
+        //重置弹药/??大雾？？如果
     }
 
     //*************************  碰撞  ********************************//
@@ -231,8 +307,10 @@ public class Player extends Sprite implements PlayerAction {
             setyPos(Math.max(0,getyPos()));
         if (touchRightBounder(width))
             setxPos(Math.min(width - getWEIGHT(),getxPos()));
-        if (touchBottomBounder(height))
-            setyPos(Math.min(height - getHEIGHT(),getyPos()));
+        if (touchBottomBounder(height)) {
+            onGround = true;
+            setyPos(Math.min(height - getHEIGHT(), getyPos()));
+        }
         resetPoint();
     }
 
@@ -270,30 +348,36 @@ public class Player extends Sprite implements PlayerAction {
         rightDownConor = new Point2D.Double(x+getWEIGHT() , y + getHEIGHT()); //右下角
     }
 
-    //*********************  射击动作  *******************//
+    //*********************  攻击动作  *******************//
+
+
     @Override
-    public void shoot(BoomGroup group,InputState state) {
-        if (group.size() >= boomCounts)
+    public void attack(Weapon weapon, InputState state) {
+        if (((Gun)weapon).isEmpty()) {
+            //如果弹药架为空
+            logger.warning("弹药为空");
+            Music.emptyBullets();
             return;
-        group.add(createBoom(state));
-        Music.shoot();
+        }
+        weapon.attack(createBoom(state));
     }
 
     private Sprite createBoom(InputState state) {
         Boom boom;
+        double speed = ((Gun) currentWeapon).shootSpeed();
         switch (state.direction) {
             case NORTH -> boom = new Boom(getxPos() + getWEIGHT() / 2.0 - 5
                     ,getyPos() + 10,
-                    10,10, state.direction, BoomShape.CIRCLE);
+                    10,10, state.direction, speed);
             case SOUTH -> boom = new Boom(getxPos() + getWEIGHT() / 2.0 - 3
                     ,getyPos() + getHEIGHT(),
-                    6,10, state.direction);
+                    6,10, state.direction,speed);
             case WEST -> boom = new Boom(getxPos()
                     ,getyPos() + getHEIGHT() / 2.0 - 3,
-                    10,6, state.direction);
-            default -> boom = new Boom(getxPos() + getWEIGHT()
+                    10,6, state.direction,speed);
+            default -> boom = new TimerBoom(getxPos() + getWEIGHT()
                     ,getyPos() + getHEIGHT() / 2.0 - 5,
-                    10,10, state.direction,BoomShape.CIRCLE);
+                    10,10, state.direction,speed);
         }
         return boom;
     }
@@ -319,5 +403,39 @@ public class Player extends Sprite implements PlayerAction {
             Y_SPEED = 0;
             setyPos(sprite.getBottom());
         }
+    }
+
+    //********************  生命系统  ************************//
+    public int getLife() {
+        return life;
+    }
+
+    public void decreaseLife() {
+        this.life--;
+    }
+
+    public void increasedLife() {
+        this.life++;
+    }
+
+    //************** 得分  *********************//
+
+    public int getScore() {
+        return score;
+    }
+
+    public void addScore(int added) {
+        this.score += added;
+    }
+
+    public Weapon getCurrentWeapon() {
+        return currentWeapon;
+    }
+
+    //获取该玩家所有的武器
+    public Weapon[] allWeapons() {
+        return new Weapon[]{
+                assaultRifle,pistol,submachingGun,sniperRifle
+        };
     }
 }

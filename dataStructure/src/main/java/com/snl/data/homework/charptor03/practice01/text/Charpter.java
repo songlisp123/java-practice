@@ -7,7 +7,8 @@ public final class Charpter implements Text {
     private final String[] data = {
             "第一关：初出茅庐",
             "第二关：天火流星",
-            "第二关：草船借箭",
+            "第三关：草船借箭",
+            "第四关：夹缝求生",
     };
 
     public Charpter() {

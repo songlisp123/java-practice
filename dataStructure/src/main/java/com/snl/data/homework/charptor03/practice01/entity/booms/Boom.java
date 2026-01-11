@@ -1,6 +1,7 @@
 package com.snl.data.homework.charptor03.practice01.entity.booms;
 
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
+import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.state.Direction;
@@ -12,9 +13,8 @@ import java.util.Iterator;
 
 public class Boom extends Sprite {
 
-    private final double SPEED = 5.0;
+    private double xSpeed;
     private Direction direction;
-
     private BoomShape shape;
     private Color color;
 
@@ -26,30 +26,47 @@ public class Boom extends Sprite {
         this(xPos, yPos, WEIGHT, HEIGHT,direction,BoomShape.RECT);
     }
 
+
+    public Boom(double xPos, double yPos, int WEIGHT, int HEIGHT, Direction direction,double xSpeed) {
+        this(xPos, yPos, WEIGHT, HEIGHT,direction,BoomShape.RECT,Color.CYAN,xSpeed);
+    }
+
     public Boom(double xPos, double yPos, int WEIGHT, int HEIGHT, Direction direction, BoomShape shape) {
         this(xPos, yPos, WEIGHT, HEIGHT,direction,shape,Color.GREEN);
     }
 
-    public Boom(double xPos, double yPos, int WEIGHT, int HEIGHT, Direction direction, BoomShape shape, Color color) {
+    public Boom(double xPos, double yPos, int WEIGHT, int HEIGHT,
+                Direction direction, BoomShape shape, Color color)
+    {
+        this(xPos, yPos, WEIGHT, HEIGHT,direction,shape,Color.GREEN,GameConstants.PISTOL_ORIGIN_SHOOT_SPEED);
+    }
+
+    public Boom(double xPos, double yPos, int WEIGHT, int HEIGHT,
+                Direction direction, BoomShape shape, Color color,double xSpeed)
+    {
         super(xPos, yPos, WEIGHT, HEIGHT);
         this.direction = direction;
         this.shape = shape;
         this.color = color;
+        this.xSpeed = xSpeed;
     }
+
 
     @Override
     public void update(double delta, InputState state) {
         switch (direction) {
-            case EAST -> move(SPEED,0);
-            case NORTH -> move(0,-SPEED);
-            case SOUTH -> move(0,SPEED);
-            case WEST -> move(-SPEED,0);
+            case EAST -> move(xSpeed,0);
+            case NORTH -> move(0,-xSpeed);
+//            case SOUTH -> move(0, xSpeed);
+            case WEST -> move(-xSpeed,0);
         }
     }
 
     public void update(double delta, InputState state, Group group,Group destory,Group wall) {
         this.update(delta,state);
         Collection data = group.getData(); //敌人数据
+
+        //判断与敌人的状态
         Iterator<Sprite> iterator;
         for (iterator = data.iterator();iterator.hasNext();)
         {
@@ -64,6 +81,8 @@ public class Boom extends Sprite {
                 destory.add(next);
             }
         }
+
+        //判断与墙壁的相对位置
         data = wall.getData();
         for (iterator = data.iterator();iterator.hasNext();) {
             //遍历组中元素判断是否与炸弹碰撞
@@ -72,8 +91,10 @@ public class Boom extends Sprite {
             {
                 //子弹与墙相撞
                 setDead(true);
+                Music.bulletsCrashWall();
             }
         }
+        //处理超过屏幕的情况
         handleBeyondScene(GameConstants.Weight,GameConstants.Height);
     }
 
@@ -105,7 +126,9 @@ public class Boom extends Sprite {
 
     @Override
     public void handleBeyondScene(int width, int height) {
-        if (isBeyondScene(width,height))
+        if (isBeyondScene(width,height)) {
             setDead(true);
+            Music.bulletsCrashWall();
+        }
     }
 }

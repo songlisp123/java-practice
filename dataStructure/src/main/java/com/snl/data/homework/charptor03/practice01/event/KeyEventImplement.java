@@ -1,6 +1,7 @@
 package com.snl.data.homework.charptor03.practice01.event;
 
 import com.snl.data.homework.charptor03.practice01.state.Direction;
+import com.snl.data.homework.charptor03.practice01.state.GameState;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 import java.awt.event.KeyEvent;
@@ -40,6 +41,9 @@ public class KeyEventImplement implements KeyListener {
                 input.right = true;
                 input.change = true;
                 break;
+            case '1' ,'2','3' , '4':
+                InputState.c = keyChar;
+                break;
             default:
                 break;
         }
@@ -59,6 +63,11 @@ public class KeyEventImplement implements KeyListener {
             }else
                 //默认子弹方向向东
                 input.direction = Direction.EAST;
+        }
+
+        if (keyCode == KeyEvent.VK_ESCAPE) {
+            //如果按下esc键，暂停游戏
+            GameState.stopping = true;
         }
     }
 

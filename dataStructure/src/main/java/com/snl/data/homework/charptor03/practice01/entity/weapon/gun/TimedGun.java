@@ -1,5 +1,7 @@
 package com.snl.data.homework.charptor03.practice01.entity.weapon.gun;
 
+import com.snl.data.homework.charptor03.practice01.entity.Sprite;
+
 public class TimedGun extends Gun {
 
 
@@ -13,4 +15,9 @@ public class TimedGun extends Gun {
         super(originShootSpeed, originHearingRangle, originRecoil, originKillDamage, name, maxBullets);
     }
 
+    @Override
+    public void attack(Sprite sprite) {
+        super.attack(sprite);
+        //播放音乐
+    }
 }
