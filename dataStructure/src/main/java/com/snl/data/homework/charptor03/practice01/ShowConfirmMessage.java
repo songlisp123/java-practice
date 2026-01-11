@@ -1,9 +1,9 @@
 package com.snl.data.homework.charptor03.practice01;
 
-import com.snl.data.homework.charptor03.Problem26;
+import com.snl.data.homework.charptor03.practice01.button.CustomButton;
 import com.snl.data.homework.charptor03.practice01.mainPanel.GameLoop;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
-import com.snl.swing.practice.button.CustomButton;
+
 
 import javax.swing.*;
 import java.awt.*;

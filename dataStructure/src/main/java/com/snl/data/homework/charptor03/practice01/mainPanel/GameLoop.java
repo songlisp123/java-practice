@@ -9,7 +9,6 @@ import com.snl.data.homework.charptor03.practice01.level.levelpanel.LevelPanel;
 import com.snl.data.homework.charptor03.practice01.level.levelwrapper.GameLevelImplement;
 import com.snl.data.homework.charptor03.practice01.state.GameState;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
-import com.snl.swing.practice.button.CustomButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,7 +65,7 @@ public class GameLoop extends JPanel implements MouseMotionListener {
         setLayout(new BorderLayout());
         setBackground(Color.black);
         addMouseMotionListener(this);
-        customButton = new CustomButton("点击我");
+        customButton = new JButton("点击我");
         customButton.addActionListener(e -> {
             GameState.stopping = false;
         });
