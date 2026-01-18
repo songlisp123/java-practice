@@ -54,7 +54,7 @@ public class BootPanel extends JPanel implements PropertyChangeListener {
 
         statusLabel = new JLabel("界面正在加载……",JLabel.LEFT);
         statusLabel.setForeground(Color.GREEN);
-        statusLabel.setFont(new Font("隶书",Font.BOLD,20));
+        statusLabel.setFont(new Font("隶书",Font.BOLD,15));
 
         bar = new JProgressBar(0,100);
         bar.setStringPainted(true);

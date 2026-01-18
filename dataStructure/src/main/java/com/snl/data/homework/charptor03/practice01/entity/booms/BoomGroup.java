@@ -43,14 +43,14 @@ public class BoomGroup implements Group {
         //空实现
     }
 
-    public void update(double delta,Group aGroup,Group destory,Group wall) {
+    public void update(double delta,Group aGroup,Group destory,Group wall,double damage) {
         Iterator<Sprite> iterator;
         for (iterator = boomQueue.iterator();iterator.hasNext();)
         {
             //遍历迭代器，获取子弹
             Boom next = (Boom) iterator.next();
             //更新子弹
-            next.update(delta,null,aGroup,destory,wall);
+            next.update(delta,null,aGroup,destory,wall,damage);
             //如果子弹生命周期已过，移除
             if (next.isDead()) iterator.remove();
         }

@@ -1,5 +1,6 @@
 package com.snl.data.homework.charptor03.practice01.state;
 
+import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.entity.player.Player;
 import com.snl.data.homework.charptor03.practice01.level.levelwrapper.AbstractLevelWrapper;
 import com.snl.data.homework.charptor03.practice01.level.levelwrapper.GameLevelImplement;
@@ -13,7 +14,7 @@ public final class GameState {
     boolean losing;
     boolean hasBeenBooted;
     AbstractLevelWrapper gameLevel;
-    Player player;
+    final Player player;
 
     public static Logger logger = Logger.getLogger("game");
 
@@ -32,24 +33,31 @@ public final class GameState {
         hasBeenBooted = false;
         this.gameLevel = gameLevel;
         this.player = player;
+        Music.backGround();
     }
 
     public void update() {
         if (gameLevel.isCrash()) {
             logger.warning("玩家碰撞xxxxx");
             //玩家碰触到敌人
-            //减少玩家生命
-            player.decreaseLife();
-            //判断玩家生命是否小于0
-            if (player.getLife() <= 0) {
-                losing = true;
-                finished = false;
-                logger.warning("玩家死亡，游戏结束");
+            //减少玩家生命点数
+            player.decreaseLifePoint(5);
+            //判断该玩家的生命点数是否为零
+            if (player.getLifePoints()  <= 0) {
+                //判断玩家生命是否小于0
+                if (player.getLife() <= 0) {
+                    losing = true;
+                    finished = false;
+                    logger.warning("玩家死亡，游戏结束");
+                }else {
+                    //否则玩家生命减一
+                    player.decreaseLife();
+                    //发生碰撞,重置状态
+                    player.resetLifePoints();
+                    reset();
+                }
                 return;
             }
-            //发生碰撞,重置状态
-            reset();
-            return;
         }
 
         if (gameLevel.completed()) {

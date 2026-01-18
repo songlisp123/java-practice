@@ -155,7 +155,7 @@ public class ShowConfirmMessage extends JDialog implements ActionListener {
                 //进入程序
                 var p = new GameLoop(state,parent);
                 ((JFrame)parent).getContentPane().add(p);
-                Music.backGroundMusic();
+//                Music.backGroundMusic();
                 parent.revalidate();
                 parent.repaint();
                 this.setVisible(false);

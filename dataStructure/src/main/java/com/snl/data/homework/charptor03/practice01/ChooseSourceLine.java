@@ -12,10 +12,8 @@ public class ChooseSourceLine {
         Line.Info[] sourceLineInfo = mixer.getSourceLineInfo();
         for(int i=0;i< sourceLineInfo.length;i++) {
             Line.Info info = sourceLineInfo[i];
-            if (i == 0) {
-                System.out.println(info);
+            if (i == 0)
                 line = (SourceDataLine) mixer.getLine(info);
-            }
         }
         return line;
     }

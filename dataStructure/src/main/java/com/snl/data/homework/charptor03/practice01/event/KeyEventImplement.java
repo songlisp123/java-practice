@@ -41,7 +41,7 @@ public class KeyEventImplement implements KeyListener {
                 input.right = true;
                 input.change = true;
                 break;
-            case '1' ,'2','3' , '4':
+            case '1' ,'2','3' , '4','5','6' , '7':
                 InputState.c = keyChar;
                 break;
             default:

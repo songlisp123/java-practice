@@ -4,6 +4,7 @@ import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
+import com.snl.data.homework.charptor03.practice01.entity.enmry.Enemy;
 import com.snl.data.homework.charptor03.practice01.state.Direction;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
@@ -62,7 +63,7 @@ public class Boom extends Sprite {
         }
     }
 
-    public void update(double delta, InputState state, Group group,Group destory,Group wall) {
+    public void update(double delta, InputState state, Group group,Group destory,Group wall,double damage) {
         this.update(delta,state);
         Collection data = group.getData(); //敌人数据
 
@@ -77,8 +78,11 @@ public class Boom extends Sprite {
                 //设置两者的活动状态
                 System.out.println("相撞");
                 setDead(true);
-                next.setDead(true);
-                destory.add(next);
+                ((Enemy)next).decreaseLifePoint(damage);
+                if (((Enemy) next).getLifePoints() == 0 ){
+                    next.setDead(true);
+                    destory.add(next);
+                }
             }
         }
 

@@ -73,6 +73,7 @@
       <module name="micro-demo-device" options="-parameters" />
       <module name="micro-demo-gateway" options="-parameters" />
       <module name="micro-demo-order" options="-parameters" />
+      <module name="swing" options="--add-exports java.base/com.sun=ALL-UNNAMED" />
       <module name="todo" options="-parameters" />
       <module name="x3-rabbit-demo" options="-parameters" />
     </option>

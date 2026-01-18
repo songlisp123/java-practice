@@ -23,6 +23,7 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
     private GroupImplement<Wall> walls;
     private Door door;
     private boolean showDoor;
+    private boolean isReating;
 
     public AbstractLevel() {
         initData();
@@ -77,6 +78,7 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         eatCoin();
         //检查是否成功
         checkEmpty();
+        //判断音乐
     }
 
     /**

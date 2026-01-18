@@ -20,14 +20,19 @@ public class GroupImplement<T extends Sprite> implements Group<T> {
     public void render(Graphics g) {
         if (isEmpty())
             return;
-        for (T t : data)
-            t.paint(g);
+//        for (T t : data)
+//            t.paint(g);
+        for (T datum : data) {
+            datum.paint(g);
+        }
+
     }
 
     @Override
     public void update(double detta) {
         if (isEmpty())
             return;
+        //当使用烟雾效果的时候，会发生并发修改异常？
         Iterator<T> iterator;
         for (iterator = data.iterator();iterator.hasNext();)
         {

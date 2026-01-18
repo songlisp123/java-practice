@@ -36,8 +36,9 @@ public class TimerBoom extends Boom {
     }
 
     @Override
-    public void update(double delta, InputState state, Group group, Group destory, Group wall) {
-        super.update(delta,state,group,destory,wall);
+    public void update(double delta, InputState state, Group group,
+                       Group destory, Group wall,double damage) {
+        super.update(delta,state,group,destory,wall,damage);
         //待实现
         if (isDead())
             return;

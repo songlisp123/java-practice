@@ -3,6 +3,10 @@ package com.snl.data.homework.charptor03.practice01;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * 这个类需要优化
+ * //TODO 优化
+ */
 public class ImageCreator {
 
     private Container component;

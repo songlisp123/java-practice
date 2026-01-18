@@ -2,17 +2,28 @@ package com.snl.data.homework.charptor03.practice01.entity.player;
 
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 import com.snl.data.homework.charptor03.practice01.Music;
+import com.snl.data.homework.charptor03.practice01.article.Smoke;
+import com.snl.data.homework.charptor03.practice01.article.SmokeImplement;
 import com.snl.data.homework.charptor03.practice01.entity.Group;
+import com.snl.data.homework.charptor03.practice01.entity.GroupImplement;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.entity.booms.Boom;
 import com.snl.data.homework.charptor03.practice01.entity.booms.TimerBoom;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.Weapon;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.gun.*;
+import com.snl.data.homework.charptor03.practice01.entity.weapon.knife.AbstractKnife;
+import com.snl.data.homework.charptor03.practice01.entity.weapon.knife.SmallKnife;
+import com.snl.data.homework.charptor03.practice01.entity.weapon.sword.AbstractSword;
+import com.snl.data.homework.charptor03.practice01.entity.weapon.sword.LightSaber;
+import com.snl.data.homework.charptor03.practice01.entity.weapon.sword.SmallSword;
+import com.snl.data.homework.charptor03.practice01.entity.weapon.sword.SwordWeapon;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
-import javax.swing.plaf.PanelUI;
 import java.awt.*;
+import java.awt.font.TextAttribute;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import java.text.AttributedString;
 import java.util.Collection;
 import java.util.logging.Logger;
 
@@ -71,13 +82,78 @@ public class Player extends Sprite implements PlayerAction {
      */
     private Weapon pistol;
 
+    /**
+     * 初始化冲锋枪
+     */
     private Weapon submachingGun;
 
+    /**
+     * 初始化狙击步枪
+     */
     private Weapon sniperRifle;
 
+    /**
+     * 初始化突击步枪
+     */
     private Weapon assaultRifle;
 
     public static Logger logger = Logger.getLogger("game");
+
+    /**
+     * 初始化剑
+     */
+    private AbstractSword sword;
+
+    /**
+     * 初始化光剑
+     */
+    private LightSaber lightSaber;
+
+    /**
+     * 大雾？是否要放到这里面？？？
+     */
+    private GroupImplement<Smoke> smokes;
+
+    /**
+     * 玩家生命
+     */
+    private double lifePoints;
+
+    /**
+     * 玩家初始生命点数
+     */
+    private double originLifePoints;
+
+    /**
+     * 玩家的生命条框
+     */
+    private Shape shape;
+
+    /**
+     * 玩家生命槽
+     */
+    private Shape lifeShape;
+
+    /**
+     * 玩家与生命槽之间的距离
+     */
+    private final double GAP = 12;
+
+    /**
+     * 生命槽高度
+     * @apiNote 生命槽宽度等于初始化生命值
+     */
+    private final int LIFE_HEIGHT = 15;
+
+    private double textXPos;
+    private double textYPos;
+    private Color lifeColor;
+    private boolean hasShing;
+    private long startShing;
+    private String string;
+    private Point2D stringPoint2D;
+
+    private AbstractKnife knife;
 
     public Player() {
         super();
@@ -94,12 +170,58 @@ public class Player extends Sprite implements PlayerAction {
         onGround = true;
         life = GameConstants.PLAYERLIFES;
         score = 0;
-        currentWeapon = new AssaultRifle(300,"AK 47突击步枪");
+        currentWeapon = new AssaultRifle(30,"AK 47突击步枪");
         assaultRifle = currentWeapon;
         pistol = new Pistol(boomCounts,"小手枪");
-        submachingGun = new SubmachineGun(120,"Mp40冲锋枪");
-        sniperRifle = new SniperRifle(15,"98K 狙击步枪");
+        submachingGun = new SubmachineGun(60,"Mp40冲锋枪");
+        sniperRifle = new SniperRifle(getxPos(),getyPos(),"98K 狙击步枪",15);
+
+        //剑
+        sword = new SmallSword(this.getxPos() +getWEIGHT() / 2.0,
+                this.getyPos() + getHEIGHT() / 2.0, "光剑");
+        lightSaber = new LightSaber(this.getxPos() +getWEIGHT() / 2.0,
+                this.getyPos() + getHEIGHT() / 2.0, "光剑");
+        currentWeapon = sword;
+
+        //刀
+        knife = new SmallKnife(getxPos(),getyPos(),"刀");
+        currentWeapon = knife;
+
+        //测试雾气
+        smokes = new GroupImplement<>();
+        lifePoints = 100f; // 初始化为100
+        originLifePoints = lifePoints;
+        //初始化生命槽
+        stringPoint2D = new Point2D.Double(getxPos() ,getyPos()-40);
+        string = "";
+        calculateLife();
         resetPoint();
+    }
+
+    private void calculateLife() {
+        double left_x = getxPos() - (originLifePoints - getWEIGHT()) / 2;
+        double left_y = getyPos() - GAP - LIFE_HEIGHT;
+        shape = new Rectangle2D.Double(left_x,left_y,originLifePoints,LIFE_HEIGHT);
+        var s = new Rectangle2D.Double(left_x,left_y,lifePoints,LIFE_HEIGHT);
+        var temp = new Rectangle2D.Double(left_x,left_y,0,0);
+        lifeShape = s;
+        //计算渲染文本值
+        textXPos = left_x + originLifePoints + 10;
+        textYPos = left_y;
+        //渐变因子
+        double f = lifePoints / originLifePoints;
+        lifeColor = (f <= 0.5) ? Color.RED:Color.GREEN;
+        //频繁闪烁
+        if (f <= 0.5 && !hasShing) {
+            startShing = System.currentTimeMillis();
+            hasShing = true;
+            lifeShape = temp;
+        }
+        long now = System.currentTimeMillis();
+        if (hasShing && now - startShing >= Math.pow(f,2)*1_000) {
+            hasShing = false;
+            lifeShape = s;
+        }
     }
 
     //*********************  更新  *******************//
@@ -112,8 +234,10 @@ public class Player extends Sprite implements PlayerAction {
 //        Thread thread = Thread.currentThread();
 //        System.out.println("thread.getName() = " + thread.getName());
         if (state.up && onGround) {
+            //如果当玩家处于地面切向上按钮按下的时候
             Y_SPEED = -15;
             onGround = false;
+            Music.jumping();
         }
         double dx = 0.0f;
         if (state.left) dx -= SPEED;
@@ -132,28 +256,81 @@ public class Player extends Sprite implements PlayerAction {
         }
         changePosition(state);
         //更新武器
-        updateWeapon();
+        changeWeapon();
         //更新子弹
-        ((Gun) currentWeapon).update(delta,aGroup,destory,wall);
-        //更新装填
-        if (((Gun) currentWeapon).isReload()) {
-            long now  = System.currentTimeMillis();
-            if (now - ((Gun) currentWeapon).getShootTime() >= 1000) {
-                Music.reload();
-                ((Gun) currentWeapon).setReload(false);
-                logger.info("装填成功");
-            }
-        }
-
+//        ((Gun) currentWeapon).update(delta,aGroup,destory,wall);
+        //更新武器
+        updateWeapon(delta,state,aGroup,destory,wall);
+        //更新生命槽
+        calculateLife();
+        //更新弹药位置
+        updateBooms(state);
+        //更新烟雾
+        smokes.update(delta);
     }
 
-    private void updateWeapon() {
-        switch (InputState.c) {
-            case '1' -> currentWeapon = assaultRifle;
-            case '2' -> currentWeapon = pistol;
-            case '3' -> currentWeapon = submachingGun;
-            case '4' -> currentWeapon = sniperRifle;
+    private void updateBooms(InputState state) {
+        double x = getxPos();
+        double y = getyPos();
+        stringPoint2D = new Point2D.Double(x ,y-40);
+        if (currentWeapon instanceof Gun gun) {
+            int bullets = gun.getBullets();
+            string = gun.getName()+": "+bullets;
+        }else {
+            string = "";
+        }
+    }
 
+    private void updateWeapon(double delta,InputState state,Group aGroup, Group destory, Group wall) {
+        if (currentWeapon instanceof SwordWeapon) {
+            AbstractSword s = (AbstractSword) currentWeapon;
+            s.update(this.getxPos() +getWEIGHT() / 2.0,
+                    this.getyPos() + getHEIGHT() / 2.0,
+                    aGroup,destory,wall);
+        } else if (currentWeapon instanceof Gun w) {
+            //更新武器
+            if (state.left) w.setRadius(Math.PI);
+            else if (state.up) w.setRadius(Math.PI / 2);
+            else w.setRadius(0);
+            w.update(getxPos(),getyPos());
+            //更新子弹
+            w.update(delta,aGroup,destory,wall,currentWeapon.getKillDamage());
+            if (w.isReload()) {
+                long now  = System.currentTimeMillis();
+                if (now - w.getShootTime() >= 1000) {
+                    Music.reload();
+                    w.setReload(false);
+                    logger.info("装填成功");
+                }
+            }
+        }
+    }
+
+    private void changeWeapon() {
+        Weapon newWeapon = currentWeapon;
+
+        switch (InputState.c) {
+            case '1' -> newWeapon = assaultRifle;
+            case '2' -> newWeapon = pistol;
+            case '3' -> newWeapon = submachingGun;
+            case '4' -> newWeapon = sniperRifle;
+            case '5' -> newWeapon = sword;
+            case '6' -> newWeapon = lightSaber;
+            case '7' -> newWeapon = knife;
+        }
+        if (newWeapon != currentWeapon) {
+            //如果用户更换武器
+            currentWeapon =newWeapon;
+            if (newWeapon == sword) {
+                Music.drawTheSword();
+            }
+            else if (newWeapon instanceof Gun) {
+                Music.changeGun();
+            } else if (newWeapon == lightSaber) {
+                Music.lightSaber();
+            } else if (newWeapon == knife) {
+                Music.smallKnife();
+            }
         }
     }
 
@@ -213,29 +390,55 @@ public class Player extends Sprite implements PlayerAction {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON
         );
-        float radius = 150;
-        float[] dist = {0.0f,1.0f};
+        float radius = 300F;
+        float[] dist = {0.0f,0.5F,1.0f};
         Color[] colors = {
-                Color.WHITE,Color.BLACK
+                Color.WHITE,Color.LIGHT_GRAY,Color.BLACK
         };
         RadialGradientPaint paint = new RadialGradientPaint(leftUpConor, radius, dist, colors);
         g2.setComposite(AlphaComposite.getInstance(
                 AlphaComposite.SRC_OVER,0.65f
         ));
-        drawLine(g2);
         g2.setPaint(paint);
+        drawLine(g2);
+        paintLifePoints(g2);
+        paintBombs(g2);
         g2.fillOval(300,250,200,200);
         g2.fillOval(125,400,60,80);
         g2.fillOval(400,50,100,100);
+        g2.setFont(new Font("隶书",Font.PLAIN,30));
+        AttributedString as  = new AttributedString("你真是一个傻逼");
+        as.addAttribute(TextAttribute.FONT,new Font("隶书",Font.PLAIN,30));
+        as.addAttribute(TextAttribute.FOREGROUND,Color.MAGENTA,0,2);
+        g2.drawString(as.getIterator(),500,350);
+        //绘制武器
+        currentWeapon.render(g);
         //绘制子弹
         currentWeapon.render(g);
+        //绘制烟雾
+        smokes.render(g);
         g2.dispose();
+    }
+
+    private void paintBombs(Graphics2D g2) {
+        g2.setStroke(new BasicStroke(2));
+        g2.drawString(string, (int) stringPoint2D.getX(), (int) stringPoint2D.getY());
+    }
+
+
+    private void paintLifePoints(Graphics2D g2) {
+        //TODO 如何绘制生命条？
+        g2.setStroke(new BasicStroke(2));
+        g2.draw(shape);
+        g2.fill(lifeShape);
+        g2.drawString("%.2f / %.2f%%".formatted(lifePoints,originLifePoints),
+                (int) textXPos, (int) textYPos);
     }
 
     private void drawLine(Graphics2D g2) {
         //硬编码
         //顺时针画图
-        g2.setColor(Color.green);
+        g2.setStroke(new BasicStroke(2));
         g2.drawLine((int) leftUpConor.getX(), (int) leftUpConor.getY(),
                 (int) rightUpConor.getX(), (int) rightUpConor.getY());
         g2.drawLine((int) rightUpConor.getX(), (int) rightUpConor.getY(),
@@ -348,18 +551,30 @@ public class Player extends Sprite implements PlayerAction {
         rightDownConor = new Point2D.Double(x+getWEIGHT() , y + getHEIGHT()); //右下角
     }
 
-    //*********************  攻击动作  *******************//
 
+    //**********************************  攻击动作  ***************************//
 
     @Override
     public void attack(Weapon weapon, InputState state) {
-        if (((Gun)weapon).isEmpty()) {
-            //如果弹药架为空
-            logger.warning("弹药为空");
-            Music.emptyBullets();
-            return;
+        if (weapon instanceof SwordWeapon) {
+            AbstractSword s = (AbstractSword) weapon;
+            s.attack();
+        } else if (weapon instanceof Gun w) {
+            if (w.isEmpty()) {
+                //如果弹药架为空
+                logger.warning("弹药为空");
+                Music.emptyBullets();
+                return;
+            }
+            w.attack(createBoom(state));
+            showSmokes();
         }
-        weapon.attack(createBoom(state));
+    }
+
+    private void showSmokes() {
+        for (int i=0;i<500;i++) {
+            smokes.add(new SmokeImplement(getxPos(),getyPos(),10,10,Color.lightGray));
+        }
     }
 
     private Sprite createBoom(InputState state) {
@@ -405,7 +620,7 @@ public class Player extends Sprite implements PlayerAction {
         }
     }
 
-    //********************  生命系统  ************************//
+    //**************************  生命系统  ************************//
     public int getLife() {
         return life;
     }
@@ -418,7 +633,23 @@ public class Player extends Sprite implements PlayerAction {
         this.life++;
     }
 
-    //************** 得分  *********************//
+    public double getLifePoints() {
+        return lifePoints;
+    }
+
+    public void decreaseLifePoint (double decreased) {
+        lifePoints -= decreased;
+    }
+
+    public void addLifePoints(double added) {
+        lifePoints = Math.min(100,lifePoints + added);
+    }
+
+    public void resetLifePoints() {
+        lifePoints = originLifePoints;
+    }
+
+    //******************************** 得分  *********************//
 
     public int getScore() {
         return score;
@@ -435,7 +666,8 @@ public class Player extends Sprite implements PlayerAction {
     //获取该玩家所有的武器
     public Weapon[] allWeapons() {
         return new Weapon[]{
-                assaultRifle,pistol,submachingGun,sniperRifle
+                assaultRifle,pistol,submachingGun,sniperRifle,sword,lightSaber,knife
         };
     }
+
 }

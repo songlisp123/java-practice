@@ -1,6 +1,7 @@
 package com.snl.data.homework.charptor03.practice01.mainPanel;
 
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
+import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.entity.player.Player;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.gun.GunWeapon;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.Weapon;
@@ -13,10 +14,14 @@ import com.snl.data.homework.charptor03.practice01.state.InputState;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RectangularShape;
 import java.util.logging.Logger;
 
-public class GameLoop extends JPanel implements MouseMotionListener {
+public class GameLoop extends JPanel implements MouseListener,MouseMotionListener {
 
     //定时器类
     private Timer timer;
@@ -45,6 +50,8 @@ public class GameLoop extends JPanel implements MouseMotionListener {
 
     private Thread gameThread;
 
+    private RectangularShape shape;
+
     public static Logger logger = Logger.getLogger("game");
 
 
@@ -64,6 +71,7 @@ public class GameLoop extends JPanel implements MouseMotionListener {
     private void initDate() {
         setLayout(new BorderLayout());
         setBackground(Color.black);
+        addMouseListener(this);
         addMouseMotionListener(this);
         customButton = new JButton("点击我");
         customButton.addActionListener(e -> {
@@ -71,12 +79,12 @@ public class GameLoop extends JPanel implements MouseMotionListener {
         });
 //        customButton.setFocusPainted(false);
         customButton.setFocusable(false);
-        alignSpace();
         gameLevel = new GameLevelImplement();
         player = gameLevel.getPlayer();
         weapons = player.allWeapons();
         gameState = new GameState(gameLevel,player);
-
+        //分配空间
+        alignSpace();
         //游戏
         start = System.nanoTime();
         gameThread = new Thread(run(),"游戏线程");
@@ -147,8 +155,6 @@ public class GameLoop extends JPanel implements MouseMotionListener {
                     10,10);
             g2.drawString("当前得分：%d".formatted(player.getScore()),
                     250,10);
-            g2.drawString("当前弹药：%d".formatted(((GunWeapon)player.getCurrentWeapon()).getBullets()),
-                    600,10);
             for (int i=0;i<weapons.length;i++) {
                 Weapon currentWeapon = player.getCurrentWeapon();
                 if (currentWeapon == weapons[i]) {
@@ -159,6 +165,11 @@ public class GameLoop extends JPanel implements MouseMotionListener {
                     g2.drawString(weapons[i].getInfo(),10,(i + 1) * 40);
                 }
 
+            }
+            if (shape != null) {
+                g2.setColor(Color.WHITE);
+                g2.setStroke(new BasicStroke(2));
+                g2.draw(shape);
             }
             gameLevel.render(g);
         }
@@ -220,14 +231,57 @@ public class GameLoop extends JPanel implements MouseMotionListener {
         };
     }
 
-
     @Override
-    public void mouseDragged(MouseEvent e) {
+    public void mouseClicked(MouseEvent e) {
+
+
 
     }
 
     @Override
+    public void mousePressed(MouseEvent e) {
+        //鼠标点击
+        Point point = e.getPoint();
+        if (SwingUtilities.isRightMouseButton(e)) {
+            shape = new Rectangle2D.Double(point.getX(),point.getY(),10,10);
+        }
+        if (SwingUtilities.isLeftMouseButton(e)) {
+            state.attackPressed = true;
+            shape = new Ellipse2D.Double(point.getX(),point.getY(),10,10);
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        if (SwingUtilities.isRightMouseButton(e)) {
+            shape = null;
+        }
+        if (SwingUtilities.isLeftMouseButton(e)) {
+            state.attackPressed = false;
+            shape = null;
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if (SwingUtilities.isLeftMouseButton(e)) {
+            Point point = e.getPoint();
+            shape.setFrame(point.getX(),point.getY(),shape.getWidth(),shape.getHeight());
+        }
+    }
+
+    @Override
     public void mouseMoved(MouseEvent e) {
-        System.out.println("移动鼠标");
+
     }
 }

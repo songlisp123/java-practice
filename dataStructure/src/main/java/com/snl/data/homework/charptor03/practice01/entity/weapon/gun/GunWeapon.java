@@ -61,7 +61,7 @@ public interface GunWeapon extends Weapon {
     double hearingrange();
 
     /**
-     * 同居范围
+     * 原始听觉范围
      * @return 原始枪械射击时的听觉范围
      */
     double originHearingrange();
@@ -79,4 +79,8 @@ public interface GunWeapon extends Weapon {
      */
     int originRecoil();
 
+    @Override
+    default void update() {}
+
+    void update(double x,double y);
 }

@@ -30,12 +30,11 @@ public class StartApplication {
 
             InputState inputState = new InputState();
             KeyEventImplement keyEventImplement = new KeyEventImplement(inputState);
-            var p = new BootPanel(inputState,frame);
+            var p = new ShowPanel(inputState,frame);
             frame.add(p);
             frame.addKeyListener(keyEventImplement);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setLocationRelativeTo(null);
-            frame.setResizable(false);
             frame.pack();
             frame.setVisible(true);
         });
