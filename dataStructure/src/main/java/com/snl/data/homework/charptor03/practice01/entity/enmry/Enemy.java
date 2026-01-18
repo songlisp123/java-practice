@@ -232,4 +232,9 @@ public class Enemy extends Sprite {
     public void setxSpeed(double xSpeed) {
         this.xSpeed = xSpeed;
     }
+
+    public void setOriginLifePoints(double originLifePoints) {
+        this.originLifePoints = originLifePoints;
+        this.lifePoints = originLifePoints;
+    }
 }

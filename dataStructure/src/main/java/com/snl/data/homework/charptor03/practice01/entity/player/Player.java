@@ -8,7 +8,9 @@ import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.GroupImplement;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.entity.booms.Boom;
+import com.snl.data.homework.charptor03.practice01.entity.booms.BoomGroup;
 import com.snl.data.homework.charptor03.practice01.entity.booms.TimerBoom;
+import com.snl.data.homework.charptor03.practice01.entity.enmry.AdvancedEnemy;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.Weapon;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.gun.*;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.knife.AbstractKnife;
@@ -258,7 +260,7 @@ public class Player extends Sprite implements PlayerAction {
         //更新武器
         changeWeapon();
         //更新子弹
-//        ((Gun) currentWeapon).update(delta,aGroup,destory,wall);
+//        ((Gun) currentWeapon).update(delta,aGroup,destroy,wall);
         //更新武器
         updateWeapon(delta,state,aGroup,destory,wall);
         //更新生命槽
@@ -282,6 +284,7 @@ public class Player extends Sprite implements PlayerAction {
     }
 
     private void updateWeapon(double delta,InputState state,Group aGroup, Group destory, Group wall) {
+        //更新武器
         if (currentWeapon instanceof SwordWeapon) {
             AbstractSword s = (AbstractSword) currentWeapon;
             s.update(this.getxPos() +getWEIGHT() / 2.0,
@@ -302,6 +305,32 @@ public class Player extends Sprite implements PlayerAction {
                     w.setReload(false);
                     logger.info("装填成功");
                 }
+            }
+        }
+        //判断敌人
+        Collection<Sprite> data = aGroup.getData();
+        for (Sprite s : data) {
+            if(s.isCrash(this)) {
+                this.decreaseLifePoint(10);
+            }
+        }
+
+        BoomGroup group = null;
+        for (Sprite s : data) {
+            if (s instanceof AdvancedEnemy u) {
+                group = u.getBoomGroup();
+                break;
+            }
+        }
+
+        if (group == null)
+            return;
+        data = group.getData();
+        for (Sprite s : data) {
+            if (s.isCrash(this)) {
+                //如果玩家碰到子弹
+                this.decreaseLifePoint(10);
+                s.setDead(true);
             }
         }
     }
@@ -412,8 +441,6 @@ public class Player extends Sprite implements PlayerAction {
         as.addAttribute(TextAttribute.FOREGROUND,Color.MAGENTA,0,2);
         g2.drawString(as.getIterator(),500,350);
         //绘制武器
-        currentWeapon.render(g);
-        //绘制子弹
         currentWeapon.render(g);
         //绘制烟雾
         smokes.render(g);
@@ -583,13 +610,16 @@ public class Player extends Sprite implements PlayerAction {
         switch (state.direction) {
             case NORTH -> boom = new Boom(getxPos() + getWEIGHT() / 2.0 - 5
                     ,getyPos() + 10,
-                    10,10, state.direction, speed);
+                    10,10, state.direction, 0,-speed);
             case SOUTH -> boom = new Boom(getxPos() + getWEIGHT() / 2.0 - 3
                     ,getyPos() + getHEIGHT(),
-                    6,10, state.direction,speed);
+                    6,10, state.direction,0,speed);
             case WEST -> boom = new Boom(getxPos()
                     ,getyPos() + getHEIGHT() / 2.0 - 3,
-                    10,6, state.direction,speed);
+                    10,6, state.direction,-speed,0);
+            case EAST -> boom = new Boom(getxPos()
+                    ,getyPos() + getHEIGHT() / 2.0 - 3,
+                    10,6, state.direction,speed,0);
             default -> boom = new TimerBoom(getxPos() + getWEIGHT()
                     ,getyPos() + getHEIGHT() / 2.0 - 5,
                     10,10, state.direction,speed);

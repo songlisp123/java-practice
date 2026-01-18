@@ -26,7 +26,7 @@ public class TimerBoom extends Boom {
     public TimerBoom(double xPos, double yPos, int WEIGHT, int HEIGHT,
                      Direction direction, double xSpeed)
     {
-        super(xPos, yPos, WEIGHT, HEIGHT, direction, xSpeed);
+        super(xPos, yPos, WEIGHT, HEIGHT, direction, xSpeed,0);
     }
 
     public TimerBoom(double xPos, double yPos, int WEIGHT, int HEIGHT,

@@ -11,13 +11,17 @@ import com.snl.data.homework.charptor03.practice01.state.InputState;
 import java.awt.*;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.logging.Logger;
 
 public class Boom extends Sprite {
 
     private double xSpeed;
+    private double ySpeed;
     private Direction direction;
     private BoomShape shape;
     private Color color;
+
+    private static final Logger logger = Logger.getLogger("game");
 
     public Boom(double xPos, double yPos, int WEIGHT, int HEIGHT) {
         this(xPos, yPos, WEIGHT, HEIGHT,null,null);
@@ -27,11 +31,6 @@ public class Boom extends Sprite {
         this(xPos, yPos, WEIGHT, HEIGHT,direction,BoomShape.RECT);
     }
 
-
-    public Boom(double xPos, double yPos, int WEIGHT, int HEIGHT, Direction direction,double xSpeed) {
-        this(xPos, yPos, WEIGHT, HEIGHT,direction,BoomShape.RECT,Color.CYAN,xSpeed);
-    }
-
     public Boom(double xPos, double yPos, int WEIGHT, int HEIGHT, Direction direction, BoomShape shape) {
         this(xPos, yPos, WEIGHT, HEIGHT,direction,shape,Color.GREEN);
     }
@@ -39,68 +38,75 @@ public class Boom extends Sprite {
     public Boom(double xPos, double yPos, int WEIGHT, int HEIGHT,
                 Direction direction, BoomShape shape, Color color)
     {
-        this(xPos, yPos, WEIGHT, HEIGHT,direction,shape,Color.GREEN,GameConstants.PISTOL_ORIGIN_SHOOT_SPEED);
+        this(xPos, yPos, WEIGHT, HEIGHT,direction,shape,Color.GREEN,
+                GameConstants.PISTOL_ORIGIN_SHOOT_SPEED,0);
+    }
+
+    public Boom(double xPos, double yPos, int WEIGHT, int HEIGHT, Direction direction,double xSpeed,double ySpeed) {
+        this(xPos, yPos, WEIGHT, HEIGHT,direction,BoomShape.RECT,Color.CYAN,xSpeed,ySpeed);
     }
 
     public Boom(double xPos, double yPos, int WEIGHT, int HEIGHT,
-                Direction direction, BoomShape shape, Color color,double xSpeed)
+                Direction direction, BoomShape shape, Color color,double xSpeed,double ySpeed)
     {
         super(xPos, yPos, WEIGHT, HEIGHT);
         this.direction = direction;
         this.shape = shape;
         this.color = color;
         this.xSpeed = xSpeed;
+        //默认情况下，子弹不受重力影响
+        this.ySpeed = ySpeed;
     }
 
 
     @Override
     public void update(double delta, InputState state) {
-        switch (direction) {
-            case EAST -> move(xSpeed,0);
-            case NORTH -> move(0,-xSpeed);
-//            case SOUTH -> move(0, xSpeed);
-            case WEST -> move(-xSpeed,0);
-        }
+        move(xSpeed,ySpeed);
     }
 
     public void update(double delta, InputState state, Group group,Group destory,Group wall,double damage) {
         this.update(delta,state);
-        Collection data = group.getData(); //敌人数据
-
-        //判断与敌人的状态
+        Collection data;
         Iterator<Sprite> iterator;
-        for (iterator = data.iterator();iterator.hasNext();)
-        {
-            //遍历组中元素判断是否与炸弹碰撞
-            Sprite next = iterator.next();
-            if (this.isCrash(next))
+        if (group != null && !group.isEmpty()) {
+            data = group.getData(); //敌人数据
+            //判断与敌人的状态(如果不为null且空)
+            for (iterator = data.iterator();iterator.hasNext();)
             {
-                //设置两者的活动状态
-                System.out.println("相撞");
-                setDead(true);
-                ((Enemy)next).decreaseLifePoint(damage);
-                if (((Enemy) next).getLifePoints() == 0 ){
-                    next.setDead(true);
-                    destory.add(next);
+                //遍历组中元素判断是否与炸弹碰撞
+                Sprite next = iterator.next();
+                if (this.isCrash(next))
+                {
+                    //设置两者的活动状态
+                    logger.warning("射击敌人！");
+                    setDead(true);
+                    ((Enemy)next).decreaseLifePoint(damage);
+                    if (((Enemy) next).getLifePoints() == 0 ){
+                        next.setDead(true);
+                        destory.add(next);
+                    }
                 }
             }
         }
 
         //判断与墙壁的相对位置
-        data = wall.getData();
-        for (iterator = data.iterator();iterator.hasNext();) {
-            //遍历组中元素判断是否与炸弹碰撞
-            Sprite next = iterator.next();
-            if (this.isCrash(next))
-            {
-                //子弹与墙相撞
-                setDead(true);
-                Music.bulletsCrashWall();
+        if (wall != null && !wall.isEmpty()) {
+            data = wall.getData();
+            for (iterator = data.iterator(); iterator.hasNext(); ) {
+                //遍历组中元素判断是否与炸弹碰撞
+                Sprite next = iterator.next();
+                if (this.isCrash(next)) {
+                    //子弹与墙相撞
+                    setDead(true);
+//                    Music.bulletsCrashWall();
+                }
             }
         }
         //处理超过屏幕的情况
         handleBeyondScene(GameConstants.Weight,GameConstants.Height);
     }
+
+
 
     @Override
     public void paint(Graphics g, InputState state) {
@@ -134,5 +140,21 @@ public class Boom extends Sprite {
             setDead(true);
             Music.bulletsCrashWall();
         }
+    }
+
+    public double getxSpeed() {
+        return xSpeed;
+    }
+
+    public void setxSpeed(double xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
+    public double getySpeed() {
+        return ySpeed;
+    }
+
+    public void setySpeed(double ySpeed) {
+        this.ySpeed = ySpeed;
     }
 }

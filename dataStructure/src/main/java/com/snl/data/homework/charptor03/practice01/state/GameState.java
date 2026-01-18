@@ -37,27 +37,19 @@ public final class GameState {
     }
 
     public void update() {
-        if (gameLevel.isCrash()) {
-            logger.warning("玩家碰撞xxxxx");
-            //玩家碰触到敌人
-            //减少玩家生命点数
-            player.decreaseLifePoint(5);
-            //判断该玩家的生命点数是否为零
-            if (player.getLifePoints()  <= 0) {
-                //判断玩家生命是否小于0
-                if (player.getLife() <= 0) {
-                    losing = true;
-                    finished = false;
-                    logger.warning("玩家死亡，游戏结束");
-                }else {
-                    //否则玩家生命减一
-                    player.decreaseLife();
-                    //发生碰撞,重置状态
-                    player.resetLifePoints();
-                    reset();
-                }
-                return;
+        if (player.getLifePoints() <=0) {
+            if (player.getLife() <= 0) {
+                losing = true;
+                finished = false;
+                logger.warning("玩家死亡，游戏结束");
+            }else {
+                //否则玩家生命减一
+                player.decreaseLife();
+                //发生碰撞,重置状态
+                player.resetLifePoints();
+                reset();
             }
+            return;
         }
 
         if (gameLevel.completed()) {
