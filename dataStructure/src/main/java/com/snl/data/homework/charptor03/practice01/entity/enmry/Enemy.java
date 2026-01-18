@@ -11,7 +11,6 @@ import java.util.Collection;
 
 public class Enemy extends Sprite {
 
-    private double SPEED = 4.0;
     /**
      * 玩家生命
      */
@@ -43,6 +42,9 @@ public class Enemy extends Sprite {
      */
     private final int LIFE_HEIGHT = 15;
 
+    private double ySpeed = 4.0;
+    private double xSpeed;
+
     private double textXPos;
     private double textYPos;
     private Color lifeColor;
@@ -66,7 +68,7 @@ public class Enemy extends Sprite {
     }
 
     public void update(double delta,InputState state, Group group) {
-        move(0,SPEED);
+        move(xSpeed,ySpeed);
         //与墙体的关系
         touchWall(group.getData());
         //处理屏幕边界情况
@@ -76,7 +78,7 @@ public class Enemy extends Sprite {
     }
 
 
-    private void calculateLife() {
+    public void calculateLife() {
         double left_x = getxPos() - (originLifePoints - getWEIGHT()) / 2;
         double left_y = getyPos() - GAP - LIFE_HEIGHT;
         shape = new Rectangle2D.Double(left_x,left_y,originLifePoints,LIFE_HEIGHT);
@@ -132,15 +134,11 @@ public class Enemy extends Sprite {
     @Override
     public void handleBeyondScene(int width, int height) {
         //TODO 仅仅是一个简单的实现
-        if (touchUpBounder())
-        {
-            //到达上边界
-            SPEED = -SPEED;
+        if (touchUpBounder() || touchBottomBounder(height))
+            ySpeed = -ySpeed;
+        if (touchRightBounder(width) || touchLeftBounder(0)) {
+            xSpeed = -xSpeed;
         }
-        if (touchBottomBounder(height)) {
-            SPEED = -SPEED;
-        }
-
     }
 
     private boolean touchUpBounder() {
@@ -151,6 +149,14 @@ public class Enemy extends Sprite {
         return (getyPos()+getHEIGHT()) >= height;
     }
 
+    private boolean touchLeftBounder(double x) {
+        return getxPos() <= x;
+    }
+
+    private boolean touchRightBounder(double weight) {
+        return (getxPos()+getWEIGHT()) >= weight;
+    }
+
     public void touchWall(Collection<? extends Sprite> sprites) {
         if (sprites == null || sprites.isEmpty())
             return;
@@ -158,7 +164,7 @@ public class Enemy extends Sprite {
         {
             if (isCrash(sprite))
             {
-                this.handleCollide(sprite);
+                handleCollide(sprite);
             }
         }
     }
@@ -174,13 +180,13 @@ public class Enemy extends Sprite {
         double min = Math.min(Math.min(dxLeft, dxRight), Math.min(dyTop, dyBottom));
 
         if (min == dxLeft) {
-            SPEED = -SPEED;;
+            xSpeed = -xSpeed;;
         } else if (min == dxRight) {
-            SPEED = -SPEED;;
+            xSpeed = -xSpeed;;
         } else if (min == dyTop) {
-            SPEED = -SPEED;
+            ySpeed = -ySpeed;
         } else {
-            SPEED = -SPEED;
+            ySpeed = - ySpeed;
         }
     }
 
@@ -205,5 +211,25 @@ public class Enemy extends Sprite {
     public void reset() {
         super.reset();
         resetLifePoints();
+    }
+
+    public void setLifePoints(double lifePoints) {
+        this.lifePoints = lifePoints;
+    }
+
+    public double getySpeed() {
+        return ySpeed;
+    }
+
+    public void setySpeed(double ySpeed) {
+        this.ySpeed = ySpeed;
+    }
+
+    public double getxSpeed() {
+        return xSpeed;
+    }
+
+    public void setxSpeed(double xSpeed) {
+        this.xSpeed = xSpeed;
     }
 }

@@ -3,10 +3,12 @@ package com.snl.data.homework.charptor03.practice01.level;
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 import com.snl.data.homework.charptor03.practice01.entity.Door;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
+import com.snl.data.homework.charptor03.practice01.entity.enmry.AdvancedEnemy;
 import com.snl.data.homework.charptor03.practice01.entity.enmry.Enemy;
 import com.snl.data.homework.charptor03.practice01.entity.goods.Coin;
 import com.snl.data.homework.charptor03.practice01.entity.player.Player;
 import com.snl.data.homework.charptor03.practice01.entity.wall.Wall;
+import com.snl.data.homework.charptor03.practice01.level.map.JumpLevelMap;
 import com.snl.data.homework.charptor03.practice01.level.map.SimpleLevelMap;
 
 import java.awt.*;
@@ -29,7 +31,7 @@ public class levelMapImplement<T extends Sprite> extends AbstractLevel<T> {
         Wall wall;
         int i,j;
         Character[][] level;
-        level = SimpleLevelMap.getLevel(index);
+        level = JumpLevelMap.getLevel(index);
         int rows = level.length;
         int columns = level[0].length;
         for (j=0;j<rows;j++) {
@@ -65,6 +67,11 @@ public class levelMapImplement<T extends Sprite> extends AbstractLevel<T> {
                         var door  = new Door(i * 20.0,j * 20.0,
                                 20,20);
                         setDoor(door);
+                    }
+                    case GameConstants.ADVANCE_ENERY -> {
+                        enemy = new AdvancedEnemy(i * 20.0,j * 20.0,
+                                100,100);
+                        enmries.add(enemy);
                     }
                 }
             }

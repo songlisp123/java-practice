@@ -155,18 +155,8 @@ public class GameLoop extends JPanel implements MouseListener,MouseMotionListene
                     10,10);
             g2.drawString("当前得分：%d".formatted(player.getScore()),
                     250,10);
-            for (int i=0;i<weapons.length;i++) {
-                Weapon currentWeapon = player.getCurrentWeapon();
-                if (currentWeapon == weapons[i]) {
-                    g2.setColor(Color.green);
-                    g2.drawString(currentWeapon.getInfo() + "   ✅",10,(i + 1) * 40);
-                }else {
-                    g2.setColor(Color.WHITE);
-                    g2.drawString(weapons[i].getInfo(),10,(i + 1) * 40);
-                }
-
-            }
-            if (shape != null) {
+            if (shape != null)
+            {
                 g2.setColor(Color.WHITE);
                 g2.setStroke(new BasicStroke(2));
                 g2.draw(shape);
@@ -233,8 +223,6 @@ public class GameLoop extends JPanel implements MouseListener,MouseMotionListene
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
-
 
     }
 

@@ -7,148 +7,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="继续优化游戏，添加墙类，一些接口">
-      <change afterPath="$PROJECT_DIR$/dataStructure.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dataStructure/src/test/java/com/snl/data/demo/test/DrawGun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="6de6da2a-eb6c-4caf-b5df-23363477a590" name="更改类" comment="更改类">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/count.txt" beforeDir="false" afterPath="$PROJECT_DIR$/count.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/countTotalNumber.txt" beforeDir="false" afterPath="$PROJECT_DIR$/countTotalNumber.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/BootPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/BootPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/ChooseSourceLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/ChooseSourceLine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/ImageCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/ImageCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/Music.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/Music.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/ShowConfirmMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/ShowConfirmMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/StartApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/StartApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/GroupImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/GroupImplement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/booms/Boom.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/booms/Boom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/booms/BoomGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/booms/BoomGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/booms/TimerBoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/booms/TimerBoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/CONSTANTS/GameConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/CONSTANTS/GameConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/enmry/AdvancedEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/enmry/AdvancedEnemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/enmry/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/enmry/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/weapon/WeaponType.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/weapon/WeaponType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/Gun.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/Gun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/GunWeapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/GunWeapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/SniperRifle.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/SniperRifle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/weapon/sword/AbstractSword.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/weapon/sword/AbstractSword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/weapon/sword/SwordWeapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/entity/weapon/sword/SwordWeapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/event/KeyEventImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/event/KeyEventImplement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/images/赛朋博客1.png" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/images/赛朋博客1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/images/赛朋博客2.png" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/images/赛朋博客2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/images/赛朋博客3.png" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/images/赛朋博客3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/images/赛朋博客4.png" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/images/赛朋博客4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/images/赛朋博客5.png" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/images/赛朋博客5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/images/赛朋博客6.png" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/images/赛朋博客6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/level/AbstractLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/level/AbstractLevel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/level/levelMapImplement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/level/levelMapImplement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/level/map/JumpLevelMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/level/map/JumpLevelMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/level/map/SimpleLevelMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/level/map/SimpleLevelMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/mainPanel/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/mainPanel/GameLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/state/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/state/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/wav/冲锋枪射击.wav" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/wav/冲锋枪射击.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/wav/子弹撞墙.wav" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/wav/子弹撞墙.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/wav/手枪射击.wav" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/wav/手枪射击.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/wav/狙击枪射击.wav" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/wav/狙击枪射击.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/wav/狙击步枪.wav" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/wav/狙击步枪.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/wav/空弹.wav" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/wav/空弹.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/wav/突击步枪.wav" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/wav/突击步枪.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/wav/装弹.wav" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/resources/wav/装弹.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/game.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/BootPanel$Task.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/BootPanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/CONSTANTS/GameConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/ChooseSourceLine.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/ImageCreator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/Music.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/ShowConfirmMessage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/StartApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/button/CustomButton$MouseHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/button/CustomButton$MouseMotion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/button/CustomButton.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/AbstractSprite.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/Collideable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/Door.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/Group.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/GroupImplement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/Sprite.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/booms/Boom$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/booms/Boom.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/booms/BoomGroup.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/booms/BoomShape.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/booms/TimerBoom.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/enmry/Enemy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/goods/Coin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/player/Player$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/player/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/player/PlayerAction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/wall/Wall.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/weapon/Weapon.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/weapon/WeaponType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/AssaultRifle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/Gun.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/GunWeapon.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/Pistol.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/SniperRifle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/SubmachineGun.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/event/KeyEventImplement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/level/AbstractLevel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/level/Level.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/level/levelMapImplement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/level/levelpanel/ChapterPanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/level/levelpanel/LevelPanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/level/levelwrapper/AbstractLevelWrapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/level/levelwrapper/GameLevelImplement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/level/levelwrapper/LevelWrapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/level/map/JumpLevelMap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/log/MenuBar.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/log/WindowHandler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/log/WindowHandler$Myaction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/log/WindowHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/mainPanel/GameLoop.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/state/Direction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/state/GameState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/state/InputState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/text/Charpter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/text/Description.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/out/compile/com/snl/data/homework/charptor03/practice01/text/Text.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/src/test/java/com/snl/data/demo/test/DrawSomething.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/test/java/com/snl/data/demo/test/DrawSomething.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/BootPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/BootPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/ChooseSourceLine.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/ChooseSourceLine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/ImageCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/ImageCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/Music.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/Music.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/ShowConfirmMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/ShowConfirmMessage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/StartApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/StartApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/GroupImplement.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/GroupImplement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/booms/Boom$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/booms/Boom$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/booms/Boom.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/booms/Boom.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/booms/BoomGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/booms/BoomGroup.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/booms/TimerBoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/booms/TimerBoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/text/Charpter.java" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/src/main/java/com/snl/data/homework/charptor03/practice01/text/Charpter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/CONSTANTS/GameConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/CONSTANTS/GameConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/enmry/AdvancedEnemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/enmry/AdvancedEnemy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/enmry/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/enmry/Enemy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/player/Player$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/player/Player$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/player/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/player/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/weapon/WeaponType.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/weapon/WeaponType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/Gun.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/Gun.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/GunWeapon.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/GunWeapon.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/SniperRifle.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/weapon/gun/SniperRifle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/weapon/sword/AbstractSword.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/weapon/sword/AbstractSword.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/weapon/sword/SwordWeapon.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/entity/weapon/sword/SwordWeapon.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/event/KeyEventImplement.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/event/KeyEventImplement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/level/AbstractLevel.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/level/AbstractLevel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/level/levelMapImplement.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/level/levelMapImplement.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/level/map/JumpLevelMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/level/map/JumpLevelMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/level/map/SimpleLevelMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/level/map/SimpleLevelMap.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/mainPanel/GameLoop.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/mainPanel/GameLoop.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/state/GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/state/GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataStructure/target/test-classes/com/snl/data/demo/test/DrawSomething.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/test-classes/com/snl/data/demo/test/DrawSomething.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/text/Charpter.class" beforeDir="false" afterPath="$PROJECT_DIR$/dataStructure/target/classes/com/snl/data/homework/charptor03/practice01/text/Charpter.class" afterDir="false" />
     </list>
+    <list id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="学习java2d06" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager" show_ignored="true" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -161,6 +43,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="mian" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -197,8 +84,8 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="mian" />
-                    <option name="lastUsedInstant" value="1768136441" />
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1768726642" />
                   </RecentBranch>
                 </list>
               </option>
@@ -262,7 +149,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "mian",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/java_practice/dataStructure/src/main",
     "onboarding.tips.debug.path": "/home/snl/java/java_code/java_practice/char03/src/Main.java",
@@ -670,60 +557,12 @@
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="默认任务">
+    <task id="Default" summary="默认任务">
       <changelist id="f89de9fd-4d2f-489e-a32a-26666e0dae3a" name="更改" comment="" />
       <created>1753952480287</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1753952480287</updated>
-    </task>
-    <task id="LOCAL-00005" summary="有事烧纸06">
-      <option name="closed" value="true" />
-      <created>1759843383465</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1759843383465</updated>
-    </task>
-    <task id="LOCAL-00006" summary="有事烧纸07">
-      <option name="closed" value="true" />
-      <created>1759900574766</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1759900574766</updated>
-    </task>
-    <task id="LOCAL-00007" summary="有事烧纸08">
-      <option name="closed" value="true" />
-      <created>1759930860805</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1759930860805</updated>
-    </task>
-    <task id="LOCAL-00008" summary="有事烧纸09">
-      <option name="closed" value="true" />
-      <created>1759970719587</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1759970719587</updated>
-    </task>
-    <task id="LOCAL-00009" summary="有事烧纸10">
-      <option name="closed" value="true" />
-      <created>1761451254837</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1761451254837</updated>
-    </task>
-    <task id="LOCAL-00010" summary="有事烧纸10">
-      <option name="closed" value="true" />
-      <created>1761494148669</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1761494148670</updated>
+      <updated>1768726853051</updated>
     </task>
     <task id="LOCAL-00011" summary="有事烧纸11">
       <option name="closed" value="true" />
@@ -1069,7 +908,56 @@
       <option name="project" value="LOCAL" />
       <updated>1768059756134</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="学习java2d">
+      <option name="closed" value="true" />
+      <created>1768726207602</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1768726207602</updated>
+    </task>
+    <task id="LOCAL-00055" summary="学习java2d02">
+      <option name="closed" value="true" />
+      <created>1768726279446</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1768726279446</updated>
+    </task>
+    <task id="LOCAL-00056" summary="学习java2d04">
+      <option name="closed" value="true" />
+      <created>1768726577715</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1768726577715</updated>
+    </task>
+    <task id="LOCAL-00057" summary="学习java2d05">
+      <option name="closed" value="true" />
+      <created>1768726683692</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1768726683692</updated>
+    </task>
+    <task id="LOCAL-00058" summary="学习java2d06">
+      <option name="closed" value="true" />
+      <created>1768726816516</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1768726816516</updated>
+    </task>
+    <task active="true" id="LOCAL-00059" summary="更改类">
+      <changelist id="6de6da2a-eb6c-4caf-b5df-23363477a590" name="更改类" comment="更改类" />
+      <created>1768726853037</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1768726853051</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
+    <option name="trackContextForNewChangelist" value="true" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -1102,12 +990,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="完成死信队列&#10;1、延迟信息发送队列&#10;2、死信队列的多种形成方式&#10;3、如何使用死信队列实现延迟发送" />
-    <MESSAGE value="完善记录代码量的工具" />
-    <MESSAGE value="继续完善记录代码量的工具" />
-    <MESSAGE value="完成rabbit与springboot集成，完成一次生产消费的短小例子" />
-    <MESSAGE value="开始学习xxl-job短小精悍的项目列子" />
-    <MESSAGE value="添加todo" />
     <MESSAGE value="完成订单超时预警" />
     <MESSAGE value="学习websocket指南" />
     <MESSAGE value="创建es模块" />
@@ -1127,31 +1009,13 @@
     <MESSAGE value="继续优化游戏的结构" />
     <MESSAGE value="继续优化游戏的结构，添加关卡地图抽象" />
     <MESSAGE value="继续优化游戏，添加墙类，一些接口" />
-    <option name="LAST_COMMIT_MESSAGE" value="继续优化游戏，添加墙类，一些接口" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/char04/untitled/src/Main.kt</url>
-          <line>11</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/char05/src/Main.kt</url>
-          <line>11</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/cahr05/src/Main.java</url>
-          <line>11</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.ExceptionInInitializerError" package="java.lang" />
-          <option name="timeStamp" value="8" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="学习java2d" />
+    <MESSAGE value="学习java2d02" />
+    <MESSAGE value="学习java2d03" />
+    <MESSAGE value="学习java2d04" />
+    <MESSAGE value="学习java2d05" />
+    <MESSAGE value="学习java2d06" />
+    <option name="LAST_COMMIT_MESSAGE" value="学习java2d06" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
   </component>
 </project>
