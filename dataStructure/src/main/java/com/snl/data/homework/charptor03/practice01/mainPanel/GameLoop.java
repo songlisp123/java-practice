@@ -2,6 +2,7 @@ package com.snl.data.homework.charptor03.practice01.mainPanel;
 
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 import com.snl.data.homework.charptor03.practice01.Music;
+import com.snl.data.homework.charptor03.practice01.camary.Camera;
 import com.snl.data.homework.charptor03.practice01.entity.player.Player;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.gun.GunWeapon;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.Weapon;
@@ -44,8 +45,6 @@ public class GameLoop extends JPanel implements MouseListener,MouseMotionListene
 
     private JButton customButton;
 
-    private Weapon[] weapons;
-
     private long start;
 
     private Thread gameThread;
@@ -81,7 +80,7 @@ public class GameLoop extends JPanel implements MouseListener,MouseMotionListene
         customButton.setFocusable(false);
         gameLevel = new GameLevelImplement();
         player = gameLevel.getPlayer();
-        weapons = player.allWeapons();
+
         gameState = new GameState(gameLevel,player);
         //分配空间
         alignSpace();
@@ -131,20 +130,6 @@ public class GameLoop extends JPanel implements MouseListener,MouseMotionListene
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         var g2 = (Graphics2D) g.create();
-        g2.setColor(Color.green);
-        if (gameState.isLosing()) {
-            g2.drawString("death",200,300);
-            return;
-        }
-        if (gameState.isFinished()) {
-            g2.drawString("恭喜通关",200,300);
-            return;
-        }
-
-        if (GameState.stopping) {
-            g2.drawString("游戏暂停",200,300);
-            return;
-        }
         if (!gameState.isHasBeenBooted()) {
             g2.scale(1.5, 1.5);
             g2.setColor(Color.red);

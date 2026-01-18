@@ -58,6 +58,7 @@ public final class GameState {
             if (!gameLevel.hasNext() && !finished) {
                 //如果最后一关，并且当前finish标志没有设置为true
                 //如果全部通关
+                System.out.println("111 = " + 111);
                 finished = true;
                 losing = false;
                 logger.warning("恭喜通关游戏");

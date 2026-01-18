@@ -8,6 +8,7 @@ import com.snl.data.homework.charptor03.practice01.entity.enmry.Enemy;
 import com.snl.data.homework.charptor03.practice01.entity.goods.Coin;
 import com.snl.data.homework.charptor03.practice01.entity.player.Player;
 import com.snl.data.homework.charptor03.practice01.entity.wall.Wall;
+import com.snl.data.homework.charptor03.practice01.entity.wall.Water;
 import com.snl.data.homework.charptor03.practice01.level.map.JumpLevelMap;
 import com.snl.data.homework.charptor03.practice01.level.map.SimpleLevelMap;
 
@@ -33,7 +34,9 @@ public class levelMapImplement<T extends Sprite> extends AbstractLevel<T> {
         Character[][] level;
         level = JumpLevelMap.getLevel(index);
         int rows = level.length;
+        System.out.println("rows = " + rows);
         int columns = level[0].length;
+        System.out.println("columns = " + columns);
         for (j=0;j<rows;j++) {
             //行,y坐标
             for (i = 0;i<columns;i++) {
@@ -42,7 +45,7 @@ public class levelMapImplement<T extends Sprite> extends AbstractLevel<T> {
                 switch (c) {
                     case GameConstants.WALL -> {
                         wall = new Wall(i * 20.0,j * 20.0,
-                                20,20, Color.lightGray);
+                                20,20);
                         walls.add(wall);
                     }
                     case GameConstants.COIN -> {
@@ -72,6 +75,10 @@ public class levelMapImplement<T extends Sprite> extends AbstractLevel<T> {
                         enemy = new AdvancedEnemy(i * 20.0,j * 20.0,
                                 100,100);
                         enmries.add(enemy);
+                    }
+                    case GameConstants.WATER -> {
+                        wall = new Water(i * 20.0,j * 20.0,20,20);
+                        walls.add(wall);
                     }
                 }
             }

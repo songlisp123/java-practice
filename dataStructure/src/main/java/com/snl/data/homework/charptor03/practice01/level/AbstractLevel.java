@@ -2,6 +2,7 @@ package com.snl.data.homework.charptor03.practice01.level;
 
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 import com.snl.data.homework.charptor03.practice01.Music;
+import com.snl.data.homework.charptor03.practice01.camary.Camera;
 import com.snl.data.homework.charptor03.practice01.entity.Door;
 import com.snl.data.homework.charptor03.practice01.entity.GroupImplement;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
@@ -12,6 +13,7 @@ import com.snl.data.homework.charptor03.practice01.entity.wall.Wall;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
 
@@ -25,6 +27,8 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
     private boolean showDoor;
     private boolean isReating;
 
+    private Camera camera;
+
     public AbstractLevel() {
         initData();
     }
@@ -36,6 +40,7 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         destoryedSprite = new GroupImplement<>();
         walls = new GroupImplement<>();
         showDoor = false;
+        camera = new Camera(GameConstants.Weight,GameConstants.Height);
         //填充精灵
     }
 
@@ -56,12 +61,17 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
     // ********************  渲染  ***************************//
     @Override
     public void render(Graphics g) {
-        walls.render(g);
-        player.paint(g);
-        enmries.render(g);
-        coins.render(g);
+        Graphics2D g2 = (Graphics2D) g;
+        AffineTransform old = g2.getTransform();
+        g2.translate(-camera.x,-camera.y);
+        //绘制
+        walls.render(g2);
+        player.paint(g2);
+        enmries.render(g2);
+        coins.render(g2);
         if (showDoor)
-            door.paint(g);
+            door.paint(g2);
+        g2.setTransform(old);
     }
 
     // ********************  更新  ***************************//
@@ -79,6 +89,17 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         //检查是否成功
         checkEmpty();
         //判断玩家是否相撞
+        camera.x = player.getxPos() + player.getWEIGHT() / 2.0 - camera.width / 2.0;
+//        camera.x = player.getxPos() + player.getWEIGHT() / 2.0 ;
+//        camera.y = player.getyPos() + player.getHEIGHT() / 2.0;
+//        camera.y = player.getyPos() + player.getHEIGHT() / 2.0 - camera.height / 2.0;
+        
+
+        camera.x = Math.max(0, camera.x);
+//        camera.y = Math.max(0, camera.y);
+//        System.out.println("camera.X = " + camera.x);
+//        camera.x = Math.min(camera.x, 1200 - camera.width);
+//        camera.y = Math.min(camera.y, 800 - camera.height);
     }
 
     /**

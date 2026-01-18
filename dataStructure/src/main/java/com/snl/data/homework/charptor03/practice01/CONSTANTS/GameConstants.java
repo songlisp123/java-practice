@@ -24,6 +24,7 @@ public class GameConstants {
     public static final char COIN = 'c';
     public static final char DOOR = 'd';
     public static final char ADVANCE_ENERY = 'a';
+    public static final char WATER = 'w';
 
     public static final int PLAYERLIFES = 3;
     public static final int GAINT = 5;

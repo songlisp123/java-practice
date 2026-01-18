@@ -64,6 +64,15 @@ public class Boom extends Sprite {
         move(xSpeed,ySpeed);
     }
 
+    /**
+     * 更新子弹行为
+     * @param delta 时间间隔
+     * @param state 输入状态
+     * @param group 敌人组
+     * @param destory 毁灭的敌人组
+     * @param wall 墙壁组
+     * @param damage 伤害？？
+     */
     public void update(double delta, InputState state, Group group,Group destory,Group wall,double damage) {
         this.update(delta,state);
         Collection data;
@@ -79,10 +88,12 @@ public class Boom extends Sprite {
                 {
                     //设置两者的活动状态
                     logger.warning("射击敌人！");
-                    setDead(true);
-                    ((Enemy)next).decreaseLifePoint(damage);
+                    setDead(true); //子弹死亡
+                    ((Enemy)next).decreaseLifePoint(damage); //敌人减少生命
                     if (((Enemy) next).getLifePoints() == 0 ){
+                        //如果生命归零，清楚该敌人
                         next.setDead(true);
+                        //在破坏组中加入刚刚破坏的元素
                         destory.add(next);
                     }
                 }
@@ -138,7 +149,7 @@ public class Boom extends Sprite {
     public void handleBeyondScene(int width, int height) {
         if (isBeyondScene(width,height)) {
             setDead(true);
-            Music.bulletsCrashWall();
+//            Music.bulletsCrashWall();
         }
     }
 

@@ -22,7 +22,7 @@ public class Wall extends Sprite  {
     }
 
     public Wall(double xPos, double yPos, int WEIGHT, int HEIGHT) {
-        this(xPos, yPos, WEIGHT, HEIGHT,Color.lightGray);
+        this(xPos, yPos, WEIGHT, HEIGHT,Color.ORANGE);
     }
 
     public Wall(double xPos, double yPos, int WEIGHT, int HEIGHT, Color color) {
@@ -41,6 +41,7 @@ public class Wall extends Sprite  {
         var g2 = (Graphics2D) g.create();
         g2.setColor(color);
         g2.fill(shape);
+        g2.dispose();
     }
 
 }
