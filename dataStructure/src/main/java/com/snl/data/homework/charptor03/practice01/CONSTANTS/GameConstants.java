@@ -7,6 +7,8 @@ public class GameConstants {
 
     public static final int Weight = 800;
     public static final int Height = 600;
+    public static final int MAPHeight = 1200;
+    public static final int MAPWIDTH = 800;
 
     public static final int squreWidth = 20;
     public static final int squreHeight = 20;

@@ -173,7 +173,7 @@ public class GameLoop extends JPanel implements MouseListener,MouseMotionListene
                     //更新游戏
                     if (levelPanel != null)
                         levelPanel = null;
-                    gameLevel.update(delta, state, GameConstants.Weight, GameConstants.Height);
+                    gameLevel.update(delta, state, GameConstants.MAPWIDTH, GameConstants.MAPHeight);
                     gameState.update();
                 }
             }

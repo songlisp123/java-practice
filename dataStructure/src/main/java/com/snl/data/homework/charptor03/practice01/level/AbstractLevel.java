@@ -82,24 +82,24 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         coins.update(delta);
         //实现有待完善
         if (player.isBeyondScene(weight,height))
-            player.handleBeyondScene(weight,height);
+            player.handleBeyondScene(weight,height+400);
         //如果玩家碰到墙壁
         //判断元素是否消失
         eatCoin();
         //检查是否成功
         checkEmpty();
         //判断玩家是否相撞
-        camera.x = player.getxPos() + player.getWEIGHT() / 2.0 - camera.width / 2.0;
+//        camera.x = player.getxPos() + player.getWEIGHT() / 2.0 - camera.width / 2.0;
 //        camera.x = player.getxPos() + player.getWEIGHT() / 2.0 ;
 //        camera.y = player.getyPos() + player.getHEIGHT() / 2.0;
-//        camera.y = player.getyPos() + player.getHEIGHT() / 2.0 - camera.height / 2.0;
+        camera.y = player.getyPos() + player.getHEIGHT() / 2.0 - camera.height / 2.0;
         
 
-        camera.x = Math.max(0, camera.x);
-//        camera.y = Math.max(0, camera.y);
+//        camera.x = Math.max(0, camera.x);
+        camera.y = Math.max(0, camera.y);
 //        System.out.println("camera.X = " + camera.x);
 //        camera.x = Math.min(camera.x, 1200 - camera.width);
-//        camera.y = Math.min(camera.y, 800 - camera.height);
+        camera.y = Math.min(camera.y,GameConstants.MAPHeight- camera.height);
     }
 
     /**

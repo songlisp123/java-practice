@@ -72,7 +72,7 @@ public class Enemy extends Sprite {
         //与墙体的关系
         touchWall(group.getData());
         //处理屏幕边界情况
-        handleBeyondScene(GameConstants.Weight,GameConstants.Height);
+        handleBeyondScene(GameConstants.Weight,GameConstants.Height+240);
         //计算生命槽
         calculateLife();
     }

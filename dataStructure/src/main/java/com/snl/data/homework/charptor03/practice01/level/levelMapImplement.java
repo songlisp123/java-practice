@@ -73,7 +73,7 @@ public class levelMapImplement<T extends Sprite> extends AbstractLevel<T> {
                     }
                     case GameConstants.ADVANCE_ENERY -> {
                         enemy = new AdvancedEnemy(i * 20.0,j * 20.0,
-                                100,100);
+                                20,20);
                         enmries.add(enemy);
                     }
                     case GameConstants.WATER -> {
