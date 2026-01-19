@@ -197,7 +197,7 @@ public abstract class AbstractSword extends Sprite implements SwordWeapon {
                             img.alpha
                     )
             );
-            gImg.setPaint(new Color(0, color.getGreen(), color.getBlue(), getColor().getAlpha()));
+            gImg.setPaint(new Color(color.getRed(), color.getGreen(), color.getBlue(), getColor().getAlpha()));
             gImg.rotate(-img.currentAngle, img.xPos, img.yPos);
             gImg.fill(shape);
             gImg.dispose();

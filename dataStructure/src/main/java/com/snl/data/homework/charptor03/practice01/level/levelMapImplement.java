@@ -8,6 +8,7 @@ import com.snl.data.homework.charptor03.practice01.entity.enmry.Enemy;
 import com.snl.data.homework.charptor03.practice01.entity.goods.Coin;
 import com.snl.data.homework.charptor03.practice01.entity.player.Player;
 import com.snl.data.homework.charptor03.practice01.entity.wall.Grass;
+import com.snl.data.homework.charptor03.practice01.entity.wall.Stone;
 import com.snl.data.homework.charptor03.practice01.entity.wall.Wall;
 import com.snl.data.homework.charptor03.practice01.entity.wall.Water;
 import com.snl.data.homework.charptor03.practice01.level.map.JumpLevelMap;
@@ -83,6 +84,11 @@ public class levelMapImplement<T extends Sprite> extends AbstractLevel<T> {
 
                     case GameConstants.GRASS -> {
                         wall = new Grass(i * 20.0,j * 20.0,20,20,Color.GREEN);
+                        walls.add(wall);
+                    }
+
+                    case GameConstants.StoneChar -> {
+                        wall = new Stone(i * 20.0,j * 20.0,20,20);
                         walls.add(wall);
                     }
                 }

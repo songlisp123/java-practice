@@ -30,6 +30,7 @@ public class GameConstants {
     public static final char ADVANCE_ENERY = 'a';
     public static final char WATER = 'w';
     public static final char GRASS = 'g';
+    public static final char StoneChar = 's';
 
     public static final int PLAYERLIFES = 3;
     public static final int GAINT = 5;
@@ -46,4 +47,5 @@ public class GameConstants {
     public static final Color tuRang = new Color(255,200,0,150);
     public static final Color Water = new Color(0,255,255,150);
     public static final Color Grass = new Color(0,255,0,180);
+    public static final Color Stone = new Color(205,205,205,180);
 }
