@@ -11,6 +11,9 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.random.RandomGenerator;
 
+/**
+ * 这个类抽象了剑的几何外形
+ */
 public abstract class SimpleSword extends AbstractSword {
 
     //以下是剑的抽象数据
@@ -42,6 +45,9 @@ public abstract class SimpleSword extends AbstractSword {
     //闪烁开始时间
     private long startTime;
 
+    private int alpha;
+    private boolean changeing;
+
     public SimpleSword(double xPos, double yPos,
                          double originKillDamage, double currentDurability,
                          double originalSpeed, double swordHitWeight, double swordHitHeight,
@@ -61,6 +67,7 @@ public abstract class SimpleSword extends AbstractSword {
         initData();
     }
 
+    //绘制形状
     private void initData() {
         double x = start.getX();
         double y = start.getY();
@@ -109,31 +116,35 @@ public abstract class SimpleSword extends AbstractSword {
 
     private void fillParticles(double xTemp, double x, double y) {
         var smokes = getSmokes();
-        for (double t = xTemp; t < x ; t+=5) {
+        for (double t = xTemp; t < x ; t+=8) {
             Article article = new SwordArticle(t,y,1,1,getColor(),BoomShape.CIRCLE);
-            article.setxSpeed(generator.nextDouble(-0.5,0.5));
-            article.setySpeed(generator.nextDouble(-0.5,0.5));
+            article.setxSpeed(generator.nextDouble(-.85,.85));
+            article.setySpeed(generator.nextDouble(-1,1));
             smokes.add(article);
         }
         setSmokes(smokes);
     }
 
     @Override
-    public void update(double xPos, double yPos, Group agroup, Group destory, Group wall) {
-        super.update(xPos, yPos, agroup, destory, wall);
+    public void update(double xPos, double yPos, double delta,Group agroup, Group destory, Group wall) {
+        super.update(xPos, yPos,delta, agroup, destory, wall);
         start = new Point2D.Double(xPos,yPos);
         initData();
+        Color color = new Color(255,255,255,alpha);
+        setColor(color);
 
-        long now = System.currentTimeMillis();
-        if (hasShing && now - startTime>=LIFE) {
-            hasShing = false;
-            startTime = now;
-            setColor(Color.cyan);
+        if (alpha >= 255) {
+            changeing = true;
         }
-        if (!hasShing && now - startTime >= LIFE) {
-            hasShing = true;
-            startTime = now;
-            setColor(Color.ORANGE);
+
+        if (changeing) {
+            alpha--;
+            if (alpha <= 150) {
+                alpha = 150;
+                changeing = false;
+            }
+        }else {
+            alpha++;
         }
     }
 }

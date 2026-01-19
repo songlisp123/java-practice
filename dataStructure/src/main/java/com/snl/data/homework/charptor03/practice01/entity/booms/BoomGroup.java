@@ -53,8 +53,6 @@ public class BoomGroup implements Group {
      * @param damage 武器伤害
      */
     public void update(double delta,Group aGroup,Group destory,Group wall,double damage) {
-        if (isEmpty())
-            return;
         Iterator<Sprite> iterator;
         for (iterator = boomQueue.iterator();iterator.hasNext();)
         {

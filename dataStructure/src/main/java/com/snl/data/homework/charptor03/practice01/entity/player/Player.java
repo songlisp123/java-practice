@@ -224,6 +224,14 @@ public class Player extends Sprite implements PlayerAction {
 
     }
 
+    /**
+     * 更新玩家
+     * @param delta 时间间隔
+     * @param state 输入状态
+     * @param aGroup 敌人组
+     * @param destory 摧毁的精灵集合
+     * @param wall 墙壁组
+     */
     public void update(double delta,InputState state,Group aGroup,Group destory,Group wall) {
         if (state.up && onGround) {
             //如果当玩家处于地面切向上按钮按下的时候
@@ -271,50 +279,38 @@ public class Player extends Sprite implements PlayerAction {
 
     private void updateWeapon(double delta,InputState state,Group aGroup, Group destory, Group wall) {
         //更新武器
-        if (currentWeapon instanceof SwordWeapon) {
-            AbstractSword s = (AbstractSword) currentWeapon;
-            s.update(this.getxPos() +getWEIGHT() / 2.0,
-                    this.getyPos() + getHEIGHT() / 2.0,
-                    aGroup,destory,wall);
-        } else if (currentWeapon instanceof Gun w) {
-            //更新子弹
-            w.update(this.getxPos() +getWEIGHT() / 2.0,
-                    this.getyPos() + getHEIGHT() / 2.0,
-                    delta,aGroup,destory,wall);
-            if (w.isReload()) {
-                long now  = System.currentTimeMillis();
-                if (now - w.getShootTime() >= 1000) {
-                    Music.reload();
-                    w.setReload(false);
-                    logger.info("装填成功");
+        currentWeapon.update(this.getxPos() + getWEIGHT() / 2.0,
+                this.getyPos() + getHEIGHT() / 2.0,
+                delta,aGroup,destory,wall);
+
+        //判断敌人是否我空或者null
+        if (aGroup != null && !aGroup.isEmpty()) {
+            Collection<Sprite> data = aGroup.getData();
+            for (Sprite s : data) {
+                if (s.isCrash(this)) {
+                    this.decreaseLifePoint(10);
                 }
             }
-        }
-        //判断敌人
-        Collection<Sprite> data = aGroup.getData();
-        for (Sprite s : data) {
-            if(s.isCrash(this)) {
-                this.decreaseLifePoint(10);
-            }
-        }
 
-        BoomGroup group = null;
-        for (Sprite s : data) {
-            if (s instanceof AdvancedEnemy u) {
-                group = u.getBoomGroup();
-                break;
-            }
-        }
 
-        if (group == null)
-            return;
-        data = group.getData();
-        for (Sprite s : data) {
-            if (s.isCrash(this)) {
-                //如果玩家碰到子弹
-                this.decreaseLifePoint(10);
-                s.setDead(true);
-            }
+//            BoomGroup group = null;
+//            for (Sprite s : data) {
+//                if (s instanceof AdvancedEnemy u) {
+//                    group = u.getBoomGroup();
+//                    break;
+//                }
+//            }
+//
+//            if (group == null)
+//                return;
+//            data = group.getData();
+//            for (Sprite s : data) {
+//                if (s.isCrash(this)) {
+//                    //如果玩家碰到子弹
+//                    this.decreaseLifePoint(10);
+//                    s.setDead(true);
+//                }
+//            }
         }
     }
 

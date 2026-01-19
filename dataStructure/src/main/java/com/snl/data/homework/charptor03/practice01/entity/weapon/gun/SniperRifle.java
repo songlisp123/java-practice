@@ -29,6 +29,8 @@ public class SniperRifle extends Gun {
 
     private Point2D leftPoint;
 
+    private TexturePaint paint;
+
     public SniperRifle(double x,double y,String name,int maxBullets) {
         this(20,20,20,20,name,maxBullets,x,y);
     }
@@ -51,6 +53,10 @@ public class SniperRifle extends Gun {
         scopeWidth = 5;
         scopeHeight = 10;
         leftPoint = new Point2D.Double(x,y);
+
+        BufferedImage bi = getTextureImage();
+        var r = new Rectangle2D.Double(0,0,bi.getWidth(),bi.getHeight());
+        paint = new TexturePaint(bi,r);
     }
 
     private void createShape() {
@@ -133,13 +139,14 @@ public class SniperRifle extends Gun {
 
     @Override
     public void attack(InputState state) {
-        if (isReload()) {
-            //如果正在装填，无响应
-            return;
-        }
         if (isEmpty())
         {
             Music.emptyBullets();
+            return;
+        }
+        if (isReload()) {
+            //如果正在装填，无响应
+            Music.beep();
             return;
         }
         shoot(createBoom(state));
@@ -155,9 +162,6 @@ public class SniperRifle extends Gun {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         //设置纹理
-        BufferedImage bi = getTextureImage();
-        var r = new Rectangle2D.Double(0,0,bi.getWidth(),bi.getHeight());
-        TexturePaint paint = new TexturePaint(bi,r);
         g2.setPaint(paint);
         AffineTransform af = AffineTransform.getScaleInstance(0.5,0.5);
         var shape = af.createTransformedShape(getShape());

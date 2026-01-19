@@ -14,6 +14,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * 抽象剑维护了名字，伤害，持久性，攻速等剑属性
+ */
 public abstract class AbstractSword extends Sprite implements SwordWeapon {
 
     //剑的名字
@@ -73,18 +76,13 @@ public abstract class AbstractSword extends Sprite implements SwordWeapon {
         this.currentDurability = currentDurability;
         this.originalSpeed = originalSpeed;
         this.currentSpeed = originalSpeed;
-        this.color = Color.cyan;
+        this.color = Color.magenta;
         smokes = new GroupImplement<>();
     }
 
     @Override
     public void render(Graphics g) {
         this.paint(g,null);
-    }
-
-    @Override
-    public void update() {
-        //无实现
     }
 
     /**
@@ -95,7 +93,7 @@ public abstract class AbstractSword extends Sprite implements SwordWeapon {
      * @param destory  毁灭的敌人组
      * @param wall 墙壁组
      */
-    public void update(double xPos, double yPos,Group agroup,Group destory,Group wall) {
+    public void update(double xPos, double yPos,double delta,Group agroup,Group destory,Group wall) {
         setxPos(xPos);
         setyPos(yPos);
         long now = System.currentTimeMillis();
@@ -136,7 +134,7 @@ public abstract class AbstractSword extends Sprite implements SwordWeapon {
                 }
             }
         }
-        //更新烟雾
+        //更新粒子
         smokes.update(0);
         //判断是否碰撞敌人
         //判断与敌人的状态
@@ -199,7 +197,7 @@ public abstract class AbstractSword extends Sprite implements SwordWeapon {
                             img.alpha
                     )
             );
-            gImg.setPaint(new Color(0, color.getGreen(), color.getBlue(), 180));
+            gImg.setPaint(new Color(0, color.getGreen(), color.getBlue(), getColor().getAlpha()));
             gImg.rotate(-img.currentAngle, img.xPos, img.yPos);
             gImg.fill(shape);
             gImg.dispose();

@@ -1,6 +1,7 @@
 package com.snl.data.homework.charptor03.practice01.entity.weapon;
 
 
+import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
@@ -24,7 +25,17 @@ public interface Weapon {
 
     //三幻神
     void render(Graphics g);
-    void update();
+
+    /**
+     * 更新武器状态
+     * @param xPos x坐标，用来追随玩家
+     * @param yPos y坐标，用来追随玩家
+     * @param delta 时间间隔
+     * @param agroup 敌人组
+     * @param destory 失败组
+     * @param wall 墙壁组
+     */
+    void update(double xPos, double yPos, double delta, Group agroup, Group destory, Group wall);
     void reset();
 
     //武器信息

@@ -1,5 +1,7 @@
 package com.snl.data.homework.charptor03.practice01.CONSTANTS;
 
+import java.awt.*;
+
 public class GameConstants {
 
     public static final double GRAVITY = 9.98;
@@ -27,6 +29,7 @@ public class GameConstants {
     public static final char DOOR = 'd';
     public static final char ADVANCE_ENERY = 'a';
     public static final char WATER = 'w';
+    public static final char GRASS = 'g';
 
     public static final int PLAYERLIFES = 3;
     public static final int GAINT = 5;
@@ -38,4 +41,9 @@ public class GameConstants {
     public static final double PISTOL_ORIGIN_KILL_DAMAGE = 10.5;
     public static final int PISTOL_ORIGIN_RECOIL = 200;
 
+
+    /*            颜色               */
+    public static final Color tuRang = new Color(255,200,0,150);
+    public static final Color Water = new Color(0,255,255,150);
+    public static final Color Grass = new Color(0,255,0,180);
 }

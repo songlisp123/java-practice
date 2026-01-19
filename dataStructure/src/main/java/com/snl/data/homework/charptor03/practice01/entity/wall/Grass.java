@@ -1,23 +1,26 @@
 package com.snl.data.homework.charptor03.practice01.entity.wall;
 
-
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Water extends Wall {
+public class Grass extends Wall {
 
-    public Water(double xPos, double yPos, int WEIGHT, int HEIGHT) {
-        super(xPos, yPos + HEIGHT / 2.0, WEIGHT, HEIGHT, Color.cyan);
+    public Grass(double xPos, double yPos, int WEIGHT, int HEIGHT, Color color) {
+        super(xPos, yPos, WEIGHT, HEIGHT, color);
     }
 
+    @Override
     public BufferedImage getTexture() {
         int szie = 20;
         BufferedImage bi = new BufferedImage(szie,szie,BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = bi.createGraphics();
-        g2.setColor(GameConstants.Water);
-        g2.fillRect(0,0,bi.getWidth(), bi.getHeight());
+        //青草
+        g2.setColor(GameConstants.Grass);
+        g2.fillRect(0,0,szie,szie / 3);
+        g2.setColor(GameConstants.tuRang);
+        g2.fillRect(0,szie / 3,szie,szie - szie / 3);
         g2.dispose();
         return bi;
     }

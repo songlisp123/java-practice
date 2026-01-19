@@ -72,8 +72,5 @@ public interface GunWeapon extends Weapon {
      */
     int originRecoil();
 
-    @Override
-    default void update() {}
-
     boolean isEmpty();
 }

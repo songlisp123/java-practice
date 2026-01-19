@@ -121,6 +121,18 @@ public abstract class Gun extends Sprite implements GunWeapon {
         group.update(delta,aGroup,destory,wall,killDamage);
         //更新烟雾
         smokes.update(delta);
+        //判断是否装弹
+        updateReload();
+    }
+
+    private void updateReload() {
+        if (isReload()) {
+            long now  = System.currentTimeMillis();
+            if (now - getShootTime() >= 1_500L) {
+                Music.reload();
+                setReload(false);
+            }
+        }
     }
 
     public void update(double x, double y) {
