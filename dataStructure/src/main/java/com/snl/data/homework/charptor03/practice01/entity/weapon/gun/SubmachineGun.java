@@ -2,6 +2,7 @@ package com.snl.data.homework.charptor03.practice01.entity.weapon.gun;
 
 import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
+import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 public class SubmachineGun extends Gun {
 
@@ -15,8 +16,8 @@ public class SubmachineGun extends Gun {
     }
 
     @Override
-    public void attack(Sprite sprite) {
-        super.attack(sprite); //这一步干了三件事情,调用shot方法，将子弹从子弹夹中取出
+    public void attack(InputState state) {
+        super.attack(state); //这一步干了三件事情,调用shot方法，将子弹从子弹夹中取出
         Music.subMacheingShoot();
     }
 }

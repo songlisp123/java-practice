@@ -75,7 +75,7 @@ public class Boom extends Sprite {
      */
     public void update(double delta, InputState state, Group group,Group destory,Group wall,double damage) {
         this.update(delta,state);
-        Collection data;
+        Collection<Sprite> data;
         Iterator<Sprite> iterator;
         if (group != null && !group.isEmpty()) {
             data = group.getData(); //敌人数据

@@ -42,6 +42,11 @@ public class GroupImplement<T extends Sprite> implements Group<T> {
         }
     }
 
+    /**
+     * 更新子弹
+     * @param delta 时间间隔
+     * @param aGroup 敌人组
+     */
     public void update(double delta,Group aGroup) {
         if (isEmpty())
             return;

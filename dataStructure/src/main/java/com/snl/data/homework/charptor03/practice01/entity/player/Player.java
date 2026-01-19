@@ -112,11 +112,6 @@ public class Player extends Sprite implements PlayerAction {
     private LightSaber lightSaber;
 
     /**
-     * 大雾？是否要放到这里面？？？
-     */
-    private GroupImplement<Smoke> smokes;
-
-    /**
      * 玩家生命
      */
     private double lifePoints;
@@ -172,31 +167,28 @@ public class Player extends Sprite implements PlayerAction {
         onGround = true;
         life = GameConstants.PLAYERLIFES;
         score = 0;
-        currentWeapon = new AssaultRifle(30,"AK 47突击步枪");
-        assaultRifle = currentWeapon;
+        //初始化武器
+        assaultRifle = new AssaultRifle(30,"AK 47突击步枪");
+        currentWeapon = assaultRifle; //初始化武器为突击步枪
         pistol = new Pistol(boomCounts,"小手枪");
         submachingGun = new SubmachineGun(60,"Mp40冲锋枪");
         sniperRifle = new SniperRifle(getxPos(),getyPos(),"98K 狙击步枪",15);
-
         //剑
         sword = new SmallSword(this.getxPos() +getWEIGHT() / 2.0,
-                this.getyPos() + getHEIGHT() / 2.0, "光剑");
+                this.getyPos() + getHEIGHT() / 2.0, "手里剑");
+        //光剑
         lightSaber = new LightSaber(this.getxPos() +getWEIGHT() / 2.0,
                 this.getyPos() + getHEIGHT() / 2.0, "光剑");
-        currentWeapon = sword;
-
         //刀
         knife = new SmallKnife(getxPos(),getyPos(),"刀");
-        currentWeapon = knife;
-
-        //测试雾气
-        smokes = new GroupImplement<>();
         lifePoints = 100f; // 初始化为100
         originLifePoints = lifePoints;
         //初始化生命槽
         stringPoint2D = new Point2D.Double(getxPos() ,getyPos()-40);
         string = "";
+        //计算生命槽
         calculateLife();
+        //重置位置
         resetPoint();
     }
 
@@ -233,8 +225,6 @@ public class Player extends Sprite implements PlayerAction {
     }
 
     public void update(double delta,InputState state,Group aGroup,Group destory,Group wall) {
-//        Thread thread = Thread.currentThread();
-//        System.out.println("thread.getName() = " + thread.getName());
         if (state.up && onGround) {
             //如果当玩家处于地面切向上按钮按下的时候
             Y_SPEED = -15;
@@ -252,26 +242,22 @@ public class Player extends Sprite implements PlayerAction {
         //处理x
         movesX(dx,wall);
 
-        //发送子弹
+        //攻击动作
         if (state.attackPressed) {
-            attack(currentWeapon,state);
+            attack(state);
         }
         changePosition(state);
-        //更新武器
+        //更换武器
         changeWeapon();
-        //更新子弹
-//        ((Gun) currentWeapon).update(delta,aGroup,destroy,wall);
         //更新武器
         updateWeapon(delta,state,aGroup,destory,wall);
         //更新生命槽
         calculateLife();
         //更新弹药位置
-        updateBooms(state);
-        //更新烟雾
-        smokes.update(delta);
+        updateBooms();
     }
 
-    private void updateBooms(InputState state) {
+    private void updateBooms() {
         double x = getxPos();
         double y = getyPos();
         stringPoint2D = new Point2D.Double(x ,y-40);
@@ -291,13 +277,10 @@ public class Player extends Sprite implements PlayerAction {
                     this.getyPos() + getHEIGHT() / 2.0,
                     aGroup,destory,wall);
         } else if (currentWeapon instanceof Gun w) {
-            //更新武器
-            if (state.left) w.setRadius(Math.PI);
-            else if (state.up) w.setRadius(Math.PI / 2);
-            else w.setRadius(0);
-            w.update(getxPos(),getyPos());
             //更新子弹
-            w.update(delta,aGroup,destory,wall,currentWeapon.getKillDamage());
+            w.update(this.getxPos() +getWEIGHT() / 2.0,
+                    this.getyPos() + getHEIGHT() / 2.0,
+                    delta,aGroup,destory,wall);
             if (w.isReload()) {
                 long now  = System.currentTimeMillis();
                 if (now - w.getShootTime() >= 1000) {
@@ -419,31 +402,12 @@ public class Player extends Sprite implements PlayerAction {
                 RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON
         );
-        float radius = 300F;
-        float[] dist = {0.0f,0.5F,1.0f};
-        Color[] colors = {
-                Color.WHITE,Color.LIGHT_GRAY,Color.BLACK
-        };
-        RadialGradientPaint paint = new RadialGradientPaint(leftUpConor, radius, dist, colors);
-        g2.setComposite(AlphaComposite.getInstance(
-                AlphaComposite.SRC_OVER,0.65f
-        ));
-        g2.setPaint(paint);
+        g2.setPaint(Color.WHITE);
         drawLine(g2);
         paintLifePoints(g2);
         paintBombs(g2);
-        g2.fillOval(300,250,200,200);
-        g2.fillOval(125,400,60,80);
-        g2.fillOval(400,50,100,100);
-        g2.setFont(new Font("隶书",Font.PLAIN,30));
-        AttributedString as  = new AttributedString("你真是一个傻逼");
-        as.addAttribute(TextAttribute.FONT,new Font("隶书",Font.PLAIN,30));
-        as.addAttribute(TextAttribute.FOREGROUND,Color.MAGENTA,0,2);
-        g2.drawString(as.getIterator(),500,350);
         //绘制武器
-        currentWeapon.render(g);
-        //绘制烟雾
-        smokes.render(g);
+        currentWeapon.render(g2);
         g2.dispose();
     }
 
@@ -457,6 +421,7 @@ public class Player extends Sprite implements PlayerAction {
         //TODO 如何绘制生命条？
         g2.setStroke(new BasicStroke(2));
         g2.draw(shape);
+        g2.setColor(Color.green);
         g2.fill(lifeShape);
         g2.drawString("%.2f / %.2f%%".formatted(lifePoints,originLifePoints),
                 (int) textXPos, (int) textYPos);
@@ -582,72 +547,8 @@ public class Player extends Sprite implements PlayerAction {
     //**********************************  攻击动作  ***************************//
 
     @Override
-    public void attack(Weapon weapon, InputState state) {
-        if (weapon instanceof SwordWeapon) {
-            AbstractSword s = (AbstractSword) weapon;
-            s.attack();
-        } else if (weapon instanceof Gun w) {
-            if (w.isEmpty()) {
-                //如果弹药架为空
-                logger.warning("弹药为空");
-                Music.emptyBullets();
-                return;
-            }
-            w.attack(createBoom(state));
-            showSmokes();
-        }
-    }
-
-    private void showSmokes() {
-        for (int i=0;i<500;i++) {
-            smokes.add(new SmokeImplement(getxPos(),getyPos(),10,10,Color.lightGray));
-        }
-    }
-
-    private Sprite createBoom(InputState state) {
-        Boom boom;
-        double speed = ((Gun) currentWeapon).shootSpeed();
-        switch (state.direction) {
-            case NORTH -> boom = new Boom(getxPos() + getWEIGHT() / 2.0 - 5
-                    ,getyPos() + 10,
-                    10,10, state.direction, 0,-speed);
-            case SOUTH -> boom = new Boom(getxPos() + getWEIGHT() / 2.0 - 3
-                    ,getyPos() + getHEIGHT(),
-                    6,10, state.direction,0,speed);
-            case WEST -> boom = new Boom(getxPos()
-                    ,getyPos() + getHEIGHT() / 2.0 - 3,
-                    10,6, state.direction,-speed,0);
-            case EAST -> boom = new Boom(getxPos()
-                    ,getyPos() + getHEIGHT() / 2.0 - 3,
-                    10,6, state.direction,speed,0);
-            default -> boom = new TimerBoom(getxPos() + getWEIGHT()
-                    ,getyPos() + getHEIGHT() / 2.0 - 5,
-                    10,10, state.direction,speed);
-        }
-        return boom;
-    }
-
-    public void handleCollide(Sprite sprite) {
-        if (sprite == null)
-            return;
-        double dxLeft   = Math.abs(getRight() - sprite.getLeft());
-        double dxRight  = Math.abs(getLeft() - sprite.getRight());
-        double dyTop    = Math.abs(getBottom() - sprite.getTop());
-        double dyBottom = Math.abs(getTop() - sprite.getBottom());
-
-        double min = Math.min(Math.min(dxLeft, dxRight), Math.min(dyTop, dyBottom));
-
-        if (min == dxLeft) {
-            setxPos(sprite.getLeft() - getWEIGHT());
-        } else if (min == dxRight) {
-            setxPos(sprite.getRight());
-        } else if (min == dyTop) {
-            Y_SPEED = 0;
-            setyPos(sprite.getTop() - getHEIGHT());
-        } else {
-            Y_SPEED = 0;
-            setyPos(sprite.getBottom());
-        }
+    public void attack(InputState state) {
+        currentWeapon.attack(state);
     }
 
     //**************************  生命系统  ************************//

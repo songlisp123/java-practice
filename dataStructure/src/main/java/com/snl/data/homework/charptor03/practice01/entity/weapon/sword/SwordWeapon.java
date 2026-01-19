@@ -24,8 +24,4 @@ public interface SwordWeapon extends Weapon {
      * @return 攻速
      */
     double getSpeed();
-
-    default void attack() {
-        this.attack(null);
-    }
 }

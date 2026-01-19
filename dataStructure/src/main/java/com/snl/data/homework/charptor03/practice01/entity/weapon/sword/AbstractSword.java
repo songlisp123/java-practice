@@ -179,7 +179,7 @@ public abstract class AbstractSword extends Sprite implements SwordWeapon {
     }
 
     @Override
-    public void attack(Sprite sprite) {
+    public void attack(InputState state) {
         attacked = true;
         attackTime = System.currentTimeMillis();
         attackAngle = 0;

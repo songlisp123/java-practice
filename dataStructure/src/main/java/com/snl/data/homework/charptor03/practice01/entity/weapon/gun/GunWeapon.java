@@ -1,9 +1,11 @@
 package com.snl.data.homework.charptor03.practice01.entity.weapon.gun;
 
+import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.entity.booms.Boom;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.Weapon;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.WeaponType;
+import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 public interface GunWeapon extends Weapon {
 
@@ -23,23 +25,14 @@ public interface GunWeapon extends Weapon {
      */
     int maxBullets();
 
-    /**
-     * 射击
-     */
-    void shoot(Boom boom);
-
     @Override
-    default void attack(Sprite sprite) {
-        shoot((Boom) sprite);
-    }
+    void attack(InputState state);
 
     @Override
     default void reset() {
         //由于这个方法主要是碰撞后恢复物体原来的位置的，所以默认不实现
     }
-
     //枪械独有的属性、方法
-
     /**
      * 枪械射速
      * @return 当前枪械射速
@@ -82,5 +75,5 @@ public interface GunWeapon extends Weapon {
     @Override
     default void update() {}
 
-    void update(double x,double y);
+    boolean isEmpty();
 }

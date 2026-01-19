@@ -1,6 +1,7 @@
 package com.snl.data.homework.charptor03.practice01.entity.weapon.gun;
 
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
+import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 public class TimedGun extends Gun {
 
@@ -16,8 +17,8 @@ public class TimedGun extends Gun {
     }
 
     @Override
-    public void attack(Sprite sprite) {
-        super.attack(sprite);
+    public void attack(InputState state) {
+        super.attack(state);
         //播放音乐
     }
 }

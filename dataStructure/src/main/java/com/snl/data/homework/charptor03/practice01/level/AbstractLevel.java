@@ -61,17 +61,18 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
     // ********************  渲染  ***************************//
     @Override
     public void render(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
+        Graphics2D g2 = (Graphics2D) g.create();
         AffineTransform old = g2.getTransform();
         g2.translate(-camera.x,-camera.y);
         //绘制
-        walls.render(g2);
         player.paint(g2);
         enmries.render(g2);
+        walls.render(g2);
         coins.render(g2);
         if (showDoor)
             door.paint(g2);
         g2.setTransform(old);
+        g2.dispose();
     }
 
     // ********************  更新  ***************************//
@@ -89,16 +90,8 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         //检查是否成功
         checkEmpty();
         //判断玩家是否相撞
-//        camera.x = player.getxPos() + player.getWEIGHT() / 2.0 - camera.width / 2.0;
-//        camera.x = player.getxPos() + player.getWEIGHT() / 2.0 ;
-//        camera.y = player.getyPos() + player.getHEIGHT() / 2.0;
         camera.y = player.getyPos() + player.getHEIGHT() / 2.0 - camera.height / 2.0;
-        
-
-//        camera.x = Math.max(0, camera.x);
         camera.y = Math.max(0, camera.y);
-//        System.out.println("camera.X = " + camera.x);
-//        camera.x = Math.min(camera.x, 1200 - camera.width);
         camera.y = Math.min(camera.y,GameConstants.MAPHeight- camera.height);
     }
 

@@ -1,7 +1,9 @@
 package com.snl.data.homework.charptor03.practice01.entity.weapon.gun;
 
 import com.snl.data.homework.charptor03.practice01.Music;
+import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
+import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 import java.awt.*;
 import java.awt.geom.*;
@@ -33,7 +35,7 @@ public class SniperRifle extends Gun {
 
     public SniperRifle(double originShootSpeed, double originHearingRangle,
                        int originRecoil, double originKillDamage, String name, int maxBullets,double x,double y) {
-        super(originShootSpeed, originHearingRangle, originRecoil, originKillDamage, name, maxBullets);
+        super(originShootSpeed, originHearingRangle, originRecoil, originKillDamage, name, maxBullets,x,y);
         initData(x,y);
         createShape();
     }
@@ -130,21 +132,21 @@ public class SniperRifle extends Gun {
     }
 
     @Override
-    public void attack(Sprite sprite) {
+    public void attack(InputState state) {
         if (isReload()) {
             //如果正在装填，无响应
             return;
         }
-        super.attack(sprite); //这一步干了三件事情,调用shot方法，将子弹从子弹夹中取出
+        if (isEmpty())
+        {
+            Music.emptyBullets();
+            return;
+        }
+        shoot(createBoom(state));
+        showSmoke();
         Music.sniparShoot();
         setShootTime(System.currentTimeMillis());
         setReload(true);
-    }
-
-    @Override
-    public void update(double x, double y) {
-        leftPoint = new Point2D.Double(x,y);
-        createShape();
     }
 
     @Override
@@ -159,7 +161,7 @@ public class SniperRifle extends Gun {
         g2.setPaint(paint);
         AffineTransform af = AffineTransform.getScaleInstance(0.5,0.5);
         var shape = af.createTransformedShape(getShape());
-        af = AffineTransform.getTranslateInstance(.5 * leftPoint.getX()-10,0.5  * leftPoint.getY()+10);
+        af = AffineTransform.getTranslateInstance(.5 * leftPoint.getX()-40,0.5  * leftPoint.getY()-10);
         shape = af.createTransformedShape(shape);
         setShape(shape);
         g2.fill(getShape());
@@ -167,7 +169,13 @@ public class SniperRifle extends Gun {
         super.render(g);
     }
 
-
+    @Override
+    public void update(double x, double y) {
+        leftPoint = new Point2D.Double(x,y);
+        setxPos(x);
+        setyPos(y);
+        createShape();
+    }
 
     private BufferedImage getTextureImage() {
         int size = 2;

@@ -9,10 +9,9 @@ public interface PlayerAction {
 
     /**
      * 攻击行为
-     * @param weapon 攻击武器
      * @param state 当前输入状态
      */
-    void attack(Weapon weapon,InputState state);
+    void attack(InputState state);
 
     /**
      * 获取硬币等游戏物体

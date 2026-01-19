@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class BoomGroup implements Group {
 
+    //弹药架
     private List<Sprite> boomQueue;
 
     //当前弹药夹数量
@@ -43,13 +44,23 @@ public class BoomGroup implements Group {
         //空实现
     }
 
+    /**
+     * 更新子弹袋
+     * @param delta 时间间隔
+     * @param aGroup 敌人组
+     * @param destory 摧毁组
+     * @param wall 墙壁组
+     * @param damage 武器伤害
+     */
     public void update(double delta,Group aGroup,Group destory,Group wall,double damage) {
+        if (isEmpty())
+            return;
         Iterator<Sprite> iterator;
         for (iterator = boomQueue.iterator();iterator.hasNext();)
         {
             //遍历迭代器，获取子弹
             Boom next = (Boom) iterator.next();
-            //更新子弹
+            //更新每一个子弹
             next.update(delta,null,aGroup,destory,wall,damage);
             //如果子弹生命周期已过，移除
             if (next.isDead()) iterator.remove();
@@ -89,7 +100,7 @@ public class BoomGroup implements Group {
     }
 
     @Override
-    public Collection getData() {
+    public Collection<Sprite> getData() {
         return boomQueue;
     }
 

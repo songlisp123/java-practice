@@ -2,6 +2,7 @@ package com.snl.data.homework.charptor03.practice01.entity.weapon;
 
 
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
+import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 import java.awt.*;
 
@@ -19,7 +20,7 @@ public interface Weapon {
     /**
      * 使用武器攻击
      */
-    void attack(Sprite sprite);
+    void attack(InputState state);
 
     //三幻神
     void render(Graphics g);
