@@ -58,6 +58,12 @@ public class levelMapImplement<T extends Sprite> extends AbstractLevel<T> {
                         enmries.add(enemy);
                     }
 
+                    case GameConstants.Left_RIGHT_ENERY -> {
+                        enemy = new Enemy(i * 20.0,j * 20.0,
+                                20,20,4,0);
+                        enmries.add(enemy);
+                    }
+
                     case GameConstants.PLAYER -> {
                         if (getPlayer() == null) {
                             System.out.println("初始化玩家");
@@ -78,7 +84,7 @@ public class levelMapImplement<T extends Sprite> extends AbstractLevel<T> {
 
                     case GameConstants.ADVANCE_ENERY -> {
                         enemy = new AdvancedEnemy(i * 20.0,j * 20.0,
-                                100,100);
+                                50,50);
                         enmries.add(enemy);
                     }
 

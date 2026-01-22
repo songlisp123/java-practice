@@ -25,6 +25,7 @@ public class GameConstants {
     public static final char NOTHING = 'x';
     public static final char PLAYER = 'p';
     public static final char ENMRY = 'e';
+    public static final char Left_RIGHT_ENERY = 'r';
     public static final char COIN = 'c';
     public static final char DOOR = 'd';
     public static final char ADVANCE_ENERY = 'a';

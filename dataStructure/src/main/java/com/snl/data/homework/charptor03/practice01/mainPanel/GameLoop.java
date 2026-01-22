@@ -1,11 +1,7 @@
 package com.snl.data.homework.charptor03.practice01.mainPanel;
 
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
-import com.snl.data.homework.charptor03.practice01.Music;
-import com.snl.data.homework.charptor03.practice01.camary.Camera;
 import com.snl.data.homework.charptor03.practice01.entity.player.Player;
-import com.snl.data.homework.charptor03.practice01.entity.weapon.gun.GunWeapon;
-import com.snl.data.homework.charptor03.practice01.entity.weapon.Weapon;
 import com.snl.data.homework.charptor03.practice01.level.levelpanel.ChapterPanel;
 import com.snl.data.homework.charptor03.practice01.level.levelpanel.LevelPanel;
 import com.snl.data.homework.charptor03.practice01.level.levelwrapper.GameLevelImplement;

@@ -50,19 +50,30 @@ public class Enemy extends Sprite {
     private Color lifeColor;
     private boolean hasShing;
     private long startShing;
+    Paint paint = Color.RED;
+    final Color defaultColor = Color.red;
 
     public Enemy() {
     }
 
     public Enemy(double xPos, double yPos, int WEIGHT, int HEIGHT) {
         super(xPos, yPos, WEIGHT, HEIGHT);
+        init();
+    }
+
+    public Enemy(double xPos, double yPos, int WEIGHT, int HEIGHT, double xSpeed, double ySpeed) {
+        super(xPos, yPos, WEIGHT, HEIGHT);
+        this.xSpeed = xSpeed;
+        this.ySpeed = ySpeed;
+        init();
+    }
+
+    public void init() {
         originLifePoints = 100.0;
         lifePoints = originLifePoints;
         lifeColor = Color.RED;
         calculateLife();
     }
-
-
 
     @Override
     public void update(double delta, InputState state) {
@@ -74,7 +85,7 @@ public class Enemy extends Sprite {
         //与墙体的关系
         touchWall(group.getData());
         //处理屏幕边界情况
-        handleBeyondScene(GameConstants.Weight,GameConstants.Height+240);
+        handleBeyondScene(GameConstants.Weight,GameConstants.MAPHeight);
         //计算生命槽
         calculateLife();
     }
@@ -108,7 +119,7 @@ public class Enemy extends Sprite {
     @Override
     public void paint(Graphics g, InputState state) {
         var g2 = (Graphics2D) g.create();
-        g2.setColor(Color.red);
+        g2.setPaint(paint);
         g2.fillRect((int) getxPos(), (int) getyPos(),getWEIGHT(),getHEIGHT());
         //绘制生命槽
         paintLifePoints(g2);
@@ -238,5 +249,13 @@ public class Enemy extends Sprite {
     public void setOriginLifePoints(double originLifePoints) {
         this.originLifePoints = originLifePoints;
         this.lifePoints = originLifePoints;
+    }
+
+    public Paint getPaint() {
+        return paint;
+    }
+
+    public void setPaint(Paint paint) {
+        this.paint = paint;
     }
 }
