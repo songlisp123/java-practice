@@ -66,6 +66,11 @@ public class AdvancedEnemy extends Enemy {
         boomGroup.render(g);
     }
 
+    @Override
+    public void reset() {
+        super.reset();
+        boomGroup.clear();
+    }
 
     public BoomGroup getBoomGroup() {
         return boomGroup;

@@ -136,10 +136,9 @@ public class GameLoop extends JPanel implements MouseListener,MouseMotionListene
             if (levelPanel != null)
                 g2.drawString(levelPanel.getContent(), 250, 200);
         } else {
-            g2.drawString("当前生命值：%d".formatted(player.getLife()),
-                    10,10);
-            g2.drawString("当前得分：%d".formatted(player.getScore()),
-                    250,10);
+            g2.setColor(Color.green);
+            g2.drawString("生命值:%d".formatted(player.getLife()),10,10);
+            g2.drawString("当前得分：%d".formatted(player.getScore()), 250,10);
             if (shape != null)
             {
                 g2.setColor(Color.WHITE);
@@ -155,6 +154,8 @@ public class GameLoop extends JPanel implements MouseListener,MouseMotionListene
         if (gameState.isLosing()) {
             //失败的蛮
             logger.warning("游戏结束！");
+            //结束逻辑
+            close();
         }else {
             //游戏正在运行
             if (!gameState.isHasBeenBooted()) {
@@ -178,6 +179,10 @@ public class GameLoop extends JPanel implements MouseListener,MouseMotionListene
                 }
             }
         }
+    }
+
+    private void close() {
+        System.exit(0);
     }
 
     private Runnable run() {
@@ -216,11 +221,11 @@ public class GameLoop extends JPanel implements MouseListener,MouseMotionListene
         //鼠标点击
         Point point = e.getPoint();
         if (SwingUtilities.isRightMouseButton(e)) {
-            shape = new Rectangle2D.Double(point.getX(),point.getY(),10,10);
+            shape = new Rectangle2D.Double(point.getX() - 5,point.getY() - 5,10,10);
         }
         if (SwingUtilities.isLeftMouseButton(e)) {
             state.attackPressed = true;
-            shape = new Ellipse2D.Double(point.getX(),point.getY(),10,10);
+            shape = new Ellipse2D.Double(point.getX() - 5,point.getY() - 5,10,10);
         }
     }
 

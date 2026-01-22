@@ -62,6 +62,8 @@ public class Enemy extends Sprite {
         calculateLife();
     }
 
+
+
     @Override
     public void update(double delta, InputState state) {
         //空实现

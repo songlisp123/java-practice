@@ -3,22 +3,11 @@ package com.snl.data.homework.charptor03.practice01.entity.wall;
 
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Water extends Wall {
 
     public Water(double xPos, double yPos, int WEIGHT, int HEIGHT) {
-        super(xPos, yPos + HEIGHT / 2.0, WEIGHT, HEIGHT, Color.cyan);
+        super(xPos, yPos + HEIGHT / 2.0, WEIGHT, HEIGHT, GameConstants.Water);
     }
 
-    public BufferedImage getTexture() {
-        int szie = 20;
-        BufferedImage bi = new BufferedImage(szie,szie,BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2 = bi.createGraphics();
-        g2.setColor(GameConstants.Water);
-        g2.fillRect(0,0,bi.getWidth(), bi.getHeight());
-        g2.dispose();
-        return bi;
-    }
 }

@@ -81,6 +81,7 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         player.update(delta,state,enmries,destoryedSprite,walls);
         enmries.update(delta,walls);
         coins.update(delta);
+        walls.update(delta);
         //实现有待完善
         if (player.isBeyondScene(weight,height))
             player.handleBeyondScene(weight,height+400);

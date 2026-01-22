@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 /**
  * 墙壁主要作为阻挡玩家的脚步,只负责重绘
  */
-public class Wall extends Sprite  {
+public abstract class Wall extends Sprite  {
 
     private Color color;
     private Shape shape;
@@ -23,10 +23,6 @@ public class Wall extends Sprite  {
     public Wall() {
     }
 
-    public Wall(double xPos, double yPos, int WEIGHT, int HEIGHT) {
-        this(xPos, yPos, WEIGHT, HEIGHT,Color.ORANGE);
-    }
-
     public Wall(double xPos, double yPos, int WEIGHT, int HEIGHT, Color color) {
         super(xPos, yPos, WEIGHT, HEIGHT);
         this.color = color;
@@ -35,9 +31,7 @@ public class Wall extends Sprite  {
     }
 
     @Override
-    public void update(double delta, InputState state) {
-        //无实现
-    }
+    public  void update(double delta, InputState state) {}
 
     @Override
     public void paint(Graphics g, InputState state) {
@@ -50,14 +44,14 @@ public class Wall extends Sprite  {
     public void initPaint() {
         BufferedImage bi = getTexture();
         Rectangle2D r = new Rectangle2D.Double(0,0,bi.getWidth(),bi.getHeight());
-        setPaint(new TexturePaint(bi,r));
+        paint = new TexturePaint(bi,r);
     }
 
     public BufferedImage getTexture() {
         int szie = 20;
         BufferedImage bi = new BufferedImage(szie,szie,BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = bi.createGraphics();
-        g2.setColor(GameConstants.tuRang);
+        g2.setColor(getColor());
         g2.fillRect(0,0,szie,szie);
         g2.dispose();
         return bi;

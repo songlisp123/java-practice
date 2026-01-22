@@ -107,7 +107,7 @@ public abstract class SimpleSword extends AbstractSword {
         var smokes = getSmokes();
         for (double t = xTemp; t < x ; t+=8) {
             Article article = new SwordArticle(t,y,1,1,getColor(),BoomShape.CIRCLE);
-            article.setxSpeed(generator.nextDouble(-.85,.85));
+            article.setxSpeed(generator.nextDouble(-.2,.25));
             article.setySpeed(generator.nextDouble(-.35,.35));
             smokes.add(article);
         }

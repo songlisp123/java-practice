@@ -2,13 +2,14 @@ package com.snl.data.homework.charptor03.practice01.entity.wall;
 
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Grass extends Wall {
 
-    public Grass(double xPos, double yPos, int WEIGHT, int HEIGHT, Color color) {
-        super(xPos, yPos, WEIGHT, HEIGHT, color);
+    public Grass(double xPos, double yPos, int WEIGHT, int HEIGHT) {
+        super(xPos, yPos, WEIGHT, HEIGHT,GameConstants.Grass);
     }
 
     @Override
