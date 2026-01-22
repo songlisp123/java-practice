@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * 抽象剑维护了名字，伤害，持久性，攻速等剑属性
+ * 维护了攻击时的动作
  */
 public abstract class AbstractSword extends Sprite implements SwordWeapon {
 
@@ -90,7 +91,7 @@ public abstract class AbstractSword extends Sprite implements SwordWeapon {
      * @param xPos 玩家的位置
      * @param yPos 和玩家的位置相关
      * @param agroup 敌人组
-     * @param destory  毁灭的敌人组
+     * @param destory  毁灭组
      * @param wall 墙壁组
      */
     public void update(double xPos, double yPos,double delta,Group agroup,Group destory,Group wall) {

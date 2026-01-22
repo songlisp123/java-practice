@@ -1,7 +1,6 @@
 package com.snl.data.homework.charptor03.practice01.entity.player;
 
 import com.snl.data.homework.charptor03.practice01.entity.Group;
-import com.snl.data.homework.charptor03.practice01.entity.weapon.Weapon;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 public interface PlayerAction {

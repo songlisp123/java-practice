@@ -146,7 +146,9 @@ public abstract class Gun extends Sprite implements GunWeapon {
             Music.emptyBullets();
             return;
         }
+        //射击
         shoot(createBoom(state));
+        //展示烟雾
         showSmoke();
     }
 

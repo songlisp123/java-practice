@@ -1,6 +1,5 @@
 package com.snl.data.homework.charptor03.practice01.entity.weapon.sword;
 
-import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.article.Article;
 import com.snl.data.homework.charptor03.practice01.article.SwordArticle;
 import com.snl.data.homework.charptor03.practice01.entity.Group;
@@ -33,18 +32,8 @@ public abstract class SimpleSword extends AbstractSword {
     private double swordBladeHeight;
     //剑尖宽
     private double swordTipWeight;
-
+    //随机生成器
     private final RandomGenerator generator = RandomGenerator.getDefault();
-
-    /**
-     * 闪烁效果
-     */
-    private boolean hasShing;
-    //闪烁生命周期
-    private final long LIFE = 1000L;
-    //闪烁开始时间
-    private long startTime;
-
     private int alpha;
     private boolean changeing;
 
@@ -119,7 +108,7 @@ public abstract class SimpleSword extends AbstractSword {
         for (double t = xTemp; t < x ; t+=8) {
             Article article = new SwordArticle(t,y,1,1,getColor(),BoomShape.CIRCLE);
             article.setxSpeed(generator.nextDouble(-.85,.85));
-            article.setySpeed(generator.nextDouble(-1,1));
+            article.setySpeed(generator.nextDouble(-.35,.35));
             smokes.add(article);
         }
         setSmokes(smokes);
@@ -128,8 +117,8 @@ public abstract class SimpleSword extends AbstractSword {
     @Override
     public void update(double xPos, double yPos, double delta,Group agroup, Group destory, Group wall) {
         super.update(xPos, yPos,delta, agroup, destory, wall);
-        start = new Point2D.Double(xPos,yPos);
-        initData();
+        start = new Point2D.Double(xPos,yPos); //更新剑的位置
+        initData(); //重新更新剑的形状
         Color color = new Color(255,255,255,alpha);
         setColor(color);
 

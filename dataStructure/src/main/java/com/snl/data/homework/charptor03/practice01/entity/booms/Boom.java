@@ -1,7 +1,6 @@
 package com.snl.data.homework.charptor03.practice01.entity.booms;
 
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
-import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.entity.enmry.Enemy;
@@ -59,6 +58,7 @@ public class Boom extends Sprite {
     }
 
 
+    /******************************  更新  ****************************/
     @Override
     public void update(double delta, InputState state) {
         move(xSpeed,ySpeed);
@@ -75,12 +75,35 @@ public class Boom extends Sprite {
      */
     public void update(double delta, InputState state, Group group,Group destory,Group wall,double damage) {
         this.update(delta,state);
-        Collection<Sprite> data;
-        Iterator<Sprite> iterator;
+        handleEnmry(group,destory,damage);
+        //判断与墙壁的相对位置
+        handleWall(wall);
+        //处理超过屏幕的情况
+        handleBeyondScene(GameConstants.Weight,GameConstants.Height);
+    }
+
+    private void handleWall(Group wall) {
+        if (wall != null && !wall.isEmpty()) {
+            Collection<Sprite> data = wall.getData();
+            Iterator<Sprite> iterator;
+            for (iterator = data.iterator(); iterator.hasNext(); ) {
+                //遍历组中元素判断是否与炸弹碰撞
+                Sprite next = iterator.next();
+                if (this.isCrash(next)) {
+                    //子弹与墙相撞
+                    setDead(true);
+//                    Music.bulletsCrashWall();
+                }
+            }
+        }
+    }
+
+    private void handleEnmry(Group group, Group destory, double damage) {
         if (group != null && !group.isEmpty()) {
-            data = group.getData(); //敌人数据
+            Collection<Sprite> data = group.getData(); //敌人数据
             //判断与敌人的状态(如果不为null且空)
-            for (iterator = data.iterator();iterator.hasNext();)
+            Iterator<Sprite> iterator;
+            for (iterator = data.iterator(); iterator.hasNext();)
             {
                 //遍历组中元素判断是否与炸弹碰撞
                 Sprite next = iterator.next();
@@ -99,26 +122,23 @@ public class Boom extends Sprite {
                 }
             }
         }
-
-        //判断与墙壁的相对位置
-        if (wall != null && !wall.isEmpty()) {
-            data = wall.getData();
-            for (iterator = data.iterator(); iterator.hasNext(); ) {
-                //遍历组中元素判断是否与炸弹碰撞
-                Sprite next = iterator.next();
-                if (this.isCrash(next)) {
-                    //子弹与墙相撞
-                    setDead(true);
-//                    Music.bulletsCrashWall();
-                }
-            }
-        }
-        //处理超过屏幕的情况
-        handleBeyondScene(GameConstants.Weight,GameConstants.Height);
     }
 
+    @Override
+    public void move(double xPos, double yPos) {
+        setxPos(getxPos() + xPos);
+        setyPos(getyPos() + yPos);
+    }
 
+    @Override
+    public void handleBeyondScene(int width, int height) {
+        if (isBeyondScene(width,height)) {
+            setDead(true);
+//            Music.bulletsCrashWall();
+        }
+    }
 
+    /******************************  绘制  ****************************/
     @Override
     public void paint(Graphics g, InputState state) {
         Graphics2D g2 = (Graphics2D) g.create();
@@ -136,20 +156,6 @@ public class Boom extends Sprite {
             case RECT -> g2.fillRect((int) getxPos(), (int) getyPos(),getWEIGHT(),getHEIGHT());
             case CIRCLE -> g2.fillOval((int) getxPos(), (int) getyPos(),getWEIGHT(),getHEIGHT());
             default -> System.out.println("其他轻装");
-        }
-    }
-
-    @Override
-    public void move(double xPos, double yPos) {
-        setxPos(getxPos() + xPos);
-        setyPos(getyPos() + yPos);
-    }
-
-    @Override
-    public void handleBeyondScene(int width, int height) {
-        if (isBeyondScene(width,height)) {
-            setDead(true);
-//            Music.bulletsCrashWall();
         }
     }
 

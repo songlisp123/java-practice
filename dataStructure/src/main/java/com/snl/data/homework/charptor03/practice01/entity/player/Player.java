@@ -2,15 +2,8 @@ package com.snl.data.homework.charptor03.practice01.entity.player;
 
 import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 import com.snl.data.homework.charptor03.practice01.Music;
-import com.snl.data.homework.charptor03.practice01.article.Smoke;
-import com.snl.data.homework.charptor03.practice01.article.SmokeImplement;
 import com.snl.data.homework.charptor03.practice01.entity.Group;
-import com.snl.data.homework.charptor03.practice01.entity.GroupImplement;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
-import com.snl.data.homework.charptor03.practice01.entity.booms.Boom;
-import com.snl.data.homework.charptor03.practice01.entity.booms.BoomGroup;
-import com.snl.data.homework.charptor03.practice01.entity.booms.TimerBoom;
-import com.snl.data.homework.charptor03.practice01.entity.enmry.AdvancedEnemy;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.Weapon;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.gun.*;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.knife.AbstractKnife;
@@ -18,14 +11,11 @@ import com.snl.data.homework.charptor03.practice01.entity.weapon.knife.SmallKnif
 import com.snl.data.homework.charptor03.practice01.entity.weapon.sword.AbstractSword;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.sword.LightSaber;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.sword.SmallSword;
-import com.snl.data.homework.charptor03.practice01.entity.weapon.sword.SwordWeapon;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 import java.awt.*;
-import java.awt.font.TextAttribute;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.text.AttributedString;
 import java.util.Collection;
 import java.util.logging.Logger;
 

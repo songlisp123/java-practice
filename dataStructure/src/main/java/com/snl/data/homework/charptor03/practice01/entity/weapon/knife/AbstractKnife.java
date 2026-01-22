@@ -14,17 +14,26 @@ import java.util.random.RandomGenerator;
 public abstract class AbstractKnife extends AbstractSword implements Knife {
 
     private Point2D start ;
+    //刀柄宽
     private double hitWidth ;
+    //刀柄高
     private double hitHeight;
+    //握把高
     private double height;
-
+    //刀刃宽
     private double slideWidth;
+    //刀刃高
     private double slideHeight;
-
+    //随机化生成器
     private final RandomGenerator generator = RandomGenerator.getDefault();
-
+    /**
+     * 以下是闪烁效果
+     */
+    //是否闪烁
     private boolean hasShing;
+    //闪烁生命周期
     private final long LIFE = 1000L;
+    //闪烁开始时间
     private long startTime;
 
 
@@ -146,7 +155,9 @@ public abstract class AbstractKnife extends AbstractSword implements Knife {
         super.update(xPos, yPos,delta, agroup, destory, wall);
         start = new Point2D.Double(xPos,yPos);
         initData();
-
+        /*
+        闪烁效果
+         */
         long now = System.currentTimeMillis();
         if (hasShing && now - startTime>=LIFE) {
             hasShing = false;
