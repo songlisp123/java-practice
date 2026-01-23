@@ -6,6 +6,8 @@ import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.GroupImplement;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.entity.enmry.Enemy;
+import com.snl.data.homework.charptor03.practice01.entity.goods.AbstractGoods;
+import com.snl.data.homework.charptor03.practice01.entity.goods.LifeGoods;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 import java.awt.*;
@@ -88,13 +90,15 @@ public abstract class AbstractSword extends Sprite implements SwordWeapon {
 
     /**
      * 攻击时的剑的动作
-     * @param xPos 玩家的位置
-     * @param yPos 和玩家的位置相关
-     * @param agroup 敌人组
-     * @param destory  毁灭组
-     * @param wall 墙壁组
+     *
+     * @param xPos    玩家的位置
+     * @param yPos    和玩家的位置相关
+     * @param agroup  敌人组
+     * @param destory 毁灭组
+     * @param wall    墙壁组
+     * @param goods
      */
-    public void update(double xPos, double yPos,double delta,Group agroup,Group destory,Group wall) {
+    public void update(double xPos, double yPos, double delta, Group agroup, Group destory, Group wall, Group<AbstractGoods> goods) {
         setxPos(xPos);
         setyPos(yPos);
         long now = System.currentTimeMillis();
@@ -155,6 +159,11 @@ public abstract class AbstractSword extends Sprite implements SwordWeapon {
                 if (((Enemy) next).getLifePoints() == 0 ){
                     next.setDead(true);
                     destory.add(next);
+                    //敌人死亡，创建掉落物品
+                    var p =
+                            LifeGoods.getInstance(next.getxPos(),next.getyPos(),
+                                    next.getWEIGHT(), next.getHEIGHT(),12.5);
+                    goods.add(p);
                 }
             }
         }

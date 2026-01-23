@@ -4,6 +4,8 @@ import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
+import com.snl.data.homework.charptor03.practice01.entity.goods.AbstractGoods;
+import com.snl.data.homework.charptor03.practice01.entity.goods.LifeGoods;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.Weapon;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.gun.*;
 import com.snl.data.homework.charptor03.practice01.entity.weapon.knife.AbstractKnife;
@@ -16,7 +18,10 @@ import com.snl.data.homework.charptor03.practice01.state.InputState;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class Player extends Sprite implements PlayerAction {
@@ -142,6 +147,10 @@ public class Player extends Sprite implements PlayerAction {
 
     private AbstractKnife knife;
 
+    //获取物品后的文字
+    String goodInfo;
+    private List<GoodInfo> goodInfos = new ArrayList<>();
+
     public Player() {
         super();
         initData();
@@ -176,6 +185,7 @@ public class Player extends Sprite implements PlayerAction {
         //初始化生命槽
         stringPoint2D = new Point2D.Double(getxPos() ,getyPos()-40);
         string = "";
+        goodInfo = "";
         //计算生命槽
         calculateLife();
         //重置位置
@@ -216,13 +226,15 @@ public class Player extends Sprite implements PlayerAction {
 
     /**
      * 更新玩家
-     * @param delta 时间间隔
-     * @param state 输入状态
-     * @param aGroup 敌人组
+     *
+     * @param delta   时间间隔
+     * @param state   输入状态
+     * @param aGroup  敌人组
      * @param destory 摧毁的精灵集合
-     * @param wall 墙壁组
+     * @param wall    墙壁组
+     * @param goods
      */
-    public void update(double delta,InputState state,Group aGroup,Group destory,Group wall) {
+    public void update(double delta, InputState state, Group aGroup, Group destory, Group wall, Group<AbstractGoods> goods) {
         if (state.up && onGround) {
             //如果当玩家处于地面切向上按钮按下的时候
             Y_SPEED = -15;
@@ -248,11 +260,20 @@ public class Player extends Sprite implements PlayerAction {
         //更换武器
         changeWeapon();
         //更新武器
-        updateWeapon(delta,state,aGroup,destory,wall);
+        updateWeapon(delta,state,aGroup,destory,wall,goods);
         //更新生命槽
         calculateLife();
         //更新弹药位置
         updateBooms();
+        //更新文本
+        updateGoodsInfo();
+    }
+
+    private void updateGoodsInfo() {
+        if (goodInfos.isEmpty())
+            return;
+        //如果有下一个怎么办？？
+        goodInfos.removeIf(GoodInfo::isDead);
     }
 
     private void updateBooms() {
@@ -267,11 +288,13 @@ public class Player extends Sprite implements PlayerAction {
         }
     }
 
-    private void updateWeapon(double delta,InputState state,Group aGroup, Group destory, Group wall) {
+    private void updateWeapon(double delta, InputState state, Group aGroup, Group destory,
+                              Group wall, Group goods)
+    {
         //更新武器
         currentWeapon.update(this.getxPos() + getWEIGHT() / 2.0,
                 this.getyPos() + getHEIGHT() / 2.0,
-                delta,aGroup,destory,wall);
+                delta,aGroup,destory,wall,goods);
 
         //判断敌人是否我空或者null
         if (aGroup != null && !aGroup.isEmpty()) {
@@ -301,6 +324,37 @@ public class Player extends Sprite implements PlayerAction {
 //                    s.setDead(true);
 //                }
 //            }
+        }
+
+        //判断是否吃到掉落物品
+        handleGoods(goods);
+    }
+
+    private void handleGoods(Group goods) {
+        if (goods == null || goods.isEmpty())
+            return;
+        Collection<AbstractGoods> data = goods.getData();
+        Iterator<AbstractGoods> iterator;
+        for (iterator = data.iterator();iterator.hasNext();)
+        {
+            //获取物品元素
+            var g = iterator.next();
+            //判断是否相撞
+            if (this.isCrash(g))
+            {
+                //如果发生碰撞
+                if (g instanceof LifeGoods l)
+                {
+                    //如果是恢复生命？？
+                    double recovery = l.getRecovery();
+                    addLifePoints(recovery);
+                    goodInfo = String.format("恭喜获得 %.2f生命值",recovery);
+                }
+                g.setDead(true);
+                GoodInfo info = new GoodInfo(goodInfo);
+                goodInfos.add(info);
+            }
+
         }
     }
 
@@ -392,9 +446,18 @@ public class Player extends Sprite implements PlayerAction {
         drawLine(g2);
         paintLifePoints(g2);
         paintBombs(g2);
+        //绘制信息
+        paintInfos(g2);
         //绘制武器
         currentWeapon.render(g2);
         g2.dispose();
+    }
+
+    private void paintInfos(Graphics g) {
+        if (goodInfos.isEmpty())
+            return;
+        for (GoodInfo info :goodInfos)
+            info.render(g);
     }
 
     private void paintBombs(Graphics2D g2) {
@@ -587,4 +650,30 @@ public class Player extends Sprite implements PlayerAction {
         };
     }
 
+    class GoodInfo {
+        //字符串
+        String s;
+
+        Font font = new Font("隶书",Font.PLAIN,20);
+        long start;
+        final long life = 1000L;
+
+        public GoodInfo(String s) {
+            this.s = s;
+            start = System.currentTimeMillis();
+        }
+
+        public boolean isDead() {
+            long now = System.currentTimeMillis();
+            return now - start >= life;
+        }
+
+        public void render(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setColor(Color.cyan);
+            g2.drawString(s, (float) getxPos(), (float) (getyPos() - 50));
+            g2.dispose();
+        }
+
+    }
 }

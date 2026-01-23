@@ -1,6 +1,7 @@
 package com.snl.data.homework.charptor03.practice01.entity;
 
 import com.snl.data.homework.charptor03.practice01.entity.enmry.Enemy;
+import com.snl.data.homework.charptor03.practice01.entity.goods.AbstractGoods;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -45,17 +46,22 @@ public class GroupImplement<T extends Sprite> implements Group<T> {
     /**
      * 更新子弹
      * @param delta 时间间隔
-     * @param aGroup 敌人组
+     * @param walls 墙壁组
      */
-    public void update(double delta,Group aGroup) {
+    public void update(double delta,Group walls) {
         if (isEmpty())
+            return;
+        if (walls == null || walls.isEmpty())
             return;
         Iterator<T> iterator;
         for (iterator = data.iterator();iterator.hasNext();)
         {
-            //与墙发生碰撞
-            var next = (Enemy)iterator.next();
-            next.update(delta,null,aGroup);
+            //与墙发生碰撞,如果是敌人
+            var next = iterator.next();
+            if (next instanceof Enemy e)
+                e.update(delta,null,walls);
+            else if (next instanceof AbstractGoods g)
+                g.update(delta,walls);
             if(next.isDead()) iterator.remove();
         }
     }

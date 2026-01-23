@@ -5,6 +5,7 @@ import com.snl.data.homework.charptor03.practice01.article.Article;
 import com.snl.data.homework.charptor03.practice01.article.SwordArticle;
 import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.booms.BoomShape;
+import com.snl.data.homework.charptor03.practice01.entity.goods.AbstractGoods;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -48,8 +49,8 @@ public class LightSaber extends AbstractSword {
     }
 
     @Override
-    public void update(double xPos, double yPos,double delta, Group agroup, Group destory, Group wall) {
-        super.update(xPos, yPos,delta, agroup, destory, wall);
+    public void update(double xPos, double yPos, double delta, Group agroup, Group destory, Group wall, Group<AbstractGoods> goods) {
+        super.update(xPos, yPos,delta, agroup, destory, wall, goods);
         start = new Point2D.Double(xPos,yPos);
         initData();
         long now = System.currentTimeMillis();

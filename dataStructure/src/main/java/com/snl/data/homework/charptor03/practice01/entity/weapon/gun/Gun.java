@@ -9,6 +9,7 @@ import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.entity.booms.Boom;
 import com.snl.data.homework.charptor03.practice01.entity.booms.BoomGroup;
 import com.snl.data.homework.charptor03.practice01.entity.booms.TimerBoom;
+import com.snl.data.homework.charptor03.practice01.entity.goods.AbstractGoods;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
 
 import java.awt.*;
@@ -111,9 +112,9 @@ public abstract class Gun extends Sprite implements GunWeapon {
         smokes.render(g);
     }
 
-    public void update(double x,double y,
+    public void update(double x, double y,
                        double delta, Group aGroup,
-                       Group destory, Group wall) {
+                       Group destory, Group wall, Group<AbstractGoods> goods) {
         //更新武器
         update(x,y);
         //TODO

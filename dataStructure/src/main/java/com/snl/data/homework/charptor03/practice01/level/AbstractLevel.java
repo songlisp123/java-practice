@@ -4,9 +4,11 @@ import com.snl.data.homework.charptor03.practice01.CONSTANTS.GameConstants;
 import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.camary.Camera;
 import com.snl.data.homework.charptor03.practice01.entity.Door;
+import com.snl.data.homework.charptor03.practice01.entity.Group;
 import com.snl.data.homework.charptor03.practice01.entity.GroupImplement;
 import com.snl.data.homework.charptor03.practice01.entity.Sprite;
 import com.snl.data.homework.charptor03.practice01.entity.enmry.Enemy;
+import com.snl.data.homework.charptor03.practice01.entity.goods.AbstractGoods;
 import com.snl.data.homework.charptor03.practice01.entity.goods.Coin;
 import com.snl.data.homework.charptor03.practice01.entity.player.Player;
 import com.snl.data.homework.charptor03.practice01.entity.wall.Wall;
@@ -26,6 +28,7 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
     private Door door;
     private boolean showDoor;
     private boolean isReating;
+    private GroupImplement<AbstractGoods> goods;
 
     private Camera camera;
 
@@ -41,7 +44,8 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         walls = new GroupImplement<>();
         showDoor = false;
         camera = new Camera(GameConstants.Weight,GameConstants.Height);
-        //填充精灵
+        //掉落物品
+        goods = new GroupImplement<>();
     }
 
     // ********************  重置  ***************************//
@@ -53,6 +57,10 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         player.reset();
         enmries.reset();
         coins.reset();
+        //重置物品
+        if (!goods.isEmpty()) {
+            goods.clear();
+        }
         if (showDoor)
             showDoor = false;
     }
@@ -69,6 +77,7 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         enmries.render(g2);
         walls.render(g2);
         coins.render(g2);
+        goods.render(g2);
         if (showDoor)
             door.paint(g2);
         g2.setTransform(old);
@@ -78,14 +87,15 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
     // ********************  更新  ***************************//
     @Override
     public void update(double delta, InputState state, int weight, int height) {
-        player.update(delta,state,enmries,destoryedSprite,walls);
+        player.update(delta,state,enmries,destoryedSprite,walls,goods);
         enmries.update(delta,walls);
         coins.update(delta);
         walls.update(delta);
         //实现有待完善
         if (player.isBeyondScene(weight,height))
             player.handleBeyondScene(weight,height+400);
-        //如果玩家碰到墙壁
+        //更新掉落物品
+        goods.update(delta,walls);
         //判断元素是否消失
         eatCoin();
         //检查是否成功
