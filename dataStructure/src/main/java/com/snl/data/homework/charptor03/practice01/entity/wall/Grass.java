@@ -15,7 +15,13 @@ public class Grass extends Wall {
 
     @Override
     public void update(double delta, InputState state) {
-        setColor(InputState.changeIngColor?GameConstants.Grass:GameConstants.Grass02);
+        Color temp =  getColor();
+        Color color = InputState.changeIngColor ? GameConstants.Grass : GameConstants.Grass02;
+        if (temp == color)
+        {
+            return;
+        }
+        setColor(color);
         super.getTexture();
         super.initPaint();
     }
@@ -28,7 +34,7 @@ public class Grass extends Wall {
         //青草
         g2.setColor(getColor());
         g2.fillRect(0,0,szie,szie / 3);
-        g2.setColor(GameConstants.tuRang);
+        g2.setColor(InputState.changeIngColor?GameConstants.tuRang02 : GameConstants.tuRang);
         g2.fillRect(0,szie / 3,szie,szie - szie / 3);
         g2.dispose();
         return bi;
