@@ -32,6 +32,10 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
 
     private Camera camera;
 
+    //更新颜色
+    long start;
+    long span = 1000L;
+
     public AbstractLevel() {
         initData();
     }
@@ -46,6 +50,8 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         camera = new Camera(GameConstants.Weight,GameConstants.Height);
         //掉落物品
         goods = new GroupImplement<>();
+        //初始化时间
+        start = System.currentTimeMillis();
     }
 
     // ********************  重置  ***************************//
@@ -104,6 +110,15 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         camera.y = player.getyPos() + player.getHEIGHT() / 2.0 - camera.height / 2.0;
         camera.y = Math.max(0, camera.y);
         camera.y = Math.min(camera.y,GameConstants.MAPHeight- camera.height);
+
+        //更新颜色
+        long now = System.currentTimeMillis();
+        if (now - start >= span)
+        {
+            //更新颜色
+            InputState.changeIngColor = !InputState.changeIngColor;
+            start = now;
+        }
     }
 
     /**

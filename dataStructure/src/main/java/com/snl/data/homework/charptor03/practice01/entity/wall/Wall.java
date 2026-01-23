@@ -72,4 +72,8 @@ public abstract class Wall extends Sprite  {
     public TexturePaint getPaint() {
         return paint;
     }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }

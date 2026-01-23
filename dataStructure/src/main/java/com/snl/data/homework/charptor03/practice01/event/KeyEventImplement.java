@@ -44,6 +44,10 @@ public class KeyEventImplement implements KeyListener {
             case '1' ,'2','3' , '4','5','6' , '7':
                 InputState.c = keyChar;
                 break;
+            case 't' , 'T' :
+                System.out.println("按下T");
+                InputState.changeIngColor = !InputState.changeIngColor;
+                break;
             default:
                 break;
         }

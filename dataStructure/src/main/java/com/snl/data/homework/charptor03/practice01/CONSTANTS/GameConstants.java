@@ -47,9 +47,12 @@ public class GameConstants {
 
 
     /*            颜色               */
-    public static final Color tuRang = new Color(255,200,0,150);
+    public static final Color tuRang02 = new Color(255,200,0,150);
+    public static final Color tuRang = new Color(255,0,255,150);
     public static final Color Water = new Color(0,255,255,150);
+    public static final Color Water02 = new Color(220, 30, 30,156);
     public static final Color Grass = new Color(0,255,0,180);
+    public static final Color Grass02 = new Color(255,0,0,180);
     public static final Color Stone = new Color(205,205,205,180);
     public static final Color MUCHAI = new Color(212, 169, 21, 255);
 }

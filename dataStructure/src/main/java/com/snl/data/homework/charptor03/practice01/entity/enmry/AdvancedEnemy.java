@@ -45,6 +45,11 @@ public class AdvancedEnemy extends Enemy {
     private long startTalking;
     private StringTalk talk;
 
+    //眨眼间隔
+    long zhaYan;
+    final  long STEP = 1_000L;
+    boolean isShing;
+
 
     public AdvancedEnemy(double xPos, double yPos, int WEIGHT, int HEIGHT) {
         super(xPos, yPos, WEIGHT, HEIGHT);
@@ -60,6 +65,8 @@ public class AdvancedEnemy extends Enemy {
         startTalking = start;
         //脏话
         talk = new StringTalk();
+        //眨眼开始时间
+        zhaYan = System.currentTimeMillis();
     }
 
     private void createPaint() {
@@ -142,17 +149,31 @@ public class AdvancedEnemy extends Enemy {
         int packedColor;
         int packed;
 
-        if (alpha >= 255)
-            changing = true;
-        if (changing) {
-            alpha--;
-            if (alpha <= 0)
-            {
-                alpha = 0;
-                changing = false;
-            }
-        }else
-            alpha++;
+        //根据眨眼时长
+        long now = System.currentTimeMillis();
+        if (now - zhaYan >= 500L && !isShing) {
+            //眨眼动作
+            alpha = 255;
+            zhaYan = now;
+            isShing = true;
+        }
+        if (isShing && now - zhaYan >= STEP)
+        {
+            alpha = 0;
+            zhaYan = now;
+            isShing = false;
+        }
+//        if (alpha >= 255)
+//            changing = true;
+//        if (changing) {
+//            alpha--;
+//            if (alpha <= 0)
+//            {
+//                alpha = 0;
+//                changing = false;
+//            }
+//        }else
+//            alpha++;
         packed = (alpha << 24);
         packedColor = packed |  0X00FFFF00;
         int[] color = new int[]{
