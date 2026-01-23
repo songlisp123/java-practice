@@ -41,6 +41,10 @@ public class AdvancedEnemy extends Enemy {
     private int alpha;
 
     private boolean changing;
+    private String s;
+    private long startTalking;
+    private StringTalk talk;
+
 
     public AdvancedEnemy(double xPos, double yPos, int WEIGHT, int HEIGHT) {
         super(xPos, yPos, WEIGHT, HEIGHT);
@@ -53,6 +57,9 @@ public class AdvancedEnemy extends Enemy {
         boomGroup = new BoomGroup(200);
         //攻击的时间
         start = System.currentTimeMillis();
+        startTalking = start;
+        //脏话
+        talk = new StringTalk();
     }
 
     private void createPaint() {
@@ -76,7 +83,15 @@ public class AdvancedEnemy extends Enemy {
         //创建纹理
         createPaint();
         //更新alpha
+        //更新脏话
+        updateZhangHuang(now);
+    }
 
+    private void updateZhangHuang(long now) {
+        if (now - startTalking>=1_500L) {
+            talk.update();
+            startTalking = now;
+        }
     }
 
     private void fillBooms() {
@@ -94,8 +109,14 @@ public class AdvancedEnemy extends Enemy {
 
     @Override
     public void paint(Graphics g, InputState state) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        g2.setColor(Color.cyan);
         super.paint(g, state);
         boomGroup.render(g);
+        //绘制脏话
+        g2.drawString(talk.talk(),(int) (getxPos() + getWEIGHT()),
+                (int) (getyPos()) + getHEIGHT() / 2);
+        g2.dispose();
     }
 
     @Override
@@ -162,29 +183,21 @@ public class AdvancedEnemy extends Enemy {
         bi.setRGB(getWEIGHT() - EYE_WEIGHT - 5,5,EYE_WEIGHT,EYE_HEIGHT,color,0,EYE_WEIGHT);
 
         //绘制嘴巴
+        packedColor = packed | 0x00FF0000;
         int[] mouse = new int[] {
-            0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
-                0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,0xff00ffff,
+                packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor, packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,
+                packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor, packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,
+                packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor, packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,
+                packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor, packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,
+                packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor, packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,
+                packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor, packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,
+                packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor, packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,
+                packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor, packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,
+                packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor, packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,
+                packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor, packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,
         };
         bi.setRGB(15,30,MOUSE_WEIGHT,MOSE_HEIGHT,mouse,0,MOUSE_WEIGHT);
         return bi;
     }
+
 }

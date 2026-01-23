@@ -51,7 +51,7 @@ public class Enemy extends Sprite {
     private boolean hasShing;
     private long startShing;
     Paint paint = Color.RED;
-    final Color defaultColor = Color.red;
+    final Color defaultColor = Color.WHITE;
 
     public Enemy() {
     }
