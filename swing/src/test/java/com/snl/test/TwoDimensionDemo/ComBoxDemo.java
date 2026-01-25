@@ -94,7 +94,7 @@ public class ComBoxDemo extends JPanel implements ListDataListener , MouseListen
         ComBoxDemo demo = new ComBoxDemo();
         var uiDemo = new SpotLightLayerUiDemo();
         var layer = new JLayer<>(demo,uiDemo);
-        frame.add(layer);
+        frame.add(demo);
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);

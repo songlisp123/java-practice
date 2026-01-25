@@ -1,5 +1,6 @@
 package com.snl.data.homework.charptor03.practice01.event;
 
+import com.snl.data.homework.charptor03.practice01.Music;
 import com.snl.data.homework.charptor03.practice01.state.Direction;
 import com.snl.data.homework.charptor03.practice01.state.GameState;
 import com.snl.data.homework.charptor03.practice01.state.InputState;
@@ -46,6 +47,7 @@ public class KeyEventImplement implements KeyListener {
                 break;
             case 't' , 'T' :
                 InputState.changeIngColor = !InputState.changeIngColor;
+                Music.backGround();
                 break;
             default:
                 break;

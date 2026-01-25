@@ -1,4 +1,4 @@
-package com.snl.test.filechooser;
+package com.snl.test.image.homework01;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.File;

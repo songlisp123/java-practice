@@ -243,7 +243,7 @@ public class Music {
 
     public static void backGround() {
         String[] strings = {"/wav/背景01.wav","/wav/背景02.wav","/wav/复古.wav","/wav/快速.wav","/wav/严肃.wav"};
-        playAudio(strings[4 % strings.length]);
+        playAudio(strings[2 % strings.length]);
     }
 
 

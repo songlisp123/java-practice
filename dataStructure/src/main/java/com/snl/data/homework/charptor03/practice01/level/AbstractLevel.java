@@ -34,7 +34,7 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
 
     //更新颜色
     long start;
-    long span = 1000L;
+    long span = 500L;
 
     public AbstractLevel() {
         initData();
@@ -111,14 +111,14 @@ public abstract class AbstractLevel<T extends Sprite> implements Level<T> {
         camera.y = Math.max(0, camera.y);
         camera.y = Math.min(camera.y,GameConstants.MAPHeight- camera.height);
 
-        //更新颜色,暂时不实现
-//        long now = System.currentTimeMillis();
-//        if (now - start >= span)
-//        {
-//            //更新颜色
-//            InputState.changeIngColor = !InputState.changeIngColor;
-//            start = now;
-//        }
+//        更新颜色,暂时不实现
+        long now = System.currentTimeMillis();
+        if (now - start >= span)
+        {
+            //更新颜色
+            InputState.changeIngColor = !InputState.changeIngColor;
+            start = now;
+        }
     }
 
     /**

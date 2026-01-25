@@ -1,4 +1,4 @@
-package com.snl.test.panel;
+package com.snl.test.textMove;
 
 import com.snl.swing.practice.button.CustomButton;
 

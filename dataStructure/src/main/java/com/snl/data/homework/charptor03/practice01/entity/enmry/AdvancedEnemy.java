@@ -204,7 +204,7 @@ public class AdvancedEnemy extends Enemy {
         bi.setRGB(getWEIGHT() - EYE_WEIGHT - 5,5,EYE_WEIGHT,EYE_HEIGHT,color,0,EYE_WEIGHT);
 
         //绘制嘴巴
-        packedColor = packed | 0x00FF0000;
+        packedColor = 0x80FF0000;
         int[] mouse = new int[] {
                 packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor, packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,
                 packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor, packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,packedColor,
