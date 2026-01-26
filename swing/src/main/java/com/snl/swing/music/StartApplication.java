@@ -1,4 +1,4 @@
-package music;
+package com.snl.swing.music;
 
 import javax.swing.*;
 

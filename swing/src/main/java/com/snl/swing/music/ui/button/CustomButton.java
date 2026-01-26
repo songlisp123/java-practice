@@ -1,4 +1,4 @@
-package music.ui.button;
+package com.snl.swing.music.ui.button;
 
 import javax.swing.*;
 import java.awt.*;

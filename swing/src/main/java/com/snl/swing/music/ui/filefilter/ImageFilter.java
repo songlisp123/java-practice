@@ -1,13 +1,13 @@
-package music.ui.filefilter;
+package com.snl.swing.music.ui.filefilter;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
 import java.util.regex.Pattern;
 
-public class MusicFilter extends FileFilter {
+public class ImageFilter extends FileFilter {
 
     protected static final Pattern pattern =
-            Pattern.compile(".+\\.(mp3|wav|flac)$");
+            Pattern.compile(".+\\.(png|gif|jepg|jpg|tif|tiff)$");
 
     @Override
     public boolean accept(File f) {
@@ -16,6 +16,6 @@ public class MusicFilter extends FileFilter {
 
     @Override
     public String getDescription() {
-        return "仅音乐";
+        return "仅图片";
     }
 }

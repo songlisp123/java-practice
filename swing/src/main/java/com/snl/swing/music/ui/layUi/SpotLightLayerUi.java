@@ -1,4 +1,4 @@
-package music.ui.layUi;
+package com.snl.swing.music.ui.layUi;
 
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;

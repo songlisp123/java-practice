@@ -1,8 +1,8 @@
-package music;
+package com.snl.swing.music;
 
-import music.ui.button.CustomButton;
-import music.ui.filefilter.JFileChooserDemo;
-import music.ui.processBar.RangeBoundModelModelImplement;
+import com.snl.swing.music.ui.button.CustomButton;
+import com.snl.swing.music.ui.filefilter.JFileChooserDemo;
+import com.snl.swing.music.ui.processBar.RangeBoundModelModelImplement;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -434,6 +434,7 @@ public class MusicPanelDemo extends JPanel  {
 
         if (selectFile != null) {
             //处理逻辑
+            System.out.println("selectFile = " + selectFile);
             for (int i = 0;i<musicPaths.size();i++) {
                 Path path = musicPaths.get(i);
                 if (Objects.equals(path.toFile(),selectFile)) {
@@ -528,6 +529,7 @@ public class MusicPanelDemo extends JPanel  {
                         .filter(path -> path.toString().endsWith("wav"))
                         .forEach(musicPaths::add);
             }
+            System.out.println("musicPaths = " + musicPaths.size());
             return null;
         }
 

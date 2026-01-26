@@ -1,4 +1,4 @@
-package music.ui.processBar;
+package com.snl.swing.music.ui.processBar;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

@@ -1,4 +1,4 @@
-package music.ui.filefilter;
+package com.snl.swing.music.ui.filefilter;
 
 import javax.swing.*;
 
