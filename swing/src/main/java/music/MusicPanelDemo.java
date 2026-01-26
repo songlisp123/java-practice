@@ -1,10 +1,8 @@
-package com.snl.test.music;
+package music;
 
-import audio.ChooseBestMixer;
-import audio.ChooseSourceLine;
-import com.snl.swing.practice.button.CustomButton;
-import com.snl.swing.practice.filefilter.JFileChooserDemo;
-import com.snl.test.music.processBar.RangeBoundModelModelImplement;
+import music.ui.button.CustomButton;
+import music.ui.filefilter.JFileChooserDemo;
+import music.ui.processBar.RangeBoundModelModelImplement;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -182,20 +180,6 @@ public class MusicPanelDemo extends JPanel  {
         return new Dimension(600,500);
     }
 
-    private static void createUi() {
-        JFrame frame = new JFrame("测试");
-        var panel = new MusicPanelDemo();
-        frame.add(panel);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(MusicPanelDemo::createUi);
-    }
-
     class Task extends SwingWorker<Void,Integer> {
 
         protected int process;
@@ -232,6 +216,7 @@ public class MusicPanelDemo extends JPanel  {
                     if (task.isCancelled()) {
                         sourceDataLine.drain();
                         sourceDataLine.close();
+                        stream.close();
                         break;
                     }
                     if (!playing) {
@@ -256,6 +241,7 @@ public class MusicPanelDemo extends JPanel  {
                     read = stream.read(storeBytes, 0, 4096);
                 }
                 sourceDataLine.drain();
+                sourceDataLine.close();
                 sourceDataLine.close();
             }
             return null;
@@ -551,4 +537,5 @@ public class MusicPanelDemo extends JPanel  {
             System.out.println("任务完成");
         }
     }
+
 }

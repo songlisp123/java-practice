@@ -8,7 +8,6 @@ public class SimpleTableCellRenderer extends JLabel implements TableCellRenderer
 
     public SimpleTableCellRenderer() {
         setOpaque(true);
-//        this.addMouseListener(this);
     }
 
     @Override

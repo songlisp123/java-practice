@@ -10,6 +10,7 @@ import java.awt.geom.RectangularShape;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class OptionFrame extends JFrame implements MaskPropertyListener, ColorCompomentImplement {
 
@@ -109,7 +110,8 @@ public class OptionFrame extends JFrame implements MaskPropertyListener, ColorCo
                         Objects.equals(oldSelectedFile,currentFile))
                     //如果当前选择为null或者选择相同
                     return;
-                if (currentFile.isFile() && currentFile.canRead())
+                if (currentFile.isFile() && currentFile.canRead()
+                    && currentFile.getPath().matches(ImageFilter.pattern.pattern()))
                 {
                     //否则
                     BufferedImage image = Utilies.makeBufferImage(Utilies.blockingLoad(currentFile));
@@ -147,9 +149,18 @@ public class OptionFrame extends JFrame implements MaskPropertyListener, ColorCo
 
         c.gridx = 0;
         c.gridy = 1;
+        c.anchor = GridBagConstraints.NORTHEAST;
+        c.gridheight = 1;
+        c.weightx = 0.3f;
+        c.weighty = 0.1f;
+        c.fill = GridBagConstraints.BOTH;
+        JLabel label = new JLabel("你好世界",JLabel.CENTER);
+        contentPane.add(label,c);
+
+        c.gridx = 0;
+        c.gridy = 2;
         c.anchor = GridBagConstraints.CENTER;
         c.gridwidth = GridBagConstraints.REMAINDER;
-        c.gridheight = 1;
         c.weightx = 0.8f;
         c.weighty = 0.7f;
         c.fill = GridBagConstraints.BOTH;
@@ -157,7 +168,7 @@ public class OptionFrame extends JFrame implements MaskPropertyListener, ColorCo
         contentPane.add(pane,c);
 
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 3;
         c.gridwidth = 1;
         c.anchor = GridBagConstraints.PAGE_END;
         c.weightx = 0.3f;
@@ -167,7 +178,6 @@ public class OptionFrame extends JFrame implements MaskPropertyListener, ColorCo
         contentPane.add(executeButton,c);
 
         c.gridx = 1;
-        c.gridy = 2;
         c.gridwidth = GridBagConstraints.RELATIVE;
         c.weighty = 0.1f;
         c.insets = new Insets(0,0,20,0);

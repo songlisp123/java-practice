@@ -1,4 +1,4 @@
-package com.snl.test.music;
+package music.ui;
 
 import com.snl.swing.practice.button.CustomButton;
 

@@ -1,4 +1,4 @@
-package com.snl.test.music;
+package music;
 
 import java.awt.*;
 import java.awt.geom.Point2D;

@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class ImageFilter extends FileFilter {
 
-    protected static final Pattern pattern =
+    static final Pattern pattern =
             Pattern.compile(".+\\.(jpg|png|gif|jepg|tif|tiff)$");
 
     @Override
