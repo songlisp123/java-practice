@@ -1,4 +1,4 @@
-package com.snl.test.image.homework01;
+package com.snl.swing.homework01.ui.table;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;

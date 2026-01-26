@@ -1,4 +1,4 @@
-package com.snl.test.image.homework01;
+package com.snl.swing.homework01.data;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;

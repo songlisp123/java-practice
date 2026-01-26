@@ -1,6 +1,15 @@
-package com.snl.test.image.homework01;
+package com.snl.swing.homework01;
 
-import com.snl.swing.practice.button.CustomButton;
+import com.snl.swing.homework01.data.TableModelImplement;
+import com.snl.swing.homework01.ui.button.CustomButton;
+import com.snl.swing.homework01.ui.fileCHooser.FileViewDemo;
+import com.snl.swing.homework01.ui.fileCHooser.ImageFilter;
+import com.snl.swing.homework01.ui.fileCHooser.ImagePreviewer;
+import com.snl.swing.homework01.ui.imageFrame.ColorCompomentImplement;
+import com.snl.swing.homework01.ui.imageFrame.ImagePanel;
+import com.snl.swing.homework01.ui.imageFrame.MaskPropertyListener;
+import com.snl.swing.homework01.ui.table.SimpleTableCellRenderer;
+import com.snl.swing.homework01.utils.Utilies;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +19,6 @@ import java.awt.geom.RectangularShape;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 public class OptionFrame extends JFrame implements MaskPropertyListener, ColorCompomentImplement {
 
@@ -196,11 +204,6 @@ public class OptionFrame extends JFrame implements MaskPropertyListener, ColorCo
         tableModel.clear();
         repaint();
     }
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(OptionFrame::new);
-    }
-
 
     @Override
     public void updateMaks(RectangularShape mask) {

@@ -1,14 +1,9 @@
-package com.snl.test.image.homework01;
+package com.snl.swing.homework01.ui.fileCHooser;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.List;
-import java.util.Objects;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 /**
  * A file chooser accessory that previews images.

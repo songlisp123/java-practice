@@ -1,4 +1,6 @@
-package com.snl.test.image.homework01;
+package com.snl.swing.homework01.ui.imageFrame;
+
+import com.snl.swing.homework01.utils.Utilies;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;

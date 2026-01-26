@@ -9,7 +9,6 @@ import com.snl.swing.practice.combox.app.SimpleFontComBoxDemo;
 import com.snl.swing.practice.combox.app.SimpleFontSizeComBoxModel;
 import com.snl.swing.practice.combox.app.TitleDemo;
 import com.snl.swing.practice.filefilter.JFileChooserDemo;
-import com.snl.swing.practice.layUi.SpotLightLayerUiDemo;
 import com.snl.swing.practice.listener.DocumentListenerArea;
 import com.snl.swing.practice.listener.KeyListenLogTextArea;
 import com.snl.swing.practice.processBar.ProcessBarDemo;
@@ -361,9 +360,9 @@ public class MainPanel extends JPanel implements ActionListener, CaretListener {
                 pos[0]
         );
         StyledDocument styledDocument = editTextPanel.getPane().getStyledDocument();
-        Style style = styledDocument.getStyle("music");
+        Style style = styledDocument.getStyle("com/snl/swing/music");
         if (style==null) {
-            style = styledDocument.addStyle("music",null);
+            style = styledDocument.addStyle("com/snl/swing/music",null);
         }
         if (Objects.nonNull(answer)) {
             if (answer.equals(pos[0])) {

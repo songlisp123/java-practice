@@ -1,4 +1,4 @@
-package com.snl.test.image.homework01;
+package com.snl.swing.homework01.ui.fileCHooser;
 
 import javax.swing.filechooser.FileFilter;
 import java.io.File;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 public class ImageFilter extends FileFilter {
 
-    static final Pattern pattern =
+    public static final Pattern pattern =
             Pattern.compile(".+\\.(jpg|png|gif|jepg|tif|tiff)$");
 
     @Override
