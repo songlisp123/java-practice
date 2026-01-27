@@ -71,6 +71,11 @@ public class CustomButton extends JButton {
         g2.dispose();
     }
 
+    @Override
+    protected void paintChildren(Graphics g) {
+        super.paintChildren(g);
+    }
+
     private class MouseMotion implements MouseMotionListener {
         @Override
         public void mouseDragged(MouseEvent e) {

@@ -69,7 +69,7 @@ public class IInsertComponents extends JComboBox<String> implements ItemListener
 
 
             }else if (item.equals(options[1])){
-                ImageIcon icon = createIcon("Ours_en_peluche_-_15.jpg");
+                ImageIcon icon = createIcon("src/main/out/com/snl/swing/homework01/Ours_en_peluche_-_15.jpg");
 //                JLabel label = new JLabel("片段", icon, JLabel.CENTER);
 //                label.setCursor(Cursor.getPredefinedCursor(
 //                        Cursor.HAND_CURSOR

@@ -8,6 +8,8 @@ import com.snl.swing.homework01.ui.fileCHooser.ImagePreviewer;
 import com.snl.swing.homework01.ui.imageFrame.ColorCompomentImplement;
 import com.snl.swing.homework01.ui.imageFrame.ImagePanel;
 import com.snl.swing.homework01.ui.imageFrame.MaskPropertyListener;
+import com.snl.swing.homework01.ui.table.ColorTableCellEditor;
+import com.snl.swing.homework01.ui.table.ColorTableCellRenderer;
 import com.snl.swing.homework01.ui.table.SimpleTableCellRenderer;
 import com.snl.swing.homework01.utils.Utilies;
 
@@ -92,10 +94,12 @@ public class OptionFrame extends JFrame implements MaskPropertyListener, ColorCo
         executeButton.setToolTipText("执行对图像区域的颜色分量选择");
         tableModel = new TableModelImplement();
         //添加事件
-        tableModel.addTableModelListener(imagePanel);
+        tableModel.addColorComponentListener(imagePanel);
         table = new JTable(tableModel);
         //设置静态渲染器
+        table.setDefaultRenderer(Color.class,new ColorTableCellRenderer());
         table.setDefaultRenderer(Integer.class,new SimpleTableCellRenderer());
+        table.setDefaultEditor(Color.class,new ColorTableCellEditor());
 
 
         loadImageButton = new CustomButton("加载文件");
@@ -124,12 +128,19 @@ public class OptionFrame extends JFrame implements MaskPropertyListener, ColorCo
                     //否则
                     BufferedImage image = Utilies.makeBufferImage(Utilies.blockingLoad(currentFile));
                     imagePanel.setmImage(image); //设置图像
-                    Utilies.resizeFrame(f,imagePanel);
+                    Utilies.resizeFrame(f,imagePanel); //重置框架大小
                     //消除遮罩
                     imagePanel.setMaksShape(null);
                     //清楚模型数据
                     clearModelData();
+                    /*
+                      如果当前窗口被关闭，重新打开
+                     */
+                    if (!f.isVisible())
+                        f.setVisible(true);
+                    //重新计算布局
                     f.revalidate();
+                    //重绘该组件和其子组件
                     f.repaint();
                 }
             }
@@ -220,8 +231,10 @@ public class OptionFrame extends JFrame implements MaskPropertyListener, ColorCo
     }
 
     @Override
-    public void updateColors(int x, int y, int[] comps, int rgb) {
-        tableModel.addElements(x,y,comps,rgb);
+    public void updateColors(Object source,int x, int y, Color color) {
+        tableModel.addElements(x,y,color);
         repaint();
     }
 }
+
+//2026年1月27日14:45:08 修改底层表格模型数据

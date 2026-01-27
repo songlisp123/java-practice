@@ -221,7 +221,7 @@ public class Sampler extends JFrame {
     }
 
     public static void main(String[] args) {
-        String file = "Ours_en_peluche_-_15.jpg";
+        String file = "src/main/out/com/snl/swing/homework01/Ours_en_peluche_-_15.jpg";
         new Sampler(file);
     }
 }

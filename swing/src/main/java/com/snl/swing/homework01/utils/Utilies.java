@@ -53,6 +53,11 @@ public class Utilies {
         return image;
     }
 
+    /**
+     * 另一个版本
+     * @param f 图像文件
+     * @return image图像引用
+     */
     public static Image blockingLoad(File f) {
         Image image = Toolkit.getDefaultToolkit().createImage(f.toString());
         if (image == null)

@@ -1,15 +1,22 @@
 package com.snl.swing.homework01.data;
 
+import com.snl.swing.homework01.ui.imageFrame.ColorCompomentImplement;
+
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class TableModelImplement implements TableModel {
 
     private String[] title;//标题
     private final List<TableModelListener> listeners =
             new ArrayList<>(); //监听器
+
+    private final  List<ColorCompomentImplement> colorCompomentImplementLists =
+            new ArrayList<>();
     private Object[][] data;
 
     //更改第一次发生的行数
@@ -22,7 +29,7 @@ public class TableModelImplement implements TableModel {
 
     public TableModelImplement() {
         title = new String[]{
-                "坐标","R颜色分量","G颜色分量","B颜色分量","ARGB"
+                "坐标x","坐标y","颜色"
         };
         //默认情况
 //        data = new Object[][] {
@@ -41,7 +48,7 @@ public class TableModelImplement implements TableModel {
         {
             //data没有初始化，或者没有数据
             data = new Object[][] {
-                    {"没有数据","没有数据","没有数据","没有数据","没有数据"}
+                    {"没有数据","没有数据",0}
             };
         }
     }
@@ -80,7 +87,7 @@ public class TableModelImplement implements TableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex != 0;
+        return columnIndex  > 1;
     }
 
     @Override
@@ -113,25 +120,32 @@ public class TableModelImplement implements TableModel {
         getXAndY(rowIndex);
         firstRow = lastRow = columnIndex;
         data[rowIndex][columnIndex] = aValue;
-        fireModelEventChange(columnIndex);
+        fireColorEvent(aValue);
     }
 
     private void getXAndY(int rowIndex) {
-        String o = (String)data[rowIndex][0];
-        String[] sArray = o.split(":");
-        String y_String = sArray[2].substring(0,sArray[2].length() - 1);
-        String x_String = sArray[1].split(",")[0];
-        try {
-            y = Integer.parseInt(y_String);
-            x = Integer.parseInt(x_String);
-        }catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
+        x = (int) data[rowIndex][0];
+        y = (int) data[rowIndex][1];
     }
 
     @Override
     public void addTableModelListener(TableModelListener l) {
         listeners.add(l);
+    }
+
+    public void addColorComponentListener(ColorCompomentImplement l) {
+        colorCompomentImplementLists.add(l);
+    }
+
+    public void removeColorComponentListener(ColorCompomentImplement l) {
+        colorCompomentImplementLists.remove(l);
+    }
+
+    public void fireColorEvent(Object value) {
+        for (ColorCompomentImplement l : colorCompomentImplementLists)
+        {
+            l.updateColors(this,x,y,(Color) value);
+        }
     }
 
     @Override
@@ -146,28 +160,19 @@ public class TableModelImplement implements TableModel {
             l.tableChanged(event);
     }
 
-    public void addElements(int x, int y,int[] comps, int rgb) {
+    public void addElements(int x, int y, Color color) {
         data = Arrays.copyOf(data, id + 1); //效率太低，能否优化？？？
-        //获取红色分量
-        int red = comps[0];
-        //绿色分量
-        int green = comps[1];
-        //蓝色分量
-        int blue = comps[2];
-        //填充数据TODO
         data[id] = new Object[]{
-                "[x:%d,y:%d]".formatted(x,y),
-                red,
-                green,
-                blue,
-                rgb
+                x,
+                y,
+                color
         };
         id++;
     }
 
     public void clear() {
         data = new Object[][] {
-                {"没有数据","没有数据","没有数据","没有数据","没有数据"}
+                {"没有数据","没有数据",0}
         };
         id = 0;
     }

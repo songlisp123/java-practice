@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class ImagePanel extends JPanel implements MouseListener , MouseMotionListener , ActionListener , TableModelListener {
+public class ImagePanel extends JPanel implements
+        MouseListener , MouseMotionListener , ActionListener , TableModelListener,ColorCompomentImplement {
 
     private BufferedImage mImage;
     private Point leftPoint;
@@ -30,10 +31,6 @@ public class ImagePanel extends JPanel implements MouseListener , MouseMotionLis
     //颜色份量监听器列表
     private final List<ColorCompomentImplement> colorListeners =
             new ArrayList<>();
-    //x坐标
-    private  int x;
-    //也坐标
-    private int y;
 
     private final Pattern pattern = Pattern.compile("(png|gif|jepg|jpg|tff)$");
 
@@ -75,9 +72,11 @@ public class ImagePanel extends JPanel implements MouseListener , MouseMotionLis
         {
             g2.setColor(Color.BLACK);
             g2.setComposite(AlphaComposite.getInstance(
-                    AlphaComposite.SRC_OVER,0.6f
+                    AlphaComposite.SRC_OVER,1.0f
             ));
-            g2.fill(maksShape);
+            g2.setStroke(new BasicStroke(2,BasicStroke.CAP_ROUND,BasicStroke.JOIN_MITER,3,
+                    new float[]{4},0));
+            g2.draw(maksShape);
         }
         g2.dispose();
     }
@@ -194,6 +193,7 @@ public class ImagePanel extends JPanel implements MouseListener , MouseMotionLis
         //设置布尔变量控制
         ColorModel colorModel = mImage.getColorModel(); //颜色模型
         WritableRaster raster = mImage.getRaster(); //光栅器
+        int x,y;
         for (y = leftPoint.y;y<eastPoint.y;y++) {
             //行
             for (x = leftPoint.x;x<eastPoint.x;x++) {
@@ -202,9 +202,13 @@ public class ImagePanel extends JPanel implements MouseListener , MouseMotionLis
                         raster.getDataElements(x, y, null)
                         , null, 0);
                 //过时的老东西
-                int RGB = mImage.getRGB(x, y);
+//                int RGB = mImage.getRGB(x, y);
+                float[] normalizedComponents =
+                        colorModel.getNormalizedComponents(comp, 0, null, 0);
+                Color color = new Color(colorModel.getColorSpace(),normalizedComponents,
+                        colorModel.hasAlpha() ? 0:1);
                 //更新实践;
-                fireEvent(comp,RGB);
+                fireEvent(x,y,color);
 //              System.out.printf("坐标：[%d,%d]的颜色分量%n" +
 //                      "R:%d%n" +
 //                      "G:%d%n" +
@@ -235,9 +239,9 @@ public class ImagePanel extends JPanel implements MouseListener , MouseMotionLis
         colorListeners.remove(l);
     }
 
-    public void fireEvent(int[] comp, int RGB) {
+    public void fireEvent(int x, int y, Color color) {
         for (ColorCompomentImplement l : colorListeners)
-            l.updateColors(x,y,comp,RGB);
+            l.updateColors(this,x,y,color);
     }
 
     @Override
@@ -247,9 +251,10 @@ public class ImagePanel extends JPanel implements MouseListener , MouseMotionLis
         {
             //如果是更新事件
             int x = e.getFirstRow();
-//            mImage.getRaster().setDataElements(0,0,);
+            System.out.println("x = " + x);
             int y = e.getLastRow();
-            int column = e.getColumn();
+            System.out.println("y = " + y);
+
         }
     }
 
@@ -269,5 +274,14 @@ public class ImagePanel extends JPanel implements MouseListener , MouseMotionLis
     public void setMaksShape(RectangularShape maksShape) {
         this.maksShape = maksShape;
         fireUpdateEvent();
+    }
+
+    @Override
+    public void updateColors(Object source, int x, int y, Color color) {
+        Object dataElements = mImage.getColorModel().getDataElements(color.getComponents(
+                mImage.getColorModel().getColorSpace(), null
+        ), 0, null);
+        mImage.getRaster().setDataElements(x,y,dataElements);
+        repaint();
     }
 }
