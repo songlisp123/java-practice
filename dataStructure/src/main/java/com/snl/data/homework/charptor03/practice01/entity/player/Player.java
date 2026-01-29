@@ -496,15 +496,15 @@ public class Player extends Sprite implements PlayerAction {
         if (state.left) {
             //左按键
 //            point = new Point2D.Double()
-            leftUpConor = new Point2D.Double(x - 2.5,y);
-            rightUpConor = new Point2D.Double(x + getWEIGHT() - 2.5,y);
+            leftUpConor = new Point2D.Double(x - 4,y);
+            rightUpConor = new Point2D.Double(x + getWEIGHT() - 4,y);
         }else {
             leftUpConor = new Point2D.Double(x,y);
             rightUpConor = new Point2D.Double(x + getWEIGHT() ,y);
         }
         if (state.right) {
-            leftUpConor = new Point2D.Double(x + 2.5,y);
-            rightUpConor = new Point2D.Double(x + getWEIGHT() + 2.5,y);
+            leftUpConor = new Point2D.Double(x + 4,y);
+            rightUpConor = new Point2D.Double(x + getWEIGHT() + 4,y);
         }
     }
 

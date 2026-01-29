@@ -11,6 +11,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
+import java.awt.image.SampleModel;
 import java.awt.image.WritableRaster;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,10 +65,19 @@ public class ImagePanel extends JPanel implements
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g.create();
         g2.drawImage(mImage,null,null);
+        drawMouseShape(g2);
+        drawMask(g2);
+        g2.dispose();
+    }
+
+    private void drawMouseShape(Graphics2D g2) {
         g2.setColor(Color.cyan);
         g2.setStroke(new BasicStroke(2,BasicStroke.CAP_ROUND,BasicStroke.JOIN_MITER));
         if (shape != null)
             g2.draw(shape);
+    }
+
+    private void drawMask(Graphics2D g2) {
         if (maksShape != null)
         {
             g2.setColor(Color.BLACK);
@@ -78,7 +88,6 @@ public class ImagePanel extends JPanel implements
                     new float[]{4},0));
             g2.draw(maksShape);
         }
-        g2.dispose();
     }
 
     @Override
@@ -170,8 +179,9 @@ public class ImagePanel extends JPanel implements
                 //更新事件
                 fireUpdateEvent();
             }
+            repaint(maksShape.getBounds());
         }
-        repaint();
+
     }
 
     @Override
@@ -282,6 +292,8 @@ public class ImagePanel extends JPanel implements
                 mImage.getColorModel().getColorSpace(), null
         ), 0, null);
         mImage.getRaster().setDataElements(x,y,dataElements);
-        repaint();
+        Rectangle2D r = new Rectangle2D.Double(x,y,1,1);
+        repaint(r.getBounds());
     }
+
 }

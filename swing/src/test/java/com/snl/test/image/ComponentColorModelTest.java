@@ -62,7 +62,7 @@ public class ComponentColorModelTest  {
 
     }
 
-    private static void fillImage() {
+    static void fillImage() {
 //        int[] filled = new int[] {
 //                0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,
 //                0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,0x00ff0000,
@@ -76,7 +76,7 @@ public class ComponentColorModelTest  {
         g2.dispose();
     }
 
-    private static void createImage() {
+    static void createImage() {
         GraphicsEnvironment localGraphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice screenDevice = localGraphicsEnvironment.getDefaultScreenDevice();
         GraphicsConfiguration configuration = screenDevice.getDefaultConfiguration();
