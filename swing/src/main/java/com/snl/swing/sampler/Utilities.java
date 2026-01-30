@@ -1,4 +1,4 @@
-package com.snl.test.TEXT;
+package com.snl.swing.sampler;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;

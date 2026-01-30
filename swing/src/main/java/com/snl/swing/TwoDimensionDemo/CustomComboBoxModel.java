@@ -1,4 +1,4 @@
-package com.snl.test.TwoDimensionDemo;
+package com.snl.swing.TwoDimensionDemo;
 
 import javax.swing.*;
 import javax.swing.event.ListDataEvent;

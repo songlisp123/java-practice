@@ -1,4 +1,4 @@
-package com.snl.test.TwoDimensionDemo;
+package com.snl.swing.TwoDimensionDemo;
 
 import java.awt.*;
 import java.awt.geom.Line2D;

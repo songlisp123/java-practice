@@ -1,4 +1,4 @@
-package com.snl.test.TwoDimensionDemo.layerUi;
+package com.snl.swing.TwoDimensionDemo.layerUi;
 
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;

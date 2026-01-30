@@ -1,8 +1,7 @@
-package com.snl.test.TwoDimensionDemo.transitionDemo;
+package com.snl.swing.TwoDimensionDemo.transitionDemo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;

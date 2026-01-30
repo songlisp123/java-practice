@@ -1,6 +1,6 @@
-package com.snl.test.TwoDimensionDemo;
+package com.snl.swing.TwoDimensionDemo;
 
-import com.snl.test.TwoDimensionDemo.layerUi.SpotLightLayerUiDemo;
+import com.snl.swing.TwoDimensionDemo.layerUi.SpotLightLayerUiDemo;
 
 import javax.swing.*;
 import javax.swing.event.ListDataEvent;

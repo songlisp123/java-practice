@@ -1,4 +1,4 @@
-package com.snl.test.TwoDimensionDemo.transitionDemo;
+package com.snl.swing.TwoDimensionDemo.transitionDemo;
 
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
