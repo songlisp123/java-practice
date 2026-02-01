@@ -21,7 +21,7 @@ public class FrameV2 {
         mPreviousFilled = false;
     }
 
-    void calculateFrameRate() {
+    public void calculateFrameRate() {
         long now = System.currentTimeMillis();
         int numberOfFrames = mPreviousTimes.length;
         double newRate;
