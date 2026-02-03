@@ -11,16 +11,22 @@ public class Demo {
 
         Vector2D v2 = new Vector2D(10,12);
         Vector2D v;
-        v = t.mul(v2);
-        System.out.println("v = " + v);
 
-        v = r.mul(v2);
-        System.out.println("v = " + v);
+        Matrix3x3f s  =new Matrix3x3f(new double[][]{
+                {1,1,1},
+                {1,1,0},
+                {0,1,1},
+        });
+        s.mul(t);
 
-        v = r.mul(t).mul(v2);
-        System.out.println("v = " + v);
+        Matrix3x3f f = new Matrix3x3f(new double[][]{
+                {50,30,20},
+                {30,30,40},
+                {20,30,20},
+        });
 
-        v = t.mul(r).mul(v2);
-        System.out.println("v = " + v);
+        f = f.mul(r);
+        System.out.println(f);
+
     }
 }

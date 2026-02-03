@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 
-public class MouseInputEvent implements MouseListener, MouseMotionListener  {
+public class MouseInputEvent implements MouseListener, MouseMotionListener , MouseWheelListener {
 
     final int MOUSE_BUTTON =  3;
     private boolean[] mouses;
@@ -99,6 +99,10 @@ public class MouseInputEvent implements MouseListener, MouseMotionListener  {
                 currentPoint.getY() - MOUSE_HEIGHT / 2.0,MOUSE_WIDTH,MOUSE_HEIGHT);
     }
 
+    /**
+     * 返回屏幕坐标
+     * @return 鼠标当前的屏幕坐标
+     */
     public Point2D getCurrentPoint() {
         return currentPoint;
     }
@@ -134,5 +138,22 @@ public class MouseInputEvent implements MouseListener, MouseMotionListener  {
 
     public RectangularShape getMouseShape() {
         return mouseShape;
+    }
+
+    public Point2D getRelativePoint(Component component,double x,double y) {
+        int width = component.getWidth() / 2;
+        int height = component.getHeight() / 2;
+        double vx = x - width;
+        double vy = height - y;
+        return new Point2D.Double(vx,vy);
+    }
+
+    public Point2D getRelativePoint(Component c,Point2D p) {
+        return this.getRelativePoint(c,p.getX(),p.getY());
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+
     }
 }

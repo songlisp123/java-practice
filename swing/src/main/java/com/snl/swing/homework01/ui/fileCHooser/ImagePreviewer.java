@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.regex.Pattern;
 
 /**
- * A file chooser accessory that previews images.
+ * 图像预览器
  */
 public class ImagePreviewer extends JPanel
 {
@@ -19,8 +19,7 @@ public class ImagePreviewer extends JPanel
 
    /**
     * 构建一个图像预览图
-    * @param chooser the file chooser whose property changes trigger an image
-    *        change in this previewer
+    * @param chooser 文件过滤器
     */
    public ImagePreviewer(JFileChooser chooser)
    {
@@ -33,7 +32,7 @@ public class ImagePreviewer extends JPanel
          {
             if (event.getPropertyName() == JFileChooser.SELECTED_FILE_CHANGED_PROPERTY)
             {
-               // the user has selected a new file
+               // 用户选择新文件
                oldFile = selecedFile;
                selecedFile = (File) event.getNewValue();
                if (selecedFile == null)
@@ -43,9 +42,9 @@ public class ImagePreviewer extends JPanel
                if (selecedFile.getPath().matches(pictureReg.pattern()))
                {
                   if (label == null) label = new JLabel();
-                  // read the image into an icon
+                  //读取文件图标
                   var icon = new ImageIcon(selecedFile.getPath());
-                  // if the icon is too large to fit, scale it
+                  // 如果图标不适合，采用光滑算法
                   if (icon.getIconWidth() > getWidth())
                      icon = new ImageIcon(icon.getImage().getScaledInstance(
                              getWidth(), -1, Image.SCALE_SMOOTH));

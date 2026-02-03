@@ -75,24 +75,18 @@ public class Matrix3x3f {
                 d[j][i] = v;
             }
         }
-        this.mat = d;
-        return this;
+        return new Matrix3x3f(d);
     }
 
     //列乘行
     public Vector2D mul(Vector2D vec){
         return new Vector2D(
-                vec.x * this.mat[0][0] //
-                        + vec.y * this.mat[0][1] // V.x
-                        + vec.w * this.mat[0][2],//
-                vec.x * this.mat[1][0] //
-                        + vec.y * this.mat[1][1] // V.y
-                        + vec.w * this.mat[1][2],//
-                vec.x * this.mat[2][0] //
-                        + vec.y * this.mat[2][1] // V.w
-                        + vec.w * this.mat[2][2] //
+                this.mat[0][0] * vec.x +  this.mat[0][1] * vec.y +  this.mat[0][2] * vec.w,
+                this.mat[1][0] * vec.x + this.mat[1][1] * vec.y + this.mat[1][2] * vec.w,
+                this.mat[2][0] * vec.x + this.mat[2][1] * vec.y +  this.mat[2][2] * vec.w
         );
     }
+
 
     public static Matrix3x3f translate(Vector2D v) {
         return translate(v.x,v.y);
@@ -118,11 +112,10 @@ public class Matrix3x3f {
         });
     }
 
-
     public static  Matrix3x3f rotate(double rat) {
         return new Matrix3x3f(new double[][]{
-                {Math.sin(rat),-Math.cos(rat),0.0},
-                {Math.cos(rat),Math.sin(rat),0.0},
+                {Math.cos(rat),-Math.sin(rat),0.0},
+                {Math.sin(rat),Math.cos(rat),0.0},
                 {0.0,0.0,1.0}
         });
     }
@@ -160,6 +153,26 @@ public class Matrix3x3f {
                 {1.0,0.0,0.0},
                 {0.0,1.0,0.0},
                 {0.0,0.0,1.0},
+        });
+    }
+
+    /**
+     * 反转y轴
+     * @return 翻转Y轴
+     */
+    public static Matrix3x3f flipYAix() {
+        return new Matrix3x3f(new double[][]{
+                {1.0,.0,.0},
+                {.0,-1.0,.0},
+                {.0,.0,1.0},
+        });
+    }
+
+    public static Matrix3x3f flipXAix() {
+        return new Matrix3x3f(new double[][]{
+                {-1.0,.0,.0},
+                {.0,1.0,.0},
+                {.0,.0,1.0},
         });
     }
 

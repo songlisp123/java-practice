@@ -56,4 +56,16 @@ public class Vector2D {
                 y + "\n" +
                 w + "]";
     }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getW() {
+        return w;
+    }
 }

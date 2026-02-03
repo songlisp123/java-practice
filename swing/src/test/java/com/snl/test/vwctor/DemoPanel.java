@@ -29,6 +29,7 @@ public class DemoPanel extends JPanel {
         int width = preferredSize.width;
         int height = preferredSize.height;
         g2.translate(width / 2,height / 2);
+        g2.scale(1,-1);
         g2.setColor(Color.cyan);
         RectangularShape shape = new Rectangle2D.Double(0,0,50,50);
         RectangularShape shape2 = new Rectangle2D.Double(-50,-50,50,50);
