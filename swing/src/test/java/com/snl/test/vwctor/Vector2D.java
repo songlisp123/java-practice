@@ -68,4 +68,16 @@ public class Vector2D {
     public double getW() {
         return w;
     }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public void setW(double w) {
+        this.w = w;
+    }
 }

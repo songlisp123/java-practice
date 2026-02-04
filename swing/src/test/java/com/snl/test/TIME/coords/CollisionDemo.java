@@ -1,7 +1,6 @@
 package com.snl.test.TIME.coords;
 
 import com.snl.test.TIME.Body;
-import com.snl.test.frame.util.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,8 +28,6 @@ public class CollisionDemo extends DiKaEr {
 
     private void createBody01() {
         body = new Body(2.0,.0);
-        body.setW(20);
-        body.setH(20);
     }
 
     @Override
@@ -82,11 +79,11 @@ public class CollisionDemo extends DiKaEr {
         double right = sP.getX() + body02.getW() ;
         double left = sP.getX() ;
         double dxLeft = Math.abs(right - sp2.getX());
-        double dxRight = Math.abs(left - sp2.getX() + body.getW());
+        double dxRight = Math.abs(left - (sp2.getX() + body.getW()));
 
-        double min = Math.min(dxLeft,dxRight);
+        double min = Math.min(Math.min(dxLeft,dxRight),body02.getW());
 
-        if (min<=body.getW())
+        if (min == dxLeft || min == dxRight)
         {
             body02.flipXSpeed();
         }
