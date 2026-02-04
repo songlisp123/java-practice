@@ -183,8 +183,8 @@ public class ScreenMappingDemo extends JFrame implements Runnable {
 
 
     private void drawTri(Graphics2D g2) {
-        double w = 10.0;
-        double h = 10.0;
+        double w = 2.0;
+        double h = 2.0;
 
         int cw = c.getWidth() - 1;
         int ch = c.getHeight() - 1;

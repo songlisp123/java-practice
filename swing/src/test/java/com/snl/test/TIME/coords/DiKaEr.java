@@ -32,6 +32,7 @@ public class DiKaEr extends JFrame implements Runnable {
     int GAP = 50;
     int step = 5 , scale =  1;
     List<Point2D> points = new ArrayList<>(); //世界坐标点
+    Point2D currentPoint;
 
     public DiKaEr() throws HeadlessException {
         super("测试框架");
@@ -160,12 +161,40 @@ public class DiKaEr extends JFrame implements Runnable {
 
     public void reset() {
         points.clear();
+        currentPoint = null;
     }
 
     public void updateSprite(double delta) {
         v2.calculateFrameRate();
         axis.updateAxis(delta);
+        checkPoint();
         //TODO
+    }
+
+    private void checkPoint() {
+        if (points.isEmpty())
+            return;
+        Point2D mP = camera.ScreenToWorld(mouseInputEvent.getCurrentPoint());
+        for (Point2D p : points)
+        {
+            //判断
+            double x = p.getX();
+            double y = p.getY();
+            if (x - .1 <= mP.getX() && x + 0.1 >= mP.getX() &&
+                    y -0.1 <= mP.getY() && y + .1 >= mP.getY()) {
+                currentPoint = p;
+                break;
+            }
+            currentPoint = null;
+        }
+
+        if (currentPoint != null)
+        {
+            c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        }
+        else {
+            c.setCursor(null);
+        }
     }
 
     private void render() {
@@ -220,6 +249,12 @@ public class DiKaEr extends JFrame implements Runnable {
             g2.drawString("[%.2f,%.2f]".formatted(p.getX(), p.getY()),
                     (int) sP.getX(), (int) (sP.getY() - 3));
         }
+        if (currentPoint != null)
+        {
+            g2.setColor(Color.MAGENTA);
+            Point2D p2 = camera.worldToScreen(currentPoint);
+            var c = new Ellipse2D.Double(p2.getX() - 4, p2.getY() - 4, 8, 8);
+            g2.fill(c);
+        }
     }
-
 }
