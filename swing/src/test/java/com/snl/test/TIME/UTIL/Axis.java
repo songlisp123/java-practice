@@ -1,5 +1,9 @@
 package com.snl.test.TIME.UTIL;
 
+import com.snl.test.frame.util.Utils;
+import com.snl.test.vwctor.Matrix3x3f;
+import com.snl.test.vwctor.Vector2D;
+
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
@@ -30,7 +34,7 @@ public final class Axis {
 
     final RandomGenerator g = RandomGenerator.getDefault();
 
-    public void createAxis(Component component,int gap) {
+    public void createAxis(Component component,int worldWidth) {
         if (component == null)
             return;
         if (!coords.isEmpty())
@@ -40,11 +44,15 @@ public final class Axis {
         this.component = component;
         Dimension size = component.getSize();
         //x轴
+        int gap = size.width / worldWidth;
         int w = size.width;
         int h = size.height;
         int x = w / 2;
         int y = h / 2;
-        var originPoint = new Point2D.Double(x,y);
+        Matrix3x3f mat = Matrix3x3f.identity();
+        mat = mat.mul(Matrix3x3f.translate(x,y));
+        Vector2D v = mat.mul(new Vector2D());
+        var originPoint = Utils.vectorCovertToPoint(v);
 
         xAxis = new Line2D.Double(0,y,w,y);
         fillCoords(gap,originPoint);
@@ -57,10 +65,13 @@ public final class Axis {
     //填充网格
     private void fillCoords(int gap, Point2D originPoint) {
         Shape s,y;
+        //这都是屏幕坐标
         Shape r = new Rectangle2D.Double(0,0,1,8);
+        //这一点是否是对的？？？？
         AffineTransform af = AffineTransform.getTranslateInstance(originPoint.getX()-0.5,
                 originPoint.getY()-8);
         AffineTransform afCopy = (AffineTransform) af.clone(); //保留副本
+        //使用矩阵进行转换
         int width = component.getWidth() / 2;
         int count = width / gap;
         for (int i = 1;i<=count;i++) {
@@ -143,37 +154,38 @@ public final class Axis {
         drawAxis(g2);
         g2.draw(originPointShape);
         drawCoords(g2);
-        drawGrid(g2);
+//        drawGrid(g2);
         g2.dispose();
     }
 
     private void drawCoords(Graphics2D g2) {
         if (coords.isEmpty())
             return;
-        for (Shape r : coords)
-            g2.draw(r);
+        for (Shape s : coords) {
+            g2.draw(s);
+        }
     }
 
     private void drawGrid(Graphics2D g2) {
         g2.setComposite(AlphaComposite.getInstance(
                 AlphaComposite.SRC_OVER,0.4F
         ));
-        for (Grid g : grids) {
-            g2.setColor(g.c);
-            g2.draw(g.s);
+        for (Grid s : grids) {
+            g2.setColor(s.c);
+            g2.draw(s.s);
         }
     }
 
     private void drawAxis(Graphics2D g2) {
         g2.draw(xAxis);
         g2.draw(yAxis);
-        Stroke stroke = g2.getStroke();
-        g2.setStroke(new BasicStroke(2,BasicStroke.CAP_ROUND,BasicStroke.JOIN_MITER,1.0f,
-                new float[]{3,5,3},1));
-        g2.setColor(Color.cyan);
-        g2.draw(x_45du);
-        g2.draw(x_135Du);
-        g2.setStroke(stroke);
+//        Stroke stroke = g2.getStroke();
+//        g2.setStroke(new BasicStroke(2,BasicStroke.CAP_ROUND,BasicStroke.JOIN_MITER,1.0f,
+//                new float[]{3,5,3},1));
+//        g2.setColor(Color.cyan);
+//        g2.draw(x_45du);
+//        g2.draw(x_135Du);
+//        g2.setStroke(stroke);
     }
 
     class Grid {
@@ -219,3 +231,5 @@ public final class Axis {
             g.update(delta);
     }
 }
+
+//会发生并发修改异常

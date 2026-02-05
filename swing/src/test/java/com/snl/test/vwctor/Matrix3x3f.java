@@ -1,5 +1,8 @@
 package com.snl.test.vwctor;
 
+import com.snl.test.frame.util.Utils;
+
+import java.awt.geom.Point2D;
 import java.util.Arrays;
 
 public class Matrix3x3f {
@@ -85,6 +88,11 @@ public class Matrix3x3f {
                 this.mat[1][0] * vec.x + this.mat[1][1] * vec.y + this.mat[1][2] * vec.w,
                 this.mat[2][0] * vec.x + this.mat[2][1] * vec.y +  this.mat[2][2] * vec.w
         );
+    }
+
+    public Point2D mul(Point2D p) {
+        Vector2D v = mul(new Vector2D(p.getX(), p.getY()));
+        return Utils.vectorCovertToPoint(v);
     }
 
 

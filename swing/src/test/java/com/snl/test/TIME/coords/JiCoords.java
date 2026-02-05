@@ -34,11 +34,7 @@ public class JiCoords extends JFrame implements Runnable {
     int GAP = 50;
     int step = 5 , scale =  1;
     List<Point2D> points = new ArrayList<>(); //世界坐标点
-
     Point2D currentPoint;
-
-    boolean dragging;
-
 
     public JiCoords() throws HeadlessException {
         super("极坐标系");
@@ -146,7 +142,8 @@ public class JiCoords extends JFrame implements Runnable {
             camera.scale -= step;
             axis.createAxis(c, (int) camera.scale);
         }
-        if (mouseInputEvent.mouseButtonDownOnce(MouseEvent.BUTTON1) && !dragging)
+        if (mouseInputEvent.mouseButtonDownOnce(MouseEvent.BUTTON1) &&
+                currentPoint == null)
         {
             //点击左键,将当前屏幕点转换成世界点
             points.add(
@@ -194,11 +191,9 @@ public class JiCoords extends JFrame implements Runnable {
 
         if (currentPoint != null)
         {
-            dragging = true;
             c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         }
         else {
-            dragging = false;
             c.setCursor(null);
         }
     }
@@ -271,7 +266,7 @@ public class JiCoords extends JFrame implements Runnable {
                     0, (int) theta
             );
         }
-        if (dragging)
+        if (currentPoint != null)
         {
             g2d.setColor(Color.MAGENTA);
             Point2D p2 = camera.worldToScreen(currentPoint);

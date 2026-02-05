@@ -52,6 +52,13 @@ public class MouseInputEvent implements MouseListener, MouseMotionListener , Mou
     @Override
     public void mouseClicked(MouseEvent e) {
         //不实现
+        int clickCount = e.getClickCount();
+        int button = e.getButton() - 1;
+        if (clickCount > 1)
+            polled[button] = 2;
+        else
+            polled[button] = 0;
+
     }
 
     @Override
@@ -156,4 +163,9 @@ public class MouseInputEvent implements MouseListener, MouseMotionListener , Mou
     public void mouseWheelMoved(MouseWheelEvent e) {
 
     }
+
+    public boolean mouseClickedTwo(int keyCode) {
+        return polled[keyCode-1] == 2;
+    }
+
 }

@@ -45,11 +45,7 @@ public class DisplayModelActiveRender extends JFrame implements Runnable {
                             }
                             break;
                         case KeyEvent.VK_BACK_SPACE:
-                            int i = Utils.showClosingDialog();
-                            if (i == JOptionPane.YES_OPTION)
-                            {
-                                System.exit(0);
-                            }
+                            Utils.showClosingDialog(null);
                             break;
                         case KeyEvent.VK_SPACE :
                         default:

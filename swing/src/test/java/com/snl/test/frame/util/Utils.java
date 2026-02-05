@@ -1,8 +1,14 @@
 package com.snl.test.frame.util;
 
+import com.snl.test.vwctor.Matrix3x3f;
+import com.snl.test.vwctor.Vector2D;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Line2D;
+import java.awt.geom.Point2D;
 import java.util.Arrays;
+import java.util.List;
 
 public class Utils {
 
@@ -38,15 +44,18 @@ public class Utils {
 
     /**
      * 窗口被关闭时的请求
-     * @return 窗口关闭操作
      */
-    public static int showClosingDialog() {
-        return JOptionPane.showConfirmDialog(null,
+    public static void showClosingDialog(Component c) {
+        int answer = JOptionPane.showConfirmDialog(c,
                 "是否要退出",
                 "退出",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null);
+        if(answer == JOptionPane.YES_OPTION)
+        {
+            System.exit(0);
+        }
     }
 
     public static void sleep(long l)
@@ -57,6 +66,8 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
+    public static void getPingMuViewPort(Component c) {}
 
     /**
      * 获取当前底层设备的显示模式
@@ -78,4 +89,98 @@ public class Utils {
         return screenDevice.getDisplayModes();
     }
 
+    /**
+     * 获取视口缩放矩阵
+     * @param c 窗口组件
+     * @param wordWidth 世界坐标系宽
+     * @param wordHeight 世界坐标系高
+     * @return 视口矩阵
+     */
+    public static Matrix3x3f getViewportTransform(Component c, int wordWidth, int wordHeight) {
+        Dimension screenSize = c.getSize();
+        int sx = screenSize.width / wordWidth;
+        int sy = screenSize.height / wordHeight;
+        int tx = screenSize.width / 2;
+        int ty = screenSize.height / 2;
+        Matrix3x3f mat  = Matrix3x3f.identity();
+        mat = mat.mul(Matrix3x3f.translate(tx,ty));
+        mat = mat.mul(Matrix3x3f.scale(sx,-sy));
+        return mat;
+    }
+
+    /**
+     * 将点转换成向量
+     * @param p 点
+     * @return 新的向量
+     */
+    public static Vector2D pointConvertToVector(Point2D p) {
+        return new Vector2D(p.getX(),p.getY());
+    }
+
+    /**
+     * 将向量转换成点
+     * @param v 转换向量
+     * @return 新的点
+     */
+    public static Point2D vectorCovertToPoint(Vector2D v) {
+        return new Point2D.Double(v.getX(),v.getY());
+    }
+
+    /**
+     * 获取世界坐标转换系
+     * @param c 屏幕组件
+     * @param wordWidth 世界高度
+     * @param wordHeight 世界宽度
+     * @return 世界坐标转换矩阵
+     */
+    public static Matrix3x3f getReverseWorldTransForm(Component c, int wordWidth, int wordHeight) {
+        Dimension screenSize = c.getSize();
+        double sx = (double) wordWidth / screenSize.width;
+        double sy =  (double) wordHeight / screenSize.height;
+        int tx = screenSize.width / 2;
+        int ty = screenSize.height / 2;
+        Matrix3x3f mat  = Matrix3x3f.identity();
+        mat = mat.mul(Matrix3x3f.scale(sx,-sy));
+        mat = mat.mul(Matrix3x3f.translate(-tx,-ty));
+        return mat;
+    }
+
+    public static void drawPolygon(Graphics2D g2, Vector2D[] polygon) {
+        if(polygon.length == 0)
+            return;
+        Vector2D p;
+        Vector2D f = polygon[polygon.length -1];
+        for (Vector2D v : polygon) {
+            p = v;
+            Line2D l = new Line2D.Double(
+                    f.getX(),f.getY(),
+                    p.getX(),p.getY()
+            );
+            g2.draw(l);
+            f = p;
+        }
+    }
+
+    public static void drawPolygon(Graphics2D g2, Point2D[] polygon) {
+        if(polygon.length == 0)
+            return;
+        Point2D p;
+        Point2D f = polygon[polygon.length -1];
+        for (Point2D point : polygon) {
+            p = point;
+            Line2D l = new Line2D.Double(f,p);
+            g2.draw(l);
+            f = p;
+        }
+    }
+
+    public static void drawPolygonForVector(Graphics2D g2, List<Vector2D> polygon)
+    {
+        drawPolygon(g2,polygon.toArray(Vector2D[]::new));
+    }
+
+    public static void drawPolygonForPoint(Graphics2D g2, List<Point2D> polygon)
+    {
+        drawPolygon(g2,polygon.toArray(Point2D[]::new));
+    }
 }

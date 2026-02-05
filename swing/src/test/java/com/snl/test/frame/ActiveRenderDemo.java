@@ -29,14 +29,7 @@ public class ActiveRenderDemo extends JFrame implements Runnable {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                int i = Utils.showClosingDialog();
-                if (i == JOptionPane.YES_OPTION)
-                {
-                    if (gameThread != null)
-                        gameThread = null;
-                    running = false;
-                    System.exit(0);
-                }
+                 Utils.showClosingDialog(null);
             }
         });
         createAndShowUi();

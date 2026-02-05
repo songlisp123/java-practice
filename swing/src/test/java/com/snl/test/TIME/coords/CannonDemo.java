@@ -70,17 +70,19 @@ public class CannonDemo extends DiKaEr {
 
         if (keyBoardEvent.keyDownOnce(KeyEvent.VK_SPACE))
         {
-            Matrix3x3f mat = Matrix3x3f.identity();
-            mat = mat.mul(Matrix3x3f.rotate(rot));
-            mat = mat.mul(Matrix3x3f.translate(7.0F,0F));
-            velocity = mat.mul(new Vector2D());
-            //世界坐标
-            Vector2D muzzleLocal = new Vector2D(1.5, 0);
-            Matrix3x3f model = Matrix3x3f.identity()
-                    .mul(Matrix3x3f.rotate(rot));
+            if (bullet == null) {
+                Matrix3x3f mat = Matrix3x3f.identity();
+                mat = mat.mul(Matrix3x3f.rotate(rot));
+                mat = mat.mul(Matrix3x3f.translate(7.0F, 0F));
+                velocity = mat.mul(new Vector2D());
+                //世界坐标
+                Vector2D muzzleLocal = new Vector2D(1.5, 0);
+                Matrix3x3f model = Matrix3x3f.identity()
+                        .mul(Matrix3x3f.rotate(rot));
 
-            bulletStart = model.mul(muzzleLocal);
-            bullet = new Vector2D(bulletStart);
+                bulletStart = model.mul(muzzleLocal);
+                bullet = new Vector2D(bulletStart);
+            }
         }
     }
 

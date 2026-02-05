@@ -49,6 +49,72 @@ public class Vector2D {
         x = temp;
     }
 
+    public Vector2D inv() {
+        return new Vector2D(-x,-y);
+    }
+
+    public Vector2D add(Vector2D v)
+    {
+        return new Vector2D(x + v.x,y + v.y);
+    }
+
+    public Vector2D sub(Vector2D v) {
+        return new Vector2D(x - v.x,y - v.y);
+    }
+
+    public Vector2D mul(double scale)
+    {
+        return mul(scale,scale);
+    }
+
+    public Vector2D mul(double xScale,double yScale) {
+        return new Vector2D(x * xScale,y * yScale);
+    }
+
+    public Vector2D div(double x,double y) {
+        return new Vector2D(this.x / x,this.y / y);
+    }
+
+    public Vector2D div(double scale) {
+        return div(scale,scale);
+    }
+
+
+    public Vector2D norm() {
+        return div(len());
+    }
+
+    public Vector2D dot(Vector2D v) {
+        return new Vector2D(this.x * v.x,this.y * v.y);
+    }
+
+    public double len() {
+        return Math.sqrt(x * x + y * y);
+    }
+
+    public double lenSqr() {
+        return x * x + y * y;
+    }
+
+    /**
+     * 投影向量
+     * @return 投影向量
+     */
+    public Vector2D prep() {
+        return new Vector2D(-y,x);
+    }
+
+    public double angle() {
+        return Math.atan2(y,x);
+    }
+
+    public static Vector2D polar(double angle,double radius) {
+        return new Vector2D(
+                radius * Math.cos(angle),
+                radius * Math.sin(angle)
+        );
+    }
+
     @Override
     public String toString() {
         return "[" + "\n" +
