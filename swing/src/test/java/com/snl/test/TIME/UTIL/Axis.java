@@ -154,7 +154,7 @@ public final class Axis {
         drawAxis(g2);
         g2.draw(originPointShape);
         drawCoords(g2);
-//        drawGrid(g2);
+        drawGrid(g2);
         g2.dispose();
     }
 
