@@ -5,8 +5,8 @@ import com.snl.test.vwctor.Vector2D;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
+import java.awt.geom.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -182,5 +182,87 @@ public class Utils {
     public static void drawPolygonForPoint(Graphics2D g2, List<Point2D> polygon)
     {
         drawPolygon(g2,polygon.toArray(Point2D[]::new));
+    }
+
+    public static Matrix3x3f getScaleViewPortMat(Component c, int wordWidth,int worldHeight) {
+        Dimension screenSize = c.getSize();
+        int sx = screenSize.width / wordWidth;
+        int sy = screenSize.height / worldHeight;
+        Matrix3x3f mat  = Matrix3x3f.identity();
+        mat = mat.mul(Matrix3x3f.scale(sx,sy));
+        return mat;
+    }
+
+    public static Shape reShape(Shape shape, Matrix3x3f mat) {
+        if (shape == null)
+            return null;
+        if (mat == null)
+            return null;
+        AffineTransform af =
+                Matrix3x3f.convertIntoAffineTransform(mat);
+        PathIterator pi = shape.getPathIterator(af);
+        double x,y;
+        Point2D p,f;
+        List<Point2D> points = new ArrayList<>();
+        GeneralPath result;
+        while (!pi.isDone()) {
+            double[] cords = new double[6];
+            int i = pi.currentSegment(cords);
+            switch (i) {
+                case PathIterator.SEG_MOVETO:
+                case PathIterator.SEG_LINETO:
+                    x = cords[0];
+                    y = cords[1];
+                    p = new Point2D.Double(x,y);
+                    points.add(p);
+                    break;
+                case PathIterator.SEG_QUADTO:
+                    x = cords[0];
+                    y = cords[1];
+                    p = new Point2D.Double(x,y);
+                    points.add(p);
+                    x = cords[2];
+                    y = cords[3];
+                    p = new Point2D.Double(x,y);
+                    points.add(p);
+                    break;
+                case PathIterator.SEG_CUBICTO:
+                    x = cords[0];
+                    y = cords[1];
+                    p = new Point2D.Double(x,y);
+                    points.add(p);
+                    x = cords[2];
+                    y = cords[3];
+                    p = new Point2D.Double(x,y);
+                    points.add(p);
+                    x = cords[4];
+                    y = cords[5];
+                    p = new Point2D.Double(x,y);
+                    points.add(p);
+                    break;
+                case PathIterator.SEG_CLOSE:
+                default:
+                    break;
+            }
+            pi.next();
+        }
+        result = new GeneralPath();
+        Point2D last = points.getLast();
+        result.moveTo(last.getX(),last.getY());
+        for (int i = 1;i<points.size();i++) {
+            f = points.get(i);
+            result.lineTo(f.getX(), f.getY());
+        }
+        result.closePath();
+        return result;
+    }
+
+    public static Matrix3x3f getTranslationMat(Component c, int wordWidth, int wordHeight) {
+        Dimension screenSize = c.getSize();
+        int tx = screenSize.width / 2;
+        int ty = screenSize.height / 2;
+        Matrix3x3f mat  = Matrix3x3f.identity();
+        mat = mat.mul(Matrix3x3f.translate(tx,ty));
+        return mat;
     }
 }

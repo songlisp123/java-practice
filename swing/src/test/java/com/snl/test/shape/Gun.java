@@ -5,9 +5,9 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 
-public class Gun extends JPanel {
+public class Gun  {
 
-    private Shape shape;
+    Shape shape;
 
     //枪托
     private float gunStockWidth;
@@ -28,12 +28,10 @@ public class Gun extends JPanel {
     private Point2D leftPoint;
 
     public Gun() {
-        setBackground(Color.black);
         init();
     }
 
     public  Gun(float x,float y) {
-        setBackground(Color.black);
         leftPoint = new Point2D.Float(x,y);
         init();
     }
@@ -128,23 +126,23 @@ public class Gun extends JPanel {
         shape = a1;
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g.create();
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-        //设置纹理
-        BufferedImage bi = getTextureImage();
-        var r = new Rectangle2D.Double(0,0,bi.getWidth(),bi.getHeight());
-        TexturePaint paint = new TexturePaint(bi,r);
-        g2.setPaint(Color.yellow);
-        g2.setPaint(paint);
-        g2.draw(shape);
-        AffineTransform af = AffineTransform.getScaleInstance(0.8,0.8);
-        shape = af.createTransformedShape(shape);
+//    @Override
+//    protected void paintComponent(Graphics g) {
+//        super.paintComponent(g);
+//        Graphics2D g2 = (Graphics2D) g.create();
+//        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+//        //设置纹理
+//        BufferedImage bi = getTextureImage();
+//        var r = new Rectangle2D.Double(0,0,bi.getWidth(),bi.getHeight());
+//        TexturePaint paint = new TexturePaint(bi,r);
+//        g2.setPaint(Color.yellow);
+//        g2.setPaint(paint);
+//        g2.draw(shape);
+//        AffineTransform af = AffineTransform.getScaleInstance(0.8,0.8);
+//        shape = af.createTransformedShape(shape);
 //        af = AffineTransform.getTranslateInstance(0.2 * leftPoint.getX(),0.2 * leftPoint.getY());
-        shape = af.createTransformedShape(shape);
-        g2.fill(shape);
+//        shape = af.createTransformedShape(shape);
+//        g2.fill(shape);
 //        for (int i= 1;i<=3;i++) {
 //            int i1 = i * 50;
 //            af = AffineTransform.getTranslateInstance(0,i1);
@@ -152,26 +150,8 @@ public class Gun extends JPanel {
 //            a = af.createTransformedShape(o);
 //            g2.fill(a);
 //        }
-        g2.dispose();
-    }
-
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(800,600);
-    }
-
-    private static void createUi() {
-        JFrame f = new JFrame("Java2D Gun Outline");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.add(new Gun(50,150));
-        f.pack();
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(Gun::createUi);
-    }
+//        g2.dispose();
+//    }
 
     private BufferedImage getTextureImage() {
         int size = 2;
@@ -187,5 +167,25 @@ public class Gun extends JPanel {
         g2.setPaint(Color.white);
         g2.fillRect(size / 2,size /2 ,size,size);
         return bi;
+    }
+
+    public void draw(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        //设置纹理
+        BufferedImage bi = getTextureImage();
+        var r = new Rectangle2D.Double(0,0,bi.getWidth(),bi.getHeight());
+        TexturePaint paint = new TexturePaint(bi,r);
+        g2.setPaint(Color.yellow);
+        g2.setPaint(paint);
+        g2.draw(shape);
+        g2.dispose();
+    }
+
+    public Shape getShape() {
+        return shape;
+    }
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
     }
 }

@@ -2,6 +2,9 @@ package com.snl.test.vwctor;
 
 import com.snl.test.frame.util.Utils;
 
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.util.Arrays;
 
@@ -92,6 +95,7 @@ public class Matrix3x3f {
 
     public Point2D mul(Point2D p) {
         Vector2D v = mul(new Vector2D(p.getX(), p.getY()));
+        p = Utils.vectorCovertToPoint(v);
         return Utils.vectorCovertToPoint(v);
     }
 
@@ -182,6 +186,12 @@ public class Matrix3x3f {
                 {.0,1.0,.0},
                 {.0,.0,1.0},
         });
+    }
+
+    public static AffineTransform convertIntoAffineTransform(Matrix3x3f m) {
+        return new AffineTransform(
+                m.mat[0][0],m.mat[1][0],m.mat[0][1],m.mat[1][1],m.mat[0][2],m.mat[1][2]
+        );
     }
 
     @Override

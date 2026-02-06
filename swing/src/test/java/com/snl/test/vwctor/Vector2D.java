@@ -1,5 +1,7 @@
 package com.snl.test.vwctor;
 
+import java.awt.geom.Point2D;
+
 public class Vector2D {
     double x,y,w;
 
@@ -25,6 +27,12 @@ public class Vector2D {
         this.x = x;
         this.y = y;
         this.w = w;
+    }
+
+    public Vector2D(Point2D o) {
+        this.x = o.getX();
+        this.y = o.getY();
+        this.w = 1.0;
     }
 
     public void translation(double dx,double dy) {
@@ -145,5 +153,10 @@ public class Vector2D {
 
     public void setW(double w) {
         this.w = w;
+    }
+
+    @Override
+    public Vector2D clone() {
+        return new Vector2D(x,y);
     }
 }

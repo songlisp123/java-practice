@@ -1,5 +1,6 @@
-package com.snl.test.frame;
+package com.snl.test.frame.collide;
 
+import com.snl.test.frame.SimpleGameFrame;
 import com.snl.test.frame.util.Utils;
 import com.snl.test.shape.Gun;
 import com.snl.test.vwctor.Matrix3x3f;

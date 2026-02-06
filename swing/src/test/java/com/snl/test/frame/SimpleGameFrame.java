@@ -18,15 +18,15 @@ import java.util.List;
 
 public class SimpleGameFrame extends JFrame implements Runnable {
 
-    Thread gameThread;
-    transient boolean running;
-    BufferStrategy bs;
-    Canvas c;
+    protected Thread gameThread;
+    protected transient boolean running;
+    protected BufferStrategy bs;
+    protected Canvas c;
     final int WIDTH = 900;
     final int HEIGHT = 900;
-    CheckInputEvent keyBoardEvent;
-    MouseInputEvent mouseInputEvent;
-    FrameV2 v2;
+    protected CheckInputEvent keyBoardEvent;
+    protected MouseInputEvent mouseInputEvent;
+    protected FrameV2 v2;
 
     protected int wordWidth = 12;
     protected int wordHeight = 12;
@@ -35,14 +35,14 @@ public class SimpleGameFrame extends JFrame implements Runnable {
     protected long appSleep = 16L;
     protected boolean appMaintainRatio  = true;
 
-    Point2D originPoint;
-    Axis axis;
+    protected Point2D originPoint;
+    protected Axis axis;
 
     Vector2D[] testShape,copy;
     double rot,thetaDelta;
 
     List<Point2D> points = new ArrayList<>(); //世界坐标点
-    Point2D currentPoint;
+    protected Point2D currentPoint;
 
 
     public SimpleGameFrame() throws HeadlessException {
@@ -187,6 +187,14 @@ public class SimpleGameFrame extends JFrame implements Runnable {
         return Utils.vectorCovertToPoint(v);
     }
 
+    public Matrix3x3f getScaleViewPortMat() {
+        return Utils.getScaleViewPortMat(c,wordWidth,wordHeight);
+    }
+
+    public Matrix3x3f getTranslationMat() {
+        return Utils.getTranslationMat(c,wordWidth,wordHeight);
+    }
+
     //**********************************************************************//
     /* ******************          游戏线程          *********************** */
     //**********************************************************************//
@@ -266,7 +274,7 @@ public class SimpleGameFrame extends JFrame implements Runnable {
             axis.createAxis(c,wordWidth);
         }
 
-        if (mouseInputEvent.mouseClickedTwo(MouseEvent.BUTTON1))
+        if (mouseInputEvent.mouseClickedTwo(MouseEvent.BUTTON2))
         {
             //点击左键,将当前屏幕点转换成世界点
             points.add(Utils.vectorCovertToPoint(
@@ -281,6 +289,12 @@ public class SimpleGameFrame extends JFrame implements Runnable {
 
         if (wordWidth <= 2 || wordHeight <= 2)
             wordWidth = wordHeight = 2;
+
+        if (wordWidth == WIDTH || wordHeight == HEIGHT)
+        {
+            wordWidth = WIDTH;
+            wordHeight = HEIGHT;
+        }
 
     }
 
@@ -332,7 +346,7 @@ public class SimpleGameFrame extends JFrame implements Runnable {
         }
     }
 
-    protected void render() {
+    private void render() {
         do {
             do {
                 Graphics drawGraphics = bs.getDrawGraphics();
@@ -371,9 +385,8 @@ public class SimpleGameFrame extends JFrame implements Runnable {
         g2.drawString("按下 a 左旋转",30,170);
         g2.drawString("按下 d 右旋转",30,190);
         g2.drawString("按下 c 重置",30,210);
-        g2.drawString("按下 鼠标中键 添加点",30,230);
+        g2.drawString("按下 鼠标左键 添加点",30,230);
         g2.drawString("[%d px : 1 单位]".formatted(c.getWidth() / wordWidth),30,c.getHeight() - 20);
-        g2.draw(mouseInputEvent.getMouseShape());
         drawOriginalPoint(g2);
         axis.draw(g2);
         //TODO
@@ -381,6 +394,7 @@ public class SimpleGameFrame extends JFrame implements Runnable {
         g2.drawString("笛卡尔坐标系",c.getWidth() - 100,30);
         drawTestShape(g2);
         drawPoint(g2);
+        g2.draw(mouseInputEvent.getMouseShape());
         g2.dispose();
     }
 
