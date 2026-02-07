@@ -267,20 +267,11 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         g2.setColor(Color.green);
         g2.setStroke(new BasicStroke(2));
         g2.drawString(v2.getFrameRate(),30,30);
-//        g2.drawString("当前鼠标相对坐标：[%.1f,%.1f]".formatted(
-//                mouseInputEvent.getCurrentPoint().getX(),
-//                mouseInputEvent.getCurrentPoint().getY()
-//        ),30,50);
-//        g2.drawString("当前鼠标绝对坐标：[%.1f,%.1f]".formatted(
-//                mouseInputEvent.getAbsPoint().getX(),
-//                mouseInputEvent.getAbsPoint().getY()
-//        ),30,70);
         g2.drawString("鼠标按下:[%s]".formatted(mouseInputEvent.checkButton()),30,50);
         g2.drawString("向 上 滑动滚轮放大地图",30,70);
         g2.drawString("向 下 滑动滚轮缩小地图",30,90);
         g2.drawString("按下 c 重置",30,110);
         g2.drawString("[%d px : 1 单位]".formatted(c.getWidth() / wordWidth),30,c.getHeight() - 20);
-//        drawOriginalPoint(g2);
         //TODO
         g2.setColor(Color.PINK);
         g2.drawString("笛卡尔坐标系",c.getWidth() - 100,30);
@@ -288,18 +279,5 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         g2.dispose();
     }
 
-//    private void drawOriginalPoint(Graphics2D g2) {
-//        g2.setColor(Color.MAGENTA);
-//        Matrix3x3f mat = getViewportTransform();
-//        Vector2D v = mat.mul(new Vector2D());
-//        Point2D p = mat.mul(originPoint);
-//        Shape o = new Ellipse2D.Double(
-//                p.getX() - 4,p.getY() - 4,
-//                8,8
-//        );
-//        g2.fill(o);
-//        g2.drawString("[%.2f,%.2f]".formatted(v.getX(),v.getY()),
-//                (int) p.getX(), (int) (p.getY() - 10));
-//    }
 
 }
