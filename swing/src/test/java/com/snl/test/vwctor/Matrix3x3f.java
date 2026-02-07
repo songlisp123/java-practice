@@ -188,6 +188,39 @@ public class Matrix3x3f {
         });
     }
 
+    public Matrix3x3f inverse() {
+        double a  = mat[0][0];
+        double b  = mat[0][1];
+        double tx = mat[0][2];
+
+        double c  = mat[1][0];
+        double d  = mat[1][1];
+        double ty = mat[1][2];
+
+        double det = a * d - b * c;
+
+        if (Math.abs(det) < 1e-8) {
+            throw new ArithmeticException("矩阵必须可逆");
+        }
+
+        double invDet = 1.0 / det;
+
+        Matrix3x3f inv = new Matrix3x3f();
+        inv.mat[0][0] =  d * invDet;
+        inv.mat[0][1] = -b * invDet;
+        inv.mat[0][2] = (b * ty - d * tx) * invDet;
+
+        inv.mat[1][0] = -c * invDet;
+        inv.mat[1][1] =  a * invDet;
+        inv.mat[1][2] = (c * tx - a * ty) * invDet;
+
+        inv.mat[2][0] = 0;
+        inv.mat[2][1] = 0;
+        inv.mat[2][2] = 1;
+
+        return inv;
+    }
+
     public static AffineTransform convertIntoAffineTransform(Matrix3x3f m) {
         return new AffineTransform(
                 m.mat[0][0],m.mat[1][0],m.mat[0][1],m.mat[1][1],m.mat[0][2],m.mat[1][2]

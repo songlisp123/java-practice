@@ -265,4 +265,13 @@ public class Utils {
         mat = mat.mul(Matrix3x3f.translate(tx,ty));
         return mat;
     }
+
+    public static Matrix3x3f getReverseScaleViewPortMat(Component c, int wordWidth, int wordHeight) {
+        Dimension screenSize = c.getSize();
+        double sx = (double) wordWidth / screenSize.width;
+        double sy =  (double) wordHeight / screenSize.height;
+        Matrix3x3f mat  = Matrix3x3f.identity();
+        mat = mat.mul(Matrix3x3f.scale(sx,-sy));
+        return mat;
+    }
 }

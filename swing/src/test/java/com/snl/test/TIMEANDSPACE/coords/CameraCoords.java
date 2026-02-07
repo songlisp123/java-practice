@@ -1,4 +1,4 @@
-package com.snl.test.TIME.coords;
+package com.snl.test.TIMEANDSPACE.coords;
 
 import java.awt.geom.Point2D;
 

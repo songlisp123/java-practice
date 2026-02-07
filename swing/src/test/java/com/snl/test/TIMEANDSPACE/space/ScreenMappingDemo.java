@@ -1,4 +1,4 @@
-package com.snl.test.TIME;
+package com.snl.test.TIMEANDSPACE.space;
 
 import com.snl.test.frame.FrameV2;
 import com.snl.test.frame.util.Utils;

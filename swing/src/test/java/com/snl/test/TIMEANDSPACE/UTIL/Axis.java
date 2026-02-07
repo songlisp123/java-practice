@@ -1,4 +1,4 @@
-package com.snl.test.TIME.UTIL;
+package com.snl.test.TIMEANDSPACE.UTIL;
 
 import com.snl.test.frame.util.Utils;
 import com.snl.test.vwctor.Matrix3x3f;
@@ -34,7 +34,7 @@ public final class Axis {
 
     final RandomGenerator g = RandomGenerator.getDefault();
 
-    public void createAxis(Component component,int worldWidth) {
+    public void createAxis(Component component,int worldWidth,Matrix3x3f m) {
         if (component == null)
             return;
         if (!coords.isEmpty())
@@ -51,6 +51,8 @@ public final class Axis {
         int y = h / 2;
         Matrix3x3f mat = Matrix3x3f.identity();
         mat = mat.mul(Matrix3x3f.translate(x,y));
+        if (m != null)
+            mat = mat.mul(m);
         Vector2D v = mat.mul(new Vector2D());
         var originPoint = Utils.vectorCovertToPoint(v);
 
@@ -58,8 +60,12 @@ public final class Axis {
         fillCoords(gap,originPoint);
         createYAxis(originPoint);
         originPointShape = new Ellipse2D.Double(x- 6,y-6,12,12);
-        fillGrids(gap);
-        createAxisOf45(originPoint);
+//        fillGrids(gap);
+//        createAxisOf45(originPoint);
+    }
+
+    public void createAxis(Component component,int worldWidth) {
+        this.createAxis(component,worldWidth,null);
     }
 
     //填充网格
@@ -154,7 +160,7 @@ public final class Axis {
         drawAxis(g2);
         g2.draw(originPointShape);
         drawCoords(g2);
-        drawGrid(g2);
+//        drawGrid(g2);
         g2.dispose();
     }
 

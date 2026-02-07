@@ -1,4 +1,4 @@
-package com.snl.test.TIME;
+package com.snl.test.TIMEANDSPACE.UTIL;
 
 import com.snl.test.vwctor.Vector2D;
 

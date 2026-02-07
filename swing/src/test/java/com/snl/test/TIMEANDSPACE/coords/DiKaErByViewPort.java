@@ -1,6 +1,6 @@
-package com.snl.test.TIME.coords;
+package com.snl.test.TIMEANDSPACE.coords;
 
-import com.snl.test.TIME.UTIL.Axis;
+import com.snl.test.TIMEANDSPACE.UTIL.Axis;
 import com.snl.test.frame.FrameV2;
 import com.snl.test.frame.util.Utils;
 import com.snl.test.input.CheckInputEvent;

@@ -1,4 +1,4 @@
-package com.snl.test.TIME;
+package com.snl.test.TIMEANDSPACE.time;
 
 import com.snl.test.frame.FrameV2;
 import com.snl.test.frame.util.Utils;
@@ -9,14 +9,11 @@ import com.snl.test.vwctor.Vector2D;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
+import java.awt.event.KeyEvent;
+import java.awt.geom.*;
 import java.awt.image.BufferStrategy;
 
-public class ViewPortDemo extends JFrame implements Runnable {
+public class TimeDeltaDemo extends JFrame implements Runnable {
 
     Thread gameThread;
     transient boolean running;
@@ -35,16 +32,11 @@ public class ViewPortDemo extends JFrame implements Runnable {
     Point2D screenMiddlePoint;
     Shape originPointShape;
 
-    Vector2D[] tri;
-    Vector2D[] triWord;
+    double step;
+    long sleep;
+    double angle;
 
-    Vector2D[] rec;
-    Vector2D[] recWorld;
-
-    double worldWidth;
-    double worldHeight;
-
-    public ViewPortDemo() throws HeadlessException {
+    public TimeDeltaDemo() throws HeadlessException {
         super("测试框架");
         //生成事件
         createEvent();
@@ -69,29 +61,10 @@ public class ViewPortDemo extends JFrame implements Runnable {
         c.addKeyListener(keyBoardEvent);
         c.addMouseListener(mouseInputEvent);
         c.addMouseMotionListener(mouseInputEvent);
-        c.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                Dimension size = getSize();
-                int vw = size.width * 9 / 10;
-                int vh = size.height * 9 / 10;
-                int vx = (size.width - vw) / 2;
-                int vy = (size.height - vh) / 2;
-                int newW = vw;
-                int newH = (int) (vw * worldHeight / worldWidth); //调整视窗的比率
-                if (newH > vh) {
-                    newW = (int) (vh * worldWidth / worldHeight);
-                    newH = vh;
-                }
-                vx += (vw - newW) / 2;
-                vy += (vh - newH) / 2;
-                c.setLocation(vx,vy);
-                c.setSize(newW,newH);
-            }
-        });
 
         getContentPane().add(c);
         pack();
+        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Utils.centerContainer(this);
         setVisible(true);
@@ -117,56 +90,66 @@ public class ViewPortDemo extends JFrame implements Runnable {
         {
             currentTime = System.nanoTime();
             frame = currentTime - lastTime; //计算每帧过去的时间
-            delta = frame / 1.0E9; //时间间隔
-            processInput(delta); //获取输入
+            delta = frame / 1.0E9;
+            processInput(delta);
             updateSprite(delta); //暂时不实现
             render(); //不实现
-            Utils.sleep(16);
+            Utils.sleep(sleep);
             lastTime = currentTime;
         }
     }
 
+
     private void gameInitial() {
         running = true;
-        tri = new Vector2D[]{
-                new Vector2D(0.0f,0.5f),new Vector2D(-0.5f,-0.5f),new Vector2D(0.5f,-0.5f)
-        };
-        triWord = new Vector2D[tri.length];
-        rec = new Vector2D[] {
-                new Vector2D(-1.0f,1.0f),new Vector2D(1.0f,1.0f),
-                new Vector2D(1.0f,-1.0f),new Vector2D(-1.0f,-1.0f)
-        };
-        recWorld = new Vector2D[rec.length];
-
-        worldHeight = 9;
-        worldWidth = 16;
+        sleep = 16;
+        angle = 0.0;
+        step = Math.PI / 2;
+        xAix = new Line2D.Double(
+                0,HEIGHT / 2.0,WIDTH,HEIGHT / 2.0
+        );
+        yAix = new Line2D.Double(
+                WIDTH / 2.0,0,WIDTH / 2.0,HEIGHT
+        );
+        screenMiddlePoint = new Point2D.Double(WIDTH  /2.0,HEIGHT / 2.0);
+        originPointShape = new Ellipse2D.Double(screenMiddlePoint.getX() - 10,
+                screenMiddlePoint.getY() - 10,20,20);
+        var p = new Point2D.Double(screenMiddlePoint.getX() + WIDTH / 2.0,
+                screenMiddlePoint.getY());
+        var p2 = new Point2D.Double(screenMiddlePoint.getX() - WIDTH / 2.0,
+                screenMiddlePoint.getY());
     }
 
     private void processInput(double delta) {
         keyBoardEvent.poll();
         mouseInputEvent.poll();
         //TODO
+        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_UP))
+        {
+            sleep += 5;
+        }
+
+        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_DOWN))
+        {
+            sleep -= 5;
+        }
+
+        if (sleep > 1000)
+        {
+            sleep = 16;
+        }
+        if (sleep < 0)
+            sleep = 16;
     }
 
     private void updateSprite(double delta) {
         v2.calculateFrameRate();
-        changePos();
         //TODO
-
-    }
-
-    private void changePos() {
-        xAix = new Line2D.Double(
-                0,c.getHeight() / 2.0,c.getWidth(),c.getHeight() / 2.0
-        );
-        yAix = new Line2D.Double(
-                c.getWidth() / 2.0,0,c.getWidth() / 2.0,c.getHeight()
-        );
-        screenMiddlePoint = new Point2D.Double(c.getWidth()  /2.0,c.getHeight() / 2.0);
-        originPointShape = new Ellipse2D.Double(screenMiddlePoint.getX() - 10,
-                screenMiddlePoint.getY() - 10,20,20);
-        //TODO
-
+//        angle += step * delta;
+        angle += step * v2.getmFrameRate() / 1000;
+        if (angle > 2 * Math.PI) {
+            angle -= 2 * Math.PI;
+        }
     }
 
     private void render() {
@@ -198,57 +181,51 @@ public class ViewPortDemo extends JFrame implements Runnable {
                 mouseInputEvent.getAbsPoint().getY()
         ),30,70);
         g2.drawString("鼠标按下:[%s]".formatted(mouseInputEvent.checkButton()),30,110);
-        g2.draw(xAix);
-        g2.draw(yAix);
-        g2.draw(originPointShape);
+        g2.drawString("当前休眠时间:[%d]".formatted(sleep),30,130);
+//        AffineTransform transform = g2.getTransform();
+//        Stroke stroke = g2.getStroke();
+//        g2.setStroke(new BasicStroke(2,BasicStroke.CAP_ROUND,BasicStroke.JOIN_MITER,
+//                1.0f,new float[]{4,2,4},2.0f));
+//        g2.rotate(-Math.PI / 4,screenMiddlePoint.getX(),screenMiddlePoint.getY());
+//        g2.draw(x_45du);
+//        g2.rotate(Math.PI / 2,screenMiddlePoint.getX(),screenMiddlePoint.getY());
+//        g2.draw(x_45du);
+//        g2.setStroke(stroke);
+//        g2.setTransform(transform);
+//        g2.draw(xAix);
+//        g2.draw(yAix);
+//        g2.draw(originPointShape);
+        drawHandle(g2);
         g2.setColor(Color.cyan);
         g2.draw(mouseInputEvent.getMouseShape());
-        g2.setColor(Color.cyan);
-        drawTri(g2);
         g2.dispose();
     }
 
-    private void drawTri(Graphics2D g2) {
+    private void drawHandle(Graphics2D g2) {
+        Matrix3x3f m = Matrix3x3f.identity();
+        int w = WIDTH / 2;
+        int h = HEIGHT / 2;
+        m = m.mul(Matrix3x3f.translate(w,h));
+        Vector2D v = m .mul(new Vector2D());
+        RectangularShape s = new Ellipse2D.Double(v.getX() - w / 2.0,v.getY() - h / 2.0,w,h);
+        g2.draw(s);
 
-        int cw = c.getWidth() - 1;
-        int ch = c.getHeight() - 1;
+        Matrix3x3f mat = Matrix3x3f.identity();
+        mat = mat.mul(Matrix3x3f.rotate(angle));
+        mat = m.mul(mat);
+        mat = mat.mul(Matrix3x3f.translate(w  /2.0,0));
+        Vector2D v2  = mat.mul(new Vector2D());
 
-        double sx = cw / worldWidth;
-        double sy = ch / worldHeight;
+        double cx = v2.getX();
+        double cy = v2.getY();
+        Line2D l = new Line2D.Double(new Point2D.Double(cx,cy),screenMiddlePoint);
+        g2.draw(l);
 
-        double tx = cw / 2.0;
-        double ty = ch / 2.0;
-
-        Matrix3x3f view = Matrix3x3f.identity();
-        view = view.mul(Matrix3x3f.translate(tx,ty));
-        view = view.mul(Matrix3x3f.scale(sx,-sy));
-
-        int i;
-        for (i = 0;i<tri.length;i++) {
-            triWord[i] = view.mul(tri[i]);
-        }
-
-        drawPolygon(g2,triWord);
-
-        for (i=0;i< rec.length;i++) {
-            recWorld[i] = view.mul(rec[i]);
-        }
-        drawPolygon(g2,recWorld);
-    }
-
-    private void drawPolygon(Graphics2D g2, Vector2D[] polyGon) {
-        Vector2D f;
-        int i;
-        Vector2D p = polyGon[polyGon.length -1];
-        for (i = 0;i<polyGon.length;i++) {
-            f = polyGon[i];
-            Line2D l = new Line2D.Double(f.getX(),f.getY(),p.getX(),p.getY());
-            g2.draw(l);
-            p = f;
-        }
+        s = new Rectangle2D.Double(cx - 2,cy - 2,4,4);
+        g2.draw(s);
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(ViewPortDemo::new);
+        SwingUtilities.invokeLater(TimeDeltaDemo::new);
     }
 }

@@ -1,6 +1,6 @@
-package com.snl.test.TIME;
+package com.snl.test.TIMEANDSPACE.coords;
 
-import com.snl.test.TIME.UTIL.Axis;
+import com.snl.test.TIMEANDSPACE.UTIL.Axis;
 import com.snl.test.frame.FrameV2;
 import com.snl.test.frame.util.Utils;
 import com.snl.test.input.CheckInputEvent;
@@ -8,36 +8,33 @@ import com.snl.test.input.MouseInputEvent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.geom.*;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AixelDemo extends JFrame implements Runnable {
+public class DiKaEr extends JFrame implements Runnable {
 
     Thread gameThread;
     transient boolean running;
     BufferStrategy bs;
     Canvas c;
-
-    final int WIDTH = 600;
-    final int HEIGHT = 600;
+    final int WIDTH = 900;
+    final int HEIGHT = 900;
     CheckInputEvent keyBoardEvent;
     MouseInputEvent mouseInputEvent;
-
     FrameV2 v2;
     Axis axis;
-
-    Shape ball,yBall,ball45,ball135,middleSpeedBall,speedBall;
-    Shape copy;
-    boolean rolling;
-    double rollDelta , rollDistance;
+    CameraCoords camera;
 
     int GAP = 50;
-    int step = 5;
+    int step = 5 , scale =  1;
+    List<Point2D> points = new ArrayList<>(); //世界坐标点
+    Point2D currentPoint;
 
-    public AixelDemo() throws HeadlessException {
+    public DiKaEr() throws HeadlessException {
         super("测试框架");
         //生成事件
         createEvent();
@@ -74,23 +71,6 @@ public class AixelDemo extends JFrame implements Runnable {
         //创建缓冲区
         c.createBufferStrategy(2);
         bs = c.getBufferStrategy();
-
-        c.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                axis.createAxis(c,GAP);
-                changeBall();
-            }
-        });
-    }
-
-    private void changeBall() {
-        ball = new Ellipse2D.Double(c.getWidth() / 2.0 - 5,
-                c.getHeight() / 2.0 - 5,10,10);
-        copy = ball;
-        yBall = ball;
-        middleSpeedBall = ball;
-        speedBall = ball;
     }
 
     private void startGame() {
@@ -112,89 +92,110 @@ public class AixelDemo extends JFrame implements Runnable {
             processInput(delta); //获取输入
             updateSprite(delta); //暂时不实现
             render(); //不实现
-            Utils.sleep(16);
+            Utils.sleep(14);
             lastTime = currentTime;
         }
     }
 
     private void gameInitial() {
         running = true;
-        rollDelta = GAP;
-        rollDistance = 0;
-        changeBall();
+        //坐标
         axis = new Axis();
         axis.createAxis(c,GAP);
+        //移动形状？？
+//        moveShape = new Ellipse2D.Double(c.getWidth() / 2.0 - 4,
+//                c.getHeight() / 2.0 - 4,8,8);
+//        copy = moveShape;
+        //重置相机
+        resetCamera();
     }
 
-    private void processInput(double delta) {
+    public void resetCamera() {
+        camera = new CameraCoords(
+                (double) GAP / scale,
+                new Point2D.Double(c.getWidth() / 2.0,c.getHeight() / 2.0)
+        );
+    }
+
+    public void processInput(double delta) {
         keyBoardEvent.poll();
         mouseInputEvent.poll();
         //TODO
-        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_SPACE))
+        if (camera.scale <= 10 )
         {
-            //空格键
-            rolling = !rolling;
+            camera.scale = 10;
+        }
+        if (GAP >= c.getWidth() / 2)
+        {
+            camera.scale = c.getWidth() / 2.0;
+        }
+        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_UP))
+        {
+            //如果按上上箭头
+            camera.scale += step;
+            axis.createAxis(c, (int) camera.scale);
+        }
+
+        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_DOWN))
+        {
+            //下箭头
+            camera.scale -= step;
+            axis.createAxis(c, (int) camera.scale);
+        }
+
+        if (mouseInputEvent.mouseButtonDownOnce(MouseEvent.BUTTON1))
+        {
+            //点击左键,将当前屏幕点转换成世界点
+            points.add(
+                    camera.ScreenToWorld(mouseInputEvent.getCurrentPoint())
+            );
         }
 
         if (keyBoardEvent.keyDownOnce(KeyEvent.VK_C))
         {
             reset();
         }
+        //……
 
-        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_UP))
-        {
-            //如果按上上箭头
-            GAP += step;
-            axis.createAxis(c,GAP);
-            rollDelta = GAP;
-        }
-
-        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_DOWN))
-        {
-            //下箭头
-            GAP -= step;
-            axis.createAxis(c,GAP);
-            rollDelta = GAP;
-        }
-
-        if (GAP <= 10 || GAP >= c.getWidth() / 2)
-        {
-            step = - step;
-        }
     }
 
-    private void reset() {
-        changeBall();
-        rollDistance = 0;
-        rollDelta = GAP;
+    public void reset() {
+        points.clear();
+        currentPoint = null;
     }
 
-    private void updateSprite(double delta) {
+    public void updateSprite(double delta) {
         v2.calculateFrameRate();
         axis.updateAxis(delta);
+        checkPoint();
         //TODO
-        if (rolling) {
-            rollDistance += rollDelta * delta;
-            AffineTransform t = AffineTransform.getTranslateInstance(rollDistance, 0);
-            ball = t.createTransformedShape(copy);
-            AffineTransform t5 = AffineTransform.getTranslateInstance(2 * rollDistance,0);
-            middleSpeedBall = t5.createTransformedShape(copy);
-            AffineTransform t6 = AffineTransform.getTranslateInstance(3 *  rollDistance,0);
-            speedBall = t6.createTransformedShape(copy);
-            AffineTransform t2 = AffineTransform.getTranslateInstance(0, -rollDistance);
-            yBall = t2.createTransformedShape(copy);
-        }
-        checkCollide();
     }
 
-    private void checkCollide() {
-        if (ball.getBounds2D().getX() + ball.getBounds2D().getWidth() >= c.getWidth()
-            || ball.getBounds2D().getX() <= 0)
+    private void checkPoint() {
+        if (points.isEmpty())
+            return;
+        Point2D mP = camera.ScreenToWorld(mouseInputEvent.getCurrentPoint());
+        for (Point2D p : points)
         {
-            rollDelta = -rollDelta;
+            //判断
+            double x = p.getX();
+            double y = p.getY();
+            if (x - .1 <= mP.getX() && x + 0.1 >= mP.getX() &&
+                    y -0.1 <= mP.getY() && y + .1 >= mP.getY()) {
+                currentPoint = p;
+                break;
+            }
+            currentPoint = null;
+        }
+
+        if (currentPoint != null)
+        {
+            c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        }
+        else {
+            c.setCursor(null);
         }
     }
-
 
     private void render() {
         do {
@@ -209,7 +210,7 @@ public class AixelDemo extends JFrame implements Runnable {
         }while (bs.contentsLost());
     }
 
-    private void draw(Graphics g) {
+    public void draw(Graphics g) {
         var g2 = (Graphics2D)g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
@@ -224,26 +225,36 @@ public class AixelDemo extends JFrame implements Runnable {
                 mouseInputEvent.getAbsPoint().getX(),
                 mouseInputEvent.getAbsPoint().getY()
         ),30,70);
-        g2.drawString("鼠标按下:[%s]".formatted(mouseInputEvent.checkButton()),30,110);
-        g2.drawString("按下 空格键 渲染动画",30,130);
-        g2.drawString("这是一个 %d 像素为1m的绘制空间".formatted(GAP),30,170);
-        g2.drawString("按下 上箭头 增加间距",30,190);
-        g2.drawString("按下 下箭头 减少间距",30,210);
-        axis.draw(g2);
+        g2.drawString("鼠标按下:[%s]".formatted(mouseInputEvent.checkButton()),30,90);
         g2.draw(mouseInputEvent.getMouseShape());
-        g2.setColor(Color.cyan);
-        //绘制球
-        g2.fill(ball);
-        g2.fill(yBall);
-        g2.setColor(Color.red);
-        g2.fill(middleSpeedBall);
-        g2.setColor(Color.ORANGE);
-        g2.fill(speedBall);
+        axis.draw(g2);
+        //TODO
+        g2.setColor(Color.PINK);
+        g2.drawString("按下 上箭头 增加间距",30,110);
+        g2.drawString("按下 下箭头 减少间距",30,130);
+        g2.drawString("按下 C 重绘",30,150);
+        g2.drawString("[%.0f px : 1 m]".formatted(camera.scale),30,c.getHeight() - 20);
+        g2.drawString("笛卡尔坐标系",c.getWidth() - 100,30);
+        drawPoint(g2);
         g2.dispose();
     }
 
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(AixelDemo::new);
+    private void drawPoint(Graphics2D g2) {
+        g2.setColor(Color.ORANGE);
+        Point2D sP;
+        for (Point2D p : points) {
+            sP = camera.worldToScreen(p);
+            Shape s = new Ellipse2D.Double(sP.getX() - 1, sP.getY() - 1, 2, 2);
+            g2.draw(s);
+            g2.drawString("[%.2f,%.2f]".formatted(p.getX(), p.getY()),
+                    (int) sP.getX(), (int) (sP.getY() - 3));
+        }
+        if (currentPoint != null)
+        {
+            g2.setColor(Color.MAGENTA);
+            Point2D p2 = camera.worldToScreen(currentPoint);
+            var c = new Ellipse2D.Double(p2.getX() - 4, p2.getY() - 4, 8, 8);
+            g2.fill(c);
+        }
     }
 }

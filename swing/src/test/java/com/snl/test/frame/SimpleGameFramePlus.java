@@ -1,6 +1,6 @@
 package com.snl.test.frame;
 
-import com.snl.test.TIMEANDSPACE.UTIL.Axis;
+import com.snl.test.TIMEANDSPACE.UTIL.AxisPlus;
 import com.snl.test.frame.util.Utils;
 import com.snl.test.input.CheckInputEvent;
 import com.snl.test.input.MouseInputEvent;
@@ -13,10 +13,8 @@ import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
-import java.util.List;
 
-public class SimpleGameFrame extends JFrame implements Runnable {
+public class SimpleGameFramePlus extends JFrame implements Runnable {
 
     protected Thread gameThread;
     protected transient boolean running;
@@ -35,18 +33,16 @@ public class SimpleGameFrame extends JFrame implements Runnable {
     protected long appSleep = 16L;
     protected boolean appMaintainRatio  = true;
 
-    protected Point2D originPoint;
-    protected Axis axis;
+    protected boolean dragging;
+    protected Vector2D mousePos,mouseDelta; //(世界坐标)
+    protected Vector2D mousePosScreen;
+    protected Matrix3x3f viewMat;
+    protected AxisPlus axis;
+    //原点形状
+    Point2D originPoint;
 
-    Vector2D[] testShape,copy;
-    double rot,thetaDelta;
-
-    List<Point2D> points = new ArrayList<>(); //世界坐标点
-    protected Point2D currentPoint;
-
-
-    public SimpleGameFrame() throws HeadlessException {
-        super("游戏框架");
+    public SimpleGameFramePlus() throws HeadlessException {
+        super("游戏框架进阶版");
     }
 
     private void createAndShowUi() {
@@ -107,10 +103,6 @@ public class SimpleGameFrame extends JFrame implements Runnable {
                 Utils.showClosingDialog(c);
             }
         });
-
-        //创建轴线
-        axis = new Axis();
-        axis.createAxis(c,WIDTH / wordWidth);
     }
 
     /**
@@ -134,8 +126,6 @@ public class SimpleGameFrame extends JFrame implements Runnable {
         vy += (vh - newHeight) / 2;
         c.setLocation(vx,vy);
         c.setSize(newWidth,newHeight);
-
-        axis.createAxis(c,wordWidth);
     }
 
     /**
@@ -149,7 +139,7 @@ public class SimpleGameFrame extends JFrame implements Runnable {
     /**
      * 启动游戏类
      */
-    protected static void launchGame(SimpleGameFrame frame) {
+    protected static void launchGame(SimpleGameFramePlus frame) {
         SwingUtilities.invokeLater(frame::createAndShowUi);
     }
 
@@ -158,37 +148,41 @@ public class SimpleGameFrame extends JFrame implements Runnable {
     //**********************************************************************//
 
     public Matrix3x3f getViewportTransform() {
-        return Utils.getViewportTransform(c,wordWidth,wordHeight);
+        Matrix3x3f viewportTransform =
+                Utils.getViewportTransform(c, wordWidth, wordHeight);
+        viewportTransform = viewportTransform.mul(viewMat);
+        return viewportTransform;
     }
 
     public Matrix3x3f getReverseWorldTransForm() {
-        return Utils.getReverseWorldTransForm(c,wordWidth,wordHeight);
+        Matrix3x3f RmAT =
+                Utils.getReverseWorldTransForm(c, wordWidth, wordHeight);
+        Matrix3x3f inView = viewMat.inverse();
+        return inView.mul(RmAT);
     }
 
+    //需要修改
     public Vector2D getMousePointInWorldPosition() {
         Matrix3x3f mat = getReverseWorldTransForm();
-        Vector2D v = Utils.pointConvertToVector(
-                mouseInputEvent.getCurrentPoint()
-        );
-        return mat.mul(v);
+        return mat.mul(mousePosScreen);
     }
 
     public Point2D convertWorldPointToScreenPoint(Point2D p) {
         Matrix3x3f view = getViewportTransform();
-        Vector2D v = Utils.pointConvertToVector(p);
-        v = view.mul(v);
-        return Utils.vectorCovertToPoint(v);
+        return view.mul(p);
     }
 
     public Point2D convertScreenPointToWorldPoint(Point2D p) {
         Matrix3x3f worldView = getReverseWorldTransForm();
-        Vector2D v = Utils.pointConvertToVector(p);
-        v = worldView.mul(v);
-        return Utils.vectorCovertToPoint(v);
+        return worldView.mul(p);
     }
 
     public Matrix3x3f getScaleViewPortMat() {
         return Utils.getScaleViewPortMat(c,wordWidth,wordHeight);
+    }
+
+    public Matrix3x3f getReverseScaleViewPortMat() {
+        return Utils.getReverseScaleViewPortMat(c,wordWidth,wordHeight);
     }
 
     public Matrix3x3f getTranslationMat() {
@@ -231,16 +225,14 @@ public class SimpleGameFrame extends JFrame implements Runnable {
      */
     protected void gameInitial() {
         running = true;
+        viewMat = Matrix3x3f.identity();
+        mousePos = new Vector2D();
+        mousePosScreen = getViewportTransform().mul(mousePos);
+        //创建轴
+        axis = new AxisPlus();
+        axis.createAxis(getViewportTransform(),c);
+        originPoint = new Point2D.Double();
         //TODO
-        //一个菱形形状
-        testShape = new Vector2D[] {
-                new Vector2D(-1,.0),new Vector2D(.0,1.0),
-                new Vector2D(1.0,.0),new Vector2D(.0,-1.0),
-        };
-        copy = new Vector2D[testShape.length];
-
-        rot = 0;
-        thetaDelta = Math.PI / 4;
     }
 
     //**********************************************************************//
@@ -254,49 +246,25 @@ public class SimpleGameFrame extends JFrame implements Runnable {
     protected void processInput(double delta) {
         keyBoardEvent.poll();
         mouseInputEvent.poll();
-        //TODO
-        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_A)) {
-            rot -= thetaDelta;
-        }
-        if(keyBoardEvent.keyDownOnce(KeyEvent.VK_D)){
-            rot += thetaDelta;
-        }
-
-//        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_UP))
-//        {
-//            wordWidth--;
-//            wordHeight--;
-//            axis.createAxis(c,wordWidth);
-//        }
-//        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_DOWN)) {
-//            wordWidth++;
-//            wordHeight++;
-//            axis.createAxis(c,wordWidth);
-//        }
-
-        if (mouseInputEvent.mouseClickedTwo(MouseEvent.BUTTON1))
-        {
-            //点击左键,将当前屏幕点转换成世界点
-            points.add(Utils.vectorCovertToPoint(
-                    getMousePointInWorldPosition()
-            ));
-        }
-
+        Vector2D pos = new Vector2D(mouseInputEvent.getCurrentPoint());
+        mouseDelta = pos.sub(mousePos);
+        mousePos = pos;
+        dragging = mouseInputEvent.mouseButtonDown(MouseEvent.BUTTON2);
         if (keyBoardEvent.keyDownOnce(KeyEvent.VK_C))
         {
             reset();
         }
+        //TODO
 
     }
 
     protected void reset() {
         wordWidth = wordHeight = 12;
-        rot = 0;
         appSleep = 16;
         appMaintainRatio = true;
-        axis.createAxis(c,wordWidth);
-        points.clear();
-        currentPoint = null;
+        viewMat = Matrix3x3f.identity();
+        mouseDelta = new Vector2D();
+        axis.createAxis(getViewportTransform(),c);
     }
 
     /**
@@ -305,37 +273,20 @@ public class SimpleGameFrame extends JFrame implements Runnable {
      */
     protected void updateSprite(double delta) {
         v2.calculateFrameRate();
-        axis.updateAxis(delta);
-        checkPoint();
-
+        if (dragging)
+        {
+            // 像素 → 世界单位
+            Matrix3x3f re = getReverseScaleViewPortMat();
+            Vector2D v = re.mul(mouseDelta);
+            viewMat = Matrix3x3f.translate(v.getX(),v.getY()).mul(viewMat);
+            setCursor(Cursor.getPredefinedCursor(
+                    Cursor.HAND_CURSOR
+            ));
+            axis.createAxis(getViewportTransform(),c);
+        }
+        else
+            setCursor(null);
         //TODO
-        System.arraycopy(testShape,0,copy,0,copy.length);
-    }
-
-    private void checkPoint() {
-        if (points.isEmpty())
-            return;
-        Point2D mP = Utils.vectorCovertToPoint(getMousePointInWorldPosition());
-        for (Point2D p : points)
-        {
-            //判断
-            double x = p.getX();
-            double y = p.getY();
-            if (x - .1 <= mP.getX() && x + 0.1 >= mP.getX() &&
-                    y -0.1 <= mP.getY() && y + .1 >= mP.getY()) {
-                currentPoint = p;
-                break;
-            }
-            currentPoint = null;
-        }
-
-        if (currentPoint != null)
-        {
-            c.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        }
-        else {
-            c.setCursor(null);
-        }
     }
 
     private void render() {
@@ -359,83 +310,54 @@ public class SimpleGameFrame extends JFrame implements Runnable {
         g2.setColor(Color.green);
         g2.setStroke(new BasicStroke(2));
         g2.drawString(v2.getFrameRate(),30,30);
-        g2.drawString("当前鼠标相对坐标：[%.1f,%.1f]".formatted(
-                mouseInputEvent.getCurrentPoint().getX(),
-                mouseInputEvent.getCurrentPoint().getY()
-        ),30,50);
-        g2.drawString("当前鼠标绝对坐标：[%.1f,%.1f]".formatted(
-                mouseInputEvent.getAbsPoint().getX(),
-                mouseInputEvent.getAbsPoint().getY()
-        ),30,70);
-        g2.drawString("当前鼠标世界坐标：[%.2f,%.2f]".formatted(
-                getMousePointInWorldPosition().getX(),
-                getMousePointInWorldPosition().getY()
-        ),30,90);
-        g2.drawString("鼠标按下:[%s]".formatted(mouseInputEvent.checkButton()),30,110);
-        g2.drawString("按下 a 左旋转",30,130);
-        g2.drawString("按下 d 右旋转",30,150);
-        g2.drawString("按下 c 重置",30,170);
-        g2.drawString("按下 鼠标左键 添加点",30,190);
+//        g2.drawString("当前鼠标相对坐标：[%.1f,%.1f]".formatted(
+//                mouseInputEvent.getCurrentPoint().getX(),
+//                mouseInputEvent.getCurrentPoint().getY()
+//        ),30,50);
+//        g2.drawString("当前鼠标绝对坐标：[%.1f,%.1f]".formatted(
+//                mouseInputEvent.getAbsPoint().getX(),
+//                mouseInputEvent.getAbsPoint().getY()
+//        ),30,70);
+        g2.drawString("鼠标按下:[%s]".formatted(mouseInputEvent.checkButton()),30,50);
+        g2.drawString("向 上 滑动滚轮放大地图",30,70);
+        g2.drawString("向 下 滑动滚轮缩小地图",30,90);
+        g2.drawString("按下 c 重置",30,110);
         g2.drawString("[%d px : 1 单位]".formatted(c.getWidth() / wordWidth),30,c.getHeight() - 20);
-        drawOriginalPoint(g2);
-        axis.draw(g2);
+//        drawOriginalPoint(g2);
         //TODO
         g2.setColor(Color.PINK);
         g2.drawString("笛卡尔坐标系",c.getWidth() - 100,30);
-        drawTestShape(g2);
-        drawPoint(g2);
+        axis.draw(g2);
         g2.draw(mouseInputEvent.getMouseShape());
+        drawPoint(g2,originPoint);
         g2.dispose();
     }
 
-    private void drawOriginalPoint(Graphics2D g2) {
+    private void drawPoint(Graphics2D g2, Point2D point) {
         g2.setColor(Color.MAGENTA);
         Matrix3x3f mat = getViewportTransform();
-        Vector2D v = mat.mul(new Vector2D());
-        originPoint = Utils.vectorCovertToPoint(v);
+        Point2D p = mat.mul(point);
         Shape o = new Ellipse2D.Double(
-                originPoint.getX() - 4,originPoint.getY() - 4,
+                p.getX() - 4,p.getY() - 4,
                 8,8
         );
         g2.fill(o);
+        g2.drawString("[%.2f,%.2f]".formatted(point.getX(),point.getY()),
+                (int) p.getX(), (int) (p.getY() - 10));
     }
 
-    private void drawTestShape(Graphics2D g2) {
-        g2.setColor(Color.MAGENTA);
-        double width = c.getBounds().getWidth();
-        double height = c.getBounds().getHeight();
-        double tx = width / 2.0;
-        double ty = height / 2.0;
-        double sx = width / wordWidth;
-        double sy = height / wordHeight;
-        Matrix3x3f mat = Matrix3x3f.identity();
-        mat = mat.mul(Matrix3x3f.translate(tx,ty));
-        mat = mat.mul(Matrix3x3f.scale(sx,-sy));
-        mat = mat.mul(Matrix3x3f.rotate(rot));
-        for (int i = 0;i<copy.length;i++) {
-            copy[i] = mat.mul(copy[i]);
-        }
-        //绘制
-        Utils.drawPolygon(g2,copy);
-    }
-
-    private void drawPoint(Graphics2D g2) {
-        g2.setColor(Color.ORANGE);
-        Point2D sP;
-        for (Point2D p : points) {
-            sP = convertWorldPointToScreenPoint(p);
-            Shape s = new Ellipse2D.Double(sP.getX() - 1, sP.getY() - 1, 2, 2);
-            g2.draw(s);
-            g2.drawString("[%.2f,%.2f]".formatted(p.getX(), p.getY()),
-                    (int) sP.getX(), (int) (sP.getY() - 3));
-        }
-        if (currentPoint != null)
-        {
-            g2.setColor(Color.MAGENTA);
-            Point2D p2 = convertWorldPointToScreenPoint(currentPoint);
-            var c = new Ellipse2D.Double(p2.getX() - 4, p2.getY() - 4, 8, 8);
-            g2.fill(c);
-        }
-    }
+//    private void drawOriginalPoint(Graphics2D g2) {
+//        g2.setColor(Color.MAGENTA);
+//        Matrix3x3f mat = getViewportTransform();
+//        Vector2D v = mat.mul(new Vector2D());
+//        Point2D p = mat.mul(originPoint);
+//        Shape o = new Ellipse2D.Double(
+//                p.getX() - 4,p.getY() - 4,
+//                8,8
+//        );
+//        g2.fill(o);
+//        g2.drawString("[%.2f,%.2f]".formatted(v.getX(),v.getY()),
+//                (int) p.getX(), (int) (p.getY() - 10));
+//    }
 
 }

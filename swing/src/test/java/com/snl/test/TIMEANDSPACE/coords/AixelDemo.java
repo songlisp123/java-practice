@@ -1,19 +1,20 @@
-package com.snl.test.TIME;
+package com.snl.test.TIMEANDSPACE.coords;
 
+import com.snl.test.TIMEANDSPACE.UTIL.Axis;
 import com.snl.test.frame.FrameV2;
 import com.snl.test.frame.util.Utils;
 import com.snl.test.input.CheckInputEvent;
 import com.snl.test.input.MouseInputEvent;
-import com.snl.test.vwctor.Matrix3x3f;
-import com.snl.test.vwctor.Vector2D;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.geom.*;
 import java.awt.image.BufferStrategy;
 
-public class TimeDeltaDemo extends JFrame implements Runnable {
+public class AixelDemo extends JFrame implements Runnable {
 
     Thread gameThread;
     transient boolean running;
@@ -26,17 +27,17 @@ public class TimeDeltaDemo extends JFrame implements Runnable {
     MouseInputEvent mouseInputEvent;
 
     FrameV2 v2;
+    Axis axis;
 
-    Line2D xAix;
-    Line2D yAix;
-    Point2D screenMiddlePoint;
-    Shape originPointShape;
+    Shape ball,yBall,ball45,ball135,middleSpeedBall,speedBall;
+    Shape copy;
+    boolean rolling;
+    double rollDelta , rollDistance;
 
-    double step;
-    long sleep;
-    double angle;
+    int GAP = 50;
+    int step = 5;
 
-    public TimeDeltaDemo() throws HeadlessException {
+    public AixelDemo() throws HeadlessException {
         super("测试框架");
         //生成事件
         createEvent();
@@ -64,15 +65,32 @@ public class TimeDeltaDemo extends JFrame implements Runnable {
 
         getContentPane().add(c);
         pack();
-        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Utils.centerContainer(this);
         setVisible(true);
         addKeyListener(keyBoardEvent);
+        setResizable(false);
         c.requestFocus();
         //创建缓冲区
         c.createBufferStrategy(2);
         bs = c.getBufferStrategy();
+
+        c.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                axis.createAxis(c,GAP);
+                changeBall();
+            }
+        });
+    }
+
+    private void changeBall() {
+        ball = new Ellipse2D.Double(c.getWidth() / 2.0 - 5,
+                c.getHeight() / 2.0 - 5,10,10);
+        copy = ball;
+        yBall = ball;
+        middleSpeedBall = ball;
+        speedBall = ball;
     }
 
     private void startGame() {
@@ -90,67 +108,93 @@ public class TimeDeltaDemo extends JFrame implements Runnable {
         {
             currentTime = System.nanoTime();
             frame = currentTime - lastTime; //计算每帧过去的时间
-            delta = frame / 1.0E9;
-            processInput(delta);
+            delta = frame / 1.0E9; //时间间隔
+            processInput(delta); //获取输入
             updateSprite(delta); //暂时不实现
             render(); //不实现
-            Utils.sleep(sleep);
+            Utils.sleep(16);
             lastTime = currentTime;
         }
     }
 
-
     private void gameInitial() {
         running = true;
-        sleep = 16;
-        angle = 0.0;
-        step = Math.PI / 2;
-        xAix = new Line2D.Double(
-                0,HEIGHT / 2.0,WIDTH,HEIGHT / 2.0
-        );
-        yAix = new Line2D.Double(
-                WIDTH / 2.0,0,WIDTH / 2.0,HEIGHT
-        );
-        screenMiddlePoint = new Point2D.Double(WIDTH  /2.0,HEIGHT / 2.0);
-        originPointShape = new Ellipse2D.Double(screenMiddlePoint.getX() - 10,
-                screenMiddlePoint.getY() - 10,20,20);
-        var p = new Point2D.Double(screenMiddlePoint.getX() + WIDTH / 2.0,
-                screenMiddlePoint.getY());
-        var p2 = new Point2D.Double(screenMiddlePoint.getX() - WIDTH / 2.0,
-                screenMiddlePoint.getY());
+        rollDelta = GAP;
+        rollDistance = 0;
+        changeBall();
+        axis = new Axis();
+        axis.createAxis(c,GAP);
     }
 
     private void processInput(double delta) {
         keyBoardEvent.poll();
         mouseInputEvent.poll();
         //TODO
+        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_SPACE))
+        {
+            //空格键
+            rolling = !rolling;
+        }
+
+        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_C))
+        {
+            reset();
+        }
+
         if (keyBoardEvent.keyDownOnce(KeyEvent.VK_UP))
         {
-            sleep += 5;
+            //如果按上上箭头
+            GAP += step;
+            axis.createAxis(c,GAP);
+            rollDelta = GAP;
         }
 
         if (keyBoardEvent.keyDownOnce(KeyEvent.VK_DOWN))
         {
-            sleep -= 5;
+            //下箭头
+            GAP -= step;
+            axis.createAxis(c,GAP);
+            rollDelta = GAP;
         }
 
-        if (sleep > 1000)
+        if (GAP <= 10 || GAP >= c.getWidth() / 2)
         {
-            sleep = 16;
+            step = - step;
         }
-        if (sleep < 0)
-            sleep = 16;
+    }
+
+    private void reset() {
+        changeBall();
+        rollDistance = 0;
+        rollDelta = GAP;
     }
 
     private void updateSprite(double delta) {
         v2.calculateFrameRate();
+        axis.updateAxis(delta);
         //TODO
-//        angle += step * delta;
-        angle += step * v2.getmFrameRate() / 1000;
-        if (angle > 2 * Math.PI) {
-            angle -= 2 * Math.PI;
+        if (rolling) {
+            rollDistance += rollDelta * delta;
+            AffineTransform t = AffineTransform.getTranslateInstance(rollDistance, 0);
+            ball = t.createTransformedShape(copy);
+            AffineTransform t5 = AffineTransform.getTranslateInstance(2 * rollDistance,0);
+            middleSpeedBall = t5.createTransformedShape(copy);
+            AffineTransform t6 = AffineTransform.getTranslateInstance(3 *  rollDistance,0);
+            speedBall = t6.createTransformedShape(copy);
+            AffineTransform t2 = AffineTransform.getTranslateInstance(0, -rollDistance);
+            yBall = t2.createTransformedShape(copy);
+        }
+        checkCollide();
+    }
+
+    private void checkCollide() {
+        if (ball.getBounds2D().getX() + ball.getBounds2D().getWidth() >= c.getWidth()
+            || ball.getBounds2D().getX() <= 0)
+        {
+            rollDelta = -rollDelta;
         }
     }
+
 
     private void render() {
         do {
@@ -181,51 +225,25 @@ public class TimeDeltaDemo extends JFrame implements Runnable {
                 mouseInputEvent.getAbsPoint().getY()
         ),30,70);
         g2.drawString("鼠标按下:[%s]".formatted(mouseInputEvent.checkButton()),30,110);
-        g2.drawString("当前休眠时间:[%d]".formatted(sleep),30,130);
-//        AffineTransform transform = g2.getTransform();
-//        Stroke stroke = g2.getStroke();
-//        g2.setStroke(new BasicStroke(2,BasicStroke.CAP_ROUND,BasicStroke.JOIN_MITER,
-//                1.0f,new float[]{4,2,4},2.0f));
-//        g2.rotate(-Math.PI / 4,screenMiddlePoint.getX(),screenMiddlePoint.getY());
-//        g2.draw(x_45du);
-//        g2.rotate(Math.PI / 2,screenMiddlePoint.getX(),screenMiddlePoint.getY());
-//        g2.draw(x_45du);
-//        g2.setStroke(stroke);
-//        g2.setTransform(transform);
-//        g2.draw(xAix);
-//        g2.draw(yAix);
-//        g2.draw(originPointShape);
-        drawHandle(g2);
-        g2.setColor(Color.cyan);
+        g2.drawString("按下 空格键 渲染动画",30,130);
+        g2.drawString("这是一个 %d 像素为1m的绘制空间".formatted(GAP),30,170);
+        g2.drawString("按下 上箭头 增加间距",30,190);
+        g2.drawString("按下 下箭头 减少间距",30,210);
+        axis.draw(g2);
         g2.draw(mouseInputEvent.getMouseShape());
+        g2.setColor(Color.cyan);
+        //绘制球
+        g2.fill(ball);
+        g2.fill(yBall);
+        g2.setColor(Color.red);
+        g2.fill(middleSpeedBall);
+        g2.setColor(Color.ORANGE);
+        g2.fill(speedBall);
         g2.dispose();
     }
 
-    private void drawHandle(Graphics2D g2) {
-        Matrix3x3f m = Matrix3x3f.identity();
-        int w = WIDTH / 2;
-        int h = HEIGHT / 2;
-        m = m.mul(Matrix3x3f.translate(w,h));
-        Vector2D v = m .mul(new Vector2D());
-        RectangularShape s = new Ellipse2D.Double(v.getX() - w / 2.0,v.getY() - h / 2.0,w,h);
-        g2.draw(s);
-
-        Matrix3x3f mat = Matrix3x3f.identity();
-        mat = mat.mul(Matrix3x3f.rotate(angle));
-        mat = m.mul(mat);
-        mat = mat.mul(Matrix3x3f.translate(w  /2.0,0));
-        Vector2D v2  = mat.mul(new Vector2D());
-
-        double cx = v2.getX();
-        double cy = v2.getY();
-        Line2D l = new Line2D.Double(new Point2D.Double(cx,cy),screenMiddlePoint);
-        g2.draw(l);
-
-        s = new Rectangle2D.Double(cx - 2,cy - 2,4,4);
-        g2.draw(s);
-    }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(TimeDeltaDemo::new);
+        SwingUtilities.invokeLater(AixelDemo::new);
     }
 }

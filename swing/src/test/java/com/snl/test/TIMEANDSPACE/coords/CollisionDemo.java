@@ -1,6 +1,6 @@
-package com.snl.test.TIME.coords;
+package com.snl.test.TIMEANDSPACE.coords;
 
-import com.snl.test.TIME.Body;
+import com.snl.test.TIMEANDSPACE.UTIL.Body;
 
 import javax.swing.*;
 import java.awt.*;
