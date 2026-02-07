@@ -32,9 +32,9 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     protected FrameV2 v2;
 
     //世界高
-    protected int wordWidth = 12;
+    protected int wordWidth = 60;
     //世界宽
-    protected int wordHeight = 12;
+    protected int wordHeight = 60;
     //游戏字体
     protected Font appFont = new Font("隶书", Font.PLAIN, 15);
     //游戏线程休眠时间
