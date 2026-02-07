@@ -1,17 +1,15 @@
 package com.snl.test.TIMEANDSPACE.time;
 
-import com.snl.test.frame.SimpleGameFramePlus;
+import com.snl.test.TIMEANDSPACE.coords.DiKaErPlus;
 import com.snl.test.vwctor.Matrix3x3f;
 import com.snl.test.vwctor.Vector2D;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.awt.geom.Ellipse2D;
 
-public class TimePractice01 extends SimpleGameFramePlus implements MouseWheelListener {
+public class TimePractice01 extends DiKaErPlus  {
 
     Vector2D c0,c0Pos;
     double r0;
@@ -22,7 +20,6 @@ public class TimePractice01 extends SimpleGameFramePlus implements MouseWheelLis
 
     public TimePractice01() throws HeadlessException {
         super();
-        addMouseWheelListener(this);
     }
 
     @Override
@@ -147,31 +144,5 @@ public class TimePractice01 extends SimpleGameFramePlus implements MouseWheelLis
 
     public static void main(String[] args) {
         launchGame(new TimePractice01());
-    }
-
-    @Override
-    public void mouseWheelMoved(MouseWheelEvent e) {
-        int wheelRotation = e.getWheelRotation();
-        if (wheelRotation == -1)
-        {
-            wordWidth--;
-            wordHeight--;
-            axis.createAxis(getViewportTransform(),c);
-        }
-
-        if (wheelRotation == 1) {
-            wordWidth++;
-            wordHeight++;
-            axis.createAxis(getViewportTransform(),c);
-        }
-
-        if (wordWidth <= 2)
-            wordWidth = wordHeight = 2;
-
-        if (wordWidth == WIDTH || wordHeight == HEIGHT)
-        {
-            wordWidth = WIDTH;
-            wordHeight = HEIGHT;
-        }
     }
 }

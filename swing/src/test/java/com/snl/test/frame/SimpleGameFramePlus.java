@@ -1,45 +1,48 @@
 package com.snl.test.frame;
 
-import com.snl.test.TIMEANDSPACE.UTIL.AxisPlus;
 import com.snl.test.frame.util.Utils;
 import com.snl.test.input.CheckInputEvent;
 import com.snl.test.input.MouseInputEvent;
 import com.snl.test.vwctor.Matrix3x3f;
-import com.snl.test.vwctor.Vector2D;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferStrategy;
 
 public class SimpleGameFramePlus extends JFrame implements Runnable {
 
+    //游戏线程
     protected Thread gameThread;
+    //游戏运行
     protected transient boolean running;
+    //双缓冲区
     protected BufferStrategy bs;
+    //画布
     protected Canvas c;
-    protected final int WIDTH = 900;
-    protected final int HEIGHT = 900;
+    //画布宽
+    protected final int WIDTH = 600;
+    //画布高
+    protected final int HEIGHT = 600;
+    //鼠标输入事件
     protected CheckInputEvent keyBoardEvent;
+    //鼠标输入事件
     protected MouseInputEvent mouseInputEvent;
+    //帧率类
     protected FrameV2 v2;
 
+    //世界高
     protected int wordWidth = 12;
+    //世界宽
     protected int wordHeight = 12;
-
+    //游戏字体
     protected Font appFont = new Font("隶书", Font.PLAIN, 15);
+    //游戏线程休眠时间
     protected long appSleep = 16L;
+    //是否需要画布维持比率
     protected boolean appMaintainRatio  = true;
-
-    protected boolean dragging;
-    protected Vector2D mousePos,mouseDelta; //(世界坐标)
-    protected Vector2D mousePosScreen;
+    //视图矩阵
     protected Matrix3x3f viewMat;
-    protected AxisPlus axis;
-    //原点形状
-    Point2D originPoint;
 
     public SimpleGameFramePlus() throws HeadlessException {
         super("游戏框架进阶版");
@@ -161,32 +164,12 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         return inView.mul(RmAT);
     }
 
-    //需要修改
-    public Vector2D getMousePointInWorldPosition() {
-        Matrix3x3f mat = getReverseWorldTransForm();
-        return mat.mul(mousePosScreen);
-    }
-
-    public Point2D convertWorldPointToScreenPoint(Point2D p) {
-        Matrix3x3f view = getViewportTransform();
-        return view.mul(p);
-    }
-
-    public Point2D convertScreenPointToWorldPoint(Point2D p) {
-        Matrix3x3f worldView = getReverseWorldTransForm();
-        return worldView.mul(p);
-    }
-
     public Matrix3x3f getScaleViewPortMat() {
         return Utils.getScaleViewPortMat(c,wordWidth,wordHeight);
     }
 
     public Matrix3x3f getReverseScaleViewPortMat() {
         return Utils.getReverseScaleViewPortMat(c,wordWidth,wordHeight);
-    }
-
-    public Matrix3x3f getTranslationMat() {
-        return Utils.getTranslationMat(c,wordWidth,wordHeight);
     }
 
     //**********************************************************************//
@@ -226,13 +209,6 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     protected void gameInitial() {
         running = true;
         viewMat = Matrix3x3f.identity();
-        mousePos = new Vector2D();
-        mousePosScreen = getViewportTransform().mul(mousePos);
-        //创建轴
-        axis = new AxisPlus();
-        axis.createAxis(getViewportTransform(),c);
-        originPoint = new Point2D.Double();
-        //TODO
     }
 
     //**********************************************************************//
@@ -246,10 +222,6 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     protected void processInput(double delta) {
         keyBoardEvent.poll();
         mouseInputEvent.poll();
-        Vector2D pos = new Vector2D(mouseInputEvent.getCurrentPoint());
-        mouseDelta = pos.sub(mousePos);
-        mousePos = pos;
-        dragging = mouseInputEvent.mouseButtonDown(MouseEvent.BUTTON2);
         if (keyBoardEvent.keyDownOnce(KeyEvent.VK_C))
         {
             reset();
@@ -263,8 +235,6 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         appSleep = 16;
         appMaintainRatio = true;
         viewMat = Matrix3x3f.identity();
-        mouseDelta = new Vector2D();
-        axis.createAxis(getViewportTransform(),c);
     }
 
     /**
@@ -273,19 +243,6 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
      */
     protected void updateSprite(double delta) {
         v2.calculateFrameRate();
-        if (dragging)
-        {
-            // 像素 → 世界单位
-            Matrix3x3f re = getReverseScaleViewPortMat();
-            Vector2D v = re.mul(mouseDelta);
-            viewMat = Matrix3x3f.translate(v.getX(),v.getY()).mul(viewMat);
-            setCursor(Cursor.getPredefinedCursor(
-                    Cursor.HAND_CURSOR
-            ));
-            axis.createAxis(getViewportTransform(),c);
-        }
-        else
-            setCursor(null);
         //TODO
     }
 
@@ -327,23 +284,8 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         //TODO
         g2.setColor(Color.PINK);
         g2.drawString("笛卡尔坐标系",c.getWidth() - 100,30);
-        axis.draw(g2);
         g2.draw(mouseInputEvent.getMouseShape());
-        drawPoint(g2,originPoint);
         g2.dispose();
-    }
-
-    private void drawPoint(Graphics2D g2, Point2D point) {
-        g2.setColor(Color.MAGENTA);
-        Matrix3x3f mat = getViewportTransform();
-        Point2D p = mat.mul(point);
-        Shape o = new Ellipse2D.Double(
-                p.getX() - 4,p.getY() - 4,
-                8,8
-        );
-        g2.fill(o);
-        g2.drawString("[%.2f,%.2f]".formatted(point.getX(),point.getY()),
-                (int) p.getX(), (int) (p.getY() - 10));
     }
 
 //    private void drawOriginalPoint(Graphics2D g2) {
