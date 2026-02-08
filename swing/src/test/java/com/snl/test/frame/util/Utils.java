@@ -1,13 +1,12 @@
 package com.snl.test.frame.util;
 
-import com.snl.test.vwctor.Matrix3x3f;
-import com.snl.test.vwctor.Vector2D;
+import com.snl.test.java2D.vector.Matrix3x3f;
+import com.snl.test.java2D.vector.Vector2D;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Utils {
@@ -156,7 +155,7 @@ public class Utils {
                     f.getX(),f.getY(),
                     p.getX(),p.getY()
             );
-            g2.draw(l);
+            g2.fill(l);
             f = p;
         }
     }
@@ -274,4 +273,11 @@ public class Utils {
         mat = mat.mul(Matrix3x3f.scale(sx,-sy));
         return mat;
     }
+
+    public static boolean pointInAABB(Vector2D pos,Vector2D min,Vector2D max)
+    {
+        return pos.getX() > min.getX() && pos.getX() < max.getX()
+                && pos.getY() > min.getY() && pos.getY() < max.getY();
+    }
+
 }

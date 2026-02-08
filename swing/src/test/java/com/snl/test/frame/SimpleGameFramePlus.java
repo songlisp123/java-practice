@@ -1,14 +1,15 @@
 package com.snl.test.frame;
 
 import com.snl.test.frame.util.Utils;
-import com.snl.test.input.CheckInputEvent;
-import com.snl.test.input.MouseInputEvent;
-import com.snl.test.vwctor.Matrix3x3f;
+import com.snl.test.java2D.input.CheckInputEvent;
+import com.snl.test.java2D.input.MouseInputEvent;
+import com.snl.test.java2D.vector.Matrix3x3f;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class SimpleGameFramePlus extends JFrame implements Runnable {
 
@@ -32,9 +33,9 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     protected FrameV2 v2;
 
     //世界高
-    protected int wordWidth = 60;
+    protected int wordWidth = 12;
     //世界宽
-    protected int wordHeight = 60;
+    protected int wordHeight = 12;
     //游戏字体
     protected Font appFont = new Font("隶书", Font.PLAIN, 15);
     //游戏线程休眠时间
@@ -279,5 +280,24 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         g2.dispose();
     }
 
+    //**********************************************************************//
+    /* ******************          纹理操作          *********************** */
+    //**********************************************************************//
+
+    protected BufferedImage getBufferImage() {
+        int size = 50;
+        BufferedImage bi = new BufferedImage(
+                size,size,BufferedImage.TYPE_INT_RGB);
+        var g2 = bi.createGraphics();
+        g2.setPaint(Color.WHITE);
+        g2.fillRect(0,0,size / 2 ,size /2);
+        g2.setPaint(Color.BLACK);
+        g2.fillRect(size / 2,0,size,size / 2);
+        g2.setPaint(Color.BLACK);
+        g2.fillRect(0,size / 2,size /2 ,size);
+        g2.setPaint(Color.WHITE);
+        g2.fillRect(size / 2,size /2 ,size,size);
+        return bi;
+    }
 
 }

@@ -1,7 +1,7 @@
 package com.snl.test.frame;
 
 import com.snl.test.frame.util.Utils;
-import com.snl.test.vwctor.Matrix3x3f;
+import com.snl.test.java2D.vector.Matrix3x3f;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

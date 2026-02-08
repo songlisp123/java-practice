@@ -1,11 +1,11 @@
 package com.snl.test.frame;
 
-import com.snl.test.TIMEANDSPACE.UTIL.Axis;
+import com.snl.test.java2D.UTIL.Axis;
 import com.snl.test.frame.util.Utils;
-import com.snl.test.input.CheckInputEvent;
-import com.snl.test.input.MouseInputEvent;
-import com.snl.test.vwctor.Matrix3x3f;
-import com.snl.test.vwctor.Vector2D;
+import com.snl.test.java2D.input.CheckInputEvent;
+import com.snl.test.java2D.input.MouseInputEvent;
+import com.snl.test.java2D.vector.Matrix3x3f;
+import com.snl.test.java2D.vector.Vector2D;
 
 import javax.swing.*;
 import java.awt.*;
