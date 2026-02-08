@@ -6,6 +6,7 @@ import com.snl.test.java2D.vector.Matrix3x3f;
 import com.snl.test.java2D.vector.Vector2D;
 
 import java.awt.*;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -34,6 +35,10 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         addMouseWheelListener(this);
     }
 
+    //**********************************************************************//
+    /* ******************          游戏初始化         *********************** */
+    //**********************************************************************//
+
     @Override
     protected void gameInitial() {
         super.gameInitial();
@@ -41,7 +46,7 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         mouseDelta = new Vector2D();
         //创建轴
         axis = new AxisPlus();
-        axis.createAxis(getViewportTransform(),c);
+        axis.createAxis(getViewportTransform(),c,wordWidth);
         //初始化原点
         originPoint = new Point2D.Double();
         //初始化屏幕左下角点
@@ -49,10 +54,9 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         //TODO
     }
 
-    private void resetPos() {
-        minS = new Vector2D(-wordWidth / 2.0,-wordHeight / 2.0);
-        maxS = new Vector2D(wordWidth / 2.0,wordHeight / 2.0);
-    }
+    //**********************************************************************//
+    /* ******************          游戏循环         *********************** */
+    //**********************************************************************//
 
     @Override
     protected void processInput(double delta) {
@@ -67,15 +71,6 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
     }
 
     @Override
-    protected void reset() {
-        super.reset();
-        mouseDelta = new Vector2D();
-        axis.createAxis(getViewportTransform(),c);
-        resetPos();
-        //TODO
-    }
-
-    @Override
     protected void updateSprite(double delta) {
         super.updateSprite(delta);
         if (dragging)
@@ -86,15 +81,15 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
             viewMat = Matrix3x3f.translate(-v.getX(),v.getY()).mul(viewMat);
             setCursor(Cursor.getPredefinedCursor(
                     Cursor.HAND_CURSOR));
-            axis.createAxis(getViewportTransform(),c);
-            resetPos();
-            Matrix3x3f r = viewMat.getReverseTranslation();
-            minS = r.mul(minS);
-            maxS = r.mul(maxS);
+            axis.createAxis(getViewportTransform(),c,wordWidth);
         }
         else
             setCursor(null);
         //TODO
+        resetPos();
+        Matrix3x3f r = viewMat.getReverseTranslation();
+        minS = r.mul(minS);
+        maxS = r.mul(maxS);
     }
 
     @Override
@@ -192,6 +187,33 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         this.drawPolygon(g2,polygon.toArray(Vector2D[]::new));
     }
 
+    //**********************************************************************//
+    /* ******************          重置状态         *********************** */
+    //**********************************************************************//
+
+    @Override
+    protected void reset() {
+        super.reset();
+        mouseDelta = new Vector2D();
+        axis.createAxis(getViewportTransform(),c,wordWidth);
+        resetPos();
+        //TODO
+    }
+
+    private void resetPos() {
+        minS = new Vector2D(-wordWidth / 2.0,-wordHeight / 2.0);
+        maxS = new Vector2D(wordWidth / 2.0,wordHeight / 2.0);
+    }
+
+    //**********************************************************************//
+    /* ******************          重置窗口         *********************** */
+    //**********************************************************************//
+    @Override
+    protected void handleResizeEvent(ComponentEvent e) {
+        super.handleResizeEvent(e);
+        axis.createAxis(getViewportTransform(),c,wordWidth);
+    }
+
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         int wheelRotation = e.getWheelRotation();
@@ -199,13 +221,13 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         {
             wordWidth--;
             wordHeight--;
-            axis.createAxis(getViewportTransform(),c);
+            axis.createAxis(getViewportTransform(),c,wordWidth);
         }
 
         if (wheelRotation == 1) {
             wordWidth++;
             wordHeight++;
-            axis.createAxis(getViewportTransform(),c);
+            axis.createAxis(getViewportTransform(),c,wordWidth);
         }
 
         if (wordWidth <= 2)

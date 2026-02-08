@@ -113,7 +113,7 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
      * 处理拖动窗口逻辑
      * @param e 组件事件
      */
-    private void handleResizeEvent(ComponentEvent e) {
+    protected void handleResizeEvent(ComponentEvent e) {
         Dimension size = getContentPane().getSize();
         int vw = size.width ;
         int vh = size.height;
