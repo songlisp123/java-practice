@@ -6,10 +6,8 @@ import com.snl.test.java2D.vector.Matrix3x3f;
 import com.snl.test.java2D.vector.Vector2D;
 
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
+import java.awt.event.*;
+import java.awt.font.TextLayout;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
@@ -61,6 +59,11 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
     @Override
     protected void processInput(double delta) {
         super.processInput(delta);
+        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_H))
+        {
+            viewMat = Matrix3x3f.identity();
+            axis.createAxis(getViewportTransform(),c,wordWidth);
+        }
         //获取当前坐标点
         Vector2D pos = new Vector2D(mouseInputEvent.getCurrentPoint());
         //获取坐标在当前帧移动的距离
@@ -187,6 +190,31 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         this.drawPolygon(g2,polygon.toArray(Vector2D[]::new));
     }
 
+    protected void drawShape(Graphics2D g2, TextLayout textLayout, Vector2D p) {
+        Matrix3x3f vt = getViewportTransform();
+        Vector2D c0 = vt.mul(p);
+        //左上角
+        Rectangle2D bounds = textLayout.getBounds();
+        double width = bounds.getWidth();
+        double height = bounds.getHeight();
+        float leftX = (float) (c0.getX() - width / 2.0);
+        float leftY = (float) (c0.getY() - height / 2.0);
+        textLayout.draw(g2,leftX,leftY);
+    }
+
+    protected void drawImage(Graphics2D g2,Image image,Vector2D p)
+    {
+        Matrix3x3f vt = getViewportTransform();
+        Vector2D c0 = vt.mul(p);
+        //获取缩放
+        int w = image.getWidth(null);
+        int h = image.getHeight(null);
+        //获取坐标
+        double leftX = c0.getX() - w / 2.0;
+        double leftY = c0.getY() - h / 2.0;
+        g2.drawImage(image, (int) leftX, (int) leftY,null);
+    }
+
     //**********************************************************************//
     /* ******************          重置状态         *********************** */
     //**********************************************************************//
@@ -208,6 +236,7 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
     //**********************************************************************//
     /* ******************          重置窗口         *********************** */
     //**********************************************************************//
+
     @Override
     protected void handleResizeEvent(ComponentEvent e) {
         super.handleResizeEvent(e);

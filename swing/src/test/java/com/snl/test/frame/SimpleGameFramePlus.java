@@ -269,8 +269,8 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         g2.setStroke(new BasicStroke(2));
         g2.drawString(v2.getFrameRate(),30,30);
         g2.drawString("鼠标按下:[%s]".formatted(mouseInputEvent.checkButton()),30,50);
-        g2.drawString("向 上 滑动滚轮放大地图",30,70);
-        g2.drawString("向 下 滑动滚轮缩小地图",30,90);
+        g2.drawString("使用滑动滚轮缩放地图",30,70);
+        g2.drawString("按下 h 键居中地图",30,90);
         g2.drawString("按下 c 重置",30,110);
         g2.drawString("[%d px : 1 单位]".formatted(c.getWidth() / wordWidth),30,c.getHeight() - 20);
         //TODO
