@@ -38,14 +38,14 @@ public class XiePaoYunDongDemo01 extends DiKaErPlus {
     @Override
     protected void processInput(double delta) {
         super.processInput(delta);
-        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_A))
+        if (keyBoardEvent.keyDown(KeyEvent.VK_A))
         {
-            rot += theta;
+            rot += theta * delta;
         }
 
-        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_D))
+        if (keyBoardEvent.keyDown(KeyEvent.VK_D))
         {
-            rot -= theta;
+            rot -= theta * delta;
         }
 
         if (keyBoardEvent.keyDownOnce(KeyEvent.VK_SPACE))
