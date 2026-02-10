@@ -170,7 +170,9 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
 
     //绘制多边形
     protected void drawPolygon(Graphics2D g2, Vector2D[] polygon) {
-        if(polygon.length == 0)
+        if(polygon == null || polygon.length == 0)
+            return;
+        if (g2 == null)
             return;
         Vector2D p;
         Vector2D f = polygon[polygon.length -1];
@@ -180,7 +182,7 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
                     f.getX(),f.getY(),
                     p.getX(),p.getY()
             );
-            g2.fill(l);
+            g2.draw(l);
             f = p;
         }
     }
@@ -190,18 +192,33 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         this.drawPolygon(g2,polygon.toArray(Vector2D[]::new));
     }
 
-    protected void drawShape(Graphics2D g2, TextLayout textLayout, Vector2D p) {
+    //绘制文本
+    public void drawText(Graphics2D g2,TextLayout layout,Vector2D p) {
         Matrix3x3f vt = getViewportTransform();
         Vector2D c0 = vt.mul(p);
         //左上角
-        Rectangle2D bounds = textLayout.getBounds();
+        Rectangle2D bounds = layout.getBounds();
         double width = bounds.getWidth();
         double height = bounds.getHeight();
         float leftX = (float) (c0.getX() - width / 2.0);
         float leftY = (float) (c0.getY() - height / 2.0);
-        textLayout.draw(g2,leftX,leftY);
+        layout.draw(g2,leftX,leftY);
     }
 
+    //绘制形状
+    protected void drawShape(Graphics2D g2, Shape shape, Vector2D p) {
+        Matrix3x3f vt = getViewportTransform();
+        Vector2D c0 = vt.mul(p);
+        //左上角
+        Rectangle2D bounds = shape.getBounds();
+        double width = bounds.getWidth();
+        double height = bounds.getHeight();
+        float leftX = (float) (c0.getX() - width / 2.0);
+        float leftY = (float) (c0.getY() - height / 2.0);
+        g2.fill(shape);
+    }
+
+    //绘制图像
     protected void drawImage(Graphics2D g2,Image image,Vector2D p)
     {
         Matrix3x3f vt = getViewportTransform();

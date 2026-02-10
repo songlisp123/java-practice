@@ -145,8 +145,8 @@ public class TimeDeltaDemo extends JFrame implements Runnable {
     private void updateSprite(double delta) {
         v2.calculateFrameRate();
         //TODO
-//        angle += step * delta;
-        angle += step * v2.getmFrameRate() / 1000;
+        angle += step * delta;
+//        angle += step * v2.getmFrameRate() / 1000;
         if (angle > 2 * Math.PI) {
             angle -= 2 * Math.PI;
         }
@@ -182,19 +182,6 @@ public class TimeDeltaDemo extends JFrame implements Runnable {
         ),30,70);
         g2.drawString("鼠标按下:[%s]".formatted(mouseInputEvent.checkButton()),30,110);
         g2.drawString("当前休眠时间:[%d]".formatted(sleep),30,130);
-//        AffineTransform transform = g2.getTransform();
-//        Stroke stroke = g2.getStroke();
-//        g2.setStroke(new BasicStroke(2,BasicStroke.CAP_ROUND,BasicStroke.JOIN_MITER,
-//                1.0f,new float[]{4,2,4},2.0f));
-//        g2.rotate(-Math.PI / 4,screenMiddlePoint.getX(),screenMiddlePoint.getY());
-//        g2.draw(x_45du);
-//        g2.rotate(Math.PI / 2,screenMiddlePoint.getX(),screenMiddlePoint.getY());
-//        g2.draw(x_45du);
-//        g2.setStroke(stroke);
-//        g2.setTransform(transform);
-//        g2.draw(xAix);
-//        g2.draw(yAix);
-//        g2.draw(originPointShape);
         drawHandle(g2);
         g2.setColor(Color.cyan);
         g2.draw(mouseInputEvent.getMouseShape());
