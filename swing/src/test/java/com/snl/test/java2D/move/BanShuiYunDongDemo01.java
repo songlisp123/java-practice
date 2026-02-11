@@ -7,6 +7,8 @@ import com.snl.test.java2D.vector.Vector2D;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.*;
+import java.util.List;
 
 public class BanShuiYunDongDemo01 extends DiKaErPlus {
 
@@ -20,6 +22,11 @@ public class BanShuiYunDongDemo01 extends DiKaErPlus {
     double rot02,theta02;
     double rot03,theta03;
     Vector2D speed;
+    Vector2D c0Copy;
+    double count;
+    Vector2D rotateRadius;
+
+    List<guiJi> guiJis = new ArrayList<>(20);
 
     public BanShuiYunDongDemo01() throws HeadlessException {
         super();
@@ -41,10 +48,13 @@ public class BanShuiYunDongDemo01 extends DiKaErPlus {
         };
         polCopy = new Vector2D[pol.length];
         radius = new Vector2D(2,0);
+        rotateRadius = new Vector2D(8,8);
     }
 
     private void initialPos() {
         c0Pos = new Vector2D(4,0);
+        c0 = new Vector2D(5,5);
+        c0Copy = c0.clone();
         speed = new Vector2D(1.5,0);
         rot = 0;
         rot02 = 0;
@@ -69,10 +79,21 @@ public class BanShuiYunDongDemo01 extends DiKaErPlus {
             rot03 += delta * theta03;
         }
         Matrix3x3f mat = Matrix3x3f.rotate(rot);
-        mat = mat.mul(Matrix3x3f.translate(c0Pos.getX(), c0Pos.getY()));
-        c0 = mat.mul(new Vector2D());
+        c0 = c0Copy.sub(rotateRadius);
+        c0 = mat.mul(c0);
+        c0 =c0.add(rotateRadius);
+        count += delta;
+        if (count >= 4 / 12.0) {
+            guiJi guiJi = new guiJi(c0, image01);
+            guiJis.add(guiJi);
+            count = 0;
+        }
+        for (guiJi g : guiJis)
+        {
+            g.update(delta);
+        }
+        guiJis.removeIf(next -> next.dead);
         handleView(c0);
-
         Matrix3x3f ro = Matrix3x3f.rotate(rot02);
         ro = ro.mul(Matrix3x3f.translate(6,radius.getY()));
         ro = mat.mul(ro);
@@ -86,7 +107,9 @@ public class BanShuiYunDongDemo01 extends DiKaErPlus {
     }
 
     private void handleView(Vector2D pos) {
+        viewMat = Matrix3x3f.translate(-c0.getX(), -c0.getY());
         Matrix3x3f view = getViewportTransform();
+        axis.createAxis(view,c,wordWidth);
         for (int i=0;i<polCopy.length;i++)
         {
             polCopy[i] = view.mul(pos.add(pol[i]));
@@ -105,11 +128,37 @@ public class BanShuiYunDongDemo01 extends DiKaErPlus {
         drawImage(g2,image03.getImage(),c2);
         g2.setColor(Color.cyan);
         drawPolygon(g2,polCopy);
+        for (guiJi j : guiJis)
+        {
+            drawImage(g2,j.icon.getImage(),j.pos);
+        }
         g2.drawString("按下 SPACE 开始",30,130);
         g2.dispose();
     }
 
     public static void main(String[] args) {
         launchGame(new BanShuiYunDongDemo01());
+    }
+
+    class guiJi {
+        Vector2D pos;
+        ImageIcon icon;
+        boolean dead;
+        double start;
+
+        public guiJi(Vector2D pos, ImageIcon icon) {
+            this.pos = pos;
+            this.icon = icon;
+            start = 0;
+            dead = false;
+        }
+
+        void update(double delta) {
+            start += delta;
+            if (start >= 4) //1秒
+            {
+                dead = true;
+            }
+        }
     }
 }

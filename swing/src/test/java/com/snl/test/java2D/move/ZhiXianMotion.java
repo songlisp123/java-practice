@@ -118,7 +118,7 @@ public class ZhiXianMotion extends DiKaErPlus {
         }
         playerMovingLeft = keyBoardEvent.keyDown(KeyEvent.VK_D);
         playerMovingRight = keyBoardEvent.keyDown(KeyEvent.VK_A);
-        jumping = keyBoardEvent.keyDownOnce(KeyEvent.VK_W);
+        jumping = keyBoardEvent.keyDown(KeyEvent.VK_W);
 
     }
 

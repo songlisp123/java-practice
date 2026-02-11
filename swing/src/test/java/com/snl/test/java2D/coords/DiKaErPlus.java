@@ -8,10 +8,7 @@ import com.snl.test.java2D.vector.Vector2D;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextLayout;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
+import java.awt.geom.*;
 import java.util.List;
 
 public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListener {
@@ -170,21 +167,83 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
 
     //绘制多边形
     protected void drawPolygon(Graphics2D g2, Vector2D[] polygon) {
+        drawPolygon(g2,polygon,false);
+    }
+
+    //绘制多边形，是否是正确的？？？？？
+    protected void  drawPolygon(Graphics2D g2,Vector2D[] polygon,boolean filling) {
         if(polygon == null || polygon.length == 0)
             return;
         if (g2 == null)
             return;
-        Vector2D p;
-        Vector2D f = polygon[polygon.length -1];
-        for (Vector2D v : polygon) {
-            p = v;
-            Line2D l = new Line2D.Double(
-                    f.getX(),f.getY(),
-                    p.getX(),p.getY()
-            );
-            g2.draw(l);
-            f = p;
+        if (filling)
+        {
+            GeneralPath path = new GeneralPath();
+            Vector2D p;
+            Vector2D f = polygon[polygon.length -1];
+            path.moveTo(f.getX(),f.getY());
+            for (Vector2D v : polygon)
+            {
+                p = v;
+                path.lineTo(p.getX(),p.getY());
+            }
+            g2.fill(path);
         }
+        else
+        {
+            Vector2D p;
+            Vector2D f = polygon[polygon.length -1];
+            for (Vector2D v : polygon) {
+                p = v;
+                Line2D l = new Line2D.Double(
+                        f.getX(),f.getY(),
+                        p.getX(),p.getY()
+                );
+                g2.draw(l);
+                f = p;
+            }
+        }
+    }
+
+    protected void drawPoly(Graphics2D g2,Vector2D[] poly,boolean filling) {
+        if(poly == null || poly.length == 0)
+            return;
+        if (g2 == null)
+            return;
+        Matrix3x3f view = getViewportTransform();
+        for (int i=0;i<poly.length;i++)
+        {
+            poly[i] = view.mul(poly[i]);
+        }
+
+        if (filling)
+        {
+            GeneralPath path = new GeneralPath();
+            Vector2D p;
+            Vector2D f = poly[poly.length -1];
+            path.moveTo(f.getX(),f.getY());
+            for (Vector2D v : poly)
+            {
+                p = v;
+                path.lineTo(p.getX(),p.getY());
+            }
+            g2.fill(path);
+        }
+        else
+        {
+            Vector2D p;
+            Vector2D f = poly[poly.length -1];
+            for (Vector2D v : poly) {
+                p = v;
+                Line2D l = new Line2D.Double(
+                        f.getX(),f.getY(),
+                        p.getX(),p.getY()
+                );
+                g2.draw(l);
+                f = p;
+            }
+        }
+
     }
 
     //绘制多边形2-该方法接受一个坐标列表
