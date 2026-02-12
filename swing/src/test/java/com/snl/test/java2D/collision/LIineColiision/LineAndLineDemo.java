@@ -1,4 +1,4 @@
-package com.snl.test.java2D.collision;
+package com.snl.test.java2D.collision.LIineColiision;
 
 import com.snl.test.java2D.coords.DiKaErPlus;
 import com.snl.test.java2D.vector.Matrix3x3f;
@@ -10,11 +10,13 @@ import java.awt.event.MouseEvent;
 public class LineAndLineDemo extends DiKaErPlus {
 
     Vector2D start01,end01;
+    Vector2D min01,max01;
     Vector2D start02,end02;
+    Vector2D min02,max02;
     boolean rec01Moving,rec02Moving;
     boolean clicked,dragging;
     Vector2D insert;
-    double r = 0.25;
+    double r = 0.1;
 
     public LineAndLineDemo() throws HeadlessException {
         super();

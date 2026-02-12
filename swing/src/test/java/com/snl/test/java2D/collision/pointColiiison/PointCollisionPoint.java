@@ -1,4 +1,4 @@
-package com.snl.test.java2D.collision;
+package com.snl.test.java2D.collision.pointColiiison;
 
 import com.snl.test.java2D.coords.DiKaErPlus;
 import com.snl.test.java2D.vector.Matrix3x3f;
@@ -7,7 +7,7 @@ import com.snl.test.java2D.vector.Vector2D;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class PointCollisionDemo01 extends DiKaErPlus {
+public class PointCollisionPoint extends DiKaErPlus {
 
     Vector2D pos01,pos02;
     boolean dragging,clicking;
@@ -15,12 +15,12 @@ public class PointCollisionDemo01 extends DiKaErPlus {
     boolean c0Moving,c1Moving;
     boolean clllision;
 
-    public PointCollisionDemo01() throws HeadlessException {
+    public PointCollisionPoint() throws HeadlessException {
         super();
     }
 
     public static void main(String[] args) {
-        launchGame(new PointCollisionDemo01());
+        launchGame(new PointCollisionPoint());
     }
 
     @Override
