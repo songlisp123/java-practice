@@ -49,6 +49,11 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         //TODO
     }
 
+    protected Vector2D getMousePointInVector() {
+        Matrix3x3f r = getReverseWorldTransForm();
+        return r.mul(mousePos);
+    }
+
     //**********************************************************************//
     /* ******************          游戏循环         *********************** */
     //**********************************************************************//
@@ -122,6 +127,10 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
 
     //绘制AABB矩形
     protected void drawAABB(Graphics2D g2, Vector2D min, Vector2D max) {
+        this.drawAABB(g2,min,max,false);
+    }
+
+    protected void drawAABB(Graphics2D g2, Vector2D min, Vector2D max,boolean fill) {
         Vector2D left = new Vector2D(min.getX(),max.getY());
         Vector2D bottom = new Vector2D(max.getX(), min.getY());
 
@@ -137,7 +146,10 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         double h = Math.abs(bottomS.getY() - leftS.getY());
 
         Shape s = new Rectangle2D.Double(sx,sy,w,h);
-        g2.fill(s);
+        if (fill)
+            g2.fill(s);
+        else
+            g2.draw(s);
     }
 
     //绘制圆形
@@ -211,18 +223,19 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         if (g2 == null)
             return;
         Matrix3x3f view = getViewportTransform();
+        Vector2D[] copy = new Vector2D[poly.length];
         for (int i=0;i<poly.length;i++)
         {
-            poly[i] = view.mul(poly[i]);
+            copy[i] = view.mul(poly[i]);
         }
 
         if (filling)
         {
             GeneralPath path = new GeneralPath();
             Vector2D p;
-            Vector2D f = poly[poly.length -1];
+            Vector2D f = copy[copy.length -1];
             path.moveTo(f.getX(),f.getY());
-            for (Vector2D v : poly)
+            for (Vector2D v : copy)
             {
                 p = v;
                 path.lineTo(p.getX(),p.getY());
@@ -232,8 +245,8 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         else
         {
             Vector2D p;
-            Vector2D f = poly[poly.length -1];
-            for (Vector2D v : poly) {
+            Vector2D f = copy[copy.length -1];
+            for (Vector2D v : copy) {
                 p = v;
                 Line2D l = new Line2D.Double(
                         f.getX(),f.getY(),
@@ -291,6 +304,15 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         g2.drawImage(image, (int) leftX, (int) leftY,null);
     }
 
+    protected void drawLine(Graphics2D g2,Vector2D start,Vector2D end)
+    {
+        Matrix3x3f vt = getViewportTransform();
+        Vector2D v1 = vt.mul(start);
+        Vector2D v2 = vt.mul(end);
+        Shape l = new Line2D.Double(v1.getX(),v1.getY(),v2.getX(),v2.getY());
+        g2.draw(l);
+    }
+
     //**********************************************************************//
     /* ******************          重置状态         *********************** */
     //**********************************************************************//
@@ -307,6 +329,11 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
     private void resetPos() {
         minS = new Vector2D(-wordWidth / 2.0,-wordHeight / 2.0);
         maxS = new Vector2D(wordWidth / 2.0,wordHeight / 2.0);
+    }
+
+    //重置视图
+    protected void resetView() {
+        viewMat = Matrix3x3f.identity();
     }
 
     //**********************************************************************//
@@ -343,5 +370,20 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
             wordWidth = WIDTH;
             wordHeight = HEIGHT;
         }
+    }
+    //**********************************************************************//
+    /* ******************          碰撞测试         *********************** */
+    //**********************************************************************//
+
+    protected boolean pointInCircle(Vector2D pos,Vector2D c,double r)
+    {
+        Vector2D v = pos.sub(c);
+        return v.lenSqr() < Math.pow(r,2);
+    }
+
+    protected boolean pointInAABB(Vector2D pos,Vector2D min,Vector2D max)
+    {
+        return pos.getX() >= min.getX() && pos.getX() <= max.getX()
+                && pos.getY() >= min.getY() && pos.getY() <= max.getY();
     }
 }

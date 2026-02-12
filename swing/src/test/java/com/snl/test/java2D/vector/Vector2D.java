@@ -159,4 +159,14 @@ public class Vector2D {
     public Vector2D clone() {
         return new Vector2D(x,y);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Vector2D other))
+            return false;
+        if (other == this)
+            return true;
+        return this.x == other.x &&
+                this.y == other.y;
+    }
 }

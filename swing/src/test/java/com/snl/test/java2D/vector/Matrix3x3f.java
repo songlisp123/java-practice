@@ -12,6 +12,24 @@ public class Matrix3x3f {
     public Matrix3x3f() {
     }
 
+    /**
+     * 按照行向量的标准初始化矩阵
+     * @param c 行向量数组
+     */
+    public Matrix3x3f(double[] c) {
+        this.mat[0][0] = c[0];
+        this.mat[0][1] = c[1];
+        this.mat[0][2] = 0;
+
+        this.mat[1][0] = c[2];
+        this.mat[1][1] = c[3];
+        this.mat[1][2] = 0;
+
+        this.mat[2][0] = c[4];
+        this.mat[2][1] = c[5];
+        this.mat[2][2] = 1;
+    }
+
     public Matrix3x3f(double[][] mat) {
         this.mat = mat;
     }
@@ -172,16 +190,16 @@ public class Matrix3x3f {
      */
     public static Matrix3x3f flipYAix() {
         return new Matrix3x3f(new double[][]{
-                {1.0,.0,.0},
-                {.0,-1.0,.0},
+                {-1.0,.0,.0},
+                {.0,1.0,.0},
                 {.0,.0,1.0},
         });
     }
 
     public static Matrix3x3f flipXAix() {
         return new Matrix3x3f(new double[][]{
-                {-1.0,.0,.0},
-                {.0,1.0,.0},
+                {1.0,.0,.0},
+                {.0,-1.0,.0},
                 {.0,.0,1.0},
         });
     }
