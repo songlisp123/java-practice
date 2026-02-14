@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextLayout;
 import java.awt.geom.*;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListener {
@@ -154,11 +155,20 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
 
     //绘制圆形
     protected void drawCircle(Graphics2D g2,Vector2D p,double r) {
-        this.drawEllipse(g2,p,r,r);
+        this.drawCircle(g2,p,r,false);
+    }
+
+    //绘制圆形
+    protected void drawCircle(Graphics2D g2,Vector2D p,double r,boolean fill) {
+        this.drawEllipse(g2,p,r,r,fill);
     }
 
     //绘制椭圆
     protected void drawEllipse(Graphics2D g2,Vector2D p,double ra,double rb) {
+        this.drawEllipse(g2,p,ra,rb,false);
+    }
+
+    protected void drawEllipse(Graphics2D g2,Vector2D p,double ra,double rb,boolean fill) {
         Matrix3x3f vt = getViewportTransform();
         Matrix3x3f scale = getScaleViewPortMat();
         Vector2D c0 = vt.mul(p);
@@ -170,7 +180,10 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         double leftX = c0.getX() - w / 2.0;
         double leftY =c0.getY() - h / 2.0;
         Shape s = new Ellipse2D.Double(leftX,leftY,w,h);
-        g2.fill(s);
+        if (fill)
+            g2.fill(s);
+        else
+            g2.draw(s);
         //g2.drawString("[%.2f,%.2f]".formatted(p.getX(),p.getY()),
         // (int) c0.getX(), (int) (c0.getY() - 10));
         // Shape radius = new Ellipse2D.Double(leftX,leftY,4,4);
@@ -217,6 +230,10 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         }
     }
 
+    protected void drawPoly(Graphics2D g2,List<Vector2D> polys,boolean fill){
+        this.drawPoly(g2,polys.toArray(Vector2D[]::new),fill);
+    }
+
     protected void drawPoly(Graphics2D g2,Vector2D[] poly,boolean filling) {
         if(poly == null || poly.length == 0)
             return;
@@ -261,7 +278,7 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
 
     //绘制多边形2-该方法接受一个坐标列表
     protected void drawPolygon(Graphics2D g2, List<Vector2D> polygon) {
-        this.drawPolygon(g2,polygon.toArray(Vector2D[]::new));
+        this.drawPoly(g2,polygon.toArray(Vector2D[]::new),false);
     }
 
     //绘制文本
@@ -386,4 +403,99 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         return pos.getX() >= min.getX() && pos.getX() <= max.getX()
                 && pos.getY() >= min.getY() && pos.getY() <= max.getY();
     }
+
+    protected boolean pointInEllipse(Vector2D pos,Vector2D c,double ra,double rb)
+    {
+        double x = c.getX() / ra;
+        double y = c.getY() / rb;
+        Vector2D v = new Vector2D(x,y);
+        double x1 = pos.getX() / ra;
+        double y1 = pos.getY() / rb;
+        Vector2D v1 = new Vector2D(x1,y1);
+        v1 = v1.sub(v);
+        return v1.lenSqr() < 1;
+    }
+
+    protected boolean pointInPoly(Vector2D pos,List<Vector2D> poly) {
+        return this.pointInPoly(pos,poly.toArray(Vector2D[]::new));
+    }
+
+    protected boolean pointInPoly(Vector2D pos,Vector2D[] poly)
+    {
+        if (poly == null || poly.length <= 2)
+            return false;
+        int inside = 0;
+        Vector2D s = poly[poly.length - 1];
+        boolean start = pos.getY() > s.getY();
+        for (Vector2D e : poly) {
+            boolean end = pos.getY() > e.getY();
+            if (start != end) {
+                //计算
+                double k = (e.getY() - s.getY()) / (e.getX() - s.getY());
+                double insertX = s.getX() + (pos.getY() - s.getY()) / k;
+                if (insertX > pos.getY())
+                    inside++;
+            }
+            start = end;
+            s = e;
+        }
+
+        return inside % 2 != 0;
+    }
+
+    protected boolean lineInsertLine(Vector2D start01,Vector2D end01,
+                                     Vector2D start02,Vector2D end02)
+    {
+        //使用二维增广矩阵
+//判断交点
+        double dy01 = end01.getY() - start01.getY();
+        double dx01 = end01.getX() - start01.getX();
+
+        double dy02 = end02.getY() - start02.getY();
+        double dx02 = end02.getX() - start02.getX();
+
+        double d = (-dy01 * dx02) - (dx01 * -dy02);
+        return d != 0;
+    }
+
+    //**********************************************************************//
+    /* ******************          图像测试         *********************** */
+    //**********************************************************************//
+    //创建测试图像
+    protected BufferedImage createBufferedImage(int W,int H) {
+        return this.createBufferedImage(W,H,BufferedImage.TYPE_INT_RGB);
+    }
+
+    protected BufferedImage createBufferedImage(int W,int H,int transparent) {
+        if(transparent < BufferedImage.TYPE_CUSTOM || transparent > BufferedImage.TYPE_BYTE_INDEXED)
+            throw new IllegalArgumentException("非法参数异常");
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice sd = ge.getDefaultScreenDevice();
+        GraphicsConfiguration gc = sd.getDefaultConfiguration();
+        return gc.createCompatibleImage(W,H,transparent);
+    }
+
+    protected void drawSplitImage(Graphics2D g2, double splitX, Image west, Image east) {
+        int height = c.getHeight();
+        int width = c.getWidth();
+        if (splitX != 0 && west != null)
+        {
+            Rectangle2D clip = new Rectangle2D.Double(
+                    0,0, splitX,height
+            );
+            g2.setClip(clip);
+        }
+        g2.drawImage(west,0,0,null);
+        if (splitX == 0 || east == null) return;
+        Rectangle2D secondClip = new Rectangle2D.Double(splitX, 0, width, height);
+        g2.setClip(secondClip);
+        g2.drawImage(east,0,0,null);
+        g2.setClip(null);
+        Line2D l = new Line2D.Double(splitX,0, splitX,height);
+        g2.setColor(Color.lightGray);
+        g2.setStroke(new BasicStroke(2,BasicStroke.CAP_ROUND,BasicStroke.JOIN_MITER,1,
+                new float[]{3,5,3},2));
+        g2.draw(l);
+    }
+
 }

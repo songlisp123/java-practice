@@ -11,6 +11,11 @@ public class RandomGeneratorClass {
         return g.nextDouble(-bounds / 2,bounds / 2);
     }
 
+    public static double random(double min,double bounds)
+    {
+        return g.nextDouble(min,bounds);
+    }
+
     public static int random(int bounds) {
         return g.nextInt(bounds);
     }

@@ -40,11 +40,6 @@ public class Vector2D {
         this.y += dy;
     }
 
-    public void scale(double sx,double sy){
-        this.x *= sx;
-        this.y *= sy;
-    }
-
     public void shear(double sx,double sy) {
         double temp = x + sx * y;
         y += sy * x;
@@ -55,6 +50,15 @@ public class Vector2D {
         double temp = x * Math.cos(rad) - y * Math.sin(rad);
         y = x * Math.sin(rad) + y * Math.cos(rad);
         x = temp;
+    }
+
+    public Vector2D scale(double s)
+    {
+        return new Vector2D(this.x * s,this.y * s);
+    }
+
+    public Vector2D scale(double sx,double sy) {
+        return new Vector2D(this.x * sx,this.y*sy);
     }
 
     public Vector2D inv() {
@@ -92,8 +96,8 @@ public class Vector2D {
         return div(len());
     }
 
-    public Vector2D dot(Vector2D v) {
-        return new Vector2D(this.x * v.x,this.y * v.y);
+    public double dot(Vector2D v) {
+        return this.x * v.x + this.y * v.y;
     }
 
     public double len() {

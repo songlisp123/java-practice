@@ -155,7 +155,7 @@ public class Utils {
                     f.getX(),f.getY(),
                     p.getX(),p.getY()
             );
-            g2.fill(l);
+            g2.draw(l);
             f = p;
         }
     }

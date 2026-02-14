@@ -73,6 +73,8 @@ public class LineAndLineDemo extends DiKaErPlus {
             end01 = end01.add(v);
         }
 
+        check(start01,end01,min01,max01);
+
         if (rec02Moving)
         {
             start02 = start02.add(v);
@@ -102,6 +104,34 @@ public class LineAndLineDemo extends DiKaErPlus {
 
     }
 
+    private void check(Vector2D s, Vector2D e, Vector2D min, Vector2D max) {
+        double dy = e.getY() - s.getY();
+        double dx = e.getX() - s.getX();
+        double k = dy / dx;
+        if (k < 0)
+        {
+            if (s.getY() > e.getY())
+            {
+                min = new Vector2D(s.getX(),e.getY());
+                max = new Vector2D(e.getX(),s.getY());
+            }
+            else {
+                min = new Vector2D(e.getX(),s.getY());
+                max = new Vector2D(s.getX(),e.getY());
+            }
+        }else {
+            if (s.getY() > e.getY())
+            {
+                min = e;
+                max = s;
+            }
+            else {
+                min = s;
+                max = e;
+            }
+        }
+    }
+
     @Override
     protected void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
@@ -113,7 +143,7 @@ public class LineAndLineDemo extends DiKaErPlus {
         drawAABB(g2,start01,end01);
         drawAABB(g2,start02,end02);
         g2.setPaint(Color.RED);
-        drawCircle(g2,insert,r);
+        drawCircle(g2,insert,r,false);
         g2.drawString("按下 SPACE 点火",30,130);
         g2.dispose();
     }

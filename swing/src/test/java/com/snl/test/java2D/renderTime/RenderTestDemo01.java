@@ -84,7 +84,7 @@ public class RenderTestDemo01 extends DiKaErPlus {
         //TODo
         drawStars(g2,stars);
         g2.setPaint(paint);
-        drawAABB(g2,minCopy,maxCopy);
+        drawAABB(g2,minCopy,maxCopy,true);
         drawCircle(g2,c0,r0);
         g2.setColor(Color.YELLOW);
         g2.drawString("按下 空格键 显示/关闭星空",30,130);
