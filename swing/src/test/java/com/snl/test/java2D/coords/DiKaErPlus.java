@@ -10,6 +10,7 @@ import java.awt.event.*;
 import java.awt.font.TextLayout;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.VolatileImage;
 import java.util.List;
 
 public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListener {
@@ -25,6 +26,8 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
     Point2D originPoint;
     //窗口矩阵
     protected Vector2D minS,maxS;
+
+    protected boolean drawAxis = true;
 
     public DiKaErPlus() throws HeadlessException {
         super();
@@ -103,8 +106,14 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         Graphics2D g2 = (Graphics2D) g.create();
         super.draw(g);
         //TODO
-        axis.draw(g2);
-        drawPoint(g2,originPoint);
+        if (drawAxis) {
+            axis.draw(g2);
+            drawPoint(g2, new Point2D.Double(2, 0));
+            drawPoint(g2, new Point2D.Double(0, 2));
+            drawPoint(g2, new Point2D.Double(0, -2));
+            drawPoint(g2, new Point2D.Double(-2, 0));
+            drawPoint(g2, originPoint);
+        }
         g2.dispose();
     }
 
@@ -249,13 +258,12 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         if (filling)
         {
             GeneralPath path = new GeneralPath();
-            Vector2D p;
             Vector2D f = copy[copy.length -1];
             path.moveTo(f.getX(),f.getY());
             for (Vector2D v : copy)
             {
-                p = v;
-                path.lineTo(p.getX(),p.getY());
+                f = v;
+                path.lineTo(f.getX(),f.getY());
             }
             g2.fill(path);
         }
@@ -387,6 +395,8 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
             wordWidth = WIDTH;
             wordHeight = HEIGHT;
         }
+        scaleX = WIDTH / wordWidth;
+        scaleY = HEIGHT / wordHeight;
     }
     //**********************************************************************//
     /* ******************          碰撞测试         *********************** */
@@ -447,7 +457,7 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
                                      Vector2D start02,Vector2D end02)
     {
         //使用二维增广矩阵
-//判断交点
+        //判断交点
         double dy01 = end01.getY() - start01.getY();
         double dx01 = end01.getX() - start01.getX();
 
@@ -458,9 +468,23 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         return d != 0;
     }
 
+    protected Vector2D lineInsertionPos(Vector2D start01,Vector2D end01,
+                                      Vector2D start02,Vector2D end02)
+    {
+        boolean inserts = this.lineInsertLine(start01, end01, start02, end02);
+        if (inserts)
+        {
+            //使用克莱姆法则计算
+
+        }
+        //无交点
+        return null;
+    }
+
     //**********************************************************************//
     /* ******************          图像测试         *********************** */
     //**********************************************************************//
+
     //创建测试图像
     protected BufferedImage createBufferedImage(int W,int H) {
         return this.createBufferedImage(W,H,BufferedImage.TYPE_INT_RGB);
@@ -469,9 +493,7 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
     protected BufferedImage createBufferedImage(int W,int H,int transparent) {
         if(transparent < BufferedImage.TYPE_CUSTOM || transparent > BufferedImage.TYPE_BYTE_INDEXED)
             throw new IllegalArgumentException("非法参数异常");
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice sd = ge.getDefaultScreenDevice();
-        GraphicsConfiguration gc = sd.getDefaultConfiguration();
+        var gc = getGc();
         return gc.createCompatibleImage(W,H,transparent);
     }
 
@@ -497,5 +519,22 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
                 new float[]{3,5,3},2));
         g2.draw(l);
     }
+
+    protected VolatileImage createViolateImage(int w, int h) {
+       return this.createViolateImage(w,h,Transparency.OPAQUE);
+    }
+
+    protected  VolatileImage createViolateImage(int w,int h,int transparent) {
+        if (transparent < Transparency.OPAQUE || transparent > Transparency.TRANSLUCENT)
+            throw new IllegalArgumentException("非法参数异常");
+       var gc =  getGc();
+       return gc.createCompatibleVolatileImage(w,h,transparent);
+    }
+
+    private GraphicsConfiguration getGc() {
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice sd = ge.getDefaultScreenDevice();
+        return sd.getDefaultConfiguration();
+    };
 
 }

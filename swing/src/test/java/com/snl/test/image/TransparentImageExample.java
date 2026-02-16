@@ -32,7 +32,7 @@ public class TransparentImageExample extends DiKaErPlus {
     }
 
     private void setBufferedImage(BufferedImage bi) {
-        int sqareSize = 20;
+        int sqareSize = 60;
         Graphics2D g2 = bi.createGraphics();
         g2.setColor(Color.WHITE);
         int w = bi.getWidth();
@@ -75,7 +75,7 @@ public class TransparentImageExample extends DiKaErPlus {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         //TODO 待做
         //绘制边框
-        g2.setColor(Color.lightGray);
+        g2.setColor(Color.PINK);
         double h = c.getHeight() / 8.0;
         for (int i=-1;i<8;i++) {
             g2.fillRect(0, (int) (h * i + shift),c.getWidth(), (int) (h / 2));

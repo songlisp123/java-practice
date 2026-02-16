@@ -22,9 +22,9 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     //画布
     protected Canvas c;
     //画布宽
-    protected final int WIDTH = 600;
+    protected  int WIDTH = 600;
     //画布高
-    protected final int HEIGHT = 600;
+    protected  int HEIGHT = 600;
     //鼠标输入事件
     protected CheckInputEvent keyBoardEvent;
     //鼠标输入事件
@@ -45,6 +45,8 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     //视图矩阵
     protected Matrix3x3f viewMat;
 
+    protected int scaleX,scaleY;
+
     public SimpleGameFramePlus() throws HeadlessException {
         super("游戏框架进阶版");
     }
@@ -54,6 +56,8 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         createEvent();
         //创建Ui
         createUi();
+        scaleX = WIDTH / wordWidth;
+        scaleY = HEIGHT / wordHeight;
         //游戏线程
         startGame();
     }
@@ -85,7 +89,7 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
 
         addKeyListener(keyBoardEvent);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        getContentPane().add(c);
+        getContentPane().add(c,BorderLayout.CENTER);
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -130,6 +134,9 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         vy += (vh - newHeight) / 2;
         c.setLocation(vx,vy);
         c.setSize(newWidth,newHeight);
+
+        scaleX = WIDTH / wordWidth;
+        scaleY = HEIGHT / wordHeight;
     }
 
     /**
@@ -180,6 +187,7 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     @Override
     public void run() {
         gameInitial();
+
         long currentTime = System.nanoTime();
         long lastTime = currentTime;
         double frame , delta;
@@ -191,10 +199,14 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
             processInput(delta); //获取输入
             updateSprite(delta); //暂时不实现
             render(); //不实现
+            animation(delta);
             Utils.sleep(appSleep);
             lastTime = currentTime;
         }
         teminate();
+    }
+
+    protected void animation(double delta) {
     }
 
     /**
