@@ -2,9 +2,9 @@ package com.snl.swing.game.keyBoard;
 
 public class KeyBoardSelectionModel {
 
-    int clickedIndex = -1; //索引
-    int maskIndex = -1; //索引
-    int total; //全部数量
+    private int clickedIndex = -1; //索引
+    private int maskIndex = -1; //索引
+    private final int total; //全部数量
 
     public KeyBoardSelectionModel(int total) {
         this.total = total;
@@ -24,10 +24,14 @@ public class KeyBoardSelectionModel {
     }
 
     public void setClickedIndex(int clickedIndex) {
+        if (clickedIndex < 0 || clickedIndex >= total)
+            throw new ArrayIndexOutOfBoundsException("数组边界异常");
         this.clickedIndex = clickedIndex;
     }
 
     public void setMaskIndex(int maskIndex) {
+        if (maskIndex < 0 || maskIndex >= total)
+            throw new ArrayIndexOutOfBoundsException("数组边界异常");
         this.maskIndex = maskIndex;
     }
 
