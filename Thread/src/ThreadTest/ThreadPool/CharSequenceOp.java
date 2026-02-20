@@ -38,7 +38,7 @@ public class CharSequenceOp {
         List<Future<Long>> futures = pool.invokeAll(tasks);
         long counts = 0;
         for (Future<Long> future : futures) {
-            long count = future.get();
+            long count = future.get(); //此方法会阻塞
             counts += count;
         }
 

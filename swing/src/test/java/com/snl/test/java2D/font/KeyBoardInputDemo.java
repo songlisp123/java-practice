@@ -14,7 +14,7 @@ import java.awt.geom.Rectangle2D;
 public class KeyBoardInputDemo extends DiKaErPlus {
 
     Font f = new Font("隶书",Font.ITALIC,50);
-    String testString = "花有重开日i，人无再少年";
+    String testString = "花有重开日，人无再少年";
     boolean kangjuchi;
     int currentPos;
     TextLayout tl;

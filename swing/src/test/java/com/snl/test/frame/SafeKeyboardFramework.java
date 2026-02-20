@@ -12,8 +12,7 @@ import java.awt.event.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
-public class SimpleGameFramePlus extends JFrame implements Runnable {
-
+public class SafeKeyboardFramework extends JFrame implements Runnable {
     //游戏线程
     protected Thread gameThread;
     //游戏运行
@@ -27,9 +26,8 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     //画布高
     protected  int HEIGHT = 600;
     //鼠标输入事件
-    protected CheckInputEvent keyBoardEvent;
-    //获取安全键盘输入
-//    protected SafeKeyboardInput keyBoardEvent;
+//    protected CheckInputEvent keyBoardEvent;
+    protected SafeKeyboardInput keyBoardEvent;
     //鼠标输入事件
     protected MouseInputEvent mouseInputEvent;
     //帧率类
@@ -50,7 +48,7 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
 
     protected int scaleX,scaleY;
 
-    public SimpleGameFramePlus() throws HeadlessException {
+    public SafeKeyboardFramework() throws HeadlessException {
         super("游戏框架进阶版");
     }
 
@@ -71,7 +69,7 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
 
     private void createEvent() {
         mouseInputEvent = new MouseInputEvent();
-        keyBoardEvent = new CheckInputEvent();
+        keyBoardEvent = new SafeKeyboardInput();
 
         v2 = new FrameV2();
     }
@@ -100,7 +98,7 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
             }
         });
         pack();
-        Utils.centerContainer(this);
+        com.snl.test.frame.util.Utils.centerContainer(this);
         setVisible(true);
 
         c.requestFocus();
@@ -111,7 +109,7 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                Utils.showClosingDialog(c);
+                com.snl.test.frame.util.Utils.showClosingDialog(c);
             }
         });
     }
@@ -153,7 +151,7 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     /**
      * 启动游戏类
      */
-    protected static void launchGame(SimpleGameFramePlus frame) {
+    protected static void launchGame(SafeKeyboardFramework frame) {
         SwingUtilities.invokeLater(frame::createAndShowUi);
     }
 
@@ -163,24 +161,24 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
 
     public Matrix3x3f getViewportTransform() {
         Matrix3x3f viewportTransform =
-                Utils.getViewportTransform(c, wordWidth, wordHeight);
+                com.snl.test.frame.util.Utils.getViewportTransform(c, wordWidth, wordHeight);
         viewportTransform = viewportTransform.mul(viewMat);
         return viewportTransform;
     }
 
     public Matrix3x3f getReverseWorldTransForm() {
         Matrix3x3f RmAT =
-                Utils.getReverseWorldTransForm(c, wordWidth, wordHeight);
+                com.snl.test.frame.util.Utils.getReverseWorldTransForm(c, wordWidth, wordHeight);
         Matrix3x3f inView = viewMat.inverse();
         return inView.mul(RmAT);
     }
 
     public Matrix3x3f getScaleViewPortMat() {
-        return Utils.getScaleViewPortMat(c,wordWidth,wordHeight);
+        return com.snl.test.frame.util.Utils.getScaleViewPortMat(c,wordWidth,wordHeight);
     }
 
     public Matrix3x3f getReverseScaleViewPortMat() {
-        return Utils.getReverseScaleViewPortMat(c,wordWidth,wordHeight);
+        return com.snl.test.frame.util.Utils.getReverseScaleViewPortMat(c,wordWidth,wordHeight);
     }
 
     //**********************************************************************//
@@ -190,6 +188,7 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     @Override
     public void run() {
         gameInitial();
+
         long currentTime = System.nanoTime();
         long lastTime = currentTime;
         double frame , delta;
@@ -237,10 +236,6 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     protected void processInput(double delta) {
         keyBoardEvent.poll();
         mouseInputEvent.poll();
-        if (keyBoardEvent.keyDownOnce(KeyEvent.VK_C))
-        {
-            reset();
-        }
         //TODO
 
     }
@@ -313,5 +308,4 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         g2.fillRect(size / 2,size /2 ,size,size);
         return bi;
     }
-
 }
