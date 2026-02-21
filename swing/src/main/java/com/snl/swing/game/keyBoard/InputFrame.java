@@ -17,7 +17,6 @@ public class InputFrame {
     private int charIndex = -1;
     //字符是否超出输入框距离
     private boolean filling;
-
     //包围矩形
     protected double leftX,leftY;
     protected double w,h;
@@ -41,6 +40,11 @@ public class InputFrame {
             return;
         builder.deleteCharAt(charIndex);
         charIndex = builder.isEmpty() ? 0 : --charIndex;
+    }
+
+    public void addCharIndex(int i) {
+        charIndex+= i;
+        charIndex = Math.max(0,Math.min(charIndex,builder.length()-1));
     }
 
     public void draw(Graphics2D g) {
@@ -69,10 +73,5 @@ public class InputFrame {
 
     public int getSize() {
         return builder.length();
-    }
-
-    public void addCharIndex(int i) {
-        charIndex+= i;
-        charIndex = Math.max(0,Math.min(charIndex,builder.length()-1));
     }
 }

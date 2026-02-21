@@ -337,6 +337,14 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         g2.draw(l);
     }
 
+    protected void drawText(Graphics2D g2,float leftx,float lefty,double w,TextLayout tl) {
+        float advance = tl.getAdvance();
+        if (w < advance)
+            w = advance;
+        float lx = (float) (leftx + (w - advance) / 2.0F);
+        tl.draw(g2,lx,lefty + tl.getAscent());
+    }
+
     //**********************************************************************//
     /* ******************          重置状态         *********************** */
     //**********************************************************************//

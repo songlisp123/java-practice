@@ -1,6 +1,10 @@
 package com.snl.swing.game.components;
 
-public class CollideObj {
+import com.snl.swing.game.input.MouseInputEvent;
+
+import java.awt.*;
+
+public abstract class CollideObj {
     //包围矩形
     protected double leftX,leftY;
     protected double totalW,totalH;
@@ -12,35 +16,9 @@ public class CollideObj {
         this.totalH = totalH;
     }
 
-    public double getLeftX() {
-        return leftX;
-    }
+    public abstract void processInput(MouseInputEvent mouseInputEvent);
 
-    public void setLeftX(double leftX) {
-        this.leftX = leftX;
-    }
+    public abstract void update(double delta);
 
-    public double getLeftY() {
-        return leftY;
-    }
-
-    public void setLeftY(double leftY) {
-        this.leftY = leftY;
-    }
-
-    public double getTotalW() {
-        return totalW;
-    }
-
-    public void setTotalW(double totalW) {
-        this.totalW = totalW;
-    }
-
-    public double getTotalH() {
-        return totalH;
-    }
-
-    public void setTotalH(double totalH) {
-        this.totalH = totalH;
-    }
+    public abstract void draw(Graphics g);
 }

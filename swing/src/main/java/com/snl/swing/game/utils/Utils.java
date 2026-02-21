@@ -6,6 +6,7 @@ import com.snl.swing.game.math.Vector2D;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.font.TextLayout;
 import java.awt.geom.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,22 @@ public class Utils {
 
     public static final Font font = new Font("Chiller",Font.PLAIN,15);
     public static final Font font02 = new Font("GENISO",Font.PLAIN,25);
+    public static final Font liShu = new Font("隶书",Font.PLAIN|Font.BOLD,25);
     public static final Font font03 = new Font("SHOWCARD GOTHIC",Font.PLAIN,15);
+
+
+    public static void beep() {
+        Toolkit.getDefaultToolkit().beep();
+    }
+
+    public static double drawText(Graphics2D g2, double leftx, double lefty, double w, TextLayout tl) {
+        float advance = tl.getAdvance();
+        if (w < advance)
+            w = advance;
+        float lx = (float) (leftx + (w - advance) / 2.0F);
+        tl.draw(g2,lx, (float) (lefty + tl.getAscent()));
+        return lefty + tl.getAscent() + tl.getDescent();
+    }
 
     //这个函数在本地设备上居中容器
     public static void centerContainer(Container container) {

@@ -47,6 +47,7 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     //视图矩阵
     protected Matrix3x3f viewMat;
 
+    //非必要字段
     protected int scaleX,scaleY;
 
     public SimpleGameFramePlus() throws HeadlessException {
@@ -292,25 +293,4 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         g2.draw(mouseInputEvent.getMouseShape());
         g2.dispose();
     }
-
-    //**********************************************************************//
-    /* ******************          纹理操作          *********************** */
-    //**********************************************************************//
-
-    protected BufferedImage getBufferImage() {
-        int size = 50;
-        BufferedImage bi = new BufferedImage(
-                size,size,BufferedImage.TYPE_INT_RGB);
-        var g2 = bi.createGraphics();
-        g2.setPaint(Color.WHITE);
-        g2.fillRect(0,0,size / 2 ,size /2);
-        g2.setPaint(Color.BLACK);
-        g2.fillRect(size / 2,0,size,size / 2);
-        g2.setPaint(Color.BLACK);
-        g2.fillRect(0,size / 2,size /2 ,size);
-        g2.setPaint(Color.WHITE);
-        g2.fillRect(size / 2,size /2 ,size,size);
-        return bi;
-    }
-
 }

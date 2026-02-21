@@ -21,8 +21,6 @@ public class SimpleCleanKeyBoard {
     //这个字段是动态修改每个字符的包围矩形的作用
     protected int rw,rh;
     private int padTop,padLeft,padRight,padBottom;
-    //步长参数：每行多少个元素
-    private int strideLine;
 
     //字符的包围矩形数组
     protected Shape[] shapes;
@@ -52,7 +50,16 @@ public class SimpleCleanKeyBoard {
     //点击动画
     private boolean clicked,entering;
 
+    /* 字体 */
     Font font = Utils.font;
+
+    //每行多少个元素
+    //步长参数：每行多少个元素
+    private int strideLine;
+    public static final int DEFAULT = 10;
+    public static final int MINIM = 5;
+    public static final int MAXIM = 15;
+
 
     public SimpleCleanKeyBoard(double leftX, double leftY, double totalW, double totalH) {
         this.leftX = leftX;
@@ -71,17 +78,17 @@ public class SimpleCleanKeyBoard {
 
     //这个方法修改
     public void initial() {
-        strideLine = 10;
+        strideLine = DEFAULT;
         padTop = padBottom= 2;
         padLeft = padRight = 2;
         mode = LIMIT;
-        rw = (int) (totalW / strideLine - (padLeft + padRight));
-        rh = (int) (totalH / (strideLine - 1) - (padBottom + padTop));
         fillShapes();
         fillStringArray();
     }
 
     private void fillShapes() {
+        rw = (int) (totalW / strideLine - (padLeft + padRight));
+        rh = (int) (totalH / (strideLine ) - (padBottom + padTop));
         int x = (int) leftX;
         int yy= (int) leftY;
         Rectangle2D r;
@@ -126,20 +133,22 @@ public class SimpleCleanKeyBoard {
     }
 
     public void update(double delta,Point2D mousePoint) {
+        //大雾
+        fillShapes();
         checkMaskR(mousePoint);
         clicked = clicked && getMaskIndex() != -1;
         if (clicked) {
             //TODO 点击事件
             setClickedIndex(getMaskIndex());
             inputFrame.addString(
-                    keyBoardStrings[selectionModel.getClickedIndex()]);
+                    keyBoardStrings[getClickedIndex()]);
         }
         clicked = false;
 
         if (entering) {
             setMaskIndex(getClickedIndex());
             inputFrame.addString(
-                    keyBoardStrings[selectionModel.getClickedIndex()]);
+                    keyBoardStrings[getClickedIndex()]);
         }
         entering = false;
     }
@@ -165,10 +174,7 @@ public class SimpleCleanKeyBoard {
             double cy = s.getBounds().getY();
             Font f = font.deriveFont((float) rh);
             tl = new TextLayout(keyBoardStrings[i], f, frc);
-            float ascent = tl.getAscent();
-            float advance = tl.getAdvance();
-            cx = cx + (rw - advance) / 2.0F;
-            tl.draw(g2, (float) cx, (float) cy + ascent);
+            Utils.drawText(g2, (float) cx, (float) cy,rw,tl);
         }
 
         //绘制外边框边框
@@ -178,7 +184,7 @@ public class SimpleCleanKeyBoard {
         }
 
         //绘制蒙版
-        if (selectionModel.getMaskIndex() != -1)
+        if (getMaskIndex() != -1)
         {
             Shape s = shapes[selectionModel.getMaskIndex()];
             g2.setColor(new Color(0.5F,0.5F,0.5F,0.5F));
@@ -186,7 +192,7 @@ public class SimpleCleanKeyBoard {
         }
 
         //绘制选择框
-        if (selectionModel.getClickedIndex() != -1)
+        if (getClickedIndex() != -1)
         {
             Shape s = shapes[selectionModel.getClickedIndex()];
             g2.setColor(Color.CYAN);
@@ -202,7 +208,7 @@ public class SimpleCleanKeyBoard {
                 return;
             }
             if (s.contains(mouseP)) {
-                selectionModel.setMaskIndex(i);
+                setMaskIndex(i);
                 return;
             }
         }
@@ -255,5 +261,23 @@ public class SimpleCleanKeyBoard {
 
     public String getInputString() {
         return inputFrame.builder.toString();
+    }
+
+    public double getTotalW() {
+        return totalW;
+    }
+
+    public double getTotalH() {
+        return totalH;
+    }
+
+    public int getStrideLine() {
+        return strideLine;
+    }
+
+    public void setStrideLine(int strideLine) {
+        if (strideLine < MINIM || strideLine > MAXIM)
+            throw new IllegalArgumentException("非法参数异常，应该在"+MINIM+"到"+MAXIM+"区间中");
+        this.strideLine = strideLine;
     }
 }
