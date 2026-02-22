@@ -45,30 +45,40 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
     };
     final char[] chars = {'c','d','h','s'};
     Shape[] shapes;
+    //渲染静态图像
     Image[] bufferedImages,cacheImages;
-    int pictureTop,pictureLeft;
+    Image[][] testImages;
+    private int pictureTop,pictureLeft;
     private int clickedIndex;
-    Row leftRow,rightRow;
+    private Row leftRow,rightRow;
     CustomButton startButton;
+    private double animation;
+    private int  aIndex;
+    double time,speed,amplitude,offsetY;
+    private Slide slide;
 
     //绘制文本
 
     public GameStartPanel() throws HeadlessException {
         WIDTH = 600;
         HEIGHT = 600;
-        appSleep = 14;
+        appSleep = 16;
         drawAxis = false;
         gameState = GAME_ON;
         //选择页面
         total = 56;
         wordLeft = wordRight = 20;
-        pictureW = pictureH = 200;
-        pictureTop = pictureLeft = 100;
+        pictureW = pictureH = 250;
+        pictureTop = pictureLeft = 50;
         shapes = new Shape[3];
         bufferedImages = new Image[total];
         cacheImages = new Image[total];
+        testImages = new Image[total][shapes.length];
         ioTask ioTask = new ioTask();
         ioTask.run();
+
+        speed = Math.PI / 2.0;
+        amplitude = 4;
     }
 
     private void fillShapes() {
@@ -77,7 +87,7 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         int top = 50;
         int hGap = 10;
         int y = pictureTop + pictureH + top;
-        int x  = pictureLeft;
+        int x  = left;
         int rw = (c.getWidth() - (left + right) - hGap) / 3;
         int rh = rw + 20;
         for (int  i = 0;i<shapes.length;i++) {
@@ -94,6 +104,11 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
 
         leftRow.addListeners(this);
         rightRow.addListeners(this);
+
+        //这是什么东西
+        ly = y + rh + 20;
+        slide = new Slide(left,ly,400,10,total-shapes.length);
+        slide.addListener(this);
     }
 
     @Override
@@ -103,12 +118,18 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         int h = c.getHeight();
         keyBoard = new SimpleCleanKeyBoard(0,h / 2.0,w,h / 2.0);
         keyBoard.setShowingInputFrame(false);
+
         start = new CustomButton(0,30,w,30,"进入游戏");
         start.addListeners(this);
+        start.setClickedString("enter");
+
         backButton = new CustomButton(w - 100,20,75,30,"返回");
         backButton.addListeners(this);
+        backButton.setClickedString("back");
+
         startButton = new CustomButton(0,h - 40,w,20,"开始");
         startButton.addListeners(this);
+        startButton.setClickedString("start");
         fillShapes();
     }
 
@@ -125,6 +146,7 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
                 leftRow.processInput(mouseInputEvent);
                 rightRow.processInput(mouseInputEvent);
                 startButton.processInput(mouseInputEvent);
+                slide.processInput(mouseInputEvent);
             }
         }
 
@@ -147,13 +169,23 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
                 startButton.update(delta);
                 leftRow.update(delta);
                 rightRow.update(delta);
+                slide.update(delta,po);
+                double frameCount = 1.5 / 8.0;
+                animation += delta;
+                while (animation >= frameCount)
+                {
+                    animation -= frameCount;
+                    aIndex = ++aIndex % 8;
+                }
+                time += delta;
+                slide.setValue(startIndex);
             }
         }
     }
 
     @Override
     protected void draw(Graphics g) {
-        super.draw(g);
+//        super.draw(g);
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
@@ -186,7 +218,19 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
 
         //绘制图像
         Image image = bufferedImages[startIndex + clickedIndex];
-        g2.drawImage(image,pictureLeft,pictureTop,null);
+        double sin = Math.sin(time * speed);
+        offsetY = sin * amplitude;
+        double scale = 1.0 + sin * 0.01;
+        if (image != null) {
+            int newW = (int) (image.getWidth(null) * scale);
+            int newH = (int) (image.getHeight(null) * scale);
+            g2.drawImage(image,
+                    (int) (pictureLeft - (newW - image.getWidth(null)) / 2.0),
+                    (int) (pictureTop + offsetY - (newH - image.getHeight(null)) / 2.0),
+                    newW, newH, null);
+        }
+
+
         double tx = c.getWidth() / 2.0 + wordLeft;
         double ty = pictureTop;
         float wrappingWidth = (float) (tx - 2 *wordLeft - wordRight);
@@ -227,6 +271,7 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
             double h = s.getBounds().getHeight();
             tx = s.getBounds().x;
             ty = s.getBounds().y;
+
             g2.translate(tx,ty);
             if (cacheImages[i] == null) {
                 BufferedImage bi = new BufferedImage(
@@ -237,14 +282,41 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
                 biG.fillRect(0, 0, bi.getWidth(), bi.getHeight());
                 biG.setComposite(AlphaComposite.Src);
                 biG.drawImage(im, 0, 0, bi.getWidth(), bi.getHeight(), null);
-                biG.dispose();
                 cacheImages[i] = bi;
+                Image[] testImage = testImages[i];
+                for (int k = 0;k<testImage.length;k++) {
+                    if (testImage[k] == null)
+                    {
+                        //TODO
+                        BufferedImage b = new BufferedImage(bi.getWidth(),bi.getHeight(),BufferedImage.TYPE_INT_ARGB);
+                        Graphics2D g4 = b.createGraphics();
+                        g4.setComposite(AlphaComposite.Clear);
+                        g4.fillRect(0, 0, bi.getWidth(), bi.getHeight());
+                        g4.setComposite(AlphaComposite.Src);
+                        AffineTransform af = AffineTransform.getRotateInstance(2 * Math.PI / testImage.length * (k+1)
+                                ,bi.getWidth() / 2.0,
+                                bi.getHeight() / 2.0);
+                        af.scale(0.85,0.85);
+                        g4.drawImage(bi,af,null);
+                        g4.dispose();
+                        testImages[i][k] = cacheImages[k];
+                    }
+                }
+                biG.dispose();
             }
+
             Image cacheImage = cacheImages[i];
             //确定中心
             float lx = (float) ((w - cacheImage.getWidth(null)) / 2.0F);
             float ly = 10F;
-            g2.drawImage(cacheImage, (int) lx, (int) ly,null);
+
+            int newW = (int) (cacheImage.getWidth(null) * scale);
+            int newH = (int) (cacheImage.getHeight(null) * scale);
+            g2.drawImage(cacheImage,
+                    (int) (lx - (newW - cacheImage.getWidth(null)) / 2.0),
+                    (int) (ly + offsetY - (newH - cacheImage.getHeight(null)) / 2.0),
+                    newW, newH, null);
+
             //绘制说明文本
             AttributedString ast = new AttributedString("美杜莎");
             ast.addAttribute(TextAttribute.FOREGROUND,Color.WHITE);
@@ -274,7 +346,6 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
             Utils.drawText(g2,0,ly,w,tl);
             g2.translate(-tx,-ty);
         }
-
         //绘制滑动块
         drawArraw(g2);
         //绘制
@@ -286,14 +357,13 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
             g2.setStroke(new BasicStroke(2));
             g2.draw(s);
         }
-
         //绘制按钮
-
     }
 
     private void drawArraw(Graphics2D g2) {
         leftRow.draw(g2);
         rightRow.draw(g2);
+        slide.draw(g2);
     }
 
     private void drawString(Graphics2D g2) {
@@ -353,6 +423,8 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         if (source == startButton)
             gameState = GAME_ON;
 
+        String s = event.getActionString();
+
         if (source == leftRow)
             startIndex--;
         if (source == rightRow)
@@ -362,12 +434,10 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
 
     @Override
     public void change(Object source, double oldValue, double newValue) {
-
+        startIndex = (int)newValue;
     }
 
     class ioTask extends SwingWorker<Void,Void> {
-
-        int index;
 
         @Override
         protected Void doInBackground() throws Exception {
@@ -381,6 +451,7 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         }
 
         private void fillImages() {
+            int index = 0;
             String path = "images/cards/deck/FINAL/";
             for (String s :strings) {
                 for (char c :chars)
@@ -389,6 +460,10 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
                     index = fills(relativePath,index);
                 }
             }
+//            for (int i = 0;i<8;i++) {
+//                String relativePath = path  + "medusa_idle_frame_" + (i+1) + ".png";
+//                index = fills(relativePath,index);
+//            }
         }
 
         private int fills(String path,int index) {

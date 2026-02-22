@@ -92,7 +92,6 @@ public class Row extends CollideObj {
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.draw(path);
-
         if (ani) {
             g2.setColor(new Color(1.0F, 0.0F, 1.0F, alpha));
             g2.fill(path);

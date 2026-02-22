@@ -1,6 +1,9 @@
 package com.snl.swing.game.components;
 
+import com.snl.swing.game.input.MouseInputEvent;
+
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.RoundRectangle2D;
@@ -95,9 +98,15 @@ public class Slide {
     }
 
 
-    public void update(double delta,boolean state,Point2D mousePoint) {
-        this.clicked = isClicked(state,mousePoint);
-        this.dragging = isDragging(state,mousePoint);
+    public void processInput(MouseInputEvent mouseInputEvent) {
+        clicked = mouseInputEvent.mouseButtonDownOnce(MouseEvent.BUTTON1);
+        dragging = mouseInputEvent.mouseButtonDown(MouseEvent.BUTTON1);
+    }
+
+
+    public void update(double delta,Point2D mousePoint) {
+        clicked = clicked && contains(mousePoint);
+        dragging = dragging && c(mousePoint);
         if (clicked || dragging)
             move(mousePoint);
     }

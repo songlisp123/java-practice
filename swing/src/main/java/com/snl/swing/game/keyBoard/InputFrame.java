@@ -61,14 +61,14 @@ public class InputFrame {
         float advance = tl.getAdvance();
         tl.draw(g2, (float) leftX + 10, (float) (leftY + ascent + descent));
         filling =  (leftX +advance) >= (w - 20);
-        if (filling) {
-            g2.setColor(Color.red);
-            g2.draw(r);
-        }
         Shape caretShape = tl.getCaretShape(TextHitInfo.trailing(charIndex));
         AffineTransform af = AffineTransform.getTranslateInstance(leftX + 10,leftY + ascent + descent);
         caretShape = af.createTransformedShape(caretShape);
         g2.draw(caretShape);
+        if (filling) {
+            g2.setColor(Color.red);
+            g2.draw(r);
+        }
     }
 
     public int getSize() {

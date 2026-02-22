@@ -14,6 +14,7 @@ import java.util.List;
 public class CustomButton extends CollideObj {
 
     protected String string;
+    protected String actionstring;
     boolean hanging;
     boolean clicked;
 
@@ -76,7 +77,7 @@ public class CustomButton extends CollideObj {
     }
 
     private void fireEvent() {
-        ClickedEvent event = new ClickedEvent(this,string);
+        ClickedEvent event = new ClickedEvent(this,actionstring);
         for (CollideEventListener l : listeners)
             l.clicked(event);
     }
@@ -84,6 +85,12 @@ public class CustomButton extends CollideObj {
     private boolean pointIn(Point2D p) {
         return p.getX() >= leftX && p.getX() <= leftX + totalW
                 && p.getY() >= leftY && p.getY() <= leftY + totalH;
+    }
+
+
+    public void setClickedString(String string)
+    {
+        this.actionstring = string;
     }
 
     public void  addListeners(CollideEventListener l) {
