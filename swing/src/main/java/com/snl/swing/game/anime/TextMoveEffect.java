@@ -51,7 +51,7 @@ public class TextMoveEffect  {
         AttributedCharacterIterator it = as.getIterator();
         LineBreakMeasurer lbm = new LineBreakMeasurer(it,frc);
 
-        double dy = 20;
+        double dy = leftY;
         while (lbm.getPosition() < it.getEndIndex()) {
             TextLayout tl = lbm.nextLayout((float) this.w);
             dy = Utils.drawText(g2,0,dy,this.w,tl);

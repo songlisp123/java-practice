@@ -1,6 +1,6 @@
 package com.snl.swing.game.components;
 
-import com.snl.swing.game.components.enm.DirectionRow;
+import com.snl.swing.game.components.enm.Direction;
 import com.snl.swing.game.input.MouseInputEvent;
 
 import java.awt.*;
@@ -16,12 +16,12 @@ public class Row extends CollideObj {
     
     private GeneralPath path;
     
-    private static final DirectionRow EAST = DirectionRow.EAST;
-    private static final DirectionRow WEST = DirectionRow.WEST;
-    private static final DirectionRow NORTH = DirectionRow.NORTH;
-    private static final DirectionRow SOUTH = DirectionRow.SOUTH;
+    private static final Direction EAST = Direction.EAST;
+    private static final Direction WEST = Direction.WEST;
+    private static final Direction NORTH = Direction.NORTH;
+    private static final Direction SOUTH = Direction.SOUTH;
     
-    private final DirectionRow direction;
+    private final Direction direction;
 
     boolean clicked;
     private float alpha = 0.0F;
@@ -29,10 +29,10 @@ public class Row extends CollideObj {
 
     private List<CollideEventListener> listeners = new ArrayList<>();
 
-    public Row(double leftX, double leftY, double totalW, double totalH,DirectionRow direction) {
+    public Row(double leftX, double leftY, double totalW, double totalH, Direction direction) {
         super(leftX, leftY, totalW, totalH);
         if (direction == null ||
-                Arrays.stream(DirectionRow.values()).noneMatch(directionRow -> directionRow == direction))
+                Arrays.stream(Direction.values()).noneMatch(directionRow -> directionRow == direction))
             throw new IllegalArgumentException("非法参数异常");
         this.direction = direction;
         createRow();
@@ -102,7 +102,7 @@ public class Row extends CollideObj {
         return path;
     }
 
-    public DirectionRow getDirection() {
+    public Direction getDirection() {
         return direction;
     }
 

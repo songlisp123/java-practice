@@ -9,12 +9,12 @@ import java.awt.image.BufferedImage;
 public class CloseEffect implements Part {
 
     private final Component surf;
-    static final int WID = 1;
-    static final int HEI = 2;
-    static final int OVAL = 4;
-    static final int RECT = 8;
-    static final int RAND = 16;
-    static final int ARC = 32;
+    public static final int WID = 1;
+    public static final int HEI = 2;
+    public static final int OVAL = 4;
+    public static final int RECT = 8;
+    public static final int RAND = 16;
+    public static final int ARC = 32;
     private int type;
     private int beginning, ending;
     private BufferedImage bimg;

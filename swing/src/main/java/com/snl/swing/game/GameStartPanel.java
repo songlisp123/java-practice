@@ -1,9 +1,12 @@
 package com.snl.swing.game;
 
+import com.snl.swing.game.anime.*;
 import com.snl.swing.game.components.*;
-import com.snl.swing.game.components.enm.DirectionRow;
+import com.snl.swing.game.components.enm.Direction;
 import com.snl.swing.game.gameFrame.DiKaErPlus;
 import com.snl.swing.game.keyBoard.SimpleCleanKeyBoard;
+import com.snl.swing.game.sprite.Sprite;
+import com.snl.swing.game.sprite.YuanSu;
 import com.snl.swing.game.utils.Utils;
 
 import javax.swing.*;
@@ -12,12 +15,14 @@ import java.awt.event.MouseEvent;
 import java.awt.font.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
+import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameStartPanel extends DiKaErPlus implements CollideEventListener, SlideDataChangeListener {
 
     private SimpleCleanKeyBoard keyBoard;
-    private CustomButton start;
     private CustomButton backButton;
 
     private static final int GAME_PAGE = -1;
@@ -35,19 +40,19 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
     Font f1 = Utils.font;
     Font font = new Font("隶书",Font.BOLD | Font.ITALIC,30);
 
+    //游戏页面
+    Scene scene01;
+
     //游戏开始
     int wordRight,wordLeft;
     int pictureW,pictureH;
     int total;
     int startIndex;
-    final  String[] strings = {
-            "a", "2","3","4","5","6","7","8","9","10","j","q","k"
-    };
-    final char[] chars = {'c','d','h','s'};
     Shape[] shapes;
     //渲染静态图像
     Image[] bufferedImages,cacheImages;
-    Image[][] testImages;
+    Sprite[] sprites;
+//    Image[][] testImages;
     private int pictureTop,pictureLeft;
     private int clickedIndex;
     private Row leftRow,rightRow;
@@ -56,24 +61,42 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
     private int  aIndex;
     double time,speed,amplitude,offsetY;
     private Slide slide;
+    String[] sp = {
+            "美杜莎","草泥马","烈火猴"
+    };
+    String[] induction = {
+            "反击: 清除自身1个减益效果。每当自身清除4个减益效果,触发一次攻击，对所有敌人造成1 x 4点水系 / 土系伤害，并对每个敌人施加4层折磨",
+            "健康: 战斗开始的时候,给自己施加生命值差量的护盾，如果该护盾被打破，则向队友施加同等量的护盾",
+            "燥热: 每当该怪兽受到攻击时，对自身施加一层 力量 ,被向攻击敌人施加燃烧效果。",
+    };
 
-    //绘制文本
+    private static final String path = "images/game/game_sprite_";
+
+    //游戏介绍文本面板
+    final String s = """
+            欢迎来到迷雾大陆，迷雾大陆浩瀚无边，千奇百怪。有一种奇兽在该大陆生活，叫做灵兽。
+            灵兽有不同特性。不同特性代表着不同能力。但在某天，不知何时，迷雾降临大陆，灵兽消失无踪，
+            作为小镇上的灵兽训练师，面对朝夕相伴的伙伴的离奇失踪，你下定决心，去探寻外围的迷雾世界。
+            在调查中，随着深入到迷雾中，怪异离奇的事情接连发生，你发觉到，有某种物质正阻碍您的调查，灵兽失踪的真相也许
+            就在迷雾深处，你会……
+            """;
 
     public GameStartPanel() throws HeadlessException {
         WIDTH = 600;
         HEIGHT = 600;
         appSleep = 16;
         drawAxis = false;
-        gameState = GAME_ON;
+        gameState = GAME_PAGE;
         //选择页面
-        total = 56;
+        total = 3;
         wordLeft = wordRight = 20;
         pictureW = pictureH = 250;
         pictureTop = pictureLeft = 50;
-        shapes = new Shape[3];
+        shapes = new Shape[total];
+        sprites = new Sprite[total];
         bufferedImages = new Image[total];
         cacheImages = new Image[total];
-        testImages = new Image[total][shapes.length];
+//        testImages = new Image[total][shapes.length];
         ioTask ioTask = new ioTask();
         ioTask.run();
 
@@ -98,9 +121,9 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         int lx = 20;
         int w = 50,h = 50;
         int ly = y + (rh - h) / 2;
-        leftRow = new Row(lx,ly,w,h, DirectionRow.WEST);
+        leftRow = new Row(lx,ly,w,h, Direction.WEST);
         lx = c.getWidth() - 20 - w;
-        rightRow = new Row(lx,ly,w,h, DirectionRow.EAST);
+        rightRow = new Row(lx,ly,w,h, Direction.EAST);
 
         leftRow.addListeners(this);
         rightRow.addListeners(this);
@@ -119,10 +142,6 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         keyBoard = new SimpleCleanKeyBoard(0,h / 2.0,w,h / 2.0);
         keyBoard.setShowingInputFrame(false);
 
-        start = new CustomButton(0,30,w,30,"进入游戏");
-        start.addListeners(this);
-        start.setClickedString("enter");
-
         backButton = new CustomButton(w - 100,20,75,30,"返回");
         backButton.addListeners(this);
         backButton.setClickedString("back");
@@ -130,6 +149,15 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         startButton = new CustomButton(0,h - 40,w,20,"开始");
         startButton.addListeners(this);
         startButton.setClickedString("start");
+
+        List<Part> parts = new ArrayList<>();
+        TextEffect tf = new TextEffect("迷雾大陆",Utils.liShu,
+                TextEffect.SCI,Color.WHITE,0,150);
+        DitherDissolveEffect cf = new DitherDissolveEffect(150,210,4,c);
+        parts.add(tf);
+        parts.add(cf);
+        scene01 = new Scene(parts,"你好","0");
+
         fillShapes();
     }
 
@@ -140,8 +168,11 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         keyBoard.processInput(mouseInputEvent,keyBoardEvent);
         switch (gameState)
         {
-            case GAME_ON -> start.processInput(mouseInputEvent);
+            case GAME_ON -> startButton.processInput(mouseInputEvent);
             case GAME_START -> {
+                startButton.processInput(mouseInputEvent);
+            }
+            case GAME_RUNNING -> {
                 backButton.processInput(mouseInputEvent);
                 leftRow.processInput(mouseInputEvent);
                 rightRow.processInput(mouseInputEvent);
@@ -157,12 +188,17 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         super.updateSprite(delta);
         Point2D po = mouseInputEvent.getCurrentPoint();
         switch (gameState) {
-            case GAME_PAGE -> {}
+            case GAME_PAGE -> {
+                scene01.step(c.getWidth(),c.getHeight());
+            }
             case GAME_ON -> {
-                keyBoard.update(delta,po);
-                start.update(delta);
+                startButton.update(delta);
             }
             case GAME_START -> {
+                keyBoard.update(delta,po);
+                startButton.update(delta);
+            }
+            case GAME_RUNNING -> {
                 int temp = checkPos(po, shapes);
                 clickedIndex = temp != -1 ? temp : clickedIndex;
                 backButton.update(delta);
@@ -185,18 +221,22 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
 
     @Override
     protected void draw(Graphics g) {
-//        super.draw(g);
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         switch (gameState) {
-            case GAME_PAGE -> {}
+            case GAME_PAGE -> {
+                scene01.render(c.getWidth(),c.getHeight(),g2);
+            }
             case GAME_ON -> {
-                keyBoard.draw(g2,Color.WHITE);
-                drawString(g2);
-                start.draw(g2);
+                drawGameStartPanel(g2);
             }
             case GAME_START -> {
+                keyBoard.draw(g2,Color.WHITE);
+                drawString(g2);
+                startButton.draw(g2);
+            }
+            case GAME_RUNNING -> {
                 drawTest(g2);
                 backButton.draw(g2);
             }
@@ -204,31 +244,49 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         g2.dispose();
     }
 
+    private void drawGameStartPanel(Graphics2D g2) {
+        AttributedString as = new AttributedString(s);
+        as.addAttribute(TextAttribute.FONT,Utils.liShu.deriveFont(32F));
+        as.addAttribute(TextAttribute.FOREGROUND,Color.WHITE);
+        as.addAttribute(TextAttribute.FOREGROUND,Color.RED,20,50);
+        FontRenderContext frc = g2.getFontRenderContext();
+        AttributedCharacterIterator it = as.getIterator();
+        LineBreakMeasurer lbm = new LineBreakMeasurer(it,frc);
+        double dy =pictureTop;
+        while (lbm.getPosition() < it.getEndIndex()) {
+            TextLayout tl = lbm.nextLayout(c.getWidth() - pictureLeft - pictureLeft);
+            dy = Utils.drawText(g2,pictureLeft,dy,c.getWidth() - pictureLeft - pictureLeft,tl);
+        }
+        startButton.draw(g2);
+    }
+
+    //*****************************************************************************//
+    //*********************************  选择面板  **********************************//
+    //*****************************************************************************//
     private void drawTest(Graphics2D g2) {
         g2.setColor(Color.red);
         FontRenderContext frc = g2.getFontRenderContext();
         //TODO
-        String string = keyBoard.getInputString();
-        AttributedString as = new AttributedString(string);
-        as.addAttribute(TextAttribute.FONT,Utils.font02.deriveFont(30F));
+        AttributedString as = new AttributedString("请挑选您的灵兽:");
+        as.addAttribute(TextAttribute.FONT,Utils.font02.deriveFont(25F));
         as.addAttribute(TextAttribute.FOREGROUND,Color.WHITE);
-        as.addAttribute(TextAttribute.UNDERLINE,TextAttribute.UNDERLINE_ON);
+        as.addAttribute(TextAttribute.FONT,Utils.liShu.deriveFont(30F));
+        as.addAttribute(TextAttribute.FOREGROUND,Color.ORANGE,5,8);
         TextLayout tl = new TextLayout(as.getIterator(),frc);
         drawText(g2,0,20,c.getWidth(),tl);
 
         //绘制图像
-        Image image = bufferedImages[startIndex + clickedIndex];
+        Sprite sprite = sprites[startIndex + clickedIndex];
+        BufferedImage image = sprite.getImage();
         double sin = Math.sin(time * speed);
         offsetY = sin * amplitude;
         double scale = 1.0 + sin * 0.01;
-        if (image != null) {
-            int newW = (int) (image.getWidth(null) * scale);
-            int newH = (int) (image.getHeight(null) * scale);
-            g2.drawImage(image,
-                    (int) (pictureLeft - (newW - image.getWidth(null)) / 2.0),
-                    (int) (pictureTop + offsetY - (newH - image.getHeight(null)) / 2.0),
-                    newW, newH, null);
-        }
+        int newW = (int) (image.getWidth() * scale);
+        int newH = (int) (image.getHeight() * scale);
+        g2.drawImage(image,
+                (int) (pictureLeft - (newW - image.getWidth()) / 2.0),
+                (int) (pictureTop + offsetY - (newH - image.getHeight()) / 2.0),
+                newW, newH, null);
 
 
         double tx = c.getWidth() / 2.0 + wordLeft;
@@ -236,25 +294,21 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         float wrappingWidth = (float) (tx - 2 *wordLeft - wordRight);
         AffineTransform temp = g2.getTransform();
         g2.translate(tx,ty);
-        tl = new TextLayout("名称：美杜莎",font,frc);
+        tl = new TextLayout(sprite.getName(),font,frc);
+
         //获取左上角
         double dy = Utils.drawText(g2, 0, 0, 0, tl);
-        tl = new TextLayout("属性：毒/水/土" ,font.deriveFont(20F),frc);
+        tl = new TextLayout("元素:"+sprite.getYuanShu(),font.deriveFont(20F),frc);
         dy = Utils.drawText(g2,0,dy,0,tl);
-        as = new AttributedString("反击: 清除自身1个减益效果。每当自身清除4个减益效果，" +
-                "触发一次攻击，对所有敌人造成1 x 4点水系 / 土系伤害，并对每个敌人施加4层折磨。");
+
+
+        //灵兽特性
+        String beiDong = sprite.getBeiDong();
+        as = new AttributedString(beiDong);
+        int index = beiDong.indexOf(":");
         as.addAttribute(TextAttribute.FONT,font.deriveFont(20F));
         as.addAttribute(TextAttribute.FOREGROUND,new Color(179, 147, 139));
-        as.addAttribute(TextAttribute.FOREGROUND,Color.YELLOW,0,2);
-        as.addAttribute(TextAttribute.FOREGROUND,Color.ORANGE,8,9);
-        as.addAttribute(TextAttribute.FOREGROUND,Color.ORANGE,21,22);
-        as.addAttribute(TextAttribute.FOREGROUND,Color.ORANGE,32,34);
-        as.addAttribute(TextAttribute.FOREGROUND,Color.ORANGE,43,44);
-        as.addAttribute(TextAttribute.FOREGROUND,Color.ORANGE,45,46);
-        as.addAttribute(TextAttribute.FOREGROUND,Color.ORANGE,48,55);
-        as.addAttribute(TextAttribute.FOREGROUND,Color.ORANGE,49,52);
-        as.addAttribute(TextAttribute.FOREGROUND,Color.ORANGE,66,67);
-        as.addAttribute(TextAttribute.FOREGROUND,Color.ORANGE,68,70);
+        as.addAttribute(TextAttribute.FOREGROUND,Color.YELLOW,0,index);
         LineBreakMeasurer lbm = new LineBreakMeasurer(as.getIterator(),frc);
         while (lbm.getPosition() < as.getIterator().getEndIndex()) {
             tl = lbm.nextLayout(wrappingWidth);
@@ -262,18 +316,18 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         }
         g2.setTransform(temp);
 
+        //***********    精灵选择框  ********************//
         int count = 0;
         for (int  i =startIndex;i<startIndex + shapes.length;i++) {
             Shape s = shapes[count++%shapes.length];
-            Image im = bufferedImages[i];
-//            g2.draw(s);
+            BufferedImage im = sprites[i].getImage();
             double w = s.getBounds().getWidth();
             double h = s.getBounds().getHeight();
             tx = s.getBounds().x;
             ty = s.getBounds().y;
 
             g2.translate(tx,ty);
-            if (cacheImages[i] == null) {
+            if (sprites[i].getCacheImage() == null) {
                 BufferedImage bi = new BufferedImage(
                         (int) (w * 0.65), (int) (h * 0.65), BufferedImage.TYPE_INT_ARGB
                 );
@@ -282,43 +336,23 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
                 biG.fillRect(0, 0, bi.getWidth(), bi.getHeight());
                 biG.setComposite(AlphaComposite.Src);
                 biG.drawImage(im, 0, 0, bi.getWidth(), bi.getHeight(), null);
-                cacheImages[i] = bi;
-                Image[] testImage = testImages[i];
-                for (int k = 0;k<testImage.length;k++) {
-                    if (testImage[k] == null)
-                    {
-                        //TODO
-                        BufferedImage b = new BufferedImage(bi.getWidth(),bi.getHeight(),BufferedImage.TYPE_INT_ARGB);
-                        Graphics2D g4 = b.createGraphics();
-                        g4.setComposite(AlphaComposite.Clear);
-                        g4.fillRect(0, 0, bi.getWidth(), bi.getHeight());
-                        g4.setComposite(AlphaComposite.Src);
-                        AffineTransform af = AffineTransform.getRotateInstance(2 * Math.PI / testImage.length * (k+1)
-                                ,bi.getWidth() / 2.0,
-                                bi.getHeight() / 2.0);
-                        af.scale(0.85,0.85);
-                        g4.drawImage(bi,af,null);
-                        g4.dispose();
-                        testImages[i][k] = cacheImages[k];
-                    }
-                }
                 biG.dispose();
+                sprites[i].setCacheImage(bi);
             }
-
-            Image cacheImage = cacheImages[i];
+            BufferedImage cacheImage = sprites[i].getCacheImage();
             //确定中心
-            float lx = (float) ((w - cacheImage.getWidth(null)) / 2.0F);
+            float lx = (float) ((w - cacheImage.getWidth()) / 2.0F);
             float ly = 10F;
 
-            int newW = (int) (cacheImage.getWidth(null) * scale);
-            int newH = (int) (cacheImage.getHeight(null) * scale);
+            newW = (int) (cacheImage.getWidth() * scale);
+            newH = (int) (cacheImage.getHeight() * scale);
             g2.drawImage(cacheImage,
-                    (int) (lx - (newW - cacheImage.getWidth(null)) / 2.0),
-                    (int) (ly + offsetY - (newH - cacheImage.getHeight(null)) / 2.0),
+                    (int) (lx - (newW - cacheImage.getWidth()) / 2.0),
+                    (int) (ly + offsetY - (newH - cacheImage.getHeight()) / 2.0),
                     newW, newH, null);
 
             //绘制说明文本
-            AttributedString ast = new AttributedString("美杜莎");
+            AttributedString ast = new AttributedString(sprites[i].getName());
             ast.addAttribute(TextAttribute.FOREGROUND,Color.WHITE);
             ast.addAttribute(TextAttribute.FONT,font.deriveFont(15f));
             tl = new TextLayout(ast.getIterator(),frc);
@@ -406,6 +440,16 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         return -1;
     }
 
+    @Override
+    protected void animation(double delta) {
+        super.animation(delta);
+        if (scene01.getIndex() < scene01.getLength())
+            scene01.increment();
+        if (gameState == GAME_PAGE &&scene01.getIndex() == scene01.getLength() &&
+        scene01.pause())
+            gameState = GAME_ON;
+    }
+
     public static void main(String[] args) {
         launchGame(new GameStartPanel());
     }
@@ -413,18 +457,16 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
     @Override
     public void clicked(ClickedEvent event) {
         Object source = event.getSource();
-        if (source == start)
-        {
-            gameState = GAME_START;
-        }
         if (source == backButton)
             gameState = GAME_ON;
 
-        if (source == startButton)
-            gameState = GAME_ON;
-
+        if (source == startButton) {
+            switch (gameState) {
+                case GAME_ON -> gameState = GAME_START;
+                case GAME_START -> gameState = GAME_RUNNING;
+            }
+        }
         String s = event.getActionString();
-
         if (source == leftRow)
             startIndex--;
         if (source == rightRow)
@@ -451,32 +493,40 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         }
 
         private void fillImages() {
-            int index = 0;
-            String path = "images/cards/deck/FINAL/";
-            for (String s :strings) {
-                for (char c :chars)
-                {
-                    String relativePath = path + s + c + ".png";
-                    index = fills(relativePath,index);
-                }
+            String relativePath;
+            for (int i = 0;i<3;i++) {
+                String string = sp[i];
+                relativePath = path + (i+1) + ".png";
+                Sprite sprite = new Sprite(string,induction[i],1,YuanSu.WATER_EARTH,relativePath);
+                sprites[i] = sprite;
             }
-//            for (int i = 0;i<8;i++) {
-//                String relativePath = path  + "medusa_idle_frame_" + (i+1) + ".png";
-//                index = fills(relativePath,index);
-//            }
         }
-
-        private int fills(String path,int index) {
-            //获取缩放倍数
-            ImageIcon icon = new ImageIcon(path);
-            BufferedImage bi = new BufferedImage(pictureW,pictureH,BufferedImage.TYPE_INT_ARGB);
-            Graphics2D g2 = bi.createGraphics();
-            g2.clearRect(0,0,bi.getWidth(), bi.getHeight());
-            g2.drawImage(icon.getImage(),0,0,bi.getWidth(),bi.getHeight(),null);
-            g2.dispose();
-            bufferedImages[index++] = bi;
-            return index;
-        }
-
     }
 }
+//                Image[] testImage = testImages[i];
+//                for (int k = 0;k<testImage.length;k++) {
+//                    if (testImage[k] == null)
+//                    {
+//                        //TODO
+//                        BufferedImage b = new BufferedImage(bi.getWidth(),bi.getHeight(),BufferedImage.TYPE_INT_ARGB);
+//                        Graphics2D g4 = b.createGraphics();
+//                        g4.setComposite(AlphaComposite.Clear);
+//                        g4.fillRect(0, 0, bi.getWidth(), bi.getHeight());
+//                        g4.setComposite(AlphaComposite.Src);
+//                        AffineTransform af = AffineTransform.getRotateInstance(2 * Math.PI / testImage.length * (k+1)
+//                                ,bi.getWidth() / 2.0,
+//                                bi.getHeight() / 2.0);
+//                        af.scale(0.85,0.85);
+//                        g4.drawImage(bi,af,null);
+//                        g4.dispose();
+//                        testImages[i][k] = cacheImages[k];
+//                    }
+//                }
+//获取缩放倍数
+//            ImageIcon icon = new ImageIcon(path);
+//            BufferedImage bi = new BufferedImage(pictureW,pictureH,BufferedImage.TYPE_INT_ARGB);
+//            Graphics2D g2 = bi.createGraphics();
+//            g2.clearRect(0,0,bi.getWidth(), bi.getHeight());
+//            g2.drawImage(icon.getImage(),0,0,bi.getWidth(),bi.getHeight(),null);
+//            g2.dispose();
+//            bufferedImages[index++] = bi;

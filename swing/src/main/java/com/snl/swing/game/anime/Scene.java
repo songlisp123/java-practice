@@ -52,7 +52,7 @@ public class Scene {
         }
     }
 
-    public void pause() {
+    public boolean pause() {
         try {
             Thread.sleep(Long.parseLong((String) pauseAmt));
         } catch (InterruptedException e) {
@@ -60,6 +60,7 @@ public class Scene {
         }
         //这一步是什么意思？？？？
         System.gc();
+        return true;
     }
 
     public void increment() {

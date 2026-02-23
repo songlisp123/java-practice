@@ -44,7 +44,6 @@ public class Demo extends DiKaErPlus {
 
         keyBoard.draw(g2,Color.lightGray);
         g2.setColor(Color.green);
-//        g2.fillRect(0,0,c.getWidth(),c.getHeight());
         scene.render(c.getWidth(),c.getHeight(),g2);
         tm.render(c.getWidth(),c.getHeight(),g2);
         g2.dispose();
