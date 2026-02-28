@@ -91,7 +91,6 @@ public class Vector2D {
         return div(scale,scale);
     }
 
-
     public Vector2D norm() {
         return div(len());
     }
@@ -102,6 +101,10 @@ public class Vector2D {
 
     public double len() {
         return Math.sqrt(x * x + y * y);
+    }
+
+    public double v3len() {
+        return Math.sqrt(x * x + y * y + w * w);
     }
 
     public double lenSqr() {
@@ -125,6 +128,18 @@ public class Vector2D {
                 radius * Math.cos(angle),
                 radius * Math.sin(angle)
         );
+    }
+
+    public Vector2D crossDot(Vector2D v) {
+        double x = this.y * v.w - this.w * v.y;
+        double y = this.w * v.x - this.x * v.w;
+        double w = this.x * v.y - this.y * v.x;
+        return new Vector2D(x,y,w);
+    }
+
+    // 二维向量标量叉乘（返回标量值，更符合二维叉乘的常规用法）
+    public double scalarCrossProduct(Vector2D v) {
+        return this.x * v.y - this.y * v.x;
     }
 
     @Override

@@ -481,6 +481,25 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         return null;
     }
 
+    protected boolean lineInsertAABB(Vector2D min,Vector2D max,Vector2D start,Vector2D end) {
+        //TODO 这是什么东西？？？？
+        Vector2D lNorm = end.sub(start).prep();
+        //直线的法向量
+        //这是什么东西?
+        Vector2D rightBottom = new Vector2D(max.getX(),min.getY());
+        Vector2D leftUp = new Vector2D(min.getX(),max.getY());
+
+        Vector2D lbm = min.sub(start);
+        Vector2D rbm = rightBottom.sub(start);
+        Vector2D rup = max.sub(start);
+        Vector2D lup = leftUp.sub(start);
+
+        return lNorm.dot(lbm) * lNorm.dot(rup) <= 0 ||
+                lNorm.dot(rup) * lNorm.dot(rbm) <= 0 ||
+                lNorm.dot(rbm) * lNorm.dot(lup) <= 0;
+
+    }
+
     //**********************************************************************//
     /* ******************          图像测试         *********************** */
     //**********************************************************************//

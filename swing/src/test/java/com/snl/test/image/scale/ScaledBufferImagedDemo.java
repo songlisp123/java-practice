@@ -48,9 +48,9 @@ public class ScaledBufferImagedDemo extends DiKaErPlus {
     boolean handled;
 
     public ScaledBufferImagedDemo() throws HeadlessException {
-        WIDTH = HEIGHT = 1200;
+        WIDTH = HEIGHT = 600;
         wordWidth = 16;
-        wordHeight = 9;
+        wordHeight = 16;
         drawAxis = false;
     }
 

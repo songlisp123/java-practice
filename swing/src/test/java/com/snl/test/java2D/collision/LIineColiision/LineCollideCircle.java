@@ -75,8 +75,7 @@ public class LineCollideCircle extends DiKaErPlus {
         //dianji
         double dot = v.dot(u);
         double dotU = u.dot(u);
-        double t = dot / dotU;
-        t = Math.max(0,Math.min(dot/dotU,1));
+        double t = Math.max(0,Math.min(dot/dotU,1));
         //投影向量
         p = start.add(u.scale(t));
         f = c0.sub(p);

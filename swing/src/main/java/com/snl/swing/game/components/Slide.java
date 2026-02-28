@@ -120,14 +120,6 @@ public class Slide {
         return d < Math.pow(r0,2);
     }
 
-    public boolean isClicked(boolean clicked,Point2D mouse) {
-        return clicked && contains(mouse);
-    }
-
-    public boolean isDragging(boolean dragging,Point2D mouse) {
-        return dragging && c(mouse);
-    }
-
     public void addListener(SlideDataChangeListener l) {
         listeners.add(l);
     }

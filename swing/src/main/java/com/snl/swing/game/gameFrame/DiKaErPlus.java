@@ -1,15 +1,17 @@
 package com.snl.swing.game.gameFrame;
 
-import com.snl.swing.game.math.Matrix3x3f;
-import com.snl.swing.game.math.Vector2D;
+import com.snl.swing.game.math.*;
 import com.snl.swing.game.utils.AxisPlus;
+import com.snl.swing.game.utils.Utils;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
+import java.util.Arrays;
 import java.util.List;
 
 public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListener {
@@ -134,12 +136,37 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
                 (int) p.getX(), (int) (p.getY() - 10));
     }
 
-    //绘制AABB矩形
-    protected void drawAABB(Graphics2D g2, Vector2D min, Vector2D max) {
-        this.drawAABB(g2,min,max,false);
+    //绘制线
+    protected void drawLine(Graphics2D g2,Line line) {
+        //TODO 这是一个绘制线的请求
+        int mode = line.getMode();
+        if (mode == Line.XIANSHI) {
+            Vector2D pos = line.getPos(); //基点
+            drawCircle(g2,pos,.1,true);
+            Vector2D moveD = line.getMoveD(); //运动方向
+            Vector2D end;
+            end = pos.add(moveD);
+            drawCircle(g2,end,.1,true);
+            end = pos.add(moveD.mul(wordWidth));
+            pos = pos.sub(moveD.mul(wordWidth));
+            drawLine(g2,pos,end);
+        }
+        if (mode == Line.YINGSHI) {
+            //TODO 隐式
+            Vector2D n = line.getN();
+            Vector2D pos = line.getPos(); //基点
+            Vector2D d = n.prep();
+            Vector2D end = pos.add(d);
+            drawLine(g2,pos,end);
+        }
     }
 
-    protected void drawAABB(Graphics2D g2, Vector2D min, Vector2D max,boolean fill) {
+    //绘制AABB矩形
+    protected void drawAAbb(Graphics2D g2, AABB aabb,boolean filling){
+        this.drawAABB(g2,aabb.getMin(),aabb.getMax(),filling);
+    }
+
+    private void drawAABB(Graphics2D g2, Vector2D min, Vector2D max,boolean fill) {
         Vector2D left = new Vector2D(min.getX(),max.getY());
         Vector2D bottom = new Vector2D(max.getX(), min.getY());
 
@@ -161,6 +188,26 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
             g2.draw(s);
     }
 
+    protected void drawOrientedRectangle(Graphics2D g2,OrientedRectangle or,boolean filling) {
+        Vector2D[] r = new Vector2D[4];
+        Vector2D halfExtend = or.getHalfExtend();
+        double rot = or.getRot();
+        Vector2D center = or.getCenter();
+        Vector2D lup = new Vector2D( -halfExtend.getX(),-halfExtend.getY());
+        Vector2D rup = new Vector2D( +halfExtend.getX(), -halfExtend.getY());
+        Vector2D rbm = new Vector2D( +halfExtend.getX(), +halfExtend.getY());
+        Vector2D lbm = new Vector2D( -halfExtend.getX(),+halfExtend.getY());
+        r[0] = lup;
+        r[1] = rup;
+        r[2] = rbm;
+        r[3] = lbm;
+        Matrix3x3f rotate = Matrix3x3f.rotate(rot);
+        for (int i = 0;i<r.length;i++) {
+            r[i] = rotate.mul(r[i]).add(center);
+        }
+        drawPoly(g2,r,filling);
+    }
+
     //绘制圆形
     protected void drawCircle(Graphics2D g2,Vector2D p,double r) {
         this.drawCircle(g2,p,r,false);
@@ -169,6 +216,10 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
     //绘制圆形
     protected void drawCircle(Graphics2D g2,Vector2D p,double r,boolean fill) {
         this.drawEllipse(g2,p,r,r,fill);
+    }
+
+    protected void drawCircle(Graphics2D g2, Circle circle, boolean filling) {
+        this.drawCircle(g2,circle.center,circle.r,filling);
     }
 
     //绘制椭圆
@@ -345,6 +396,25 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         tl.draw(g2,lx,lefty + tl.getAscent());
     }
 
+    protected void drawConvexity(Graphics2D g2,Convexity convexity,boolean filling) {
+        Vector2D[] vertices = convexity.getVertices();
+        drawPoly(g2,vertices,filling);
+        //
+        if (convexity.isShowVer())
+        {
+            TextLayout tl;
+            Font font = g2.getFont();
+            FontRenderContext frc = g2.getFontRenderContext();
+            for (Vector2D v : vertices)
+            {
+                tl = new TextLayout("[%.2f,%.2f]".formatted(
+                        v.getX(),v.getY()
+                ),font,frc);
+                this.drawText(g2,tl,v);
+            }
+        }
+    }
+
     //**********************************************************************//
     /* ******************          重置状态         *********************** */
     //**********************************************************************//
@@ -485,6 +555,18 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         }
         //无交点
         return null;
+    }
+
+    protected boolean pointInOrientedRectangle(Vector2D pos, OrientedRectangle r) {
+        Vector2D center = r.getCenter();
+        Vector2D min = new Vector2D();
+        Vector2D max = r.getHalfExtend().mul(2);
+        double rot = r.getRot();
+        Matrix3x3f rotate = Matrix3x3f.rotate(-rot);
+        Vector2D lp = pos.sub(center);
+        lp = rotate.mul(lp);
+        lp = lp.add(r.getHalfExtend());
+        return pointInAABB(lp,min,max);
     }
 
     //**********************************************************************//

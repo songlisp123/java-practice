@@ -273,7 +273,7 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         as.addAttribute(TextAttribute.FONT,Utils.liShu.deriveFont(30F));
         as.addAttribute(TextAttribute.FOREGROUND,Color.ORANGE,5,8);
         TextLayout tl = new TextLayout(as.getIterator(),frc);
-        drawText(g2,0,20,c.getWidth(),tl);
+        drawText(g2,0,0,c.getWidth(),tl);
 
         //绘制图像
         Sprite sprite = sprites[startIndex + clickedIndex];
@@ -293,15 +293,13 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         double ty = pictureTop;
         float wrappingWidth = (float) (tx - 2 *wordLeft - wordRight);
         AffineTransform temp = g2.getTransform();
+
         g2.translate(tx,ty);
         tl = new TextLayout(sprite.getName(),font,frc);
-
         //获取左上角
         double dy = Utils.drawText(g2, 0, 0, 0, tl);
         tl = new TextLayout("元素:"+sprite.getYuanShu(),font.deriveFont(20F),frc);
         dy = Utils.drawText(g2,0,dy,0,tl);
-
-
         //灵兽特性
         String beiDong = sprite.getBeiDong();
         as = new AttributedString(beiDong);
@@ -387,9 +385,9 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         if (clickedIndex != -1)
         {
             Shape s = shapes[clickedIndex];
-            g2.setColor(Color.PINK);
+            g2.setColor(new Color(0.5F,0.5f,0.5F,0.3f));
             g2.setStroke(new BasicStroke(2));
-            g2.draw(s);
+            g2.fill(s);
         }
         //绘制按钮
     }
@@ -445,7 +443,7 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         super.animation(delta);
         if (scene01.getIndex() < scene01.getLength())
             scene01.increment();
-        if (gameState == GAME_PAGE &&scene01.getIndex() == scene01.getLength() &&
+        if (gameState == GAME_PAGE && scene01.getIndex() == scene01.getLength() &&
         scene01.pause())
             gameState = GAME_ON;
     }
@@ -466,7 +464,6 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
                 case GAME_START -> gameState = GAME_RUNNING;
             }
         }
-        String s = event.getActionString();
         if (source == leftRow)
             startIndex--;
         if (source == rightRow)

@@ -134,7 +134,7 @@ public class SimpleCleanKeyBoard {
 
     public void update(double delta,Point2D mousePoint) {
         //大雾
-        fillShapes();
+//        fillShapes();
         checkMaskR(mousePoint);
         clicked = clicked && getMaskIndex() != -1;
         if (clicked) {
@@ -245,18 +245,6 @@ public class SimpleCleanKeyBoard {
 
     public void setShowingInputFrame(boolean showingInputFrame) {
         this.showingInputFrame = showingInputFrame;
-    }
-
-    public boolean isDrawBorder() {
-        return drawBorder;
-    }
-
-    public boolean isDrawCharBorder() {
-        return drawCharBorder;
-    }
-
-    public boolean isShowingInputFrame() {
-        return showingInputFrame;
     }
 
     public String getInputString() {
