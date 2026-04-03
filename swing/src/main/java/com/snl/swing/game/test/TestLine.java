@@ -22,12 +22,15 @@ public class TestLine extends DiKaErPlus {
     protected void gameInitial() {
         super.gameInitial();
         line = new Line(
-                new Vector2D(0,0),new Vector2D(1,1),Line.XIANSHI
+                new Vector2D(1,3),new Vector2D(1,1),Line.XIANSHI
         );
         l2 = new Line(
-                new Vector2D(-1,5),new Vector2D(1,2),Line.XIANSHI
+                new Vector2D(-1,5),new Vector2D(1,3),Line.XIANSHI
         );
         p = new Vector2D();
+
+        double angle = line.getAngle(l2);
+        System.out.println("angle = " + angle);
     }
 
     @Override
@@ -82,6 +85,12 @@ public class TestLine extends DiKaErPlus {
             drawCircle(g2,c,.1,true);
         drawCircle(g2,n1,0.15,true);
         drawCircle(g2,n2,0.15,true);
+
+        Vector2D hPoint = line.getHPoint(p);
+        Vector2D verticalPoint = line.getVerticalPoint(p);
+
+        drawCircle(g2,hPoint,0.10,false);
+        drawCircle(g2,verticalPoint,0.10,false);
         Stroke stroke = g2.getStroke();
         g2.setStroke(
                 new BasicStroke(2,BasicStroke.CAP_ROUND,BasicStroke.JOIN_MITER,1,
@@ -89,6 +98,9 @@ public class TestLine extends DiKaErPlus {
         );
         drawLine(g2,n2,p);
         drawLine(g2,n1,p);
+
+        drawLine(g2,p,hPoint);
+        drawLine(g2,p,verticalPoint);
         g2.dispose();
     }
 

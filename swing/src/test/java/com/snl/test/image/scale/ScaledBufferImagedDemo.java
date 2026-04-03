@@ -277,6 +277,8 @@ public class ScaledBufferImagedDemo extends DiKaErPlus {
                         Cursor.HAND_CURSOR
                 ));
                 break;
+            }else {
+                setCursor(null);
             }
         }
     }

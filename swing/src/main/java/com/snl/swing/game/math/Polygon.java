@@ -1,5 +1,7 @@
 package com.snl.swing.game.math;
 
+import com.snl.swing.game.utils.Geometry;
+
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -15,6 +17,47 @@ public class Polygon {
     protected double area;
     //重心
     protected Vector2D center;
+
+    public Polygon() {
+    }
+
+    public Polygon(Vector2D[] vertices) {
+        validate(vertices);
+        this.vertices = vertices;
+        this.size = this.vertices.length;
+        this.offset = new Vector2D();
+        this.center = Geometry.getAverageCenter(this.vertices);
+    }
+
+    public Polygon(Polygon polygon) {
+        this.vertices = polygon.vertices;
+        this.offset = polygon.offset;
+        this.area = polygon.area;
+        this.size = polygon.size;
+        this.showVer = polygon.showVer;
+        this.center = polygon.center;
+    }
+
+    public Polygon(Vector2D center,Vector2D offset,Vector2D...vector2DS) {
+        validate(vector2DS);
+        this.center = center;
+        this.offset = offset;
+        this.size = vector2DS.length;
+        this.vertices = vector2DS;
+    }
+
+    private void validate(Vector2D[] vertices) {
+        if (vertices == null)
+            throw new IllegalArgumentException("非法参数异常，参数不能为null");
+        int length = vertices.length;
+        if (length < 3)
+            throw new IllegalArgumentException("数组长度必须大于等于3");
+        //判断 数组元素里面是否 有 null 值
+        for (Vector2D v : vertices) {
+            if (v == null)
+                throw new NullPointerException("元素不能为null");
+        }
+    }
 
     /**
      * 获取全部的边
@@ -122,7 +165,7 @@ public class Polygon {
     }
 
     public Iterator<Vector2D> iterator() {
-        return new Convexity.PointIterator();
+        return new PointIterator();
     }
 
     public void setShowVer(boolean showVer) {
@@ -142,16 +185,31 @@ public class Polygon {
     public void translate(double x,double y) {
         offset.x += x;
         offset.y += y;
+
+        this.center.x += x;
+        this.center.y += y;
     }
 
     public void translate(Vector2D m) {
         this.translate(m.x,m.y);
     }
 
-    public Convexity getTranslated(Vector2D m) {
-        Vector2D off = offset.add(m);
-        return new Convexity(off,vertices);
+//    public Convexity getTranslated(Vector2D m) {
+//        Vector2D off = offset.add(m);
+//        return new Convexity(off,vertices);
+//    }
+
+    public Polygon getTranslated(Vector2D m) {
+        if (m == null)
+            return new Polygon(this);
+        else {
+            Vector2D offsetTranslate = this.offset.add(m);
+            Vector2D centerTranslate = this.center.add(m);
+            return new Polygon(centerTranslate,offsetTranslate,this.vertices);
+        }
     }
+
+
 
     public Convexity getRotateInstance(double rat,double x,double y) {
         Vector2D v = new Vector2D(x,y);

@@ -25,9 +25,7 @@ public class Line {
         }
     }
 
-    public Line() {
-
-    }
+    public Line() {}
 
     /**
      * 判断是否与另一条线相撞
@@ -99,6 +97,7 @@ public class Line {
      * @param p
      * @return
      */
+    @Deprecated
     public double distance(Vector2D p) {
         Vector2D v = this.nearestPoint(p);
         v = p.sub(v);
@@ -108,19 +107,27 @@ public class Line {
     /**
      * 获取 线上最近点
      * @param p 测试点
-     * @return
+     * @return 线上最近点 到 p
+     * @implNote 《图像宝石》第一卷第一章
      */
     public Vector2D nearestPoint(Vector2D p) {
+        //获取 缩放距离
+        //第一种方法：
         Vector2D norm = this.n.norm();
-        double t = norm.dot(p) + this.c;
-        return p.sub(norm.scale(t));
+        double c = -(norm.dot(pos));
+        double t = norm.dot(p) + c;
+        return p.sub(norm.mul(t));
+        //第二种方法：
+//        double t = this.n.dot(p) + this.c;
+//        t /= this.n.lenSqr();
+//        return p.sub(this.n.mul(t));
     }
 
     /*
     获取距离
      */
     public double distanceOfPoint(Vector2D p) {
-        Vector2D q = nearestPoint(p);
+        Vector2D q = this.nearestPoint(p);
         return q.sub(p).len();
     }
 
@@ -137,25 +144,100 @@ public class Line {
      * 获取与另一条线的角度
      * @param line 测试线
      * @return 返回直线交叉角度
+     * @implNote 中学物理
      */
     public double getAngle(Line line) {
         Vector2D l1_norm = this.moveD.norm();
         Vector2D l2_norm = line.moveD.norm();
+        double dot = l1_norm.dot(l2_norm);
+        if (dot <= Epsilon.PRECISION)
+            //如果垂直
+            return Math.PI / 2.0;
+        if (dot > 1.0 - Epsilon.PRECISION &&
+        dot < 1.0 + Epsilon.PRECISION)
+            //如果平行
+            return 0;
+        //否则，调用公式：
+        /*
+        cos θ = a * b (如果，a、b都是归一化向量)
+         */
         return Math.acos(l1_norm.dot(l2_norm));
     }
 
+    /**
+     * 获取 竖直 点
+     * @param vector2D 测试点
+     * @return 竖直线与点相交
+     * @since 2026年4月3日22:41:16
+     * @implNote 《图像宝石》 第一卷第一章关于 竖直线的讨论
+     */
+    public Vector2D getVerticalPoint(Vector2D vector2D) {
+        /*
+        l : a * x + b * y + c = 0
+         */
+        double a,b,c; //线的参数方程系数
+        a = this.moveD.y;
+        b = -this.moveD.x;
+        c = this.pos.y * b + this.pos.x * a;
+
+        double x,y;
+        x = vector2D.x;
+        y = (c - a * vector2D.x) / b;
+        return new Vector2D(x,y);
+    }
+
+    /**
+     * 获取 水平 点
+     * @param vector2D 测试点
+     * @return 水平线与点相交
+     * @since 2026年4月3日22:41:16
+     * @implNote 《图像宝石》 第一卷第一章关于 水平线的讨论
+     */
+    public Vector2D getHPoint(Vector2D vector2D) {
+         /*
+        l : a * x + b * y + c = 0
+         */
+        double a,b,c; //线的参数方程系数
+        a = this.moveD.y;
+        b = -this.moveD.x;
+        c = this.pos.y * b + this.pos.x * a;
+
+        double x,y;
+        y = vector2D.y;
+        x = (c - b * vector2D.y) / a;
+        return new Vector2D(x,y);
+    }
 
     /**
      * 获取 点到直线的 垂直距离
      * @param v 测试点
-     * @return
+     * @return 点 {@code v} 到 改直线的垂直距离
+     * @implNote 请注意不是投影距离，而是垂直距离,
+     * 《图像宝石》 第一卷第一章关于 竖直线的讨论
      */
     public double getVerticalDistance(Vector2D v) {
-        double d;
-        double p = distanceOfPoint(v); //垂直投影
-        double k = moveD.y / moveD.x;
-        d = p / k;
+        double d; //结果值
+        double temp,p,k; //中间值
+        p = this.distanceOfPoint(v); //投影距离
+        k = moveD.y / moveD.x; // 斜率
+        temp = 1 / (1 + Math.pow(k,2));
+        temp = Math.sqrt(temp);
+        d = p / temp;
         return d;
+    }
+
+    /**
+     * 获取 点 p 到直线的水平距离，更多信息，请参阅"{@link Vector2D}"
+     * @param vector2D 测试点
+     * @return 水平距离
+     * @since 2026年4月3日22:23:24
+     */
+    public double getHDistance(Vector2D vector2D) {
+        double m,v,h;  //斜率,垂直距离,水平距离
+        m = this.moveD.y / this.moveD.x; //斜率
+        v = this.getVerticalDistance(vector2D); //竖直距离
+        h = v / m;
+        return h;
     }
 
     /**
