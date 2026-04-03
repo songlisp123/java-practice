@@ -11,13 +11,13 @@ import java.awt.geom.GeneralPath;
  */
 public class TextEffect implements Part {
 
-    public static final int INC = 1;
-    public static final int DEC = 2;
-    public static final int R = 4;
-    public static final int RI = R | INC;
-    public static final int RD = R | DEC;
-    public static final int SCALE = 8;
-    public static final int SCI = SCALE | INC;
+    public static final int INC = 1; //增加
+    public static final int DEC = 2; //减少
+    public static final int R = 4;  //旋转
+    public static final int RI = R | INC; // 旋转时增大
+    public static final int RD = R | DEC; //旋转时减少
+    public static final int SCALE = 8; // 缩放
+    public static final int SCI = SCALE | INC; // 增大缩放
     public static final int SCD = SCALE | DEC;
     public static final int SCX = 16; //沿着x负轴缩放
     public static final int SCXI = SCX | SCALE | INC;
@@ -33,7 +33,9 @@ public class TextEffect implements Part {
     private int start,end;
     //类型
     private int type;
+    //缩放速率
     private double sInc,rInc;
+    //文本形状
     private Shape[] shapes,txTShapes;
     private int sw;
     //效果增强
@@ -91,6 +93,11 @@ public class TextEffect implements Part {
         return start;
     }
 
+    //调用流程
+    /*
+    第一步：获取alpha
+    第二步：生成裁剪
+     */
     @Override
     public void render(int w, int h, Graphics2D g2) {
         Composite saveAC = null;

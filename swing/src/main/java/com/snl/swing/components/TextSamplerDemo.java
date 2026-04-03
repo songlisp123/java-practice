@@ -257,7 +257,8 @@ public class TextSamplerDemo  extends JPanel implements ActionListener {
         editorPane.setEditable(false);
         URL helpUrl = null;
         try {
-//            helpUrl = Path.of("html/table.html").toUri().toURL();
+            helpUrl = Path.of("html/table.html").toUri().toURL();
+//            helpUrl = Path.of("html/TextSamplerDemoHelp.html").toUri().toURL();
             if (Objects.nonNull(helpUrl)) {
                 editorPane.setPage(helpUrl);
             }

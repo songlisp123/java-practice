@@ -67,6 +67,12 @@ public class AABB extends Convexity implements Cloneable {
         return near.lenSqr() <= 1;
     }
 
+    /**
+     * 判断是否与 线段🍌
+     * @param p1 线段端点
+     * @param p2 线段另一端点
+     * @return 如果发生相交，返回{@code true}，否则，返回{@code false}
+     */
     public boolean collisionLineSegment(Vector2D p1,Vector2D p2) {
         Vector2D d = p2.sub(p1);
         if (!(collisionLine(p1,d))){
@@ -81,6 +87,7 @@ public class AABB extends Convexity implements Cloneable {
         Range xrange = new Range(min.x,max.x);
         if (!(lRange.overlapping(xrange)))
             return false;
+        //AABB在y轴上的投影
         lRange.min = p1.y;
         lRange.max = p2.y;
         lRange.sort();
@@ -96,8 +103,15 @@ public class AABB extends Convexity implements Cloneable {
                 p.y >= min.y && p.y <= max.y;
     }
 
+    /**
+     * 判断是否与显示定义的线相交，有关线的定义请参阅{@link Line}
+     * @param base 线的基点
+     * @param direction 线的方向
+     * @return 如果发生相交，返回{@code true}，否则，返回{@code false}
+     */
     private boolean collisionLine(Vector2D base,Vector2D direction) {
         Vector2D f = direction.prep(); //法向量
+        //TODO 我可以实现最优雅的部分
         Vector2D c1  = min;
         Vector2D c2 = max;
         Vector2D c3 = new Vector2D(max.x,min.y);

@@ -86,7 +86,6 @@ public class Problem04 {
         end = System.currentTimeMillis();
 
 
-
         System.out.printf("运行时间：%d ms%n" , end-start);
         System.out.println("l = " + l);
 

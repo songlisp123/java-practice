@@ -404,6 +404,7 @@ public class BinaryTreeDemo extends JPanel implements ActionListener, MouseMotio
         super.paintComponent(g);
         group.draw(g);
         Graphics2D g2 = (Graphics2D) g.create();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(Color.CYAN);
         if (!shapes.isEmpty()) {
             for (DrawInfo info : shapes) {

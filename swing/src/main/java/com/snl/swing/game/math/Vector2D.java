@@ -2,8 +2,10 @@ package com.snl.swing.game.math;
 
 import java.awt.geom.Point2D;
 
-public class Vector2D {
-    double x,y,w;
+public class Vector2D implements Cloneable {
+    public double x,y,w;
+
+    public static final Vector2D originPoint = new Vector2D();
 
     public Vector2D() {
         this.x = 0;
@@ -130,6 +132,10 @@ public class Vector2D {
         );
     }
 
+    public double cross2D(Vector2D vector2D) {
+        return this.x * vector2D.y - this.y * vector2D.x;
+    }
+
     public Vector2D crossDot(Vector2D v) {
         double x = this.y * v.w - this.w * v.y;
         double y = this.w * v.x - this.x * v.w;
@@ -176,7 +182,7 @@ public class Vector2D {
 
     @Override
     public Vector2D clone() {
-        return new Vector2D(x,y);
+        return new Vector2D(this.x,this.y);
     }
 
     @Override

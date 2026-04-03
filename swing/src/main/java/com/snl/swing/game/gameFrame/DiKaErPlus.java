@@ -1,6 +1,7 @@
 package com.snl.swing.game.gameFrame;
 
 import com.snl.swing.game.math.*;
+import com.snl.swing.game.math.Polygon;
 import com.snl.swing.game.utils.AxisPlus;
 import com.snl.swing.game.utils.Utils;
 
@@ -219,7 +220,7 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
     }
 
     protected void drawCircle(Graphics2D g2, Circle circle, boolean filling) {
-        this.drawCircle(g2,circle.center,circle.r,filling);
+        this.drawCircle(g2,circle.center.add(circle.offset),circle.r,filling);
     }
 
     //绘制椭圆
@@ -243,10 +244,10 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
             g2.fill(s);
         else
             g2.draw(s);
-        //g2.drawString("[%.2f,%.2f]".formatted(p.getX(),p.getY()),
-        // (int) c0.getX(), (int) (c0.getY() - 10));
-        // Shape radius = new Ellipse2D.Double(leftX,leftY,4,4);
-        // g2.fill(radius);
+        g2.drawString("[%.2f,%.2f]".formatted(p.getX(),p.getY()),
+         (int) c0.getX(), (int) (c0.getY() - 10));
+         Shape radius = new Ellipse2D.Double(c0.getX(),c0.getY() - 10,4,4);
+         g2.fill(radius);
     }
 
     //绘制多边形
@@ -386,6 +387,8 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         Vector2D v2 = vt.mul(end);
         Shape l = new Line2D.Double(v1.getX(),v1.getY(),v2.getX(),v2.getY());
         g2.draw(l);
+        drawCircle(g2,start,0.05,true);
+        drawCircle(g2,end,0.05,true);
     }
 
     protected void drawText(Graphics2D g2,float leftx,float lefty,double w,TextLayout tl) {
@@ -407,10 +410,11 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
             FontRenderContext frc = g2.getFontRenderContext();
             for (Vector2D v : vertices)
             {
-                tl = new TextLayout("[%.2f,%.2f]".formatted(
-                        v.getX(),v.getY()
-                ),font,frc);
-                this.drawText(g2,tl,v);
+                this.drawCircle(g2,v,0.05,true);
+//                tl = new TextLayout("[%.2f,%.2f]".formatted(
+//                        v.getX(),v.getY()
+//                ),font,frc);
+//                this.drawText(g2,tl,v);
             }
         }
     }
@@ -479,6 +483,11 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
     /* ******************          碰撞测试         *********************** */
     //**********************************************************************//
 
+
+    protected boolean pointInCircle(Vector2D pos,Circle circle) {
+        return this.pointInCircle(pos,circle.center.add(circle.offset),circle.r);
+    }
+
     protected boolean pointInCircle(Vector2D pos,Vector2D c,double r)
     {
         Vector2D v = pos.sub(c);
@@ -505,6 +514,10 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
 
     protected boolean pointInPoly(Vector2D pos,List<Vector2D> poly) {
         return this.pointInPoly(pos,poly.toArray(Vector2D[]::new));
+    }
+
+    protected <T extends Polygon> boolean pointInPoly(Vector2D pos, T t) {
+        return t.containsPoint(pos);
     }
 
     protected boolean pointInPoly(Vector2D pos,Vector2D[] poly)

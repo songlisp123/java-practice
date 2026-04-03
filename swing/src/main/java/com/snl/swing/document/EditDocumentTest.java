@@ -31,7 +31,7 @@ public class EditDocumentTest extends JFrame {
 
 
         try {
-            URL path = Path.of("html/table.html").toUri().toURL();
+            URL path = Path.of("html/TextSamplerDemoHelp.html").toUri().toURL();
             JEditorPane jEditorPane1 = new JEditorPane();
             jEditorPane1.setPage(path);
             Document document1 = jEditorPane1.getDocument();

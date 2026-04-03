@@ -1,93 +1,73 @@
 package com.snl.swing.game.math;
 
+import com.snl.swing.game.utils.Geometry;
+
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class Convexity {
-    Vector2D[] vertices;
-    int size; //点数量
-    Vector2D offset;
-    //显示顶点
-    boolean showVer;
+public class Convexity extends Polygon {
 
-    public Convexity() {
-    }
+    public Convexity() {}
 
     public Convexity(Vector2D offset, Vector2D... vertices) {
-        this.offset = offset;
+        validate(vertices);
+        if (offset == null) this.offset = new Vector2D();
+        else this.offset = offset;
         this.vertices = vertices;
         size = this.vertices.length;
+        center = Geometry.getAverageCenter(vertices);
     }
 
     /**
-     * 获取全部的边
-     * @return 边集合
+     * 判断 端点 的有效性
+     * @param vectors 端点
+     * @since 2026年4月2日21:07:38
      */
-    public SegMent[] getAllEdge() {
-        SegMent[] segMents = new SegMent[size];
-        for (int i=0;i< segMents.length;i++) {
-            segMents[i] = getEdge(i);
+    private void validate(Vector2D...vectors) {
+        if (vectors == null) {
+            throw new IllegalArgumentException("参数不能为null");
         }
-        return segMents;
-    }
+        if (vectors.length == 0) {
+            //如果点坐标的长度 等于0
+            throw new IllegalArgumentException("点数不能非零");
+        }
+        int length = vectors.length;
+        if (length < 3) {
+            throw new IllegalArgumentException("点数必须大于等于三");
+        }
+        //否则 ，验证是否有null的点
+        for (Vector2D vector : vectors) {
+            if (vector == null)
+                throw new IllegalArgumentException("参数不能为null");
+        }
+        //验证是否是凸变形
+        double sign = 0,area = 0;
+        for (int i = 0;i<length ; i++) {
+            Vector2D p0 = i - 1 < 0 ? vectors[length - 1] : vectors[i - 1];
+            Vector2D p1 = vectors[i];
+            Vector2D p2 = (i + 1 == length) ? vectors[0] : vectors[i + 1];
+            if (p1.equals(p2)) {
+                //如果，p1和p2相同 ，则表明，共点，返回
+                throw new ArithmeticException("不能共点");
+            }
 
-    /**
-     * 获取投影轴
-     * @return 投影轴集合
-     */
-    public Vector2D[] getAxis() {
-        SegMent[] edges = getAllEdge();
-        Vector2D[] axis = new Vector2D[size];
-        for (int i = 0;i<axis.length;i++) {
-            SegMent edge = edges[i];
-            Vector2D prep = edge.p2.sub(edge.p1).prep();
-            axis[i] = prep;
-        }
-        return axis;
-    }
+            //叉积
+            double cross = p0.sub(p1).cross2D(p1.sub(p2));
+            //判断 叉积符号，好吧，如果叉积返回小于0的数字，则表明
+            double tsign = Math.signum(cross);
 
-    /**
-     * 获取边
-     * @param n 第n条边
-     * @return 边
-     */
-    public SegMent getEdge(int n) {
-        if (n < 0 || n >= size) {
-            throw new IllegalArgumentException("非法参数异常，边界必须在"+0+"到"+size+"区间");
+            area += cross;
+            if (Math.abs(cross) > Epsilon.E && sign != 0.0F  && tsign != sign) {
+                throw new IllegalArgumentException("必须是凸多边形");
+            }
+            sign = tsign;
         }
-        SegMent edge = new SegMent();
-        edge.p1 = this.vertices[n].add(offset);
-        edge.p2 = this.vertices[(n+1)%size].add(offset);
-        return edge;
-    }
 
-    /**
-     * 获取点
-     * @return 点集
-     */
-    public Vector2D[] getVertices() {
-        Vector2D[] copy = Arrays.copyOf(vertices, size);
-        for (int i =0 ;i<size;i++) {
-            copy[i] = copy[i].add(offset);
+        if (Math.abs(area) <= Epsilon.E) {
+            throw new RuntimeException("凸多边形有面积接近为0的区域");
+        }else {
+            this.area = area;
         }
-        return copy;
-    }
-
-    /**
-     * 将当前形状投影到轴线上
-     * @param on 投影轴
-     * @return 返回一维距离
-     */
-    public Range projectionOntoVector(Vector2D on) {
-        Vector2D norm = on.norm();
-        Range range = new Range();
-        for (Vector2D v : vertices) {
-            double dot = v.add(offset).dot(norm);
-            if (dot < range.min)
-                range.min = dot;
-            if (dot > range.max)
-                range.max = dot;
-        }
-        return range;
     }
 
     /**
@@ -118,31 +98,6 @@ public class Convexity {
     }
 
     /**
-     * 是否包含某点,使用的是奇偶规则
-     * @param pos 测试点
-     * @return 如果包含该店，返回{@code true},否则返回{@code false}
-     */
-    public boolean containsPoint(Vector2D pos) {
-        int inside = 0;
-        Vector2D[] copy = getVertices();
-        Vector2D s = copy[copy.length - 1];
-        boolean start = pos.getY() > s.getY();
-        for (Vector2D e : copy) {
-            boolean end = pos.getY() > e.getY();
-            if (start != end) {
-                //计算
-                double k = (e.getY() - s.getY()) / (e.getX() - s.getX());
-                double insertX = s.getX() + (pos.getY() - s.getY()) / k;
-                if (insertX > pos.getX())
-                    inside++;
-            }
-            start = end;
-            s = e;
-        }
-        return inside % 2 != 0;
-    }
-
-    /**
      * 获取AABB矩形
      * @return 包裹aabb矩形
      */
@@ -160,14 +115,17 @@ public class Convexity {
     }
 
     //TODO 待办如何找到多边形的包围圆？？ 【未完成 ❌】
-//    public Circle getCircle() {
-//        AABB aabb = getAABB();
-//        Vector2D ct = aabb.max.add(aabb.min).div(2);
-//        Vector2D hf = aabb.max.sub(aabb.min).div(2);
-//        OrientedRectangle o = new OrientedRectangle(ct,hf,0);
-//        double r = o.halfExtend.len();
-//        return new Circle(r,o.center);
-//    }
+    /*
+    对于三角形来说：我们需要找到
+     */
+    public Circle getCircle() {
+        AABB aabb = getAABB();
+        Vector2D ct = aabb.max.add(aabb.min).div(2);
+        Vector2D hf = aabb.max.sub(aabb.min).div(2);
+        OrientedRectangle o = new OrientedRectangle(ct,hf,0);
+        double r = o.halfExtend.len();
+        return new Circle(r,o.center);
+    }
 
     /**
      * 移动
@@ -196,6 +154,10 @@ public class Convexity {
      * 获取面积
      * @return 改凸变形的面积
      */
+    /*
+    我们使用一个常用的公式：
+    ||
+     */
     public double getArea() {
         Vector2D v0 = vertices[0];
         double area = 0;
@@ -205,18 +167,24 @@ public class Convexity {
             Vector2D v2 = vertices[i + 2].sub(v0);
             v2.w = 0;
             Vector2D c = v1.crossDot(v2);
-            area += c.v3len();
+            area += c.v3len() / 2.0;
         }
         return area;
+//        return Math.abs(this.area / 2.0);
     }
 
+    /**
+     * 随机选择一个点
+     * @param s 权重
+     * @param t 权重
+     * @return
+     */
     public Vector2D pickedRandomPoint(double s,double t) {
         if (s<0 || s > 1 ||
             t < 0 || t > 1)
             throw new IllegalArgumentException("参数异常，必须是0到1之间");
         return null;
     }
-
 
     /**
      * 根据公式，将凸变形分割成不同的字三角形
@@ -227,78 +195,51 @@ public class Convexity {
         Vector2D v0 = vertices[0];
         for (int i = 0;i<size-2;i++) {
             Vector2D v1 = vertices[i + 1].sub(v0);
-            v1.w = 0;
             Vector2D v2 = vertices[i + 2].sub(v0);
-            v2.w = 0;
-            Vector2D c = v1.crossDot(v2);
-            r[i] = c.v3len() / 2.0;
+            double c = v1.cross2D(v2);
+            r[i] = c / 2.0;
         }
         return r;
     }
 
+
+    /**
+     * 获取归一化法向子三角形面积
+     * @return 子三角型面积
+     */
     public double[] getNormSubTriangleArea() {
+        double area = getArea();
         double[] r = getSubTriangleArea();
         for (int  i = 0;i<r.length;i++) {
-            r[i] = r[i] / getArea();
+            r[i] = r[i] / area;
         }
         return r;
     }
 
-    /**
-     * 是否需要回执顶点
-     * @return 绘制顶点
+    /*
+    获取 离 p 点最近的凸边形点
      */
-    public boolean isShowVer() {
-        return showVer;
+    public Vector2D getNearestPoint(Vector2D p) {
+        //TODO
+        return null;
     }
 
-    public void setShowVer(boolean showVer) {
-        this.showVer = showVer;
-    }
-
-    public void translate(double x,double y) {
-        offset.x += x;
-        offset.y += y;
-    }
-
-    public void translate(Vector2D m) {
-        this.translate(m.x,m.y);
-    }
-
-    public Convexity getTranslated(Vector2D m) {
-        Vector2D off = offset.add(m);
-        return new Convexity(off,vertices);
-    }
-
-    public Convexity getRotateInstance(double rat,double x,double y) {
-        Vector2D v = new Vector2D(x,y);
-        return this.getRotateInstance(rat,v);
-    }
-
-    public Convexity getRotateInstance(double rat,Vector2D v) {
-        Matrix3x3f rotate = Matrix3x3f.rotate(rat);
-        Vector2D[] copy = Arrays.copyOf(vertices, size);
-        for (int i = 0;i<copy.length;i++) {
-            copy[i] = rotate.mul(copy[i].sub(v));
-            copy[i] = copy[i].add(v);
-        }
-        return new Convexity(this.offset,copy);
-    }
-
-
-    /**
-     * 重置状态
+    /*
+    获取 离 p 点 最远的凸变形点
      */
-    public void reset() {
-        offset.x= 0;
-        offset.y = 0;
-    }
+    public Vector2D getFarthestPoint(Vector2D var1) {
+        //TODO
+        return null;
+    };
 
-    public Convexity getScaled(double sx, double sy) {
-        Matrix3x3f scaled = Matrix3x3f.scale(sx, sy);
-        Vector2D[] copy = Arrays.copyOf(vertices, size);
-        for (int i = 0;i<copy.length;i++)
-            copy[i] = scaled.mul(copy[i]);
-        return new Convexity(this.offset,copy);
+    public static void main(String[] args) {
+        Convexity convexity = new Convexity(new Vector2D(),
+                new Vector2D(0, 2), new Vector2D(1, 5), new Vector2D(3, 0), Vector2D.originPoint);
+        Vector2D c = convexity.getCenter();
+        Vector2D averageCenter = Geometry.getAverageCenter(convexity);
+        System.out.println("averageCenter = " + averageCenter);
+
+        Vector2D areaWeightedCenter = Geometry.getAreaWeightedCenter(convexity);
+        System.out.println("areaWeightedCenter = " + areaWeightedCenter);
     }
 }

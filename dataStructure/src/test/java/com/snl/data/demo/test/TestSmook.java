@@ -1,7 +1,7 @@
 package com.snl.data.demo.test;
 
-import com.snl.data.homework.charptor03.practice01.article.Smoke;
-import com.snl.data.homework.charptor03.practice01.article.SmokeImplement;
+import com.snl.swing.practice01.article.Smoke;
+import com.snl.swing.practice01.article.SmokeImplement;
 
 import javax.swing.*;
 import java.awt.*;

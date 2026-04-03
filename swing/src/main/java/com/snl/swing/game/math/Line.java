@@ -16,15 +16,17 @@ public class Line {
             throw new IllegalArgumentException("非法参数异常：参数应该在"+XIANSHI+"和" +YINGSHI+"区间之中");
         this.mode = mode;
         switch (mode) {
-            case XIANSHI -> {
+            case XIANSHI, YINGSHI -> {
                 this.pos = pos;
                 moveD = o;
-            }
-            case YINGSHI -> {
                 n = o.prep();
                 c = -(n.dot(pos));
             }
         }
+    }
+
+    public Line() {
+
     }
 
     /**
@@ -44,6 +46,9 @@ public class Line {
         return Math.abs(dot) != 0; //包括反向
     }
 
+    /*
+    显示碰撞点的程序
+     */
     public Vector2D collisionPoint(Line l) {
         Vector2D c = null;
         if (!collision(l))
@@ -68,6 +73,89 @@ public class Line {
         c = pos.sub(moveD.scale(f/ d));
         return c;
 
+    }
+
+    /**
+    点距离 改直线 最近的点
+    可以简化成 ： 以点p做直线的垂线，垂足为所得
+     @implNote 废弃
+     */
+    @Deprecated
+    public Vector2D getNearestPoint(Vector2D p) {
+        Vector2D q; //假设垂足为q
+        //归一化向量
+        if (n == null) {
+            n = moveD.prep().norm();
+            c = -(n.dot(pos));
+        }
+
+        double t = n.dot(p) + c;
+        q = p.sub(n.scale(t));
+        return q;
+    }
+
+    /**
+     * 点到 直线的距离
+     * @param p
+     * @return
+     */
+    public double distance(Vector2D p) {
+        Vector2D v = this.nearestPoint(p);
+        v = p.sub(v);
+        return v.len();
+    }
+
+    /**
+     * 获取 线上最近点
+     * @param p 测试点
+     * @return
+     */
+    public Vector2D nearestPoint(Vector2D p) {
+        Vector2D norm = this.n.norm();
+        double t = norm.dot(p) + this.c;
+        return p.sub(norm.scale(t));
+    }
+
+    /*
+    获取距离
+     */
+    public double distanceOfPoint(Vector2D p) {
+        Vector2D q = nearestPoint(p);
+        return q.sub(p).len();
+    }
+
+    /**
+     * 是否与给定的圆碰撞
+     * @param circle 碰撞测试圆
+     * @return 如果发生碰撞，则返回{@code true}，否则返回{@code true}
+     */
+    public boolean collideCircle(Circle circle) {
+        return circle.collisionLine(this);
+    }
+
+    /**
+     * 获取与另一条线的角度
+     * @param line 测试线
+     * @return 返回直线交叉角度
+     */
+    public double getAngle(Line line) {
+        Vector2D l1_norm = this.moveD.norm();
+        Vector2D l2_norm = line.moveD.norm();
+        return Math.acos(l1_norm.dot(l2_norm));
+    }
+
+
+    /**
+     * 获取 点到直线的 垂直距离
+     * @param v 测试点
+     * @return
+     */
+    public double getVerticalDistance(Vector2D v) {
+        double d;
+        double p = distanceOfPoint(v); //垂直投影
+        double k = moveD.y / moveD.x;
+        d = p / k;
+        return d;
     }
 
     /**

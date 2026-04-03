@@ -97,4 +97,7 @@ public class Triangle extends Convexity {
     public double getArea() {
         return super.getArea() / 2.0;
     }
+
+
+
 }

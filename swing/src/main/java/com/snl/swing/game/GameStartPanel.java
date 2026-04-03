@@ -29,10 +29,11 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
     private static final int GAME_ON = 0;
     private static final int GAME_START = 1;
     private static final int GAME_RUNNING = 2;
-    private static final int GAME_STOP = 3;
-    private static final int GAME_COMPLETED = 4;
-    private static final int GAME_FILLED = 5;
-    private static final int GAME_END = 6;
+    private static final int GAME_UP = 3;
+    private static final int GAME_STOP = 4;
+    private static final int GAME_COMPLETED = 5;
+    private static final int GAME_FILLED = 6;
+    private static final int GAME_END = 7;
     private static final int GAME_EXCEPTION = 100;
 
     private int gameState;
@@ -152,11 +153,19 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
 
         List<Part> parts = new ArrayList<>();
         TextEffect tf = new TextEffect("迷雾大陆",Utils.liShu,
-                TextEffect.SCI,Color.WHITE,0,150);
-        DitherDissolveEffect cf = new DitherDissolveEffect(150,210,4,c);
+                TextEffect.INC | TextEffect.AL | TextEffect.R | TextEffect.SCI
+                ,Color.WHITE,0,150);
+//        BackGroundEffect bc  = new BackGroundEffect(100,200,Color.WHITE,Color.GRAY);
+//        GradientEffect gradientEffect = new GradientEffect(GradientEffect.BUR | GradientEffect.SDH,
+//                Color.WHITE,Color.GRAY,160,250);
+        DitherDissolveEffect cf = new DitherDissolveEffect(260,340,4,c);
+//        TexturePaintEffect texturePaintEffect = new TexturePaintEffect(TexturePaintEffect.OD,Color.BLACK,
+//                Color.YELLOW,20,300,350);
         parts.add(tf);
+//        parts.add(gradientEffect);
         parts.add(cf);
-        scene01 = new Scene(parts,"你好","0");
+//        parts.add(texturePaintEffect);
+        scene01 = new Scene(parts,"你好","2");
 
         fillShapes();
     }
@@ -263,6 +272,7 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
     //*****************************************************************************//
     //*********************************  选择面板  **********************************//
     //*****************************************************************************//
+
     private void drawTest(Graphics2D g2) {
         g2.setColor(Color.red);
         FontRenderContext frc = g2.getFontRenderContext();
@@ -462,6 +472,7 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
             switch (gameState) {
                 case GAME_ON -> gameState = GAME_START;
                 case GAME_START -> gameState = GAME_RUNNING;
+                case GAME_RUNNING -> gameState = GAME_UP;
             }
         }
         if (source == leftRow)

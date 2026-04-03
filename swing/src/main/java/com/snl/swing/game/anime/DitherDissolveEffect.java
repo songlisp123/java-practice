@@ -11,8 +11,8 @@ public class DitherDissolveEffect implements Part {
     private BufferedImage bimg;
     private Graphics2D big;
     private List<Integer> list, xlist, ylist;
-    private int xeNum, yeNum;    // element number
-    private int xcSize, ycSize;  // chunk size
+    private int xeNum, yeNum;    // 元素数量
+    private int xcSize, ycSize;  // 块大小
     private int inc;
     private int blocksize;
 
@@ -67,7 +67,7 @@ public class DitherDissolveEffect implements Part {
             xeNum = 0;
             inc = 0;
         }
-        xeNum = xcSize * (list.get(inc)).intValue();
+        xeNum = xcSize * list.get(inc);
         yeNum = -ycSize;
         inc++;
     }
@@ -88,8 +88,8 @@ public class DitherDissolveEffect implements Part {
                  i++) {
                 for (int j = yeNum; j < yeNum + ycSize && j
                         < ylist.size(); j++) {
-                    int xval = (xlist.get(i)).intValue();
-                    int yval = (ylist.get(j)).intValue();
+                    int xval = xlist.get(i);
+                    int yval = ylist.get(j);
                     if (((xval % blocksize) == 0) && ((yval % blocksize)
                             == 0)) {
                         big.fillRect(xval, yval, blocksize, blocksize);

@@ -112,7 +112,6 @@ public class Matrix3x3f {
 
     public Point2D mul(Point2D p) {
         Vector2D v = mul(new Vector2D(p.getX(), p.getY()));
-        p = Utils.vectorCovertToPoint(v);
         return Utils.vectorCovertToPoint(v);
     }
 
@@ -197,6 +196,10 @@ public class Matrix3x3f {
         });
     }
 
+    /**
+     * 反转x轴
+     * @return x轴镜像
+     */
     public static Matrix3x3f flipXAix() {
         return new Matrix3x3f(new double[][]{
                 {1.0,.0,.0},
@@ -205,6 +208,11 @@ public class Matrix3x3f {
         });
     }
 
+    /**
+     * 逆矩阵
+     * @return 该矩阵的逆
+     * @implNote 采用的是伴随余子式
+     */
     public Matrix3x3f inverse() {
         double a  = mat[0][0];
         double b  = mat[0][1];
