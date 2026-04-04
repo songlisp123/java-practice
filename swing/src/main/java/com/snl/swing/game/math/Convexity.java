@@ -104,7 +104,7 @@ public class Convexity extends Polygon {
     public AABB getAABB() {
         AABB aabb = new AABB(new Vector2D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY),
                 new Vector2D(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY));
-        Vector2D[] v = getVertices();
+        Vector2D[] v = this.getVertices();
         for (Vector2D corner : v) {
             aabb.min.x = Math.min(corner.x,aabb.min.x);
             aabb.min.y = Math.min(corner.y,aabb.min.y);
@@ -127,13 +127,6 @@ public class Convexity extends Polygon {
         return new Circle(r,o.center);
     }
 
-    /**
-     * 移动
-     * @param delta 移动距离
-     */
-    public void move(Vector2D delta) {
-        this.offset = this.offset.add(delta);
-    }
 
     /**
      * 获取周长
@@ -177,7 +170,7 @@ public class Convexity extends Polygon {
      * 随机选择一个点
      * @param s 权重
      * @param t 权重
-     * @return
+     * @return 凸变形上的随机点
      */
     public Vector2D pickedRandomPoint(double s,double t) {
         if (s<0 || s > 1 ||
@@ -232,14 +225,14 @@ public class Convexity extends Polygon {
         return null;
     };
 
-    public static void main(String[] args) {
-        Convexity convexity = new Convexity(new Vector2D(),
-                new Vector2D(0, 2), new Vector2D(1, 5), new Vector2D(3, 0), Vector2D.originPoint);
-        Vector2D c = convexity.getCenter();
-        Vector2D averageCenter = Geometry.getAverageCenter(convexity);
-        System.out.println("averageCenter = " + averageCenter);
-
-        Vector2D areaWeightedCenter = Geometry.getAreaWeightedCenter(convexity);
-        System.out.println("areaWeightedCenter = " + areaWeightedCenter);
-    }
+//    public static void main(String[] args) {
+//        Convexity convexity = new Convexity(new Vector2D(),
+//                new Vector2D(0, 2), new Vector2D(1, 5), new Vector2D(3, 0), Vector2D.originPoint);
+//        Vector2D c = convexity.getCenter();
+//        Vector2D averageCenter = Geometry.getAverageCenter(convexity);
+//        System.out.println("averageCenter = " + averageCenter);
+//
+//        Vector2D areaWeightedCenter = Geometry.getAreaWeightedCenter(convexity);
+//        System.out.println("areaWeightedCenter = " + areaWeightedCenter);
+//    }
 }

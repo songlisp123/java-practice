@@ -253,10 +253,10 @@ public class AABB extends Convexity implements Cloneable {
     }
 
     public AABB scale(double s) {
-       return this.scale(s,s);
+       return this.scaled(s,s);
     }
 
-    private AABB scale(double sx,double sy) {
+    private AABB scaled(double sx,double sy) {
         this.min = this.min.scale(sx);
         this.max = this.max.scale(sy);
         return this;

@@ -48,6 +48,16 @@ public class Vector2D implements Cloneable {
         x = temp;
     }
 
+    public Vector2D getSheared(double sx,double sy) {
+        Vector2D v = new Vector2D();
+        double temp = x + sx * y;
+        y += sy * x;
+        x = temp;
+        v.x = x;
+        v.y = y;
+        return v;
+    }
+
     public void rotate(double rad) {
         double temp = x * Math.cos(rad) - y * Math.sin(rad);
         y = x * Math.sin(rad) + y * Math.cos(rad);

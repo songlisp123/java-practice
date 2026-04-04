@@ -252,10 +252,14 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
 
     //绘制多边形
     protected void drawPolygon(Graphics2D g2, Vector2D[] polygon) {
-        drawPolygon(g2,polygon,false);
+        drawPoly(g2,polygon,false);
     }
 
     //绘制多边形，是否是正确的？？？？？
+    protected void drawPolyGon(Graphics2D g2,Polygon polygon,boolean filling) {
+        drawPoly(g2,polygon.getVertices(),filling);
+    }
+
     protected void  drawPolygon(Graphics2D g2,Vector2D[] polygon,boolean filling) {
         if(polygon == null || polygon.length == 0)
             return;

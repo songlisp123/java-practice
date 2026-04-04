@@ -140,6 +140,7 @@ public class SegMent {
                 return PointBeyondP2;
             else
             {
+                //P 在 p1、p2区间内
                 return ONP1P2RANGE;
             }
         }
@@ -158,6 +159,7 @@ public class SegMent {
             case PointBeyondP2 -> v = this.p2;
             case ONP1P2RANGE -> {
                 //否则 p在线段 区间中
+                //这一个方法能成功，引入了一个新的线段，但是不够优雅
                 Vector2D m = p1.sub(p2).norm();
                 Line l = new Line(p2,m,Line.YINGSHI);
                 v = l.nearestPoint(p);
@@ -225,7 +227,6 @@ public class SegMent {
             //在外部，分为三种情况
             //第一种 ： 完全不相交
             double d , r;
-            Vector2D mo = p1.sub(p2).norm();
             d = this.getDistanceOfPoint(circle.getCenter());
             r = circle.r;
 

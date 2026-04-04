@@ -1,9 +1,14 @@
 package com.snl.swing.game.math;
 
+import com.snl.swing.game.utils.Geometry;
+
 public class Line {
     int mode;
     public static final int XIANSHI = 1;
     public static final int YINGSHI = 2;
+
+    public static final int OUTSIDE = 3;
+    public static final int COLLISION = 4;
 
     Vector2D pos;
     Vector2D moveD;
@@ -192,6 +197,7 @@ public class Line {
      * @return 水平线与点相交
      * @since 2026年4月3日22:41:16
      * @implNote 《图像宝石》 第一卷第一章关于 水平线的讨论
+     * @since 2026年4月3日23:45:45
      */
     public Vector2D getHPoint(Vector2D vector2D) {
          /*
@@ -214,6 +220,7 @@ public class Line {
      * @return 点 {@code v} 到 改直线的垂直距离
      * @implNote 请注意不是投影距离，而是垂直距离,
      * 《图像宝石》 第一卷第一章关于 竖直线的讨论
+     * @since 2026年4月3日23:45:37
      */
     public double getVerticalDistance(Vector2D v) {
         double d; //结果值
@@ -238,6 +245,48 @@ public class Line {
         v = this.getVerticalDistance(vector2D); //竖直距离
         h = v / m;
         return h;
+    }
+
+    /**
+     * 是否与指定的{@code segment} 相碰撞
+     * @param segMent 线段部分
+     * @return 是否碰撞
+     * @since 2026年4月3日23:45:29
+     */
+    public int collideSegment(SegMent segMent) {
+        double a,b; //符号
+        Vector2D v1,v2,norm;
+        norm = this.moveD.norm();
+        v1 = this.pos.sub(segMent.p1);
+        v2 = this.pos.sub(segMent.p2);
+//        v1 = segMent.p1.sub(this.pos);
+//        v2 = segMent.p2.sub(this.pos);
+        a = v1.dot(norm); //点积
+        b = v2.dot(norm); //点积 2
+        System.out.println("a = " + a);
+        System.out.println("b = " + b);
+        if (a * b > 0) {
+            //如果点积大于零,线段在直线一侧
+            return OUTSIDE;
+        }else {
+            //否则线段与直线相交
+            return COLLISION;
+        }
+    }
+
+    public Vector2D collideSegmentInPoint(SegMent segMent) {
+        int mode = this.collideSegment(segMent);
+        switch (mode) {
+            case OUTSIDE -> {
+                return null;
+            }
+            case COLLISION -> {
+                Vector2D mov = segMent.p1.sub(segMent.p2);
+                Line l = new Line(segMent.p1,mov,Line.XIANSHI);
+                return this.collisionPoint(l);
+            }
+        }
+        return null;
     }
 
     /**

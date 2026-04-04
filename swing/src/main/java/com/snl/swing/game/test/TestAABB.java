@@ -3,6 +3,7 @@ package com.snl.swing.game.test;
 import com.snl.swing.game.gameFrame.DiKaErPlus;
 import com.snl.swing.game.math.AABB;
 import com.snl.swing.game.math.Matrix3x3f;
+import com.snl.swing.game.math.Polygon;
 import com.snl.swing.game.math.Vector2D;
 
 import java.awt.*;
@@ -72,6 +73,9 @@ public class TestAABB extends DiKaErPlus {
         g2.setColor(Color.red);
         drawAAbb(g2,aabb2,false);
         drawCircle(g2,cp,.1,true);
+
+        Polygon sheared = aabb.getSheared(0.5, 0.5);
+        drawPolyGon(g2,sheared,false);
         g2.dispose();
     }
 

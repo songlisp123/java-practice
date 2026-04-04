@@ -1,14 +1,19 @@
 package com.snl.swing.game.math;
 
+import com.snl.swing.game.math.contract.AbstractShape;
+import com.snl.swing.game.math.contract.PointIterator;
+import com.snl.swing.game.math.contract.Wound;
 import com.snl.swing.game.utils.Geometry;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Objects;
 
-public class Polygon {
+public class Polygon extends AbstractShape implements Wound {
     //点 坐标云
     protected Vector2D[] vertices;
-    protected int size; //点数量
+    //点数量
+    protected int size;
     //偏移量
     protected Vector2D offset;
     //显示顶点
@@ -41,7 +46,7 @@ public class Polygon {
     public Polygon(Vector2D center,Vector2D offset,Vector2D...vector2DS) {
         validate(vector2DS);
         this.center = center;
-        this.offset = offset;
+        this.offset = Objects.requireNonNullElseGet(offset, Vector2D::new);
         this.size = vector2DS.length;
         this.vertices = vector2DS;
     }
@@ -101,13 +106,19 @@ public class Polygon {
         return edge;
     }
 
+    @Override
+    public Iterator<Vector2D> getVertexIterator() {
+        return new PointIterator(getVertices());
+    }
+
     /**
      * 获取点
      * @return 点集
      */
+    @Override
     public Vector2D[] getVertices() {
         Vector2D[] copy = Arrays.copyOf(vertices, size);
-        for (int i =0 ;i<size;i++) {
+        for (int i = 0 ;i<size;i++) {
             copy[i] = copy[i].add(offset);
         }
         return copy;
@@ -164,10 +175,6 @@ public class Polygon {
         return showVer;
     }
 
-    public Iterator<Vector2D> iterator() {
-        return new PointIterator();
-    }
-
     public void setShowVer(boolean showVer) {
         this.showVer = showVer;
     }
@@ -182,6 +189,14 @@ public class Polygon {
 
     /*************  几何变换 ****************/
 
+    /**
+     * 移动
+     * @param delta 移动距离
+     */
+    public void move(Vector2D delta) {
+        this.offset = this.offset.add(delta);
+    }
+
     public void translate(double x,double y) {
         offset.x += x;
         offset.y += y;
@@ -194,13 +209,23 @@ public class Polygon {
         this.translate(m.x,m.y);
     }
 
-//    public Convexity getTranslated(Vector2D m) {
-//        Vector2D off = offset.add(m);
-//        return new Convexity(off,vertices);
-//    }
+    public Polygon getTranslated(double x , double y) {
+        if (x == 0 && y == 0)
+            return this;
+        else {
+            double ox = this.offset.x + x;
+            double oy = this.offset.y + y;
+
+            double cx = this.center.x + x;
+            double cy = this.center.y + y;
+            return new Polygon(
+                    new Vector2D(cx,cy),new Vector2D(ox,oy),this.vertices
+            );
+        }
+    }
 
     public Polygon getTranslated(Vector2D m) {
-        if (m == null)
+        if (m == null || m.equals(new Vector2D()))
             return new Polygon(this);
         else {
             Vector2D offsetTranslate = this.offset.add(m);
@@ -209,23 +234,60 @@ public class Polygon {
         }
     }
 
-
-
-    public Convexity getRotateInstance(double rat,double x,double y) {
-        Vector2D v = new Vector2D(x,y);
-        return this.getRotateInstance(rat,v);
+    @Override
+    public void rotate(double rotateTheta) {
+        return;
     }
 
-    public Convexity getRotateInstance(double rat,Vector2D v) {
-        Matrix3x3f rotate = Matrix3x3f.rotate(rat);
-        Vector2D[] copy = new Vector2D[vertices.length];
-        for (int i = 0;i<copy.length;i++) {
-            copy[i] = rotate.mul(vertices[i].sub(v));
-            copy[i] = copy[i].add(v);
+    @Override
+    public void rotate(double rot, Vector2D rotateCenter) {
+        return;
+    }
+
+    @Override
+    public void rotate(double rot, double x, double y) {
+        return;
+    }
+
+    public Polygon getRotateInstance(double rot,double x,double y) {
+        //初始化
+        Vector2D c = new Vector2D();
+        //旋转矩阵
+        Matrix3x3f rotate = Matrix3x3f.rotate(rot);
+        //平移
+        c.x = x;
+        c.y = y;
+        Vector2D[] copy = new Vector2D[size];
+        for (int i = 0; i < size; ++i) {
+            copy[i] = rotate.mul(vertices[i].sub(c));
+            copy[i] = copy[i].add(c);
         }
-        return new Convexity(this.offset,copy);
+        Vector2D c2 = this.center.clone();
+        //旋转 重心
+        c2.sub(c).rotate(rot);
+        c2.x += x;
+        c2.y += y;
+        return new Polygon(c2,this.offset,copy);
     }
 
+//    public Convexity getRotateInstance(double rat,double x,double y) {
+//        Vector2D v = new Vector2D(x,y);
+//        return this.getRotateInstance(rat,v);
+//    }
+
+    public Polygon getRotateInstance(double rot,Vector2D v) {
+        return this.getRotateInstance(rot,v.x,v.y);
+    }
+
+//    public Convexity getRotateInstance(double rat,Vector2D v) {
+//        Matrix3x3f rotate = Matrix3x3f.rotate(rat);
+//        Vector2D[] copy = new Vector2D[vertices.length];
+//        for (int i = 0;i<copy.length;i++) {
+//            copy[i] = rotate.mul(vertices[i].sub(v));
+//            copy[i] = copy[i].add(v);
+//        }
+//        return new Convexity(this.offset,copy);
+//    }
 
     /**
      * 重置状态
@@ -235,63 +297,63 @@ public class Polygon {
         offset.y = 0;
     }
 
+
+//    public Convexity getScaled(double sx, double sy) {
+//        Matrix3x3f scaled = Matrix3x3f.scale(sx, sy);
+//        Vector2D[] copy = Arrays.copyOf(vertices, size);
+//        for (int i = 0;i<copy.length;i++)
+//            copy[i] = scaled.mul(copy[i]);
+//        return new Convexity(this.offset,copy);
+//    }
+
+    @Override
+    public void scale(double scale) {
+        this.scale(scale,scale);
+    }
+
+    @Override
+    public void scale(double sx, double sy) {
+        for (int i = 0;i<vertices.length;i++)
+            vertices[i] = vertices[i].scale(sx,sy);
+    }
+
     /**
-     * 获取缩放凸边形
+     * 获取缩放多边形
      * @param sx 沿x轴缩放凸边形
      * @param sy 沿y轴缩放凸边形
      * @return 缩放后的凸边形
+     * @since 2026年4月4日11:31:25
      */
-    public Convexity getScaled(double sx, double sy) {
-        Matrix3x3f scaled = Matrix3x3f.scale(sx, sy);
-        Vector2D[] copy = Arrays.copyOf(vertices, size);
+    public Polygon getScaled(double sx,double sy) {
+        if (sx == 1 && sy == 1)
+            return this;
+        Vector2D[] copy = new Vector2D[size];
         for (int i = 0;i<copy.length;i++)
-            copy[i] = scaled.mul(copy[i]);
-        return new Convexity(this.offset,copy);
+            copy[i] = vertices[i].scale(sx,sy);
+        //缩放重心
+        Vector2D scale = this.center.scale(sx, sy);
+        return new Polygon(scale,this.offset,copy);
     }
 
+    @Override
     public void shear(double sx,double sy) {
         Matrix3x3f shear = Matrix3x3f.shear(sx, sy);
         for (int i = 0;i<vertices.length;i++)
             vertices[i] = shear.mul(vertices[i]);
     }
 
-    public Convexity getSheared(double sx,double sy) {
+    public Polygon getSheared(double sx,double sy) {
         Matrix3x3f shear = Matrix3x3f.shear(sx, sy);
-        Vector2D[] copy = Arrays.copyOf(vertices, size);
-        for (int i = 0;i<copy.length;i++)
-            copy[i] = shear.mul(copy[i]);
-        return new Convexity(this.offset,copy);
+        Vector2D[] copy = new Vector2D[size];
+        for (int i = 0;i<copy.length;i++) {
+            copy[i] = shear.mul(vertices[i]);
+        }
+        return new Polygon(this.center,this.offset,copy);
     }
 
-    /**
-     * 点 迭代器,保留的是副本
-     * @since 2026年4月2日20:39:19
-     */
-    class PointIterator implements Iterator<Vector2D> {
-
-        private  Vector2D[] copy;
-        private int index;
-
-        public PointIterator() {
-            copy = new Vector2D[size];
-            System.arraycopy(vertices,0,copy,0,size);
-            index = -1;
-        }
-
-        public PointIterator(int offset) {
-            copy = new Vector2D[size + offset];
-            System.arraycopy(vertices,0,copy,offset,size);
-            index = -1; //从索引 -1 开始
-        }
-
-        @Override
-        public boolean hasNext() {
-            return index < size - 1;
-        }
-
-        @Override
-        public Vector2D next() {
-            return copy[++index];
-        }
+    public void setVertices(Vector2D[] vertices) {
+        validate(vertices);
+        this.vertices = vertices;
     }
+
 }

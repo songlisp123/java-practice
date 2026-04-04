@@ -3,6 +3,7 @@ package com.snl.swing.game.test;
 import com.snl.swing.game.gameFrame.DiKaErPlus;
 import com.snl.swing.game.math.Line;
 import com.snl.swing.game.math.Matrix3x3f;
+import com.snl.swing.game.math.SegMent;
 import com.snl.swing.game.math.Vector2D;
 
 import java.awt.*;
@@ -18,6 +19,8 @@ public class TestLine extends DiKaErPlus {
     Vector2D n1,n2;
     double dn1,dn2;
 
+    SegMent segMent;
+
     @Override
     protected void gameInitial() {
         super.gameInitial();
@@ -31,6 +34,10 @@ public class TestLine extends DiKaErPlus {
 
         double angle = line.getAngle(l2);
         System.out.println("angle = " + angle);
+
+        segMent = new SegMent();
+        segMent.p1 = new Vector2D(1,1);
+        segMent.p2 = new Vector2D(-2,3);
     }
 
     @Override
@@ -91,6 +98,11 @@ public class TestLine extends DiKaErPlus {
 
         drawCircle(g2,hPoint,0.10,false);
         drawCircle(g2,verticalPoint,0.10,false);
+        drawLine(g2,segMent.p1,segMent.p2);
+        Vector2D vector2D = line.collideSegmentInPoint(segMent);
+        if (vector2D != null)
+            drawCircle(g2,vector2D,0.10,true);
+        System.out.println("vector2D = " + vector2D);
         Stroke stroke = g2.getStroke();
         g2.setStroke(
                 new BasicStroke(2,BasicStroke.CAP_ROUND,BasicStroke.JOIN_MITER,1,

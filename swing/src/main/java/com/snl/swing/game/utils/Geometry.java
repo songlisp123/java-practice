@@ -120,5 +120,7 @@ public class Geometry {
         return getAreaWeightedCenter(collection.toArray(Vector2D[]::new));
     }
 
-
+    public static  boolean CheckSign(double a,double b) {
+        return a * b > 0;
+    }
 }
