@@ -23,7 +23,7 @@ public class Geometry {
     public static  Vector2D getAverageCenter(Convexity convexity) {
         Vector2D temp = new Vector2D();
         Vector2D center = new Vector2D();
-        Iterator<Vector2D> iterator = convexity.iterator();
+        Iterator<Vector2D> iterator = convexity.getVertexIterator();
         while (iterator.hasNext()) {
             Vector2D v2 = iterator.next();
             temp = temp.add(v2);

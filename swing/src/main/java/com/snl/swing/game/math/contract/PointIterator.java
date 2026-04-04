@@ -15,7 +15,8 @@ public class PointIterator implements Iterator<Vector2D> {
     private int index;
 
     public PointIterator(Vector2D[] vector2DS) {
-        this.vector2DS = vector2DS;
+        this.vector2DS = new Vector2D[vector2DS.length];
+        System.arraycopy(vector2DS,0,this.vector2DS,0,vector2DS.length);
         this.index = -1;
     }
 

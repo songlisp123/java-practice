@@ -19,9 +19,20 @@ public class TestPolyGon extends DiKaErPlus {
             {0.2,0.2,1.0,1.0},
     };
 
+    double[][] scaleF = {
+            {0.2,0.2,1.0,1.0},
+            {-0.2,0,-1.0,1.0},
+            {0.0,-0.2,-1.0,-1.0},
+            {0.2,0.2,1.0,1.0},
+    };
+
     double shearX,shearY;
-    int shearIndex;
+    int shearIndex,scaleIndex;
     boolean shearing;
+
+    double scaleX ,scaleY;
+
+    double rot,theta;
 
     @Override
     protected void gameInitial() {
@@ -35,6 +46,8 @@ public class TestPolyGon extends DiKaErPlus {
         });
         polygon.shear(0.5,0.5);
         shearing = true;
+
+        theta = Math.PI / 3;
     }
 
     @Override
@@ -54,7 +67,7 @@ public class TestPolyGon extends DiKaErPlus {
         pMoving = pMoving && drag;
         if (pMoving) {
             //如果移动点
-            Matrix3x3f re = getReverseScaleViewPortMat();
+            Matrix3x3f re = this.getReverseScaleViewPortMat();
             Vector2D d = re.mul(mouseDelta);
             polygon.translate(d);
         }
@@ -69,7 +82,19 @@ public class TestPolyGon extends DiKaErPlus {
                 shearIndex = 0;
             }
         }
-        //剪切
+        //缩放
+        scaleX += scaleF[scaleIndex][0] * delta;
+        scaleY += scaleF[scaleIndex][1] * delta;
+        if (scaleX < -1.0F || scaleX > 1.0f || scaleY < -1.0F || scaleY > 1.0F)
+        {
+            scaleX = scaleF[scaleIndex][2];
+            scaleY = scaleF[scaleIndex][3];
+            if (scaleIndex++ == scaleF.length - 1)
+            {
+                scaleIndex = 0;
+            }
+        }
+        rot += theta * delta;
         clicking = false;
     }
 
@@ -80,10 +105,12 @@ public class TestPolyGon extends DiKaErPlus {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         super.draw(g);
         g2.setColor(Color.WHITE);
-        g2.drawString("dn1="+shearX,30,150);
-        g2.drawString("dn2="+shearY,30,170);
+        g2.drawString("shearX="+shearX,30,150);
+        g2.drawString("shearY="+shearY,30,170);
+        g2.drawString("scaleX="+scaleX,30,190);
+        g2.drawString("scaleY="+scaleY,30,210);
+        g2.drawString("旋转角度="+rot,30,230);
         drawPolyGon(g2,polygon,false);
-
 //        Vector2D center = polygon.getCenter();
 //        drawCircle(g2,center,0.10,true);
 //
@@ -96,7 +123,9 @@ public class TestPolyGon extends DiKaErPlus {
 //
 //        Polygon scaled = translated.getScaled(2, 2);
 //        drawPolyGon(g2,scaled,false);
-        sheared = polygon.getSheared(shearX, shearY);
+        sheared = polygon.getSheared(shearX, shearY); //剪切
+        sheared.scale(scaleX,shearY); //缩放
+        sheared.rotate(rot); //旋转
         drawPolyGon(g2,sheared,false);
     }
 

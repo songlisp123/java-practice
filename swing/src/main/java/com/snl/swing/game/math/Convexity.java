@@ -2,9 +2,6 @@ package com.snl.swing.game.math;
 
 import com.snl.swing.game.utils.Geometry;
 
-import java.util.Arrays;
-import java.util.Iterator;
-
 public class Convexity extends Polygon {
 
     public Convexity() {}
@@ -77,7 +74,17 @@ public class Convexity extends Polygon {
      * @implNote 该程序由分离轴定理实现
      */
     public boolean collideOtherConvexity(Convexity convexity) {
-        Vector2D[] axis = this.getAxis();
+        AABB aabb = this.getAABB();
+        AABB aabb02 = convexity.getAABB();
+
+        if (!aabb.collisionAABB(aabb02))
+            return false;
+        //否则，使用分离轴思想
+        /*
+        分离轴的思想是：如果存在一条能分离两多边形的直线，那么
+        这两个多边形不会相交
+         */
+        Vector2D[] axis = this.getAxes();
         Range range,range1;
         for (Vector2D a : axis)
         {
@@ -86,7 +93,7 @@ public class Convexity extends Polygon {
             if (!range.overlapping(range1))
                 return false;
         }
-        axis = convexity.getAxis();
+        axis = convexity.getAxes();
         for (Vector2D a : axis)
         {
              range = this.projectionOntoVector(a);
@@ -125,45 +132,6 @@ public class Convexity extends Polygon {
         OrientedRectangle o = new OrientedRectangle(ct,hf,0);
         double r = o.halfExtend.len();
         return new Circle(r,o.center);
-    }
-
-
-    /**
-     * 获取周长
-     * @return 多边形周长
-     */
-    public double getPerimeter() {
-        double r = 0;
-        Vector2D p = vertices[size - 1];
-        for (Vector2D vertex : vertices) {
-            Vector2D d = p.sub(vertex);
-            r += d.len();
-            p = vertex;
-        }
-        return r;
-    }
-
-    /**
-     * 获取面积
-     * @return 改凸变形的面积
-     */
-    /*
-    我们使用一个常用的公式：
-    ||
-     */
-    public double getArea() {
-        Vector2D v0 = vertices[0];
-        double area = 0;
-        for (int i = 0;i<size-2;i++) {
-            Vector2D v1 = vertices[i + 1].sub(v0);
-            v1.w = 0;
-            Vector2D v2 = vertices[i + 2].sub(v0);
-            v2.w = 0;
-            Vector2D c = v1.crossDot(v2);
-            area += c.v3len() / 2.0;
-        }
-        return area;
-//        return Math.abs(this.area / 2.0);
     }
 
     /**
@@ -224,8 +192,7 @@ public class Convexity extends Polygon {
         //TODO
         return null;
     };
-
-//    public static void main(String[] args) {
+    //    public static void main(String[] args) {
 //        Convexity convexity = new Convexity(new Vector2D(),
 //                new Vector2D(0, 2), new Vector2D(1, 5), new Vector2D(3, 0), Vector2D.originPoint);
 //        Vector2D c = convexity.getCenter();

@@ -252,19 +252,34 @@ public class AABB extends Convexity implements Cloneable {
         return this.clone().extend(ex);
     }
 
-    public AABB scale(double s) {
+    public AABB scaled(double s) {
        return this.scaled(s,s);
     }
 
-    private AABB scaled(double sx,double sy) {
+    @Override
+    public void scale(double sx, double sy) {
+        this.min = this.min.scale(sx);
+        this.max = this.max.scale(sy);
+    }
+
+    private AABB scaled(double sx, double sy) {
         this.min = this.min.scale(sx);
         this.max = this.max.scale(sy);
         return this;
     }
 
     public AABB getScaled(double s) {
-        return this.clone().scale(s);
+        return this.clone().scaled(s);
     }
+
+    @Override
+    public double getPerimeter() {
+        double w = this.max.x - this.min.x;
+        double h = this.max.y - this.min.x;
+        return 2 * (w + h);
+    }
+
+
 
     //**********************************************************************//
     /* ******************          get/set         *********************** */

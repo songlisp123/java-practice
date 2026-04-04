@@ -1,6 +1,7 @@
 package com.snl.swing.game.math;
 
 import com.snl.swing.game.math.contract.AbstractShape;
+import com.snl.swing.game.math.contract.Convex;
 import com.snl.swing.game.math.contract.PointIterator;
 import com.snl.swing.game.math.contract.Wound;
 import com.snl.swing.game.utils.Geometry;
@@ -9,7 +10,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class Polygon extends AbstractShape implements Wound {
+public class Polygon extends AbstractShape implements Wound , Convex {
     //点 坐标云
     protected Vector2D[] vertices;
     //点数量
@@ -32,6 +33,7 @@ public class Polygon extends AbstractShape implements Wound {
         this.size = this.vertices.length;
         this.offset = new Vector2D();
         this.center = Geometry.getAverageCenter(this.vertices);
+        this.area = this.getArea();
     }
 
     public Polygon(Polygon polygon) {
@@ -65,33 +67,6 @@ public class Polygon extends AbstractShape implements Wound {
     }
 
     /**
-     * 获取全部的边
-     * @return 边集合
-     */
-    public SegMent[] getAllEdge() {
-        SegMent[] segMents = new SegMent[size];
-        for (int i=0;i< segMents.length;i++) {
-            segMents[i] = getEdge(i);
-        }
-        return segMents;
-    }
-
-    /**
-     * 获取投影轴
-     * @return 投影轴集合
-     */
-    public Vector2D[] getAxis() {
-        SegMent[] edges = getAllEdge();
-        Vector2D[] axis = new Vector2D[size];
-        for (int i = 0;i<axis.length;i++) {
-            SegMent edge = edges[i];
-            Vector2D prep = edge.p2.sub(edge.p1).prep();
-            axis[i] = prep;
-        }
-        return axis;
-    }
-
-    /**
      * 获取边
      * @param n 第n条边
      * @return 边
@@ -117,9 +92,9 @@ public class Polygon extends AbstractShape implements Wound {
      */
     @Override
     public Vector2D[] getVertices() {
-        Vector2D[] copy = Arrays.copyOf(vertices, size);
+        Vector2D[] copy = new Vector2D[size];
         for (int i = 0 ;i<size;i++) {
-            copy[i] = copy[i].add(offset);
+            copy[i] = vertices[i].add(offset);
         }
         return copy;
     }
@@ -194,7 +169,9 @@ public class Polygon extends AbstractShape implements Wound {
      * @param delta 移动距离
      */
     public void move(Vector2D delta) {
+        //更新 偏移量 + 重心
         this.offset = this.offset.add(delta);
+        this.center = this.center.add(delta);
     }
 
     public void translate(double x,double y) {
@@ -236,7 +213,10 @@ public class Polygon extends AbstractShape implements Wound {
 
     @Override
     public void rotate(double rotateTheta) {
-        return;
+        Matrix3x3f rotate = Matrix3x3f.rotate(rotateTheta);
+        for (int i = 0;i<size;i++)
+            vertices[i] = rotate.mul(vertices[i]);
+        //缩放重心
     }
 
     @Override
@@ -297,15 +277,6 @@ public class Polygon extends AbstractShape implements Wound {
         offset.y = 0;
     }
 
-
-//    public Convexity getScaled(double sx, double sy) {
-//        Matrix3x3f scaled = Matrix3x3f.scale(sx, sy);
-//        Vector2D[] copy = Arrays.copyOf(vertices, size);
-//        for (int i = 0;i<copy.length;i++)
-//            copy[i] = scaled.mul(copy[i]);
-//        return new Convexity(this.offset,copy);
-//    }
-
     @Override
     public void scale(double scale) {
         this.scale(scale,scale);
@@ -356,4 +327,71 @@ public class Polygon extends AbstractShape implements Wound {
         this.vertices = vertices;
     }
 
+    /**
+     * 获取周长
+     * @return 多边形周长
+     */
+    public double getPerimeter() {
+        double r = 0;
+        Vector2D p = vertices[size - 1];
+        for (Vector2D vertex : vertices) {
+            Vector2D d = p.sub(vertex);
+            r += d.len();
+            p = vertex;
+        }
+        return r;
+    }
+
+    /**
+     * 获取面积
+     * @return 改凸变形的面积
+     */
+    public double getArea() {
+        Vector2D v0 = vertices[0];
+        double area = 0;
+        for (int i = 0;i<size-2;i++) {
+            Vector2D v1 = vertices[i + 1].sub(v0);
+            Vector2D v2 = vertices[i + 2].sub(v0);
+            double c = v1.cross2D(v2); //有向三角形面积的两倍
+            area += Math.abs(c / 2.0);
+        }
+        return area;
+    }
+
+    @Override
+    public Vector2D[] getAxes() {
+        SegMent[] edges = this.getEdge();
+        Vector2D[] axis = new Vector2D[size];
+        for (int i = 0;i<axis.length;i++) {
+            SegMent edge = edges[i];
+            Vector2D prep = edge.p2.sub(edge.p1).prep();
+            axis[i] = prep;
+        }
+        return axis;
+    }
+
+    @Override
+    public SegMent[] getEdge() {
+        SegMent[] segMents = new SegMent[size];
+        for (int i=0;i< segMents.length;i++) {
+            segMents[i] = getEdge(i);
+        }
+        return segMents;
+    }
+
+    public static void main(String[] args) {
+        Polygon polygon = new Polygon(
+                new Vector2D[]{new Vector2D(0, 2), new Vector2D(2, 0),
+                        new Vector2D(0, -2), new Vector2D(-2, 0)}
+        );
+        double area1 = polygon.getArea();
+        System.out.println("area1 = " + area1);
+
+        Iterator<Vector2D> it = polygon.getVertexIterator();
+        while (it.hasNext())
+        {
+            Vector2D next = it.next();
+            System.out.println("next = " + next);
+        }
+    }
 }
