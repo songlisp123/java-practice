@@ -35,6 +35,7 @@ public class Sampler extends JFrame {
     }
 
     private void createConvolutions() {
+        //模糊效果
         float ninth = 1.0f / 9.0f;
         float[] blurKernel = {
                 ninth, ninth, ninth,
@@ -44,6 +45,7 @@ public class Sampler extends JFrame {
         mOps.put("Blur", new ConvolveOp(
                 new Kernel(3, 3, blurKernel),
                 ConvolveOp.EDGE_NO_OP, null));
+        //边缘检测
         float[] edge = {
                 0f, -1f, 0f,
                 -1f, 4f, -1f,
@@ -52,6 +54,7 @@ public class Sampler extends JFrame {
         mOps.put("Edge detector", new ConvolveOp(
                 new Kernel(3, 3, edge),
                 ConvolveOp.EDGE_ZERO_FILL, null));
+        //锐化操作
         float[] sharp = {
                 0f, -1f, 0f,
                 -1f, 5F, -1f,
@@ -59,22 +62,45 @@ public class Sampler extends JFrame {
         };
         mOps.put("Sharpen", new ConvolveOp(
                 new Kernel(3, 3, sharp)));
+
+        //压花操作
+        float[] embossing = {
+                -2,0,0,
+                0,1,0,
+                0,0,2
+        };
+        mOps.put("emboss",new ConvolveOp(new Kernel(3,3,embossing)));
     }
 
+    /*
+    仿射变换
+     */
     private void createTransformations() {
         AffineTransform at;
-        at = AffineTransform.getRotateInstance(Math.PI / 6, 0, 285);
+        //最近邻旋转算法
+        at = AffineTransform.getRotateInstance(Math.PI / 6, 0, 0);
         mOps.put("Rotate nearest neighbor", new AffineTransformOp(at, null));
         RenderingHints rh = new RenderingHints(
                 RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         mOps.put("Rotate bilinear", new AffineTransformOp(at, rh));
+        //缩小0.5倍
         at = AffineTransform.getScaleInstance(.5, .5);
         mOps.put("Scale .5, .5", new AffineTransformOp(at, null));
+        //放大两倍
+        at = AffineTransform.getScaleInstance(2.0,2.0);
+        mOps.put("scale 2",new AffineTransformOp(at,rh));
+        //按原点旋转
         at = AffineTransform.getRotateInstance(Math.PI / 6);
         mOps.put("Rotate bilinear (origin)", new AffineTransformOp(at, rh));
+        //剪切
+        at = AffineTransform.getShearInstance(0,0.75);
+        mOps.put("shear 0.75" ,new AffineTransformOp(at,rh));
     }
 
+    /*
+    查找表
+     */
     private void createLookups() {
         short[] brighten = new short[256];
         short[] betterBrighten = new short[256];
@@ -85,7 +111,8 @@ public class Sampler extends JFrame {
         for (int i = 0; i < 256; i++) {
             brighten[i] = (short)(128 + i / 2);
             betterBrighten[i] = (short)(Math.sqrt((double)i / 255.0) * 255.0);
-            posterize[i] = (short)(i - (i % 32));
+//            posterize[i] = (short)(i - (i % 32));
+            posterize[i] = (short)(i - (i % 16));
             invert[i] = (short)(255 - i);
             straight[i] = (short)i;
             zero[i] = (short)0;
@@ -117,6 +144,9 @@ public class Sampler extends JFrame {
                 new ShortLookupTable(0, blueRemove), null));
     }
 
+    /*
+    创建缩放
+     */
     private void createRescales() {
         mOps.put("Rescale .5, 0", new RescaleOp(.5f, 0, null));
         mOps.put("Rescale .5, 64", new RescaleOp(.5f, 64, null));
@@ -124,6 +154,9 @@ public class Sampler extends JFrame {
         mOps.put("Rescale 1.5, 0", new RescaleOp(1.5f, 0, null));
     }
 
+    /*
+    颜色操作
+     */
     private void createColorOps() {
         mOps.put("Grayscale", new ColorConvertOp(
                 ColorSpace.getInstance(ColorSpace.CS_GRAY), null));
@@ -133,7 +166,6 @@ public class Sampler extends JFrame {
     }
 
     private void createImageFrame(String imageFile) {
-// Create the image frame.
         mSplitImageComponent = new SplitImageComponent(imageFile);
         mImageFrame = new JFrame(imageFile);
         mImageFrame.setLayout(new BorderLayout());
@@ -146,13 +178,11 @@ public class Sampler extends JFrame {
     private void createUI() {
         setFont(new Font("Serif", Font.PLAIN, 12));
         setLayout(new BorderLayout());
-// Set our location to the left of the image frame.
         setSize(200, 350);
         Point pt = mImageFrame.getLocation();
         setLocation(pt.x - getSize().width, pt.y);
         final Checkbox accumulateCheckbox = new Checkbox("Accumulate", false);
         final Label statusLabel = new Label("");
-// Make a sorted list of the operators.
         Enumeration e = mOps.keys();
         Vector names = new Vector();
         while (e.hasMoreElements())
@@ -162,7 +192,7 @@ public class Sampler extends JFrame {
         for (int i = 0; i < names.size(); i++)
             list.add((String) names.elementAt(i));
         add(list, BorderLayout.CENTER);
-// When an item is selected, do the corresponding transformation.
+
         list.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent ie) {
                 if (ie.getStateChange() != ItemEvent.SELECTED) return;
