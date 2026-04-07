@@ -45,7 +45,7 @@ public class Line {
         Vector2D p = pos.sub(l.pos);
         double d = p.dot(l1);
         if (Math.abs(dot) == 0 && d == 0)
-            return false;
+            return true;
         return Math.abs(dot) != 0; //包括反向
     }
 
@@ -134,15 +134,6 @@ public class Line {
     public double distanceOfPoint(Vector2D p) {
         Vector2D q = this.nearestPoint(p);
         return q.sub(p).len();
-    }
-
-    /**
-     * 是否与给定的圆碰撞
-     * @param circle 碰撞测试圆
-     * @return 如果发生碰撞，则返回{@code true}，否则返回{@code true}
-     */
-    public boolean collideCircle(Circle circle) {
-        return circle.collisionLine(this);
     }
 
     /**
@@ -254,24 +245,45 @@ public class Line {
      * @since 2026年4月3日23:45:29
      */
     public int collideSegment(SegMent segMent) {
-        double a,b; //符号
-        Vector2D v1,v2,norm;
-        norm = this.moveD.norm();
-        v1 = this.pos.sub(segMent.p1);
-        v2 = this.pos.sub(segMent.p2);
+//        double a,b; //符号
+//        Vector2D v1,v2,norm;
+//        norm = this.moveD.norm();
+//        v1 = this.pos.sub(segMent.p1);
+//        v2 = this.pos.sub(segMent.p2);
 //        v1 = segMent.p1.sub(this.pos);
 //        v2 = segMent.p2.sub(this.pos);
-        a = v1.dot(norm); //点积
-        b = v2.dot(norm); //点积 2
-        System.out.println("a = " + a);
-        System.out.println("b = " + b);
-        if (a * b > 0) {
-            //如果点积大于零,线段在直线一侧
+//        a = v1.dot(norm); //点积
+//        b = v2.dot(norm); //点积 2
+//        System.out.println("a = " + a);
+//        System.out.println("b = " + b);
+//        if (a * b > 0) {
+//            //如果点积大于零,线段在直线一侧
+//            return OUTSIDE;
+//        }else {
+//            //否则线段与直线相交
+//            return COLLISION;
+//        }
+        Vector2D A = segMent.p1;
+        Vector2D B = segMent.p2;
+
+        // 直线法向量
+        Vector2D n = this.moveD.prep().norm();
+
+        double d1 = A.sub(this.pos).dot(n);
+        double d2 = B.sub(this.pos).dot(n);
+
+        // 同侧
+        if (d1 * d2 > 0) {
             return OUTSIDE;
-        }else {
-            //否则线段与直线相交
-            return COLLISION;
         }
+
+        // 平行情况（避免除0）
+        double denom = this.moveD.prep().dot(B.sub(A));
+        if (Math.abs(denom) < Epsilon.PRECISION) {
+            return OUTSIDE;
+        }
+
+        return COLLISION;
     }
 
     public Vector2D collideSegmentInPoint(SegMent segMent) {
@@ -287,6 +299,11 @@ public class Line {
             }
         }
         return null;
+    }
+
+    public boolean collideSegmentBoolean(SegMent segMent) {
+        int mode = this.collideSegment(segMent);
+        return mode == COLLISION;
     }
 
     /**

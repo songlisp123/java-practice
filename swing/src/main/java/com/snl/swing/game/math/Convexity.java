@@ -132,6 +132,7 @@ public class Convexity extends Polygon {
         OrientedRectangle o = new OrientedRectangle(ct,hf,0);
         double r = o.halfExtend.len();
         return new Circle(r,o.center);
+        //TODO 有更好地算法
     }
 
     /**
@@ -177,21 +178,6 @@ public class Convexity extends Polygon {
         return r;
     }
 
-    /*
-    获取 离 p 点最近的凸边形点
-     */
-    public Vector2D getNearestPoint(Vector2D p) {
-        //TODO
-        return null;
-    }
-
-    /*
-    获取 离 p 点 最远的凸变形点
-     */
-    public Vector2D getFarthestPoint(Vector2D var1) {
-        //TODO
-        return null;
-    };
     //    public static void main(String[] args) {
 //        Convexity convexity = new Convexity(new Vector2D(),
 //                new Vector2D(0, 2), new Vector2D(1, 5), new Vector2D(3, 0), Vector2D.originPoint);

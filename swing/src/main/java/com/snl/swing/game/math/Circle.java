@@ -52,35 +52,41 @@ public class Circle {
         Vector2D v = null;
         switch (i) {
             case OUTSIDE -> {
-                Vector2D d = p.sub(this.center.add(offset)).norm();
-                v = this.center.add(offset).add(d.scale(r));
+                Vector2D c1 = getCenter();
+                Vector2D d = p.sub(c1).norm();
+                v = c1.add(d.scale(r));
             }
             case INSIDE -> {
-                Vector2D base = this.center.add(offset);
+                Vector2D base = getCenter();
                 //获取方向向量的归一化
                 Vector2D direct = p.sub(base).norm();
-                Line line = new Line(base,direct,Line.YINGSHI);
-                Vector2D[] cts = this.collidePointInLine(line);
-                if (p.x > this.center.x) {
-                    //在右半圆
-                    for (Vector2D vector2D : cts) {
-                        if (vector2D.x > p.x)
-                            v = vector2D;
-                    }
-                }
-                if (p.x < this.center.x) {
-                    //在左半圆
-                    for (Vector2D vector2D : cts) {
-                        if (vector2D.x < p.x)
-                            v = vector2D;
-                    }
-                }
+                //可以优化
+                Vector2D point = base.add(direct.scale(r));
+                return point;
+
+//                Line line = new Line(base,direct,Line.YINGSHI);
+//                Vector2D[] cts = this.collidePointInLine(line);
+//                if (p.x > this.center.x) {
+//                    //在右半圆
+//                    for (Vector2D vector2D : cts) {
+//                        if (vector2D.x > p.x)
+//                            v = vector2D;
+//                    }
+//                }
+//                if (p.x < this.center.x) {
+//                    //在左半圆
+//                    for (Vector2D vector2D : cts) {
+//                        if (vector2D.x < p.x)
+//                            v = vector2D;
+//                    }
+//                }
             }
 
             case ONCIRCLE -> v = p;
             case CHONGHE -> {
                 //重合的情况下，取任意点
-                v = new Vector2D(this.center.x + r,this.center.y);
+                Vector2D c1 = getCenter();
+                v = new Vector2D(c1.x + r,c1.y);
             }
             case -1 -> throw new IllegalArgumentException("暂未找到该点");
         }
@@ -98,30 +104,31 @@ public class Circle {
     public Vector2D getFarthestPoint(Vector2D p) {
         Vector2D v = null;
         int mode = containsPoint(p);
+        Vector2D c1 = getCenter();
         switch (mode) {
             case CHONGHE -> {
                 //与 圆心 重合
-                v = new Vector2D(this.center.x + r,this.center.y);
+                v = new Vector2D(c1.x + r,c1.y);
             }
             case ONCIRCLE,OUTSIDE -> {
                 // 在圆上或者 圆外
-                Vector2D c1 = this.getCenter();
-                Vector2D m = p.sub(c1).norm(); //向量
+                Vector2D m = p.sub(c1).norm(); //向量r
                 v = c1.sub(m.scale(this.r));
             }
             case INSIDE -> {
                 //在内部
-                Vector2D c1 = this.getCenter();
                 Vector2D m = p.sub(c1).norm(); //向量
-                Line l = new Line(c1,m,Line.YINGSHI);
-                //测试交点
-                Vector2D[] vs = this.collidePointInLine(l);
-                for (Vector2D v2d : vs) {
-                    Vector2D c = p.sub(v2d).norm(); //归一化向量
-                    double dot = c.dot(m);
-                    if (dot < 0)
-                        return v2d;
-                }
+                return c1.sub(m.scale(r));
+//                Line l = new Line(c1,m,Line.YINGSHI);
+//                //测试交点
+//                Vector2D[] vs = this.collidePointInLine(l);
+//                for (Vector2D v2d : vs) {
+//                    Vector2D c = p.sub(v2d).norm(); //归一化向量
+//                    double dot = c.dot(m);
+//                    if (dot < 0)
+//                        return v2d;
+//                }
+//            }
             }
         }
         return v;
@@ -135,13 +142,14 @@ public class Circle {
     public int containsPoint(Vector2D p) {
         double lenSqr = p.sub(this.center.add(offset)).lenSqr();
         double rd = Math.pow(r,2);
-        if (lenSqr - rd < Epsilon.E) {
+        double diff = lenSqr - rd;
+        if (diff < 0) {
             //点在圆内
             return INSIDE;
-        } else if (lenSqr - rd > Epsilon.E) {
+        } else if (diff > 0) {
             //点在圆外
             return OUTSIDE;
-        }else if (lenSqr - rd == Math.floor(Epsilon.E)) {
+        }else if (Math.abs(diff) < Epsilon.PRECISION) {
             //点在圆上
             return ONCIRCLE;
         } else if (lenSqr <= Epsilon.E) {
@@ -183,6 +191,8 @@ public class Circle {
         double b = 2 * line.moveD.dot(D);
         double c = D.lenSqr() - this.r * this.r;
         double d = b * b - 4 * a * c;
+        if (d < 0) return null; //无交点
+        d = Math.max(0,d);
         double sqrtD = Math.sqrt(d);
         switch (mode) {
             case OUTSIDE_LINE -> {
@@ -210,16 +220,17 @@ public class Circle {
      * @param line 测试相交线
      */
     private int collideLine(Line line) {
-        double d = line.distanceOfPoint(this.getCenter());
-        if (d - r > Epsilon.E) {
+        double d = line.distanceOfPoint(getCenter());
+        double diff = d - r;
+        if (diff > Epsilon.PRECISION) {
             //无交点
             return OUTSIDE_LINE;
-        } else if (d - r < Epsilon.E) {
-            //相交，两交点
-            return COLLIDE_LINE;
+        } else if (Math.abs(diff) < Epsilon.E) {
+            //相切，一交点
+            return Q_LINE;
         }
-        //相切，一交点
-        return Q_LINE;
+        //相交，两交点
+        return COLLIDE_LINE;
     }
 
     /**
@@ -278,7 +289,8 @@ public class Circle {
     }
 
     public void reset() {
-        this.offset = new Vector2D();
+        this.offset.x = 0;
+        this.offset.y = 0;
     }
 
     /**
@@ -451,14 +463,13 @@ public class Circle {
 
     public Circle getScaled(double scale) {
         double s = this.r * scale;
-        return new Circle(s,this.center.add(this.offset));
+        return new Circle(s,getCenter());
     }
 
     //平移
     public void translated(double tx,double ty) {
-        double xt = this.offset.x + tx;
-        double yt = this.offset.y + ty;
-        this.offset = new Vector2D(xt,yt);
+        offset.x += tx;
+        offset.y += ty;
     }
 
     public void translated(Vector2D moved) {
@@ -469,12 +480,11 @@ public class Circle {
         double xt = this.offset.x + x;
         double yt = this.offset.y + y;
         Vector2D moved = new Vector2D(xt,yt);
-        return new Circle(this.r,this.center.add(moved));
+        return new Circle(this.r,getCenter().add(moved));
     }
 
     public Circle getTranslated(Vector2D p) {
-        Vector2D moved = this.offset.add(p);
-        return new Circle(this.r,this.center.add(moved));
+        return getTranslated(p.x,p.y);
     }
 
     //旋转

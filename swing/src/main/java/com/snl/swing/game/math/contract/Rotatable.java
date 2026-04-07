@@ -1,5 +1,6 @@
 package com.snl.swing.game.math.contract;
 
+import com.snl.swing.game.math.Polygon;
 import com.snl.swing.game.math.Vector2D;
 
 public interface Rotatable {
@@ -9,6 +10,8 @@ public interface Rotatable {
      * @param rotateTheta 旋转角度
      */
     void rotate(double rotateTheta);
+
+    <T extends Polygon> T rotateWithTheta(double rotateTheta);
 
     /**
      * 以{@code rotateCenter} 为中心 旋转

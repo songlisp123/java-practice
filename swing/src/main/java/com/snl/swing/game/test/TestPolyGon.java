@@ -1,16 +1,18 @@
 package com.snl.swing.game.test;
 
 import com.snl.swing.game.gameFrame.DiKaErPlus;
+import com.snl.swing.game.math.Line;
 import com.snl.swing.game.math.Matrix3x3f;
 import com.snl.swing.game.math.Polygon;
 import com.snl.swing.game.math.Vector2D;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.Collection;
 
 public class TestPolyGon extends DiKaErPlus {
 
-    Polygon polygon,sheared;
+    Polygon polygon,sheared,copy;
     boolean pMoving,clicking,drag;
     double[][] shearF = {
             {0.2,0.2,1.0,1.0},
@@ -40,13 +42,50 @@ public class TestPolyGon extends DiKaErPlus {
         polygon = new Polygon(new Vector2D[] { new Vector2D(-0.5, 0.5),
                 new Vector2D(1, 0), new Vector2D(-0.5, -0.5),
                 new Vector2D(), });
-        polygon = new Polygon(new Vector2D[]{
-                new Vector2D(-1,1),new Vector2D(1,1),
-                new Vector2D(1,-1),new Vector2D(-1,-1)
-        });
-        polygon.shear(0.5,0.5);
-        shearing = true;
+//        polygon = new Polygon(new Vector2D[]{
+//                new Vector2D(0,1),new Vector2D(3,0),new Vector2D(3,2),
+//                new Vector2D(4,2),new Vector2D(-1,-1),new Vector2D(4,8)
+//        });
+//        polygon.shear(0.5,0.5);
 
+        //8 边形
+        polygon = new Polygon(new Vector2D[]{
+                new Vector2D(0,3),
+                new Vector2D(2,2),
+                new Vector2D(3,0),
+                new Vector2D(2,-2),
+                new Vector2D(0,-3),
+                new Vector2D(-2,-2),
+                new Vector2D(-3,0),
+                new Vector2D(-2,2)
+        });
+
+        //星形
+//        polygon = new Polygon(new Vector2D[]{
+//                new Vector2D(0,4),
+//                new Vector2D(1,1),
+//                new Vector2D(4,1),
+//                new Vector2D(2,-1),
+//                new Vector2D(3,-4),
+//                new Vector2D(0,-2),
+//                new Vector2D(-3,-4),
+//                new Vector2D(-2,-1),
+//                new Vector2D(-4,1),
+//                new Vector2D(-1,1)
+//        });
+
+        //不规则 但是自然的形状
+//        polygon = new Polygon(new Vector2D[]{
+//                new Vector2D(-3,1),
+//                new Vector2D(-1,3),
+//                new Vector2D(2,3),
+//                new Vector2D(4,1),
+//                new Vector2D(3,-2),
+//                new Vector2D(1,-3),
+//                new Vector2D(-2,-2)
+//        });
+        shearing = true;
+        copy = polygon.clone();
         theta = Math.PI / 3;
     }
 
@@ -95,6 +134,7 @@ public class TestPolyGon extends DiKaErPlus {
             }
         }
         rot += theta * delta;
+        polygon = copy.rotateWithTheta(rot);
         clicking = false;
     }
 
@@ -127,6 +167,35 @@ public class TestPolyGon extends DiKaErPlus {
         sheared.scale(scaleX,shearY); //缩放
         sheared.rotate(rot); //旋转
         drawPolyGon(g2,sheared,false);
+
+        Polygon sh = polygon.getSheared(Math.pow(shearX, 2), Math.pow(shearY, 2));
+        sh.scale(scaleX,scaleY);
+        sh.rotate(Math.PI - rot);
+        drawPolyGon(g2,sh,false);
+
+        Line l = new Line(new Vector2D(),new Vector2D(1,1),Line.XIANSHI);
+        drawLine(g2,l);
+        if (polygon.collideLine(l)) {
+            Collection<Vector2D> vs = polygon.collideLineInPoints(l);
+            for (Vector2D v : vs) {
+                drawCircle(g2,v,0.05,true);
+            }
+        }
+
+        if (sheared.collideLine(l)) {
+            Collection<Vector2D> vs = sheared.collideLineInPoints(l);
+            for (Vector2D v : vs) {
+                drawCircle(g2,v,0.05,true);
+            }
+        }
+
+        if (sh.collideLine(l)) {
+            Collection<Vector2D> vs = sh.collideLineInPoints(l);
+            for (Vector2D v : vs) {
+                drawCircle(g2,v,0.05,true);
+            }
+        }
+
     }
 
     public static void main(String[] args) {

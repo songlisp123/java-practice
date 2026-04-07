@@ -14,6 +14,13 @@ public class AABB extends Convexity implements Cloneable {
         super.size = 4;
         super.offset = new Vector2D();
         fillVertices();
+        //计算center
+        super.center = this.getCenter();
+    }
+
+    public AABB() {
+        this(new Vector2D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY)
+        ,new Vector2D(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY));
     }
 
     private void fillVertices() {
@@ -26,6 +33,16 @@ public class AABB extends Convexity implements Cloneable {
         vertices[3] = min;
     }
 
+    @Override
+    public Vector2D getCenter() {
+        Vector2D min = getMin();
+        Vector2D max = getMax();
+        Vector2D move = max.sub(min);
+        double len = move.len();
+        Vector2D norm = move.norm();
+        return min.add(norm.scale(len / 2.0));
+    }
+
     //**********************************************************************//
     /* ******************          碰撞测试         ************************ */
     //**********************************************************************//
@@ -33,30 +50,51 @@ public class AABB extends Convexity implements Cloneable {
     //TODO 我需要时间来将这个东西重构一下
 
     public boolean collisionAABB(AABB aabb) {
+        Vector2D min = this.getMin();
+        Vector2D max = this.getMax();
+
+        Vector2D otherMin = aabb.getMin();
+        Vector2D otherMax = aabb.getMax();
+
         if (aabb == this)
             return false;
-        if (min.x > aabb.max.x || max.x < aabb.min.x)
+        if (min.x > otherMax.x || max.x < otherMin.x)
             return false;
-        if (min.y > aabb.max.y || max.y < aabb.min.y)
+        if (min.y > otherMax.y || max.y < otherMin.y)
             return false;
         return true;
     }
 
     public boolean contains(AABB aabb) {
-        return aabb.min.x >= this.min.x && aabb.min.y >= this.min.y &&
-                aabb.max.x <= this.max.x && aabb.max.y <= this.max.y;
+        Vector2D min = this.getMin();
+        Vector2D max = this.getMax();
+
+        Vector2D otherMin = aabb.getMin();
+        Vector2D otherMax = aabb.getMin();
+
+
+        return otherMin.x >= min.x && otherMin.y >= min.y &&
+                otherMax.x <= max.x && otherMax.y <= max.y;
+    }
+
+    public boolean collisionCircle(Circle circle) {
+        return this.collisionCircle(circle.center,circle.r);
     }
 
     public boolean collisionCircle(Vector2D center,double r) {
         Vector2D near = new Vector2D();
-        near.x = clampRange(center.x,min.x, max.x);
-        near.y = clampRange(center.y,min.y,max.y);
+        Vector2D min = getMin();
+        Vector2D max = getMax();
+        near.x = clampRange(center.x, min.x, max.x);
+        near.y = clampRange(center.y, min.y, max.y);
         near = near.sub(center);
         return near.lenSqr() < Math.pow(r,2);
     }
 
     public boolean collisionEllipse(Vector2D center,double ra,double rb) {
         //转换到椭圆坐标系，并将圆心设置为center
+        Vector2D min = getMin();
+        Vector2D max = getMax();
         Vector2D minTsm = min.sub(center).div(ra,rb);
         Vector2D maxTsm = max.sub(center).div(ra,rb);
 
@@ -97,10 +135,18 @@ public class AABB extends Convexity implements Cloneable {
 
     }
 
+    public boolean collideSegment(SegMent segMent) {
+        return this.collisionLineSegment(segMent.p1,segMent.p2);
+    }
+
     @Override
     public boolean containsPoint(Vector2D p) {
-        return p.x >= min.x && p.x <= max.x &&
-                p.y >= min.y && p.y <= max.y;
+        return this.contains(p.x,p.y);
+    }
+
+    public boolean contains(double x, double y) {
+        return x >= min.x + this.offset.x && x <= max.x + this.offset.x &&
+                y >= min.y + this.offset.y && y <= max.y + + this.offset.y;
     }
 
     /**
@@ -112,10 +158,11 @@ public class AABB extends Convexity implements Cloneable {
     private boolean collisionLine(Vector2D base,Vector2D direction) {
         Vector2D f = direction.prep(); //法向量
         //TODO 我可以实现最优雅的部分
-        Vector2D c1  = min;
-        Vector2D c2 = max;
-        Vector2D c3 = new Vector2D(max.x,min.y);
-        Vector2D c4 = new Vector2D(min.x, max.y);
+        Vector2D c1  = getMin();
+        Vector2D c2 = getMax();
+        Vector2D c3 = new Vector2D(c2.x,c1.y); //第三
+        Vector2D c4 = new Vector2D(c1.x, c2.y); //第一
+
         double cd1,cd2,cd3,cd4;
         c1 = c1.sub(base);
         c2 = c2.sub(base);
@@ -130,6 +177,12 @@ public class AABB extends Convexity implements Cloneable {
         return cd1 * cd2 <= 0 ||
                 cd2 * cd3 <= 0 ||
                 cd3 * cd4 <= 0;
+    }
+
+    public boolean collideLine( Line line) {
+        Vector2D pos = line.getPos();
+        Vector2D norm = line.getMoveD().norm();
+        return this.collisionLine(pos,norm);
     }
 
     public boolean collisionOrientedRectangle(OrientedRectangle or) {
@@ -199,13 +252,24 @@ public class AABB extends Convexity implements Cloneable {
     //**********************************************************************//
 
     public void translate(double dx,double dy) {
-        Vector2D d = new Vector2D(dx,dy);
-        this.translate(d);
+/*
+        this.min.x += dx;
+        this.min.y += dy;
+        this.max.x += dx;
+        this.max.y += dy;
+
+        this.center.x += dx;
+        this.center.y += dy;
+*/
+        this.offset.x += dx;
+        this.offset.y += dy;
+        this.center.x += dx;
+        this.center.y += dy;
     }
 
     public void translate(Vector2D d) {
-        min = min.add(d);
-        max = max.add(d);
+        this.offset = offset.add(d);
+        this.center = this.center.add(d);
     }
 
     public AABB getTranslated(Vector2D d) {
@@ -279,29 +343,64 @@ public class AABB extends Convexity implements Cloneable {
         return 2 * (w + h);
     }
 
+    public AABB intersection(AABB aabb) {
+        AABB ab = new AABB();
+        Vector2D min = getMin();
+        Vector2D max = getMax();
 
+        Vector2D otherMax = aabb.getMax();
+        Vector2D otherMin = aabb.getMin();
+
+        ab.min.x = Math.max(min.x,otherMin.x);
+        ab.min.y = Math.max(min.y,otherMin.y);
+        ab.max.x = Math.min(max.x,otherMax.x);
+        ab.max.y = Math.min(max.y,otherMax.y);
+
+        if (ab.min.x > ab.max.x || ab.min.y > ab.max.y) {
+            ab.min.x = 0.0F;
+            ab.min.y = 0.0F;
+            ab.max.x = 0.0F;
+            ab.max.y = 0.0F;
+        }
+
+        return ab;
+    }
+
+    public AABB getIntersection(AABB aabb) {
+        return this.clone().intersection(aabb);
+    }
+
+    public boolean isDegenerate() {
+        return this.min.x == this.max.x || this.min.y == this.max.y;
+    }
+
+    public boolean isDegenerate(double error) {
+        return Math.abs(this.max.x - this.min.x) <= error
+                || Math.abs(this.max.y - this.min.y) <= error;
+    }
 
     //**********************************************************************//
     /* ******************          get/set         *********************** */
     //**********************************************************************//
 
     public Vector2D getMin() {
-        return min;
+        return min.add(offset);
     }
 
     public Vector2D getMax() {
-        return max;
+        return max.add(offset);
     }
 
     private Vector2D getCorner(int n) {
         //TODO 这个方法很脆弱,不知道该怎么搞 ??? 【未完成 ❌】
-        Vector2D r = min.clone();
+        Vector2D r = getMin();
+        Vector2D max = getMax();
         switch (n % 4) {
             case 0 :
                 r.y = max.y;
                 break;
             case 1 :
-                r = max.clone();
+                r = max;
                 break;
             case 2:
                 r.x = max.x;
@@ -313,7 +412,7 @@ public class AABB extends Convexity implements Cloneable {
     }
 
     @Override
-    protected AABB clone() {
+    public AABB clone() {
         return new AABB(this.min,this.max);
     }
 

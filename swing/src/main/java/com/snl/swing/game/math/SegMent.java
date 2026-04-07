@@ -1,9 +1,11 @@
 package com.snl.swing.game.math;
 
+import com.snl.swing.game.math.contract.AbstractShape;
+
 /**
  * 线段建模
  */
-public class SegMent {
+public class SegMent extends AbstractShape implements Cloneable {
     public Vector2D p1,p2;
 
     private static final int DONT_INTERSECT = 0; //不相交
@@ -16,10 +18,34 @@ public class SegMent {
 
     private static final int OUTSIDE = 6; //线段 在 圆 外面
     private static final int INSIDE = 7; //线段 在 圆 里面
-    private static final int INSECTIONINONEPOINT = 8; //线段 相交于一点
-    private static final int COLLISION = 9; //线段 相交于一点
+    private static final int INSECTIONINONEPOINT = 8; //线段 与多边形 相交于一点
+    private static final int COLLISION = 9; //线段 与 相交于一点
+    private static final int TARGENT = 10; //线段 与 相交于一点
 
     public SegMent() {
+    }
+
+    public SegMent(Vector2D p1, Vector2D p2) {
+        validate(p1,p2);
+        this.p1 = p1;
+        this.p2 = p2;
+    }
+
+    public SegMent(SegMent scaledSegment) {
+        this.p1 = scaledSegment.p1;
+        this.p2 = scaledSegment.p2;
+    }
+
+    private boolean validate(Vector2D p1, Vector2D p2) {
+        if (p1 == null) {
+            throw new IllegalArgumentException("p1不能为null");
+        } else if (p2 == null) {
+            throw new IllegalArgumentException("p2不能为Null");
+        } else if (p1.equals(p2)) {
+            throw new IllegalArgumentException("p1不能语p2共点");
+        } else {
+            return true;
+        }
     }
 
     public Range projection(Vector2D on) {
@@ -160,9 +186,19 @@ public class SegMent {
             case ONP1P2RANGE -> {
                 //否则 p在线段 区间中
                 //这一个方法能成功，引入了一个新的线段，但是不够优雅
-                Vector2D m = p1.sub(p2).norm();
-                Line l = new Line(p2,m,Line.YINGSHI);
-                v = l.nearestPoint(p);
+                //一个不够优雅的解决方案
+//                Vector2D m = p1.sub(p2).norm();
+//                Line l = new Line(p2,m,Line.YINGSHI);
+//                v = l.nearestPoint(p);
+
+                //第二个方案
+                Vector2D pToP1 = p.sub(p1);
+                Vector2D p2ToP1 = p2.sub(p1);
+                double ab2 = p2ToP1.dot(p2ToP1);
+                double ab = pToP1.dot(p2ToP1);
+
+                double t = ab / ab2;
+                return p1.add(p2ToP1.mul(t));
             }
         }
         return v;
@@ -175,7 +211,7 @@ public class SegMent {
      * @return 是否相同符号
      */
     private boolean sameSigns(double a,double b) {
-        return a*b >= 0;
+        return a*b > 0;
     }
 
     /*
@@ -184,10 +220,15 @@ public class SegMent {
     public Vector2D getCenter() {
         if (p1.equals(p2))
             return p1;
-        Vector2D center;
-        Vector2D m = p2.sub(p1).norm(); //计算方向向量 - 归一化
-        center = p1.add(m.scale(length() / 2));
-        return center;
+//        Vector2D center;
+//        Vector2D m = p2.sub(p1).norm(); //计算方向向量 - 归一化
+//        center = p1.add(m.scale(length() / 2));
+//        return center;
+        //或者
+        double x = p1.x + p2.x;
+        double y = p1.y + p2.y;
+        return new Vector2D(x / 2.0,y / 2.0);
+
     }
 
     /*
@@ -219,6 +260,16 @@ public class SegMent {
         return a;
     }
 
+    public boolean collideCircleInBoolean(Vector2D center,double radius) {
+        return collideCircleInBoolean(new Circle(radius,center));
+    }
+
+    public boolean collideCircleInBoolean(Circle circle) {
+        int mode = collideCircle(circle);
+        return mode == COLLISION || mode == INSECTIONINONEPOINT ||
+                mode == TARGENT;
+    }
+
      //TODO
     public int collideCircle(Circle circle) {
         //内部
@@ -230,11 +281,15 @@ public class SegMent {
             d = this.getDistanceOfPoint(circle.getCenter());
             r = circle.r;
 
-            if (d > r) {
+            double diff = d - r;
+            if (diff > 0) {
                 return OUTSIDE;
             }
-            if (d < r)
+            else if (diff < 0)
                 return COLLISION;
+            else if (Math.abs(diff) <= Epsilon.PRECISION) {
+                return TARGENT;
+            }
         }
         //外部
         if (circle.containsPointInBoolean(this.p1)
@@ -254,7 +309,7 @@ public class SegMent {
             //如果 p1 在外部 且 p2 在内部
             return INSECTIONINONEPOINT;
         }
-        return -1;
+        throw new UnsupportedOperationException("为支持的操作");
     }
 
     public Vector2D[] collideCircleToVectorArray(Circle circle) {
@@ -267,11 +322,11 @@ public class SegMent {
             case INSECTIONINONEPOINT -> {
                 Vector2D[] v = new Vector2D[1];
                 double dot;
-                Vector2D norm = this.p1.sub(this.p2).norm();
-                Line l = new Line(p2,norm,Line.YINGSHI);
+                Vector2D norm = p2.sub(p1).norm();
+                Line l = new Line(p1,norm,Line.YINGSHI);
                 Vector2D[] vector2DS = circle.collidePointInLine(l);
                 for (Vector2D v2d : vector2DS) {
-                    dot = v2d.dot(norm);
+                    dot = v2d.sub(circle.getCenter()).dot(norm);
                     if (dot < 0)
                         //在外侧
                         continue;
@@ -292,11 +347,223 @@ public class SegMent {
         return null;
     }
 
+    // 圆 vs 线段：返回穿透深度
+    public double getCollideDepth(Vector2D pos, double r) {
+        Circle c = new Circle(r, pos);
+
+        int mode = this.collideCircle(c);
+
+        switch (mode) {
+
+            case OUTSIDE -> {
+                return 0;
+            }
+
+            case INSIDE, COLLISION, INSECTIONINONEPOINT, TARGENT -> {
+
+                // 线方向
+                Vector2D lineDir = p2.sub(p1);
+                Vector2D norm = lineDir.prep().norm(); // 法线
+
+                // 圆心到直线距离（点到线距离公式）
+                double d = Math.abs(
+                        c.getCenter().sub(p1).dot(norm)
+                );
+
+                // 穿透深度
+                double depth = r - d;
+
+                // 防御：不穿透返回0
+                return Math.max(depth, 0);
+            }
+        }
+
+        return 0;
+    }
+
     @Override
     public String toString() {
         return "SegMent{" +
                 "p1=" + p1 +
                 ", p2=" + p2 +
                 '}';
+    }
+
+    @Override
+    public double getArea() {
+        throw new UnsupportedOperationException("暂不支持该操作");
+    }
+
+    @Override
+    public void rotate(double rotateTheta) {
+        p1.rotate(rotateTheta);
+        p2.rotate(rotateTheta);
+    }
+
+    @Override
+    public <T extends Polygon> T rotateWithTheta(double rotateTheta) {
+        return null;
+    }
+
+    @Override
+    public void rotate(double rot, Vector2D center) {
+        //TODO
+        Matrix3x3f rotate = Matrix3x3f.rotate(rot);
+        p1 = rotate.mul(p1.sub(center)).add(center);
+        p2 = rotate.mul(p2.sub(center)).add(center);
+    }
+
+    @Override
+    public void rotate(double rot, double x, double y) {
+        //TODO
+        this.rotate(rot,new Vector2D(x,y));
+    }
+
+    @Override
+    public void scale(double scale) {
+
+        Vector2D p1ToP2 = p2.sub(p1).norm();
+        Vector2D center = getCenter();
+
+        double length = length();
+        double l = length / 4.0;
+
+        p2 = center.add(p1ToP2.mul(l));
+
+        Vector2D p2ToP1 = p1.sub(p2).norm();
+        p1 = center.add(p2ToP1.mul(l));
+    }
+
+    @Override
+    public void scale(double sx, double sy) {
+        throw new UnsupportedOperationException("未受支持的操作");
+    }
+
+    @Override
+    public void shear(double sx, double sy) {
+        p1.shear(sx,sy);
+        p2.shear(sx,sy);
+    }
+
+    @Override
+    public void translate(Vector2D translated) {
+        p1.add(translated);
+        p2.add(translated);
+    }
+
+    @Override
+    public void translate(double x, double y) {
+        p1.x += x;
+        p1.y += y;
+        p2.x += x;
+        p2.y += y;
+    }
+
+    @Override
+    public SegMent clone() {
+        return new SegMent(p1.clone(),p2.clone());
+    }
+
+    public Vector2D getSegmentIntersection(SegMent segMent) {
+        return getSegmentIntersection(p1,p2,segMent.p1,segMent.p2,true);
+    }
+
+    public AABB createAABB() {
+        double maxX = p1.x;
+        double minX = p2.x;
+
+        if (minX > maxX) {
+            double temp = minX;
+            minX = maxX;
+            maxX = temp;
+        }
+
+        double maxY = p1.y;
+        double minY = p2.y;
+        if (minY > maxY) {
+            double temp = minY;
+            minY = maxY;
+            maxY = temp;
+        }
+
+        Vector2D min = new Vector2D(minX,minY);
+        Vector2D max = new Vector2D(maxX,maxY);
+
+        return new AABB(min,max);
+    }
+
+    public boolean tangentCircle(Circle circle) {
+        return this.collideCircle(circle) == TARGENT;
+    }
+
+    public boolean tangentCircle(Vector2D pos,double r) {
+        Circle circle = new Circle(r,pos);
+        return tangentCircle(circle);
+    }
+
+    /******************* 静态方法 **********************/
+
+    public static final Vector2D getLineIntersection(Vector2D ap1,Vector2D ap2,Vector2D bp1,Vector2D bp2) {
+        Vector2D A = ap2.sub(ap1);
+        Vector2D B = bp2.sub(bp1);
+
+        double BCorssA = B.cross2D(A);
+        if (Math.abs(BCorssA) <= Epsilon.PRECISION) {
+            //分母不能为零
+            return null;
+        }else {
+            double amxA = ap1.sub(bp1).cross2D(A);
+            if (Math.abs(amxA) <= Epsilon.PRECISION) {
+                //分支为零
+                return null;
+            }
+            //否则，克莱姆法则
+            double t = amxA / BCorssA;
+            return bp1.add(B.mul(t));
+        }
+    }
+
+    public Vector2D getLineIntersection(SegMent segMent) {
+        return getLineIntersection(p1,p2,segMent.p1,segMent.p2);
+    }
+
+    public static final Vector2D getSegmentIntersection(Vector2D ap1,Vector2D ap2,Vector2D bp1,Vector2D bp2) {
+        return getSegmentIntersection(ap1,ap2,bp1,bp2,true);
+    }
+
+    public static final Vector2D getSegmentIntersection(Vector2D ap1,Vector2D ap2,Vector2D bp1,Vector2D bp2,boolean inclusive) {
+        Vector2D A = ap2.sub(ap1);
+        Vector2D B = bp2.sub(bp1);
+
+        double BCorssA = B.cross2D(A);
+        if (Math.abs(BCorssA) <= Epsilon.PRECISION) {
+            //分母不能为零
+            return null;
+        }
+        else {
+            double amxA = ap1.sub(bp1).cross2D(A);
+            if (Math.abs(amxA) <= Epsilon.PRECISION) {
+                return null;
+            }else {
+                double t = amxA / BCorssA;
+                //测试 是否在线段上
+                if (inclusive) {
+                    if (t < 0.0 || t > 1.0)
+                        return null;
+                } else if (t <= 0.0 || t >= 1.0) {
+                    return null;
+                }
+
+                Vector2D ip = bp1.add(B.mul(t));
+                double ta = ip.sub(ap1).dot(A) / A.dot(A);
+                if (inclusive) {
+                    if (ta < 0.0 || ta > 1.0)
+                        return null;
+                } else if (ta <= 0.0 || ta >= 1.0) {
+                    return null;
+                }
+                return ip;
+            }
+        }
     }
 }

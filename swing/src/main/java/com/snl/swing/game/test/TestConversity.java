@@ -16,12 +16,17 @@ public class TestConversity extends DiKaErPlus {
     Convexity convexity,convexity02;
     boolean drag,cMoving,clicked,collision;
 
+    Vector2D nr,testPoint;
+
     @Override
     protected void gameInitial() {
         super.gameInitial();
         convexity = new Convexity(new Vector2D(),
                 new Vector2D(1,2),new Vector2D(3,4),new Vector2D(-1,3));
         convexity.setShowVer(true);
+
+        testPoint = new Vector2D(3,5);
+
 
         Iterator<Vector2D> iterator = convexity.getVertexIterator();
         while (iterator.hasNext()) {
@@ -65,6 +70,8 @@ public class TestConversity extends DiKaErPlus {
             convexity.translate(d);
         }
 
+        nr = convexity.getNearestPoint(testPoint);
+
         collision = convexity.collideOtherConvexity(convexity02);
     }
 
@@ -83,6 +90,11 @@ public class TestConversity extends DiKaErPlus {
         g2.setPaint(Color.CYAN);
         drawAAbb(g2,aabb,false);
         drawAAbb(g2,aabb1,false);
+
+        drawCircle(g2,testPoint,0.10,true);
+        drawCircle(g2,nr,0.05,true);
+
+//        System.out.println("nr = " + nr);
 
         if (collision) {
             g2.setPaint(Color.RED);

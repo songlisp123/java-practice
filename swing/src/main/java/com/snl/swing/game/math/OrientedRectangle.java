@@ -1,6 +1,6 @@
 package com.snl.swing.game.math;
 
-public class OrientedRectangle {
+public class OrientedRectangle extends Convexity {
     Vector2D center;
     Vector2D halfExtend;
     double rot; //这是弧度
@@ -9,6 +9,13 @@ public class OrientedRectangle {
         this.center = center;
         this.halfExtend = halfExtend;
         this.rot = rot;
+
+        fillVertices();
+        super.size = 4;
+    }
+
+    private void fillVertices() {
+
     }
 
     public Vector2D getCenter() {

@@ -61,7 +61,7 @@ public class TestCircle extends DiKaErPlus {
             //如果移动点
             Matrix3x3f re = getReverseScaleViewPortMat();
             Vector2D d = re.mul(mouseDelta);
-            circle.offset = circle.offset.add(d);
+            circle.translated(d);
         }
 
         collide = circle.collisionLine(line);
@@ -83,11 +83,11 @@ public class TestCircle extends DiKaErPlus {
 
         farP = circle.getFarthestPoint(testPoint);
 
-        //仿射矩形
+        //仿射矩形,这个又错了
         Matrix3x3f rotate = Matrix3x3f.rotate(rot);
         rotate = rotate.mul(Matrix3x3f.translate(circle.r,0));
         Vector2D center = circle.getCenter();
-        Vector2D mulled = rotate.mul(center.inv());
+        Vector2D mulled = rotate.mul(pCopy.sub(center));
 //        point = rotate.mul(pCopy);
         point = mulled.add(center);
 
@@ -130,6 +130,7 @@ public class TestCircle extends DiKaErPlus {
         drawCircle(g2,farP,0.15,true);
 
         drawCircle(g2,point,0.08,true);
+        drawCircle(g2,pCopy,0.10,false);
         if (ql != null) {
             for (Line l : ql)
                 drawLine(g2, l);

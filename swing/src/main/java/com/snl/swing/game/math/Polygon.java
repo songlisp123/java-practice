@@ -6,11 +6,9 @@ import com.snl.swing.game.math.contract.PointIterator;
 import com.snl.swing.game.math.contract.Wound;
 import com.snl.swing.game.utils.Geometry;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
-public class Polygon extends AbstractShape implements Wound , Convex {
+public class Polygon extends AbstractShape implements Wound , Convex , Cloneable {
     //点 坐标云
     protected Vector2D[] vertices;
     //点数量
@@ -214,9 +212,19 @@ public class Polygon extends AbstractShape implements Wound , Convex {
     @Override
     public void rotate(double rotateTheta) {
         Matrix3x3f rotate = Matrix3x3f.rotate(rotateTheta);
+        //绕原心旋转
         for (int i = 0;i<size;i++)
             vertices[i] = rotate.mul(vertices[i]);
         //缩放重心
+    }
+
+    @Override
+    public <T extends Polygon> T rotateWithTheta(double rotateTheta) {
+        Matrix3x3f rotate = Matrix3x3f.rotate(rotateTheta);
+        Vector2D[] vs = new Vector2D[size];
+        for (int i = 0;i<size;i++)
+            vs[i] = rotate.mul(vertices[i]);
+        return (T) new Polygon(getCenter(),this.offset,vs);
     }
 
     @Override
@@ -379,6 +387,73 @@ public class Polygon extends AbstractShape implements Wound , Convex {
         return segMents;
     }
 
+
+    //**********************************************************************//
+    /* ******************          碰撞测试         *********************** */
+    //**********************************************************************//
+
+    public boolean collideLine(Line line) {
+        SegMent[] edge = getEdge();
+        for (SegMent segMent : edge) {
+            if (line.collideSegmentBoolean(segMent)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Collection<Vector2D> collideLineInPoints(Line line) {
+        if (!collideLine(line))
+            return null;
+        List<Vector2D> vector2DS = new ArrayList<>();
+        SegMent[] edge = getEdge();
+        for (SegMent segMent : edge) {
+            Vector2D vector2D = line.collideSegmentInPoint(segMent);
+            if (vector2D != null)
+            {
+                vector2DS.add(vector2D);
+            }
+        }
+        return vector2DS;
+    }
+
+    /*
+   获取 离 p 点最近的凸边形点
+    */
+    public Vector2D getNearestPoint(Vector2D p) {
+        //TODO
+        // 好吧，暴力解法，欧几里得距离
+        double min = Double.POSITIVE_INFINITY;
+        int selected = 0;
+        Vector2D[] vs = getVertices();
+        for (int i = 0;i<vs.length;i++) {
+            double temp = p.sub(vs[i]).len();
+            if (temp < min) {
+                min = temp;
+                selected = i;
+            }
+        }
+        return vs[selected];
+    }
+
+    /*
+    获取 离 p 点 最远的凸变形点
+     */
+    public Vector2D getFarthestPoint(Vector2D p) {
+        //TODO
+        double max = Double.NEGATIVE_INFINITY;
+        int selected = 0;
+        Vector2D[] vs = getVertices();
+        for (int i = 0;i<vs.length;i++) {
+            double temp = p.sub(vs[i]).len();
+            if (temp > max) {
+                max = temp;
+                selected = i;
+            }
+        }
+        return vs[selected];
+    };
+
     public static void main(String[] args) {
         Polygon polygon = new Polygon(
                 new Vector2D[]{new Vector2D(0, 2), new Vector2D(2, 0),
@@ -393,5 +468,10 @@ public class Polygon extends AbstractShape implements Wound , Convex {
             Vector2D next = it.next();
             System.out.println("next = " + next);
         }
+    }
+
+    @Override
+    public Polygon clone() {
+        return new Polygon(this);
     }
 }

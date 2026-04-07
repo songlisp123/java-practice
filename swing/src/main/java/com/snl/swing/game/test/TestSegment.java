@@ -31,6 +31,8 @@ public class TestSegment extends DiKaErPlus {
 
     Vector2D p1Copy,p3Copy;
 
+    SegMent scaledSegment,copy;
+
     @Override
     protected void gameInitial() {
         super.gameInitial();
@@ -55,6 +57,15 @@ public class TestSegment extends DiKaErPlus {
         circle = new Circle(3,new Vector2D());
         c2 = new Circle(1,new Vector2D());
         speed = 0.1;
+
+        scaledSegment = new SegMent(
+                new Vector2D(2,3),new Vector2D(-2,1)
+        );
+
+        copy = scaledSegment.clone();
+//        scaledSegment.scale(0.5);
+//        scaledSegment.shear(0.2,0.6);
+        scaledSegment.rotate(Math.PI / 3);
 
     }
 
@@ -191,6 +202,9 @@ public class TestSegment extends DiKaErPlus {
                         new float[]{3.0F,5.0F,3.0F},2)
         );
         drawLine(g2,testPoint,nr);
+
+        drawLine(g2,scaledSegment.p1,scaledSegment.p2);
+        drawLine(g2,copy.p1,copy.p2);
         g2.setPaint(Color.red);
         g2.dispose();
     }

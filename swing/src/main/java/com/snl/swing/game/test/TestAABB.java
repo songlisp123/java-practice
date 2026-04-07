@@ -1,10 +1,8 @@
 package com.snl.swing.game.test;
 
 import com.snl.swing.game.gameFrame.DiKaErPlus;
-import com.snl.swing.game.math.AABB;
-import com.snl.swing.game.math.Matrix3x3f;
+import com.snl.swing.game.math.*;
 import com.snl.swing.game.math.Polygon;
-import com.snl.swing.game.math.Vector2D;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -17,6 +15,7 @@ public class TestAABB extends DiKaErPlus {
     boolean contains;
     boolean moving,clicked,drag;
     Vector2D cp;
+    Circle circle;
 
     public TestAABB() throws HeadlessException {
         drawAxis = true;
@@ -32,6 +31,8 @@ public class TestAABB extends DiKaErPlus {
         cp = aabb.pickedRandomPoint(0.2,0.6);
         double[] subTriangleArea = aabb.getSubTriangleArea();
         System.out.println(Arrays.toString(subTriangleArea));
+
+        circle = new Circle(0.56,new Vector2D(2,-2));
     }
 
     @Override
@@ -74,9 +75,30 @@ public class TestAABB extends DiKaErPlus {
         drawAAbb(g2,aabb2,false);
         drawCircle(g2,cp,.1,true);
 
-        Polygon sheared = aabb.getSheared(0.5, 0.5);
-        drawPolyGon(g2,sheared,false);
+//        Polygon sheared = aabb.getSheared(0.5, 0.5);
+//        drawPolyGon(g2,sheared,false);
+        boolean b = aabb.collisionAABB(aabb2);
+        if (b) {
+            AABB intersection = aabb.intersection(aabb2);
+            drawAAbb(g2,intersection,true);
+        }
+
+        Vector2D center = aabb.getCenter();
+        drawCircle(g2,center,0.05,true);
+
+        drawCircle(g2,circle,false);
+
+        if (aabb.collisionCircle(circle)) {
+            System.out.println("相撞了");
+        }
+
         g2.dispose();
+    }
+
+    @Override
+    protected void reset() {
+        super.reset();
+        aabb.reset();
     }
 
     public static void main(String[] args) {

@@ -200,6 +200,7 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
             delta = frame / 1.0E9; //时间间隔
             processInput(delta); //获取输入
             updateSprite(delta); //暂时不实现
+
             render(); //不实现
             animation(delta);
             Utils.sleep(appSleep);

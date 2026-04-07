@@ -14,11 +14,14 @@ public class Ball implements Cloneable {
     double r;
     double oldYSpeed;
     List<Vector2D> olds = new ArrayList<>();
+    boolean showMoving = true;
 
     public Ball(Vector2D pos,double r) {
         this.pos = pos;
         this.posCopy = pos;
         this.r = r;
+        this.offset = new Vector2D();
+        this.speed = new Vector2D();
     }
 
     public Ball(Ball ball) {
@@ -74,5 +77,13 @@ public class Ball implements Cloneable {
     @Override
     protected Ball clone() {
         return new Ball(this);
+    }
+
+    public boolean isShowMoving() {
+        return showMoving;
+    }
+
+    public void setShowMoving(boolean showMoving) {
+        this.showMoving = showMoving;
     }
 }
