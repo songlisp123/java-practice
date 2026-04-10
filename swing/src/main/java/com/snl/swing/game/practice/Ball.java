@@ -1,6 +1,7 @@
 package com.snl.swing.game.practice;
 
 import com.snl.swing.game.math.Vector2D;
+import com.snl.swing.game.utils.Generator;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -31,6 +32,15 @@ public class Ball implements Cloneable {
         this.r = ball.r;
         this.oldYSpeed = ball.oldYSpeed;
         this.posCopy = ball.posCopy;
+    }
+
+    public static Ball gen(int wordHeight, int wordWidth) {
+        double x = Generator.generateDouble(-wordWidth / 2.0, wordWidth / 2.0);
+        double y = Generator.generateDouble(-wordHeight / 2.0, wordHeight / 2.0);
+        double r = Generator.generateDouble(0, 0.2);
+        return new Ball(
+                new Vector2D(x,y),r
+        );
     }
 
     public Vector2D getPos() {

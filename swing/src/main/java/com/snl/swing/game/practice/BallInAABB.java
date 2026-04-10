@@ -5,6 +5,7 @@ import com.snl.swing.game.math.*;
 import com.snl.swing.game.math.Polygon;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,21 +15,21 @@ public class BallInAABB extends DiKaErPlus {
     List<Ball> balls = new ArrayList<>();
     AABB aabb;
     Polygon polygon;
+    boolean pMoving,clicking,drag;
+
 
     @Override
     protected void gameInitial() {
         super.gameInitial();
-        Ball ball = new Ball(new Vector2D(),0.15);
+        Ball ball = new Ball(new Vector2D(),1.0);
         balls.add(ball);
-        ball = new Ball(new Vector2D(2,3),0.15);
-        balls.add(ball);
-        ball = new Ball(new Vector2D(-2,4.5),0.15);
-        balls.add(ball);
-        aabb = new AABB(
-                new Vector2D(-1,-1),new Vector2D(1,1)
-        );
 
-        aabb.extend(5);
+        for (int  i = 0;i<30;i++)
+            balls.add(Ball.gen(wordHeight,wordWidth));
+
+        aabb = new AABB(new Vector2D(-1,-1),new Vector2D(1,1));
+
+        aabb.extend(wordWidth);
 
         polygon = new Polygon(
                 new Vector2D[]{
@@ -38,11 +39,17 @@ public class BallInAABB extends DiKaErPlus {
         );
 
 
-        polygon.scale(10);
+        polygon.scale(wordWidth);
 
 
     }
 
+    @Override
+    protected void processInput(double delta) {
+        super.processInput(delta);
+        clicking = mouseInputEvent.mouseButtonDownOnce(MouseEvent.BUTTON1);
+        drag = mouseInputEvent.mouseButtonDown(MouseEvent.BUTTON1);
+    }
 
     @Override
     protected void draw(Graphics g) {
@@ -57,7 +64,25 @@ public class BallInAABB extends DiKaErPlus {
         drawPolyGon(g2,polygon,false);
 
         for (Ball ball : balls) {
-            drawCircle(g2,ball.pos,ball.r,true);
+            drawCircle(g2,ball.pos,ball.r,false);
+        }
+    }
+
+    @Override
+    protected void updateSprite(double delta) {
+        super.updateSprite(delta);
+        Vector2D mouse = getMousePointInVector();
+        boolean b = pointInPoly(mouse, polygon);
+        if (clicking && b) {
+            pMoving = true;
+        }
+
+        pMoving = pMoving && drag;
+        if (pMoving) {
+            //如果移动点
+            Matrix3x3f re = getReverseScaleViewPortMat();
+            Vector2D d = re.mul(mouseDelta);
+            polygon.translate(d);
         }
     }
 

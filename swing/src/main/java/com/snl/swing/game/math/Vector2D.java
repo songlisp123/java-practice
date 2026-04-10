@@ -204,4 +204,8 @@ public class Vector2D implements Cloneable {
         return this.x == other.x &&
                 this.y == other.y;
     }
+
+    public boolean isZero() {
+        return this.x ==  0 && this.y == 0;
+    }
 }

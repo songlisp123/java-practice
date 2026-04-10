@@ -9,4 +9,8 @@ public interface Wound {
     Iterator<Vector2D> getVertexIterator();
 
     Vector2D[] getVertices();
+
+    Vector2D[] getNormals();
+
+    Iterator<Vector2D> getNormalIterator();
 }

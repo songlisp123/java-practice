@@ -61,7 +61,7 @@ public class TestCircle extends DiKaErPlus {
             //如果移动点
             Matrix3x3f re = getReverseScaleViewPortMat();
             Vector2D d = re.mul(mouseDelta);
-            circle.translated(d);
+            circle.translate(d);
         }
 
         collide = circle.collisionLine(line);

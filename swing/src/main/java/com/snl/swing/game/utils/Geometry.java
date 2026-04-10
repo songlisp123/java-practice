@@ -123,4 +123,23 @@ public class Geometry {
     public static  boolean CheckSign(double a,double b) {
         return a * b > 0;
     }
+
+    public static Vector2D[] getCounterClockwiseEdgeNormals(Vector2D...v2ds) {
+        if (v2ds == null)
+            throw new IllegalArgumentException("参数不能为null");
+        int size = v2ds.length;
+        if (size <= 1)
+            throw new IllegalArgumentException("点数必须大于等于2");
+        Vector2D[] normals = new Vector2D[size];
+
+        for (int i = 0;i<size;i++) {
+            Vector2D p1 = v2ds[i];
+            Vector2D p2 = i + 1 == size ? v2ds[0] : v2ds[i + 1];
+            //截取向量
+            Vector2D norm = p2.sub(p1).prep().norm();
+            normals[i] = norm;
+        }
+
+        return normals;
+    }
 }

@@ -21,6 +21,8 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
     protected double area;
     //重心
     protected Vector2D center;
+    // 边法向量
+    Vector2D[] norms;
 
     public Polygon() {
     }
@@ -32,6 +34,7 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
         this.offset = new Vector2D();
         this.center = Geometry.getAverageCenter(this.vertices);
         this.area = this.getArea();
+        this.norms = Geometry.getCounterClockwiseEdgeNormals(vertices);
     }
 
     public Polygon(Polygon polygon) {
@@ -41,6 +44,7 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
         this.size = polygon.size;
         this.showVer = polygon.showVer;
         this.center = polygon.center;
+        this.norms = polygon.norms;
     }
 
     public Polygon(Vector2D center,Vector2D offset,Vector2D...vector2DS) {
@@ -49,6 +53,7 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
         this.offset = Objects.requireNonNullElseGet(offset, Vector2D::new);
         this.size = vector2DS.length;
         this.vertices = vector2DS;
+        this.norms = Geometry.getCounterClockwiseEdgeNormals(vector2DS);
     }
 
     private void validate(Vector2D[] vertices) {
@@ -95,6 +100,17 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
             copy[i] = vertices[i].add(offset);
         }
         return copy;
+    }
+
+    @Override
+    public Vector2D[] getNormals() {
+        //最好不要引用方法
+        return this.norms;
+    }
+
+    @Override
+    public Iterator<Vector2D> getNormalIterator() {
+        return new PointIterator(norms);
     }
 
     /**
@@ -453,6 +469,54 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
         }
         return vs[selected];
     };
+
+    /**
+     * 计算AABB矩形
+     * @return
+     */
+    public AABB computeAABB() {
+        AABB aabb = new AABB();
+        Vector2D[] vs = getVertices();
+        Vector2D v = vs[0]; // 从第一个点开始
+        double minX = v.x;
+        double maxX = v.x;
+
+        double minY = v.y;
+        double maxY = v.y;
+
+        for(int  j = 1;j < size;j++) {
+            Vector2D point = vs[j];
+            if (point.x < minX)
+                minX = point.x;
+            else if (point.x > maxX)
+                maxX = point.x;
+
+            if (point.y <  minY)
+                minY = point.y;
+            else if (point.y > maxY)
+                maxY = point.y;
+        }
+
+        aabb.min.x = minX;
+        aabb.min.y = minY;
+
+        aabb.max.x = maxX;
+        aabb.max.y = maxY;
+        return aabb;
+    }
+
+//    public AABB getAABB() {
+//        AABB aabb = new AABB(new Vector2D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY),
+//                new Vector2D(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY));
+//        Vector2D[] v = this.getVertices();
+//        for (Vector2D corner : v) {
+//            aabb.min.x = Math.min(corner.x,aabb.min.x);
+//            aabb.min.y = Math.min(corner.y,aabb.min.y);
+//            aabb.max.x = Math.max(corner.x,aabb.max.x);
+//            aabb.max.y = Math.max(corner.y,aabb.max.y);
+//        }
+//        return aabb;
+//    }
 
     public static void main(String[] args) {
         Polygon polygon = new Polygon(

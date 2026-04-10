@@ -74,8 +74,8 @@ public class Convexity extends Polygon {
      * @implNote 该程序由分离轴定理实现
      */
     public boolean collideOtherConvexity(Convexity convexity) {
-        AABB aabb = this.getAABB();
-        AABB aabb02 = convexity.getAABB();
+        AABB aabb = computeAABB();
+        AABB aabb02 = convexity.computeAABB();
 
         if (!aabb.collisionAABB(aabb02))
             return false;
@@ -104,29 +104,12 @@ public class Convexity extends Polygon {
         return true;
     }
 
-    /**
-     * 获取AABB矩形
-     * @return 包裹aabb矩形
-     */
-    public AABB getAABB() {
-        AABB aabb = new AABB(new Vector2D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY),
-                new Vector2D(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY));
-        Vector2D[] v = this.getVertices();
-        for (Vector2D corner : v) {
-            aabb.min.x = Math.min(corner.x,aabb.min.x);
-            aabb.min.y = Math.min(corner.y,aabb.min.y);
-            aabb.max.x = Math.max(corner.x,aabb.max.x);
-            aabb.max.y = Math.max(corner.y,aabb.max.y);
-        }
-        return aabb;
-    }
-
     //TODO 待办如何找到多边形的包围圆？？ 【未完成 ❌】
     /*
     对于三角形来说：我们需要找到
      */
     public Circle getCircle() {
-        AABB aabb = getAABB();
+        AABB aabb = computeAABB();
         Vector2D ct = aabb.max.add(aabb.min).div(2);
         Vector2D hf = aabb.max.sub(aabb.min).div(2);
         OrientedRectangle o = new OrientedRectangle(ct,hf,0);

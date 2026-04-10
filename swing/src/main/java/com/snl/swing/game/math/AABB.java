@@ -37,10 +37,11 @@ public class AABB extends Convexity implements Cloneable {
     public Vector2D getCenter() {
         Vector2D min = getMin();
         Vector2D max = getMax();
-        Vector2D move = max.sub(min);
-        double len = move.len();
-        Vector2D norm = move.norm();
-        return min.add(norm.scale(len / 2.0));
+//        Vector2D move = max.sub(min);
+//        double len = move.len();
+//        Vector2D norm = move.norm();
+//        return min.add(norm.scale(len / 2.0));
+        return min.add(max).div(2);
     }
 
     //**********************************************************************//

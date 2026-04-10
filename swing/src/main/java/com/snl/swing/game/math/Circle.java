@@ -1,8 +1,11 @@
 package com.snl.swing.game.math;
 
+import com.snl.swing.game.math.contract.AbstractShape;
+import com.snl.swing.game.math.contract.Convex;
+
 import java.util.Objects;
 
-public class Circle {
+public class Circle extends AbstractShape implements Convex,Cloneable {
 
     public double r;
     public Vector2D center;
@@ -36,6 +39,7 @@ public class Circle {
         this.r = circle.r;
         this.center = circle.center;
         this.offset = circle.offset;
+        area = circle.area;
     }
 
     public Circle() {
@@ -112,13 +116,13 @@ public class Circle {
             }
             case ONCIRCLE,OUTSIDE -> {
                 // 在圆上或者 圆外
-                Vector2D m = p.sub(c1).norm(); //向量r
+                Vector2D m = p.sub(c1).norm(); //向量
                 v = c1.sub(m.scale(this.r));
             }
             case INSIDE -> {
                 //在内部
                 Vector2D m = p.sub(c1).norm(); //向量
-                return c1.sub(m.scale(r));
+                v =  c1.sub(m.scale(r));
 //                Line l = new Line(c1,m,Line.YINGSHI);
 //                //测试交点
 //                Vector2D[] vs = this.collidePointInLine(l);
@@ -140,7 +144,7 @@ public class Circle {
      * @return 点模式
      */
     public int containsPoint(Vector2D p) {
-        double lenSqr = p.sub(this.center.add(offset)).lenSqr();
+        double lenSqr = p.sub(getCenter()).lenSqr();
         double rd = Math.pow(r,2);
         double diff = lenSqr - rd;
         if (diff < 0) {
@@ -255,14 +259,14 @@ public class Circle {
         int mode = this.containsPoint(p);
         if (mode == INSIDE || mode == CHONGHE)
             return null;
-        Line line = new Line();
         if (mode == ONCIRCLE) {
             //如果点在圆上
-            line.pos = p;
-            line.moveD = p.sub(this.getCenter()).prep();
+            var moveD = p.sub(this.getCenter()).prep();
+            Line line = new Line(p, moveD, Line.XIANSHI);
             return new Line[]{line};
         }
         //否则点在圆外,有两条切线
+        //TODO 求切线
         return null;
     }
 
@@ -461,18 +465,23 @@ public class Circle {
         this.r  *= scale;
     }
 
+    @Override
+    public void scale(double sx, double sy) {
+        throw new UnsupportedOperationException("暂不支持该操作");
+    }
+
     public Circle getScaled(double scale) {
         double s = this.r * scale;
         return new Circle(s,getCenter());
     }
 
     //平移
-    public void translated(double tx,double ty) {
+    public void translate(double tx,double ty) {
         offset.x += tx;
         offset.y += ty;
     }
 
-    public void translated(Vector2D moved) {
+    public void translate(Vector2D moved) {
         this.offset = this.offset.add(moved);
     }
 
@@ -487,11 +496,26 @@ public class Circle {
         return getTranslated(p.x,p.y);
     }
 
+    @Override
+    public void rotate(double rotateTheta) {
+        //绕原点旋转
+    }
+
+    @Override
+    public <T extends Polygon> T rotateWithTheta(double rotateTheta) {
+        return null;
+    }
+
     //旋转
     public void rotate(double rotate,Vector2D rotateCenter) {
         this.offset.sub(rotateCenter)
                 .rotate(rotate);
         this.offset.add(rotateCenter);
+    }
+
+    @Override
+    public void rotate(double rot, double x, double y) {
+
     }
 
     public Circle getRotate(double rotate,Vector2D rotateCenter) {
@@ -525,4 +549,19 @@ public class Circle {
                 '}';
     }
 
+    @Override
+    public void shear(double sx, double sy) {
+        throw new UnsupportedOperationException("未收支持的异常");
+    }
+
+
+    @Override
+    public Vector2D[] getAxes() {
+        throw new UnsupportedOperationException("未收支持的异常");
+    }
+
+    @Override
+    public SegMent[] getEdge() {
+        throw new UnsupportedOperationException("未收支持的异常");
+    }
 }
