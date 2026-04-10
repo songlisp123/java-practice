@@ -566,4 +566,9 @@ public class SegMent extends AbstractShape implements Cloneable {
             }
         }
     }
+
+    public static final double getLocation(Vector2D point, Vector2D linePoint1, Vector2D linePoint2) {
+        return (linePoint2.x - linePoint1.x) * (point.y - linePoint1.y)
+                - (point.x - linePoint1.x) * (linePoint2.y - linePoint1.y);
+    }
 }

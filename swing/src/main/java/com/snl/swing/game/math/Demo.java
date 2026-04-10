@@ -164,7 +164,7 @@ public class Demo extends DiKaErPlus {
         drawAAbb(g2,aabb1,false);
         Circle circle = or.getCircle();
         drawCircle(g2,circle.center,circle.r,false);
-        AABB aabb2 = convexity.getAABB();
+        AABB aabb2 = convexity.computeAABB();
         drawAAbb(g2,aabb2,false);
         g2.drawString("按下 T 键切换撞击模式",30,130);
         g2.drawString("碰撞模式:"+collide[mode],30,150);

@@ -3,12 +3,9 @@ package com.snl.swing.game.math;
 public class Triangle extends Convexity {
 
     public Triangle(Vector2D ... vertices) {
-        super();
+        super(null,vertices);
         if (vertices.length != 3)
             throw new IllegalArgumentException("参数必须是3个");
-        this.vertices = vertices;
-        this.offset = new Vector2D();
-        size = 3;
     }
 
     /**
@@ -98,6 +95,30 @@ public class Triangle extends Convexity {
         return super.getArea() / 2.0;
     }
 
+    @Override
+    public boolean containsPoint(Vector2D pos) {
+        Vector2D[] vs = getVertices();
+        Vector2D p1 = vs[0];
+        Vector2D p2 = vs[1];
+        Vector2D p3 = vs[2];
 
-
+        //获取三边向量
+        Vector2D ab = p2.sub(p1);
+        Vector2D ac = p3.sub(p1);
+        Vector2D pa = pos.sub(p1);
+        double dot00 = ac.dot(ac);
+        double dot01 = ac.dot(ab);
+        double dot02 = ac.dot(pa);
+        double dot11 = ab.dot(ab);
+        double dot12 = ab.dot(pa);
+        double denominator = dot00 * dot11 - dot01 * dot01;
+        double invD = (double)1.0F / denominator;
+        double u = (dot11 * dot02 - dot01 * dot12) * invD;
+        if (u <= (double)0.0F) {
+            return false;
+        } else {
+            double v = (dot00 * dot12 - dot01 * dot02) * invD;
+            return v > (double)0.0F && u + v <= (double)1.0F;
+        }
+    }
 }

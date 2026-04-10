@@ -4,6 +4,8 @@ import com.snl.swing.game.math.contract.AbstractShape;
 import com.snl.swing.game.math.contract.Convex;
 import com.snl.swing.game.math.contract.PointIterator;
 import com.snl.swing.game.math.contract.Wound;
+import com.snl.swing.game.math.geo.EdgeFeature;
+import com.snl.swing.game.math.geo.PointFeature;
 import com.snl.swing.game.utils.Geometry;
 
 import java.util.*;
@@ -517,6 +519,39 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
 //        }
 //        return aabb;
 //    }
+
+    public EdgeFeature getFarthestFeature(Vector2D vector,Matrix3x3f mat) {
+        Vector2D locale = mat.getInverseTransformedR(vector);
+        int index = getFarthestVertexIndex(locale);
+        Vector2D[] vs = getVertices();
+        Vector2D maxiMum = new Vector2D(vs[index]);
+        Vector2D leftN = this.norms[index == 0 ? size - 1 : index - 1];
+        Vector2D rightN = this.norms[index];
+        maxiMum = mat.mul(maxiMum);
+        PointFeature pointFeature = new PointFeature(index, maxiMum);
+        //todo
+        return null;
+    }
+
+    private int getFarthestVertexIndex(Vector2D locale) {
+        int maxIndex = 0;
+        Vector2D[] vs = getVertices();
+        double max =locale.dot(vs[0]);
+        double candidateMax = 0;
+        if (max < (locale.dot(vs[1])))
+        {
+            do {
+                ++maxIndex;
+            }while (maxIndex + 1 < size && candidateMax < (candidateMax = locale.dot(vs[maxIndex + 1])));
+        } else if (max < (candidateMax = locale.dot(vs[size - 1]))) {
+            maxIndex = size;
+            do {
+                --maxIndex;
+            }while (maxIndex > 0 && candidateMax <= (candidateMax = locale.dot(vs[maxIndex - 1])));
+        }
+
+        return maxIndex;
+    }
 
     public static void main(String[] args) {
         Polygon polygon = new Polygon(

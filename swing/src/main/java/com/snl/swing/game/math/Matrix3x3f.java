@@ -277,6 +277,15 @@ public class Matrix3x3f {
 
     }
 
+    public Vector2D getInverseTransformedR(Vector2D vector) {
+        Vector2D v2d = new Vector2D();
+        double x = vector.x;
+        double y = vector.y;
+         v2d.x = x * mat[0][0] - y * mat[0][1] + mat[0][2];
+         v2d.y = -x * mat[1][0] + y * mat[1][1] + mat[1][2];
+        return v2d;
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
