@@ -2,6 +2,7 @@ package com.snl.swing.game.math;
 
 import com.snl.swing.game.math.contract.AbstractShape;
 import com.snl.swing.game.math.contract.Convex;
+import com.snl.swing.game.math.geo.hull.PathIterator;
 
 import java.util.Objects;
 
@@ -52,7 +53,7 @@ public class Circle extends AbstractShape implements Convex,Cloneable {
      * @return 返回离点p最近的点
      */
     public Vector2D getNearestPoint(Vector2D p) {
-        int i = containsPoint(p);
+        int i = containsPointInMode(p);
         Vector2D v = null;
         switch (i) {
             case OUTSIDE -> {
@@ -107,7 +108,7 @@ public class Circle extends AbstractShape implements Convex,Cloneable {
      */
     public Vector2D getFarthestPoint(Vector2D p) {
         Vector2D v = null;
-        int mode = containsPoint(p);
+        int mode = containsPointInMode(p);
         Vector2D c1 = getCenter();
         switch (mode) {
             case CHONGHE -> {
@@ -143,7 +144,7 @@ public class Circle extends AbstractShape implements Convex,Cloneable {
      * @param p 待判断点
      * @return 点模式
      */
-    public int containsPoint(Vector2D p) {
+    public int containsPointInMode(Vector2D p) {
         double lenSqr = p.sub(getCenter()).lenSqr();
         double rd = Math.pow(r,2);
         double diff = lenSqr - rd;
@@ -163,14 +164,10 @@ public class Circle extends AbstractShape implements Convex,Cloneable {
         return -1;
     }
 
-    /**
-     *
-     * @param p
-     * @return
-     * @since 2026年4月2日00:07:08
-     */
-    public boolean containsPointInBoolean(Vector2D p) {
-        return this.containsPoint(p) != OUTSIDE; //不在圆外
+
+    @Override
+    public boolean containsPoint(double x, double y) {
+        return this.containsPointInMode(new Vector2D(x,y)) != OUTSIDE;
     }
 
     /**
@@ -256,7 +253,7 @@ public class Circle extends AbstractShape implements Convex,Cloneable {
      * @return 与点相切的直线,如果点在圆内部，返回null
      */
     public Line[] getQLine(Vector2D p) {
-        int mode = this.containsPoint(p);
+        int mode = this.containsPointInMode(p);
         if (mode == INSIDE || mode == CHONGHE)
             return null;
         if (mode == ONCIRCLE) {
@@ -434,6 +431,11 @@ public class Circle extends AbstractShape implements Convex,Cloneable {
         return new AABB(min,max);
     }
 
+    @Override
+    public PathIterator getPathIterator(Matrix3x3f transform) {
+        return null;
+    }
+
 
     /**
      * 获取AABB矩形
@@ -481,10 +483,6 @@ public class Circle extends AbstractShape implements Convex,Cloneable {
         offset.y += ty;
     }
 
-    public void translate(Vector2D moved) {
-        this.offset = this.offset.add(moved);
-    }
-
     public Circle getTranslated(double x,double y) {
         double xt = this.offset.x + x;
         double yt = this.offset.y + y;
@@ -502,20 +500,18 @@ public class Circle extends AbstractShape implements Convex,Cloneable {
     }
 
     @Override
-    public <T extends Polygon> T rotateWithTheta(double rotateTheta) {
-        return null;
-    }
-
-    //旋转
-    public void rotate(double rotate,Vector2D rotateCenter) {
-        this.offset.sub(rotateCenter)
-                .rotate(rotate);
-        this.offset.add(rotateCenter);
-    }
-
-    @Override
     public void rotate(double rot, double x, double y) {
+        double ox,oy;
+        offset.x -= x;
+        ox = offset.x;
+        offset.y -= y;
+        oy = offset.y;
 
+        offset.x = ox * Math.cos(rot) - Math.sin(rot) * oy;
+        offset.y = ox * Math.sin(rot) + Math.cos(rot) * oy;
+
+        offset.x += x;
+        offset.y += y;
     }
 
     public Circle getRotate(double rotate,Vector2D rotateCenter) {

@@ -1,6 +1,7 @@
 package com.snl.swing.game.math;
 
 import com.snl.swing.game.math.contract.AbstractShape;
+import com.snl.swing.game.math.geo.hull.PathIterator;
 
 /**
  * 线段建模
@@ -270,11 +271,15 @@ public class SegMent extends AbstractShape implements Cloneable {
                 mode == TARGENT;
     }
 
-     //TODO
+    /**
+     * 这是一个碰撞圆测试
+     * @param circle 测试圆
+     * @return 碰撞测试
+     */
     public int collideCircle(Circle circle) {
         //内部
-        if (!circle.containsPointInBoolean(this.p1)
-        && !circle.containsPointInBoolean(this.p2)) {
+        if (!circle.containsPoint(this.p1)
+        && !circle.containsPoint(this.p2)) {
             //在外部，分为三种情况
             //第一种 ： 完全不相交
             double d , r;
@@ -292,24 +297,24 @@ public class SegMent extends AbstractShape implements Cloneable {
             }
         }
         //外部
-        if (circle.containsPointInBoolean(this.p1)
-        && circle.containsPointInBoolean(this.p2)) {
+        if (circle.containsPoint(this.p1)
+        && circle.containsPoint(this.p2)) {
             return INSIDE;
         }
         //相交与一点
-        if (circle.containsPointInBoolean(this.p1)
-            && !circle.containsPointInBoolean(this.p2)) {
+        if (circle.containsPoint(this.p1)
+            && !circle.containsPoint(this.p2)) {
             //如果p1在内部 且 p2 在外部
             return INSECTIONINONEPOINT;
         }
 
-        if (!circle.containsPointInBoolean(this.p1)
-            && circle.containsPointInBoolean(this.p2))
+        if (!circle.containsPoint(this.p1)
+            && circle.containsPoint(this.p2))
         {
             //如果 p1 在外部 且 p2 在内部
             return INSECTIONINONEPOINT;
         }
-        throw new UnsupportedOperationException("为支持的操作");
+        throw new UnsupportedOperationException("不支持的操作");
     }
 
     public Vector2D[] collideCircleToVectorArray(Circle circle) {
@@ -363,17 +368,11 @@ public class SegMent extends AbstractShape implements Cloneable {
 
                 // 线方向
                 Vector2D lineDir = p2.sub(p1);
-                Vector2D norm = lineDir.prep().norm(); // 法线
-
-                // 圆心到直线距离（点到线距离公式）
+                Vector2D norm = lineDir.prep().norm();
                 double d = Math.abs(
                         c.getCenter().sub(p1).dot(norm)
                 );
-
-                // 穿透深度
                 double depth = r - d;
-
-                // 防御：不穿透返回0
                 return Math.max(depth, 0);
             }
         }
@@ -392,6 +391,55 @@ public class SegMent extends AbstractShape implements Cloneable {
     @Override
     public double getArea() {
         throw new UnsupportedOperationException("暂不支持该操作");
+    }
+
+    @Override
+    public boolean containsPoint(double x, double y) {
+        double x1,y1,x2,y2;
+        double d1,d2,co;
+        x1 = p2.x - p1.x;
+        y1 = p2.y - p1.y;
+
+        x2 = x - p1.x;
+        y2 = y - p1.y;
+
+        d1 = x1 * x1 + y1 * y1;
+        d2 = x1 * x2 + y1 * y2;
+
+        co = d2 / d1;
+        if (co > 1 || co < 0)
+            return false;
+        return true;
+    }
+
+    @Override
+    public AABB getAABB() {
+        double maxX = p1.x;
+        double minX = p2.x;
+
+        if (minX > maxX) {
+            double temp = minX;
+            minX = maxX;
+            maxX = temp;
+        }
+
+        double maxY = p1.y;
+        double minY = p2.y;
+        if (minY > maxY) {
+            double temp = minY;
+            minY = maxY;
+            maxY = temp;
+        }
+
+        Vector2D min = new Vector2D(minX,minY);
+        Vector2D max = new Vector2D(maxX,maxY);
+
+        return new AABB(min,max);
+    }
+
+    @Override
+    public PathIterator getPathIterator(Matrix3x3f transform) {
+        return null;
     }
 
     @Override
@@ -468,30 +516,6 @@ public class SegMent extends AbstractShape implements Cloneable {
         return getSegmentIntersection(p1,p2,segMent.p1,segMent.p2,true);
     }
 
-    public AABB createAABB() {
-        double maxX = p1.x;
-        double minX = p2.x;
-
-        if (minX > maxX) {
-            double temp = minX;
-            minX = maxX;
-            maxX = temp;
-        }
-
-        double maxY = p1.y;
-        double minY = p2.y;
-        if (minY > maxY) {
-            double temp = minY;
-            minY = maxY;
-            maxY = temp;
-        }
-
-        Vector2D min = new Vector2D(minX,minY);
-        Vector2D max = new Vector2D(maxX,maxY);
-
-        return new AABB(min,max);
-    }
-
     public boolean tangentCircle(Circle circle) {
         return this.collideCircle(circle) == TARGENT;
     }
@@ -500,6 +524,8 @@ public class SegMent extends AbstractShape implements Cloneable {
         Circle circle = new Circle(r,pos);
         return tangentCircle(circle);
     }
+
+
 
     /******************* 静态方法 **********************/
 
@@ -514,7 +540,7 @@ public class SegMent extends AbstractShape implements Cloneable {
         }else {
             double amxA = ap1.sub(bp1).cross2D(A);
             if (Math.abs(amxA) <= Epsilon.PRECISION) {
-                //分支为零
+                //重合
                 return null;
             }
             //否则，克莱姆法则
@@ -537,7 +563,7 @@ public class SegMent extends AbstractShape implements Cloneable {
 
         double BCorssA = B.cross2D(A);
         if (Math.abs(BCorssA) <= Epsilon.PRECISION) {
-            //分母不能为零
+            //平行
             return null;
         }
         else {
@@ -567,8 +593,50 @@ public class SegMent extends AbstractShape implements Cloneable {
         }
     }
 
+    /**
+     * 获取点 在线段的位置
+     * @param point 测试点
+     * @param linePoint1 线段端点
+     * @param linePoint2 线段端点
+     * @return 如果结果大于，则在右侧，如果结果小于0，则在左侧，否则点在线段上
+     * @implNote 图像宝石第一卷第二章 2d渲染
+     */
     public static final double getLocation(Vector2D point, Vector2D linePoint1, Vector2D linePoint2) {
         return (linePoint2.x - linePoint1.x) * (point.y - linePoint1.y)
                 - (point.x - linePoint1.x) * (linePoint2.y - linePoint1.y);
+    }
+
+
+    public static final double ptSegDistSq(double x1,double y1,double x2,double y2,double px,double py) {
+        //假设根点是x1,y1，此时x1 -> x2,x1 -> px
+        x2 -= x1;
+        y2 -= y1;
+        px -= x1;
+        py -= y1;
+        //点积判断角度
+        double dotProd = px * x2 + py * y2;
+        double projlenSq; //投影平方
+        if (dotProd < 0)
+            //p点在x1侧远离x2点
+            projlenSq = 0;
+        else {
+            //判断另一侧，此时x2 -> x1,x2 -> p
+            //此时两个向量方向相反，但是点积的性质是如果两个的方向相反，相当于两个正常向量点积
+            px = x2 - px;
+            py = y2 - py;
+            dotProd = px *x2+ py * y2;
+            if (dotProd < 0)
+                //p点在x\2侧远离x1点
+                projlenSq = 0;
+            else {
+                //p在x1,x2区间
+                projlenSq = dotProd * dotProd / (x2 * x2 + y2 * y2);
+            }
+        }
+
+        double lensq = (px * px + py * py) - projlenSq;
+        if (Math.abs(lensq) < Epsilon.PRECISION)
+            lensq = 0;
+        return lensq;
     }
 }

@@ -74,8 +74,8 @@ public class Convexity extends Polygon {
      * @implNote 该程序由分离轴定理实现
      */
     public boolean collideOtherConvexity(Convexity convexity) {
-        AABB aabb = computeAABB();
-        AABB aabb02 = convexity.computeAABB();
+        AABB aabb = getAABB();
+        AABB aabb02 = convexity.getAABB();
 
         if (!aabb.collisionAABB(aabb02))
             return false;
@@ -109,7 +109,7 @@ public class Convexity extends Polygon {
     对于三角形来说：我们需要找到
      */
     public Circle getCircle() {
-        AABB aabb = computeAABB();
+        AABB aabb = getAABB();
         Vector2D ct = aabb.max.add(aabb.min).div(2);
         Vector2D hf = aabb.max.sub(aabb.min).div(2);
         OrientedRectangle o = new OrientedRectangle(ct,hf,0);
@@ -160,15 +160,4 @@ public class Convexity extends Polygon {
         }
         return r;
     }
-
-    //    public static void main(String[] args) {
-//        Convexity convexity = new Convexity(new Vector2D(),
-//                new Vector2D(0, 2), new Vector2D(1, 5), new Vector2D(3, 0), Vector2D.originPoint);
-//        Vector2D c = convexity.getCenter();
-//        Vector2D averageCenter = Geometry.getAverageCenter(convexity);
-//        System.out.println("averageCenter = " + averageCenter);
-//
-//        Vector2D areaWeightedCenter = Geometry.getAreaWeightedCenter(convexity);
-//        System.out.println("areaWeightedCenter = " + areaWeightedCenter);
-//    }
 }

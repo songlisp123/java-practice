@@ -1,8 +1,6 @@
 package com.snl.swing.game.utils;
 
-import com.snl.swing.game.math.Convexity;
-import com.snl.swing.game.math.Epsilon;
-import com.snl.swing.game.math.Vector2D;
+import com.snl.swing.game.math.*;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -15,20 +13,22 @@ public class Geometry {
 
     private static final double FRACTOR = 1 / 3.0;
 
+
     /**
-     * 获取 凸多边形 重心，重心由边的平分线描述
-     * @param convexity 凸多边形
-     * @return 重心坐标
+     *
+     * @param t
+     * @return
+     * @param <T>
      */
-    public static  Vector2D getAverageCenter(Convexity convexity) {
+    public static <T extends Polygon> Vector2D getAverageCenter(T t) {
         Vector2D temp = new Vector2D();
         Vector2D center = new Vector2D();
-        Iterator<Vector2D> iterator = convexity.getVertexIterator();
+        Iterator<Vector2D> iterator = t.getVertexIterator();
         while (iterator.hasNext()) {
             Vector2D v2 = iterator.next();
             temp = temp.add(v2);
         }
-        int size = convexity.getSize();
+        int size = t.getSize();
         center.x = temp.x / size;
         center.y = temp.y / size;
         return center;
@@ -112,8 +112,8 @@ public class Geometry {
         }
     }
 
-    public static Vector2D getAreaWeightedCenter(Convexity convexity) {
-        return getAreaWeightedCenter(convexity.getVertices());
+    public static <T extends Polygon>  Vector2D getAreaWeightedCenter(T t) {
+        return getAreaWeightedCenter(t.getVertices());
     }
 
     public static Vector2D getAreaWeightedCenter(Collection<Vector2D> collection) {
@@ -141,5 +141,71 @@ public class Geometry {
         }
 
         return normals;
+    }
+
+    /**
+     * 获取环绕规则，环绕规则是一个复杂的问题
+     * @param vector2DS
+     * @return
+     * @implNote github开源代码
+     */
+    public static final double getWinding(Vector2D...vector2DS) {
+        if (vector2DS == null)
+            throw new IllegalArgumentException("参数为null");
+        else {
+            double area = 0;
+            int length = vector2DS.length;
+            if (length < 2)
+                throw new IllegalArgumentException("参数数组至少大于等于2");
+            for (int i = 0;i<length;++i){
+                //TODO
+                int  j = i + 1 == length ? 0 : i + 1;
+                Vector2D p1 = vector2DS[i];
+                Vector2D p2 = vector2DS[j];
+                if (p1 == null)
+                    throw new NullPointerException("数组元素为空");
+                if (p2 == null)
+                    throw new NullPointerException("数组元素为空");
+
+                area += p1.cross2D(p2);
+            }
+            return area;
+        }
+    }
+
+
+    /**
+     * 判断给定点与线段的位置
+     * @param ap1 点1
+     * @param ap2 点2
+     * @param segMent 线段
+     * @return {@code 0}，表示其中一点位于线段上，{@code < 0} 表示相交
+     * {@code > 0} 表示p1\p2位于同一侧
+     * @implNote 图像宝石第一卷
+     */
+    public static final int PointWhere(Vector2D ap1, Vector2D ap2, SegMent segMent) {
+        //计算各向量
+        double dx,dy,dx1,dy1,dx2,dy2,p_1,p_2;
+        //计算dx，这是线段的水平距离
+        dx = segMent.p2.x - segMent.p1.x;
+        dy = segMent.p2.y - segMent.p1.x;
+        //计算
+        dx1 = ap1.x - segMent.p1.x;
+        dy1 = ap1.y - segMent.p1.y;
+
+        //计算dx2，dy2
+        dx2 = ap2.x - segMent.p2.x;
+        dy2 = ap2.y - segMent.p2.y;
+
+        //计算p_2,p_2
+        p_1 = dx * dy1 - dx1 * dy;
+        p_2 = dx * dy2 - dx2 * dy;
+
+        if (p_1 == 0 || p_2 == 0)
+            return 0;
+        else
+            if ((p_1 > 0 && p_2 < 0) || (p_1 < 0 && p_2 >0))
+                return -1;
+            return 1;
     }
 }

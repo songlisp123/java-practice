@@ -84,8 +84,8 @@ public class TestConversity extends DiKaErPlus {
         drawConvexity(g2,convexity,false);
         drawConvexity(g2,convexity02,false);
         drawCircle(g2,convexity.getCenter(),0.15,true);
-        AABB aabb = convexity.computeAABB();
-        AABB aabb1 = convexity02.computeAABB();
+        AABB aabb = convexity.getAABB();
+        AABB aabb1 = convexity02.getAABB();
 
         g2.setPaint(Color.CYAN);
         drawAAbb(g2,aabb,false);

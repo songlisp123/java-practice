@@ -1,5 +1,7 @@
 package com.snl.swing.game.math;
 
+import java.awt.*;
+import java.awt.geom.Arc2D;
 import java.util.Objects;
 
 public class AABB extends Convexity implements Cloneable {

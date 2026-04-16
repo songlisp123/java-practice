@@ -75,15 +75,15 @@ public class TestPolyGon extends DiKaErPlus {
 //        });
 
         //不规则 但是自然的形状
-//        polygon = new Polygon(new Vector2D[]{
-//                new Vector2D(-3,1),
-//                new Vector2D(-1,3),
-//                new Vector2D(2,3),
-//                new Vector2D(4,1),
-//                new Vector2D(3,-2),
-//                new Vector2D(1,-3),
-//                new Vector2D(-2,-2)
-//        });
+        polygon = new Polygon(new Vector2D[]{
+                new Vector2D(-3,1),
+                new Vector2D(-1,3),
+                new Vector2D(2,3),
+                new Vector2D(4,1),
+                new Vector2D(3,-2),
+                new Vector2D(1,-3),
+                new Vector2D(-2,-2)
+        });
         shearing = true;
         copy = polygon.clone();
         theta = Math.PI / 3;

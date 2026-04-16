@@ -6,6 +6,7 @@ import com.snl.swing.game.math.contract.PointIterator;
 import com.snl.swing.game.math.contract.Wound;
 import com.snl.swing.game.math.geo.EdgeFeature;
 import com.snl.swing.game.math.geo.PointFeature;
+import com.snl.swing.game.math.geo.hull.PathIterator;
 import com.snl.swing.game.utils.Geometry;
 
 import java.util.*;
@@ -40,13 +41,13 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
     }
 
     public Polygon(Polygon polygon) {
-        this.vertices = polygon.vertices;
-        this.offset = polygon.offset;
+        this.vertices = polygon.vertices.clone();
+        this.offset = polygon.offset.clone();
         this.area = polygon.area;
         this.size = polygon.size;
         this.showVer = polygon.showVer;
-        this.center = polygon.center;
-        this.norms = polygon.norms;
+        this.center = polygon.center.clone();
+        this.norms = polygon.norms.clone();
     }
 
     public Polygon(Vector2D center,Vector2D offset,Vector2D...vector2DS) {
@@ -158,6 +159,48 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
         return inside % 2 != 0;
     }
 
+    @Override
+    public boolean containsPoint(double x, double y) {
+        return false;
+    }
+
+    @Override
+    public AABB getAABB() {
+        AABB aabb = new AABB();
+        Vector2D[] vs = getVertices();
+        Vector2D v = vs[0]; // 从第一个点开始
+        double minX = v.x;
+        double maxX = v.x;
+
+        double minY = v.y;
+        double maxY = v.y;
+
+        for(int  j = 1;j < size;j++) {
+            Vector2D point = vs[j];
+            if (point.x < minX)
+                minX = point.x;
+            else if (point.x > maxX)
+                maxX = point.x;
+
+            if (point.y <  minY)
+                minY = point.y;
+            else if (point.y > maxY)
+                maxY = point.y;
+        }
+
+        aabb.min.x = minX;
+        aabb.min.y = minY;
+
+        aabb.max.x = maxX;
+        aabb.max.y = maxY;
+        return aabb;
+    }
+
+    @Override
+    public PathIterator getPathIterator(Matrix3x3f transform) {
+        return null;
+    }
+
     /**
      * 是否需要回执顶点
      * @return 绘制顶点
@@ -198,10 +241,6 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
         this.center.y += y;
     }
 
-    public void translate(Vector2D m) {
-        this.translate(m.x,m.y);
-    }
-
     public Polygon getTranslated(double x , double y) {
         if (x == 0 && y == 0)
             return this;
@@ -221,9 +260,7 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
         if (m == null || m.equals(new Vector2D()))
             return new Polygon(this);
         else {
-            Vector2D offsetTranslate = this.offset.add(m);
-            Vector2D centerTranslate = this.center.add(m);
-            return new Polygon(centerTranslate,offsetTranslate,this.vertices);
+            return this.getTranslated(m.x,m.y);
         }
     }
 
@@ -231,9 +268,18 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
     public void rotate(double rotateTheta) {
         Matrix3x3f rotate = Matrix3x3f.rotate(rotateTheta);
         //绕原心旋转
-        for (int i = 0;i<size;i++)
+        for (int i = 0;i<size;i++) {
+            //更新顶点
             vertices[i] = rotate.mul(vertices[i]);
-        //缩放重心
+            //更新法线
+            norms[i] = rotate.mul(norms[i]);
+        }
+        //重心变换
+        center = updateCenter();
+    }
+
+    private Vector2D updateCenter() {
+        return Geometry.getAverageCenter(getVertices());
     }
 
     @Override
@@ -243,11 +289,6 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
         for (int i = 0;i<size;i++)
             vs[i] = rotate.mul(vertices[i]);
         return (T) new Polygon(getCenter(),this.offset,vs);
-    }
-
-    @Override
-    public void rotate(double rot, Vector2D rotateCenter) {
-        return;
     }
 
     @Override
@@ -304,11 +345,6 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
     }
 
     @Override
-    public void scale(double scale) {
-        this.scale(scale,scale);
-    }
-
-    @Override
     public void scale(double sx, double sy) {
         for (int i = 0;i<vertices.length;i++)
             vertices[i] = vertices[i].scale(sx,sy);
@@ -346,11 +382,6 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
             copy[i] = shear.mul(vertices[i]);
         }
         return new Polygon(this.center,this.offset,copy);
-    }
-
-    public void setVertices(Vector2D[] vertices) {
-        validate(vertices);
-        this.vertices = vertices;
     }
 
     /**
@@ -409,6 +440,7 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
     //**********************************************************************//
     /* ******************          碰撞测试         *********************** */
     //**********************************************************************//
+    //我觉得这不好
 
     public boolean collideLine(Line line) {
         SegMent[] edge = getEdge();
@@ -472,54 +504,8 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
         return vs[selected];
     };
 
-    /**
-     * 计算AABB矩形
-     * @return
-     */
-    public AABB computeAABB() {
-        AABB aabb = new AABB();
-        Vector2D[] vs = getVertices();
-        Vector2D v = vs[0]; // 从第一个点开始
-        double minX = v.x;
-        double maxX = v.x;
-
-        double minY = v.y;
-        double maxY = v.y;
-
-        for(int  j = 1;j < size;j++) {
-            Vector2D point = vs[j];
-            if (point.x < minX)
-                minX = point.x;
-            else if (point.x > maxX)
-                maxX = point.x;
-
-            if (point.y <  minY)
-                minY = point.y;
-            else if (point.y > maxY)
-                maxY = point.y;
-        }
-
-        aabb.min.x = minX;
-        aabb.min.y = minY;
-
-        aabb.max.x = maxX;
-        aabb.max.y = maxY;
-        return aabb;
-    }
-
-//    public AABB getAABB() {
-//        AABB aabb = new AABB(new Vector2D(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY),
-//                new Vector2D(Double.NEGATIVE_INFINITY,Double.NEGATIVE_INFINITY));
-//        Vector2D[] v = this.getVertices();
-//        for (Vector2D corner : v) {
-//            aabb.min.x = Math.min(corner.x,aabb.min.x);
-//            aabb.min.y = Math.min(corner.y,aabb.min.y);
-//            aabb.max.x = Math.max(corner.x,aabb.max.x);
-//            aabb.max.y = Math.max(corner.y,aabb.max.y);
-//        }
-//        return aabb;
-//    }
-
+    //TODO
+    // 我现在还不太会这个，等我学习更多，再来看这个
     public EdgeFeature getFarthestFeature(Vector2D vector,Matrix3x3f mat) {
         Vector2D locale = mat.getInverseTransformedR(vector);
         int index = getFarthestVertexIndex(locale);
@@ -553,6 +539,11 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
         return maxIndex;
     }
 
+    @Override
+    public Polygon clone() {
+        return new Polygon(this);
+    }
+
     public static void main(String[] args) {
         Polygon polygon = new Polygon(
                 new Vector2D[]{new Vector2D(0, 2), new Vector2D(2, 0),
@@ -567,10 +558,5 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
             Vector2D next = it.next();
             System.out.println("next = " + next);
         }
-    }
-
-    @Override
-    public Polygon clone() {
-        return new Polygon(this);
     }
 }
