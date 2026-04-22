@@ -35,10 +35,33 @@ public interface Curve extends Shape,Cloneable, Serializable {
 
     Vector2D getStartPoint();
 
+    Vector2D getControlPoint01();
+    Vector2D getControlPoint02();
+
     Vector2D getEndPoint();
 
     double getStartPointX();
     double getStartPointY();
+    double getControlPoint01X();
+    double getControlPoint01Y();
+
+    double getControlPoint02X();
+    double getControlPoint02Y();
     double getEndPointX();
     double getEndPointY();
+
+
+    void setStartPointX(double x);
+    void setStartPointY(double y);
+
+    void setControlPoint01X(double x);
+    void setControlPoint01Y(double y);
+
+    void setControlPoint02X(double x);
+    void setControlPoint02Y(double y);
+
+    void setEndPointX(double x);
+    void setEndpointY(double y);
+
+    Vector2D getPointNearCurve(Vector2D point);
 }

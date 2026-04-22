@@ -51,7 +51,7 @@ public class GradientEffect implements Part {
             this.start = start;
             this.end = end;
         }
-        reset();
+        reset(0,0);
     }
 
     @Override
@@ -128,10 +128,6 @@ public class GradientEffect implements Part {
         if ((type & INC) != 0 || (type & DEC) != 0) {
             index += incr;
         }
-    }
-
-    private void reset() {
-        this.reset(0,0);
     }
 
     @Override

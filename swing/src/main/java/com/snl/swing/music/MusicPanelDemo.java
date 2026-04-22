@@ -225,15 +225,37 @@ public class MusicPanelDemo extends JPanel  {
                     }else {
                         sourceDataLine.start();
                     }
-                    for (int i = 0; i < read; i+=2) {
+//                    for (int i = 0; i < read; i+=2) {
+//                        short sample = (short) ((storeBytes[i + 1] << 8) | (storeBytes[i] & 0xff));
+//                        float s = sample * gain;
+//                        short newSample = (short) s;
+//                        blockingQueue.put(newSample);
+//                        storeBytes[i] = (byte) (newSample & 0xff);
+//                        storeBytes[i+1] = (byte) ((newSample >> 8) & 0xff);
+//                        if (gain < 1f) gain += fadeInStep;
+//                    }
+                    // ===== 🎯 核心：RMS计算 =====
+                    double sum = 0;
+                    int sampleCount = 0;
+
+                    for (int i = 0; i < read; i += 2) {
                         short sample = (short) ((storeBytes[i + 1] << 8) | (storeBytes[i] & 0xff));
-                        float s = sample * gain;
-                        short newSample = (short) s;
-                        blockingQueue.put(newSample);
-                        storeBytes[i] = (byte) (newSample & 0xff);
-                        storeBytes[i+1] = (byte) ((newSample >> 8) & 0xff);
-                        if (gain < 1f) gain += fadeInStep;
+                        sum += sample * sample;
+                        sampleCount++;
                     }
+
+                    double rms = Math.sqrt(sum / sampleCount);
+
+                    // ===== 🎯 归一化（0~1） =====
+                    double normalized = rms / 32768.0;
+
+                    // ===== 🎯 放大到可视高度 =====
+                    double height = normalized * 200;
+
+                    // 放入队列
+                    blockingQueue.offer((short) height);
+
+                    // 写入音频
                     sourceDataLine.write(storeBytes,0,read);
                     int framePosition = sourceDataLine.getFramePosition();
                     seconds = framePosition / format.getFrameRate();
@@ -474,32 +496,32 @@ public class MusicPanelDemo extends JPanel  {
         protected void paintComponent(Graphics g) {
             var g2 = (Graphics2D) g.create();
             super.paintComponent(g2);
-//            for (Rectangle2D rec : rectangles) {
-//                var r = (RectangleDemo) rec;
-//                if (r.getHeight() < 50) {
-//                    g2.setColor(Color.CYAN);
-//                }else if (r.getHeight() < 100){
-//                    g2.setColor(Color.GREEN);
-//                }else if (r.getHeight() < 150){
-//                    g2.setColor(Color.PINK);
-//                }else if (r.getHeight() < 250){
-//                    g2.setColor(Color.red);
-//                }else {
-//                    g2.setColor(Color.ORANGE);
-//                }
-//                g2.fill(r);
-//            }
+            for (Rectangle2D rec : rectangles) {
+                var r = (RectangleDemo) rec;
+                if (r.getHeight() < 50) {
+                    g2.setColor(Color.CYAN);
+                }else if (r.getHeight() < 100){
+                    g2.setColor(Color.GREEN);
+                }else if (r.getHeight() < 150){
+                    g2.setColor(Color.PINK);
+                }else if (r.getHeight() < 250){
+                    g2.setColor(Color.red);
+                }else {
+                    g2.setColor(Color.ORANGE);
+                }
+                g2.fill(r);
+            }
             g2.dispose();
         }
 
-        private void updatePanel() {
-            int x = label.getX();
-            int width = super.getWidth();
-            if (x < -(width / 2 + 50) ) {
-                x = width / 2 + 50;
-            }
-            x--;
-            label.setLocation(x, label.getY());
+//        private void updatePanel() {
+//            int x = label.getX();
+//            int width = super.getWidth();
+//            if (x < -(width / 2 + 50)) {
+//                x = width / 2 + 50;
+//            }
+//            x--;
+//            label.setLocation(x, label.getY());
 //            for (Rectangle2D rec : rectangles) {
 //                var r = (RectangleDemo) rec;
 //                try {
@@ -511,6 +533,44 @@ public class MusicPanelDemo extends JPanel  {
 //                    ex.printStackTrace();
 //                }
 //
+//                repaint();
+//            }
+//        }
+
+        private void updatePanel() {
+
+            // ===== 🎯 获取音量 =====
+            Short value = blockingQueue.poll();
+
+            if (value != null) {
+
+                for (int i = 0; i < rectangles.size(); i++) {
+
+                    RectangleDemo r = (RectangleDemo) rectangles.get(i);
+
+                    // ===== 🎯 扩散（越远越小）=====
+                    double factor = Math.exp(-i * 0.03);
+
+                    double targetHeight = value * factor;
+
+                    // ===== 🎯 平滑（关键）=====
+                    double smooth = r.getHeight() * 0.7 + targetHeight * 0.3;
+
+                    r.setHeight(smooth);
+                }
+            }
+
+            // ===== 🎯 label移动 =====
+            int x = label.getX();
+            int width = getWidth();
+
+            if (x < -(width / 2 + 50)) {
+                x = width / 2 + 50;
+            }
+
+            label.setLocation(x - 1, label.getY());
+
+            // 🔥 只 repaint 一次！
             repaint();
         }
 

@@ -1,7 +1,7 @@
 package com.snl.swing.game.math;
 
 import com.snl.swing.game.math.contract.AbstractShape;
-import com.snl.swing.game.math.geo.hull.PathIterator;
+import com.snl.swing.game.math.geo.PathIterator;
 
 /**
  * 线段建模

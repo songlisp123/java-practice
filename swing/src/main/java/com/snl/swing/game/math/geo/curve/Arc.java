@@ -3,9 +3,10 @@ package com.snl.swing.game.math.geo.curve;
 import com.snl.swing.game.math.AABB;
 import com.snl.swing.game.math.Matrix3x3f;
 import com.snl.swing.game.math.Vector2D;
-import com.snl.swing.game.math.geo.hull.PathIterator;
+import com.snl.swing.game.math.contract.AbstractShape;
+import com.snl.swing.game.math.geo.PathIterator;
 
-public class Arc implements Curve {
+public class Arc extends AbstractShape {
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
@@ -108,6 +109,7 @@ public class Arc implements Curve {
         return new Vector2D(x,y);
     }
 
+
     //获取圆弧的结束点
     /*
     xi = x + w / 2 * (cos(θ + extent)) + w / 2
@@ -117,26 +119,6 @@ public class Arc implements Curve {
         double x = getX() + (Math.cos(r) * 0.5 + 0.5) * getW();
         double y = getY() + (Math.sin(r) * 0.5 + 0.5) * getH();
         return new Vector2D(x,y);
-    }
-
-    @Override
-    public double getStartPointX() {
-        return getStartPoint().x;
-    }
-
-    @Override
-    public double getStartPointY() {
-        return getStartPoint().y;
-    }
-
-    @Override
-    public double getEndPointX() {
-        return getEndPoint().x;
-    }
-
-    @Override
-    public double getEndPointY() {
-        return getEndPoint().y;
     }
 
     public void setAngleStart(Vector2D p) {

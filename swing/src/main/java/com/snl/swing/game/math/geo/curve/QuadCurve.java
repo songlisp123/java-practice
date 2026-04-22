@@ -4,9 +4,7 @@ import com.snl.swing.game.math.AABB;
 import com.snl.swing.game.math.Matrix3x3f;
 import com.snl.swing.game.math.SegMent;
 import com.snl.swing.game.math.Vector2D;
-import com.snl.swing.game.math.geo.hull.PathIterator;
-
-import java.util.Arrays;
+import com.snl.swing.game.math.geo.PathIterator;
 
 public class QuadCurve implements Curve {
     //起点坐标
@@ -20,6 +18,56 @@ public class QuadCurve implements Curve {
 
     public QuadCurve(double x1, double y1, double ctrlx, double ctrxy, double x2, double y2) {
         setCurve(x1, y1, ctrlx, ctrxy, x2, y2);
+    }
+
+    public QuadCurve() {
+
+    }
+
+    @Override
+    public void setStartPointX(double x) {
+        this.x1 = x;
+    }
+
+    @Override
+    public void setStartPointY(double y) {
+        this.y1 = y;
+    }
+
+    @Override
+    public void setControlPoint01X(double x) {
+        this.ctrlx = x;
+    }
+
+    @Override
+    public void setControlPoint01Y(double y) {
+        this.ctrxy = y;
+    }
+
+    @Override
+    public void setControlPoint02X(double x) {
+        throw new UnsupportedOperationException("该曲线并没有第二个控制点");
+    }
+
+    @Override
+    public void setControlPoint02Y(double y) {
+        throw new UnsupportedOperationException("该曲线并没有第二个控制点");
+    }
+
+    @Override
+    public void setEndPointX(double x) {
+        this.x2 = x;
+    }
+
+    @Override
+    public void setEndpointY(double y) {
+            this.y2 = y;
+    }
+
+    public QuadCurve(Curve curve) {
+        setCurve(curve.getStartPointX(),curve.getControlPoint01Y(),
+                curve.getControlPoint01X(),curve.getControlPoint01Y(),
+                curve.getEndPointX(),curve.getEndPointY());
     }
 
     public void setCurve(double x1, double y1, double ctrlx, double ctrxy, double x2, double y2) {
@@ -52,6 +100,36 @@ public class QuadCurve implements Curve {
     }
 
     @Override
+    public double getControlPoint01X() {
+        return ctrlx;
+    }
+
+    @Override
+    public double getControlPoint01Y() {
+        return ctrxy;
+    }
+
+    @Override
+    public double getControlPoint02X() {
+        throw new UnsupportedOperationException("该曲线并没有第二个控制点");
+    }
+
+    @Override
+    public double getControlPoint02Y() {
+        throw new UnsupportedOperationException("该曲线并没有第二个控制点");
+    }
+
+    @Override
+    public Vector2D getControlPoint01() {
+        return new Vector2D(ctrlx,ctrxy);
+    }
+
+    @Override
+    public Vector2D getControlPoint02() {
+        throw new UnsupportedOperationException("该曲线并没有第二个控制点");
+    }
+
+    @Override
     public Vector2D getEndPoint() {
         return new Vector2D(x2,y2);
     }
@@ -76,6 +154,12 @@ public class QuadCurve implements Curve {
         return y2;
     }
 
+    @Override
+    public Vector2D getPointNearCurve(Vector2D point) {
+        //TODO
+        return null;
+    }
+
     public double getCtrlx() {
         return ctrlx;
     }
@@ -84,8 +168,12 @@ public class QuadCurve implements Curve {
         return ctrxy;
     }
 
-    public Vector2D getControlPoint() {
-        return new Vector2D(ctrlx,ctrxy);
+    public void setControlPoint(Vector2D point) {
+        setControlPoint(point.x,point.y);
+    }
+    public void setControlPoint(double x,double y) {
+        ctrlx += x;
+        ctrxy += y;
     }
 
     @Override
@@ -119,7 +207,7 @@ public class QuadCurve implements Curve {
 
     @Override
     public PathIterator getPathIterator(Matrix3x3f transform) {
-        return null;
+        return new QuadIterator(this,transform);
     }
 
     //********************************* *********************//
@@ -280,8 +368,12 @@ public class QuadCurve implements Curve {
         ctrly = (ctrly1 + ctrly2) / 2.0;
         if (left != null)
             left.setCurve(x1,y1,ctrlx1,ctrly1,ctrlx,ctrly);
+        else
+            throw new NullPointerException();
         if (right != null)
             right.setCurve(ctrlx,ctrly,ctrlx2,ctrly2,x2,y2);
+        else
+            throw new NullPointerException();
     }
 
     //********************************* *********************//
@@ -294,7 +386,7 @@ public class QuadCurve implements Curve {
     }
 
     public boolean intersects(AABB aabb) {
-        return false;
+        return intersects(aabb.getMin(),aabb.getMax());
     }
 
     @Override

@@ -2,8 +2,11 @@ package com.snl.swing.game.gameFrame;
 
 import com.snl.swing.game.math.*;
 import com.snl.swing.game.math.Polygon;
+import com.snl.swing.game.math.geo.curve.CubicCurve;
+import com.snl.swing.game.math.geo.curve.Curve;
+import com.snl.swing.game.math.geo.curve.QuadCurve;
+import com.snl.swing.game.math.geo.Path;
 import com.snl.swing.game.utils.AxisPlus;
-import com.snl.swing.game.utils.Utils;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,7 +15,6 @@ import java.awt.font.TextLayout;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
-import java.util.Arrays;
 import java.util.List;
 
 public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListener {
@@ -421,6 +423,49 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
 //                this.drawText(g2,tl,v);
             }
         }
+    }
+
+    protected <T extends Curve> void drawCurve(Graphics2D g2,T t) {
+        Matrix3x3f vt = getViewportTransform();
+        GeneralPath path = new GeneralPath();
+        if (t instanceof QuadCurve arc)
+        {
+            Vector2D startPoint = arc.getStartPoint();
+            startPoint = vt.mul(startPoint);
+            path.moveTo(startPoint.x,startPoint.y);
+
+            Vector2D controlPoint = arc.getControlPoint01();
+            controlPoint = vt.mul(controlPoint);
+
+            Vector2D endPoint = arc.getEndPoint();
+            endPoint = vt.mul(endPoint);
+
+            path.quadTo(controlPoint.x,controlPoint.y,endPoint.x,endPoint.y);
+        } else if (t instanceof CubicCurve cc) {
+            Vector2D startPoint = cc.getStartPoint();
+            startPoint = vt.mul(startPoint);
+            path.moveTo(startPoint.x,startPoint.y);
+
+            Vector2D controlPoint = cc.getControlPoint01();
+            controlPoint = vt.mul(controlPoint);
+
+            Vector2D controlPoint2 = cc.getControlPoint2();
+            controlPoint2 = vt.mul(controlPoint2);
+
+            Vector2D endPoint = cc.getEndPoint();
+            endPoint = vt.mul(endPoint);
+
+            path.curveTo(controlPoint.x,controlPoint.y,controlPoint2.x,controlPoint2.y,
+                    endPoint.x,endPoint.y);
+        }
+
+        g2.fill(path);
+    }
+
+
+    public void drawPath(Graphics2D g2, Path path) {
+        Matrix3x3f vt = getViewportTransform();
+        g2.fill(path.getGp(vt));
     }
 
     //**********************************************************************//

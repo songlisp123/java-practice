@@ -2,7 +2,7 @@ package com.snl.swing.game.math;
 
 import com.snl.swing.game.math.contract.AbstractShape;
 import com.snl.swing.game.math.contract.Convex;
-import com.snl.swing.game.math.geo.hull.PathIterator;
+import com.snl.swing.game.math.geo.PathIterator;
 
 import java.util.Objects;
 
@@ -157,7 +157,7 @@ public class Circle extends AbstractShape implements Convex,Cloneable {
         }else if (Math.abs(diff) < Epsilon.PRECISION) {
             //点在圆上
             return ONCIRCLE;
-        } else if (lenSqr <= Epsilon.E) {
+        } else if (Math.abs(lenSqr) <= Epsilon.E) {
             //点与圆心重合
             return CHONGHE;
         }

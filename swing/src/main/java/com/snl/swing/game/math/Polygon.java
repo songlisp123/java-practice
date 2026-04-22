@@ -6,7 +6,7 @@ import com.snl.swing.game.math.contract.PointIterator;
 import com.snl.swing.game.math.contract.Wound;
 import com.snl.swing.game.math.geo.EdgeFeature;
 import com.snl.swing.game.math.geo.PointFeature;
-import com.snl.swing.game.math.geo.hull.PathIterator;
+import com.snl.swing.game.math.geo.PathIterator;
 import com.snl.swing.game.utils.Geometry;
 
 import java.util.*;
@@ -537,6 +537,10 @@ public class Polygon extends AbstractShape implements Wound , Convex , Cloneable
         }
 
         return maxIndex;
+    }
+
+    public void setVertices(Vector2D[] vertices) {
+        this.vertices = vertices;
     }
 
     @Override

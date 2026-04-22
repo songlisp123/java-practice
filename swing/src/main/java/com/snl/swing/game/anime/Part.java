@@ -2,6 +2,9 @@ package com.snl.swing.game.anime;
 
 import java.awt.*;
 
+/**
+ * 场景，画面
+ */
 public interface Part {
     int getEnd();
     int getStart();

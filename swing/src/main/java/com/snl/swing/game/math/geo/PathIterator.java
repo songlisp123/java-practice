@@ -1,6 +1,4 @@
-package com.snl.swing.game.math.geo.hull;
-
-import com.snl.swing.game.math.Vector2D;
+package com.snl.swing.game.math.geo;
 
 public interface PathIterator {
 
@@ -13,5 +11,5 @@ public interface PathIterator {
     boolean done();
     void next();
 
-    int currentSegment(Vector2D[] coords);
+    int currentSegment(double[] coords);
 }

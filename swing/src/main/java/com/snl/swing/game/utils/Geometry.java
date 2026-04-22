@@ -1,6 +1,9 @@
 package com.snl.swing.game.utils;
 
 import com.snl.swing.game.math.*;
+import com.snl.swing.game.math.geo.curve.CubicCurve;
+import com.snl.swing.game.math.geo.curve.Curve;
+import com.snl.swing.game.math.geo.curve.QuadCurve;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -207,5 +210,77 @@ public class Geometry {
             if ((p_1 > 0 && p_2 < 0) || (p_1 < 0 && p_2 >0))
                 return -1;
             return 1;
+    }
+
+    public static final Polygon transformPolygon(Polygon src,Polygon des,Matrix3x3f transform) {
+        if (src == null)
+            throw new IllegalArgumentException("");
+        if (des == null) {
+            des = new Polygon(src);
+        }
+
+        Vector2D[] vs = des.getVertices();
+        for (int i = 0;i<vs.length;i++) {
+            vs[i] = transform.mul(vs[i]);
+        }
+
+        des.setVertices(vs);
+        return des;
+    }
+
+
+    public static final Curve transFormCurve(Curve src, Curve des, Matrix3x3f transform) {
+        if (src instanceof QuadCurve quadCurve) {
+            if (des == null)
+                des = new QuadCurve(src);
+            Vector2D startPoint = src.getStartPoint();
+            startPoint = transform.mul(startPoint);
+
+            Vector2D cp = src.getControlPoint01();
+            cp =  transform.mul(cp);
+
+            Vector2D endPoint = src.getEndPoint();
+            endPoint = transform.mul(endPoint);
+
+            des.setStartPointX(startPoint.x);
+            des.setStartPointY(startPoint.y);
+
+            des.setControlPoint01X(cp.x);
+            des.setControlPoint01Y(cp.y);
+
+            des.setEndPointX(endPoint.x);
+            des.setEndpointY(endPoint.y);
+
+            return des;
+        } else if (src instanceof CubicCurve c) {
+            if (des == null)
+                des = new CubicCurve(src);
+            Vector2D startPoint = src.getStartPoint();
+            startPoint = transform.mul(startPoint);
+
+            Vector2D cp1 = src.getControlPoint01();
+            cp1 = transform.mul(cp1);
+
+            Vector2D cp2 = src.getControlPoint02();
+            cp2 = transform.mul(cp2);
+
+            Vector2D endPoint = src.getEndPoint();
+            endPoint = transform.mul(endPoint);
+
+            des.setStartPointX(startPoint.x);
+            des.setStartPointY(startPoint.y);
+
+            des.setControlPoint01X(cp1.x);
+            des.setControlPoint01Y(cp1.y);
+
+            des.setControlPoint02X(cp2.x);
+            des.setControlPoint02Y(cp2.y);
+
+            des.setEndPointX(endPoint.x);
+            des.setEndpointY(endPoint.y);
+
+            return des;
+        }
+        throw new RuntimeException();
     }
 }

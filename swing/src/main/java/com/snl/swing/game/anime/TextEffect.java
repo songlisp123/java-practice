@@ -67,6 +67,8 @@ public class TextEffect implements Part {
             String s =String.valueOf(chars[j]);
             shapes[j] = new TextLayout(s,font,frc).getOutline(null);
         }
+
+        reset(0,0);
     }
 
     private void setIncrements(double numRev) {

@@ -1,6 +1,6 @@
-package com.snl.swing.game.math.geo.hull;
+package com.snl.swing.game.math.geo.curve;
 
-import com.snl.swing.game.math.Vector2D;
+import com.snl.swing.game.math.geo.PathIterator;
 
 public class ArcPathIterator implements PathIterator {
     @Override
@@ -14,7 +14,7 @@ public class ArcPathIterator implements PathIterator {
     }
 
     @Override
-    public int currentSegment(Vector2D[] coords) {
+    public int currentSegment(double[] coords) {
         return 0;
     }
 }

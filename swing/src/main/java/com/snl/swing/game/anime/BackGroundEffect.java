@@ -16,10 +16,13 @@ public class BackGroundEffect implements Part {
 
     private Graphics2D big;
 
-    public BackGroundEffect(int start, int end,Color...colors) {
+    private final Canvas c;
+
+    public BackGroundEffect(int start, int end,Canvas c,Color...colors) {
         this.start = start;
         this.end = end;
         this.colors = colors;
+        this.c = c;
     }
 
     @Override
@@ -35,6 +38,7 @@ public class BackGroundEffect implements Part {
     @Override
     public void render(int w, int h, Graphics2D g2) {
         big.setPaint(colors[index++ % colors.length]);
+        big.fillRect(0,0, bim.getWidth(),bim.getHeight());
         g2.drawImage(bim, 0, 0, null);
     }
 

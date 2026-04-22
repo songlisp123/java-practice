@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * 场景类，维护了一系列{@code part}和场景切换之间的时间
+ * 有关更多信息，参阅{@link Part}
  */
 public class Scene {
 
