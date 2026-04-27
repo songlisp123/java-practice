@@ -4,6 +4,8 @@ package com.snl.swing.game.utils;
 import com.snl.swing.game.math.Matrix3x3f;
 import com.snl.swing.game.math.Vector2D;
 
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.font.TextLayout;
@@ -17,6 +19,8 @@ public class Utils {
     public static final Font font02 = new Font("GENISO",Font.PLAIN,25);
     public static final Font liShu = new Font("隶书",Font.PLAIN|Font.BOLD,25);
     public static final Font font03 = new Font("SHOWCARD GOTHIC",Font.PLAIN,15);
+
+    public static final double Gravity = 9.98;
 
 
     public static void beep() {

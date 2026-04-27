@@ -549,9 +549,10 @@ public class MusicPanelDemo extends JPanel  {
                     RectangleDemo r = (RectangleDemo) rectangles.get(i);
 
                     // ===== 🎯 扩散（越远越小）=====
-                    double factor = Math.exp(-i * 0.03);
+//                    double factor = Math.exp(-i * 0.03);
 
-                    double targetHeight = value * factor;
+//                    double targetHeight = value * factor;
+                    double targetHeight = value * 1.25;
 
                     // ===== 🎯 平滑（关键）=====
                     double smooth = r.getHeight() * 0.7 + targetHeight * 0.3;

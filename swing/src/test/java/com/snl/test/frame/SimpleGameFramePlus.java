@@ -214,7 +214,7 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
     /**
      * 游戏终止逻辑
      */
-    private void teminate() {
+    protected void teminate() {
 
     }
 

@@ -5,8 +5,12 @@ import com.snl.swing.game.components.*;
 import com.snl.swing.game.components.enm.Direction;
 import com.snl.swing.game.gameFrame.DiKaErPlus;
 import com.snl.swing.game.keyBoard.SimpleCleanKeyBoard;
+import com.snl.swing.game.math.Matrix3x3f;
+import com.snl.swing.game.math.Vector2D;
+import com.snl.swing.game.sprite.Player;
 import com.snl.swing.game.sprite.Sprite;
 import com.snl.swing.game.sprite.YuanSu;
+import com.snl.swing.game.utils.ImageCreator;
 import com.snl.swing.game.utils.Utils;
 
 import javax.swing.*;
@@ -81,6 +85,8 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
             在调查中，随着深入到迷雾中，怪异离奇的事情接连发生，你发觉到，有某种物质正阻碍您的调查，灵兽失踪的真相也许
             就在迷雾深处，你会……
             """;
+
+    Player player;
 
     public GameStartPanel() throws HeadlessException {
         WIDTH = 600;
@@ -168,6 +174,11 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         scene01 = new Scene(parts,"你好","2");
 
         fillShapes();
+
+        //创建用户
+        player = new Player("",ImageCreator.makeBufferedImage(
+                ImageCreator.blockingLoad("./queen.gif")
+        ),new Vector2D(),new Vector2D(1,1));
     }
 
 
@@ -187,6 +198,10 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
                 rightRow.processInput(mouseInputEvent);
                 startButton.processInput(mouseInputEvent);
                 slide.processInput(mouseInputEvent);
+            }
+
+            case GAME_UP -> {
+                player.processInput(mouseInputEvent,keyBoardEvent);
             }
         }
 
@@ -225,11 +240,20 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
                 time += delta;
                 slide.setValue(startIndex);
             }
+
+            case GAME_UP -> {
+                player.setName(keyBoard.getInputString());
+                player.update(delta);
+                //变化视角
+                viewMat = Matrix3x3f.translate(-player.getPos().getX(),-player.getPos().getY());
+                axis.createAxis(getViewportTransform(),c,wordWidth);
+            }
         }
     }
 
     @Override
     protected void draw(Graphics g) {
+        super.draw(g);
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
@@ -249,10 +273,16 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
                 drawTest(g2);
                 backButton.draw(g2);
             }
+
+            case GAME_UP -> {
+                player.draw(g2,getViewportTransform());
+                drawAxis = true;
+            }
         }
         g2.dispose();
     }
 
+    //启动面板
     private void drawGameStartPanel(Graphics2D g2) {
         AttributedString as = new AttributedString(s);
         as.addAttribute(TextAttribute.FONT,Utils.liShu.deriveFont(32F));
@@ -273,6 +303,7 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
     //*********************************  选择面板  **********************************//
     //*****************************************************************************//
 
+    //精灵选择框
     private void drawTest(Graphics2D g2) {
         g2.setColor(Color.red);
         FontRenderContext frc = g2.getFontRenderContext();
@@ -408,6 +439,7 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         slide.draw(g2);
     }
 
+    //选择姓名模板
     private void drawString(Graphics2D g2) {
         g2.setColor(Color.WHITE);
         int w = c.getWidth();
@@ -453,8 +485,8 @@ public class GameStartPanel extends DiKaErPlus implements CollideEventListener, 
         super.animation(delta);
         if (scene01.getIndex() < scene01.getLength())
             scene01.increment();
-        if (gameState == GAME_PAGE && scene01.getIndex() == scene01.getLength() &&
-        scene01.pause())
+        if (gameState == GAME_PAGE &&
+                scene01.getIndex() == scene01.getLength() && scene01.pause())
             gameState = GAME_ON;
     }
 

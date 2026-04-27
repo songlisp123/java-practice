@@ -1,6 +1,4 @@
-package com.snl.test.frame;
-
-import java.awt.*;
+package com.snl.swing.game2d.tool;
 
 public class FrameV2 {
     //维护一个
