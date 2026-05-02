@@ -42,7 +42,7 @@ public class PolygonEditor extends SwingFramework {
         appFPSColor = Color.GREEN;
         appWidth = 640;
         appHeight = 640;
-        appSleep = 20L;
+        appSleep = 16L;
         appMaintainRatio = true;
         appBorderScale = 0.95f;
         appTitle = "Polygon Editor";

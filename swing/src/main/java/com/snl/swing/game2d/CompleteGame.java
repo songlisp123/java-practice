@@ -26,7 +26,8 @@ public class CompleteGame extends WindowFramework {
         appWorldHeight = GameConstants.WORLD_HEIGHT;
         appBorderScale = GameConstants.BORDER_SCALE;
         appDisableCursor = GameConstants.DISABLE_CURSOR;
-        appMaintainRatio = GameConstants.MAINTAIN_RATIO;
+//        appMaintainRatio = GameConstants.MAINTAIN_RATIO;
+        appMaintainRatio = false;
         appDisableCursor = false;
 
     }

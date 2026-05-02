@@ -8,8 +8,11 @@ import com.snl.swing.game2d.util.Utility;
 import java.awt.*;
 
 public class LevelStarting extends State {
+    //时间？？
     double time;
+    //背景？？
     private Sprite background;
+    //游戏状态
     private GameState state;
     private Acme acme;
 
@@ -28,6 +31,7 @@ public class LevelStarting extends State {
     public void updateObjects(double delta) {
         time += delta;
         if (time > 2.0) {
+            //如果超过  2 秒，就转换游戏状态
             getController().setState(new LevelPlaying(state));
         }
     }

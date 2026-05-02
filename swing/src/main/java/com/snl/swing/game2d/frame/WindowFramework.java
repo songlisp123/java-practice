@@ -10,11 +10,16 @@ public class WindowFramework extends GameFramework {
 
     @Override
     protected void createFramework() {
+        //创建画布
         canvas = new Canvas();
+        //设置画布颜色
         canvas.setBackground(appBackground);
+        //是否忽略重新绘制事件？？
         canvas.setIgnoreRepaint(true);
         getContentPane().add(canvas);
+        //根据平台选择中心
         setLocationByPlatform(true);
+        //维持屏幕比率
         if (appMaintainRatio) {
             getContentPane().setBackground(appBorder);
             setSize(appWidth,appHeight);
@@ -41,6 +46,9 @@ public class WindowFramework extends GameFramework {
         canvas.requestFocus();
     }
 
+    /*
+    动态更新窗口事件
+     */
     protected void onComponentResized( ComponentEvent e ) {
         Dimension size = getContentPane().getSize();
         setupViewport( size.width, size.height );
@@ -53,6 +61,7 @@ public class WindowFramework extends GameFramework {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.clearRect(0,0,getScreenWidth(),getScreenHeight());
         render(g);
+        g2.dispose();
     }
 
     @Override

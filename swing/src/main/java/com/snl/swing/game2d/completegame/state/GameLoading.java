@@ -62,10 +62,12 @@ public class GameLoading extends State {
                         "./file/images/space_background_600x600.png" ,
                         "./file/images/space_background_600x600.png" );
                 BufferedImage image = ImageIO.read( stream );
+                //世界坐标左上角
                 Vector2D worldTopLeft = new Vector2D(
                         -GameConstants.WORLD_WIDTH / 2.0f,
                         GameConstants.WORLD_HEIGHT / 2.0f
                 );
+                //世界坐标右下角
                 Vector2D worldBottomRight = new Vector2D(
                         GameConstants.WORLD_WIDTH / 2.0f,
                         -GameConstants.WORLD_HEIGHT / 2.0f
@@ -237,11 +239,20 @@ public class GameLoading extends State {
             }
         }
         // update progress bar
+        //有几个？？任务？？
+        /*
+        读取音乐文件，精灵素材等任务
+         */
         percent = (numberOfTasks - loadResults.size()) / (float) numberOfTasks;
         if (percent >= 1.0f) {
             threadPool.shutdown();
             wait += delta;
         }
+
+        //时间间隔一秒或者 线程池关闭
+        /*
+        进入到下一个状态：PressSpaceToPlay
+         */
         if (wait > 1.0f && threadPool.isShutdown()) {
             LoopEvent loop = (LoopEvent) controller.getAttribute("ambience");
             loop.fire();

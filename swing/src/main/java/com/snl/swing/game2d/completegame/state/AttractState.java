@@ -14,12 +14,19 @@ import java.util.List;
 import java.util.Vector;
 
 public abstract class AttractState extends State {
+    //界面岩石
     private List<Asteroid> asteroids;
+    //时间 累计和
     private double time;
+    //背景图（应该填充什么？？）
     private Sprite background;
+    // 岩石工厂
     private AsteroidFactory factory;
+    // 一个杂类
     protected Acme acme;
+    //键盘事件
     protected KeyBoardEvent keys;
+    //分数管理
     protected HighScoreMgr highScoreMgr;
 
     public AttractState() {

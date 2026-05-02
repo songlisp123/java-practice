@@ -14,6 +14,9 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * 核心类
+ */
 public class LevelPlaying extends State {
     private ArrayList<AsteroidExplosion> explosions;
     private ArrayList<Asteroid> asteroids;
