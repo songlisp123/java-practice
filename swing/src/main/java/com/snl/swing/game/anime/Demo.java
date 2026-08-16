@@ -33,8 +33,8 @@ public class Demo extends DiKaErPlus {
                 TexturePaintEffect.OI, Color.BLACK, Color.YELLOW, 60, 0,200);
         DitherDissolveEffect de = new DitherDissolveEffect(30,300,20,c);
         GunDongEffect effect = new GunDongEffect(10,250,c);
-        CloseEffect cff = new CloseEffect(CloseEffect.CURVE,0,200,c);
-        GradientEffect gf = new GradientEffect(GradientEffect.WID | GradientEffect.SPL | GradientEffect.INC,
+        CloseEffect cff = new CloseEffect(CloseEffect.CUSTOM,0,200,c);
+        GradientEffect gf = new GradientEffect(GradientEffect.WID | GradientEffect.INC,
                 Color.WHITE,Color.BLACK,0,120);
         TextEffect tff = new TextEffect("傻逼一个",new Font("隶书",Font.BOLD,20),
                 TextEffect.SCI  | TextEffect.SCYI,
@@ -42,10 +42,11 @@ public class Demo extends DiKaErPlus {
         BackGroundEffect bck = new BackGroundEffect(20,120,c,Color.WHITE,Color.CYAN,Color.blue);
         tm = new TextMoveEffect("你好，我是一个傻逼",c.getWidth(),c.getHeight(),50,170);
         parts.add(gf);
-        parts.add(effect);
+//        parts.add(effect);
 //        parts.add(t1);
-        parts.add(tff);
+//        parts.add(tff);
         parts.add(bck);
+        parts.add(cff);
 
         scene = new Scene(parts,"演示","56");
         keyBoard = new SimpleCleanKeyBoard(50,50,300,300);
@@ -79,14 +80,14 @@ public class Demo extends DiKaErPlus {
     @Override
     protected void animation(double delta) {
         super.animation(delta);
-        if (isBeyond())
+        if (!isBeyond())
             scene.increment();
         else
             scene.reset(c.getWidth(),c.getHeight());
     }
 
     private boolean isBeyond() {
-        return scene.getIndex() <= scene.getLength();
+        return scene.getIndex() > scene.getLength();
     }
 
     public static void main(String[] args) {

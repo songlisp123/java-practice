@@ -42,11 +42,11 @@ public class Demo extends DiKaErPlus {
                 new Vector2D(1,1.2),new Vector2D(2.5,2.5)
         );
         or = new OrientedRectangle(
-                new Vector2D(2,3),new Vector2D(2,2),Math.PI / 3
+                new Vector2D(2,3),new Vector2D(2,2), Math.PI / 3
         );
 
         or1 = new OrientedRectangle(
-                new Vector2D(-1,1),new Vector2D(1,1),Math.PI / 6
+                new Vector2D(-1,1),new Vector2D(1,1), Math.PI / 6
         );
 
         c0 = new Vector2D(-2,2);
@@ -55,17 +55,19 @@ public class Demo extends DiKaErPlus {
         pos02 = new Vector2D(-2,-2);
         r0 = .1;
 
-//        convexity = new Convexity(
-//                new Vector2D(0,0),
-//                new Vector2D(2,0),
-//                new Vector2D(1,2)
-//        );
-//
-//        convexity02 = new Convexity(
-//                new Vector2D(5,0),
-//                new Vector2D(7,0),
-//                new Vector2D(6,2)
-//        );
+        convexity = new Convexity(
+                new Vector2D(),
+                new Vector2D(0,0),
+                new Vector2D(2,0),
+                new Vector2D(1,2)
+        );
+
+        convexity02 = new Convexity(
+                new Vector2D(),
+                new Vector2D(5,0),
+                new Vector2D(7,0),
+                new Vector2D(6,2)
+        );
     }
 
     @Override

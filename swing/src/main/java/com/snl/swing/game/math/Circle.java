@@ -47,6 +47,10 @@ public class Circle extends AbstractShape implements Convex,Cloneable {
         this.offset = new Vector2D();
     }
 
+    public void setR(double r) {
+        this.r = r;
+    }
+
     /**
      * 获取离点p最近的点
      * @param p 最近点p
@@ -69,6 +73,7 @@ public class Circle extends AbstractShape implements Convex,Cloneable {
                 Vector2D point = base.add(direct.scale(r));
                 return point;
 
+                //TODO 垃圾实现
 //                Line line = new Line(base,direct,Line.YINGSHI);
 //                Vector2D[] cts = this.collidePointInLine(line);
 //                if (p.x > this.center.x) {
@@ -559,5 +564,10 @@ public class Circle extends AbstractShape implements Convex,Cloneable {
     @Override
     public SegMent[] getEdge() {
         throw new UnsupportedOperationException("未收支持的异常");
+    }
+
+
+    public void setCenter(Vector2D center) {
+        this.center = center;
     }
 }

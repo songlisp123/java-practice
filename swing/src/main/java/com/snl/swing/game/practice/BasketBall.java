@@ -186,7 +186,7 @@ public class BasketBall extends DiKaErPlus {
      * @return 如果相撞，返回{@code true}，否则返回{@code false}
      * @implNote 这个方法采用递归调用的方法，每次将问题分解为一小步，
      * 注意，这个方法也可以使用包裹矩形，目前使用前进的距离加上当前的距离采取包裹圆
-     * 来源自：2d碰撞测试 书籍
+     * 来源自：2d碰撞测试 第八章
      */
     public boolean moving_circle_rectangle_collide(Circle ball, Vector2D move, AABB aabb) {
         Circle envelope = new Circle(ball.r,ball.center.clone());

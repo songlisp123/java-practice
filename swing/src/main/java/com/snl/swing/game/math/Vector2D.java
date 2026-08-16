@@ -64,6 +64,13 @@ public class Vector2D implements Cloneable {
         x = temp;
     }
 
+    public Vector2D getRotated(double rad) {
+        double temp = x * Math.cos(rad) - y * Math.sin(rad);
+        y = x * Math.sin(rad) + y * Math.cos(rad);
+        x = temp;
+        return new Vector2D(x,y);
+    }
+
     public Vector2D scale(double s)
     {
         return new Vector2D(this.x * s,this.y * s);
@@ -113,10 +120,6 @@ public class Vector2D implements Cloneable {
 
     public double len() {
         return Math.sqrt(x * x + y * y);
-    }
-
-    public double v3len() {
-        return Math.sqrt(x * x + y * y + w * w);
     }
 
     public double lenSqr() {

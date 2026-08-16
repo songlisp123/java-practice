@@ -407,9 +407,7 @@ public class SegMent extends AbstractShape implements Cloneable {
         d2 = x1 * x2 + y1 * y2;
 
         co = d2 / d1;
-        if (co > 1 || co < 0)
-            return false;
-        return true;
+        return !(co > 1) && !(co < 0);
     }
 
     @Override

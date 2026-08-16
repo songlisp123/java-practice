@@ -67,9 +67,7 @@ public class Range {
     private double clamp(double value, double min, double max) {
         if (value >= max)
             return max;
-        if (value <= min)
-            return min;
-        return value;
+        return Math.max(value, min);
     }
 
     public boolean isDegenerate() {
@@ -90,7 +88,7 @@ public class Range {
 
     public void union(Range range) {
         min = Math.min(range.min,min);
-        max = Math.min(range.max,max);
+        max = Math.max(range.max,max);
     }
 
     public Range getUnion(Range range) {

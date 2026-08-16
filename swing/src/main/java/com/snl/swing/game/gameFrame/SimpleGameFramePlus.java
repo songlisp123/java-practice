@@ -198,6 +198,8 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
             currentTime = System.nanoTime();
             frame = currentTime - lastTime; //计算每帧过去的时间
             delta = frame / 1.0E9; //时间间隔
+            if (delta > 0.5)
+                delta = 16 * 1.0e-3;
             processInput(delta); //获取输入
             updateSprite(delta); //暂时不实现
 
@@ -251,6 +253,8 @@ public class SimpleGameFramePlus extends JFrame implements Runnable {
         appSleep = 16;
         appMaintainRatio = true;
         viewMat = Matrix3x3f.identity();
+        scaleX  = getWidth() / wordWidth;
+        scaleY  = getHeight() / wordWidth;
     }
 
     /**

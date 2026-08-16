@@ -1,6 +1,5 @@
 package com.snl.swing.game.math;
 
-import com.snl.swing.game.math.contract.AbstractShape;
 
 public class Ray {
 

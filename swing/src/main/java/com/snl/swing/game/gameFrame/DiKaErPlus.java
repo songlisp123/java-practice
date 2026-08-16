@@ -33,6 +33,9 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
     //是否绘制边框
     protected boolean drawAxis = true;
 
+    //是否开启抗锯齿渲染
+    protected boolean showAnti;
+
     public DiKaErPlus() throws HeadlessException {
         super();
         addMouseWheelListener(this);
@@ -108,6 +111,9 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
     @Override
     protected void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
+        if (showAnti)
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                    RenderingHints.VALUE_ANTIALIAS_ON);
         super.draw(g);
         //TODO
         if (drawAxis) {
@@ -217,7 +223,7 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
     }
 
     //绘制圆形
-    protected void drawCircle(Graphics2D g2,Vector2D p,double r,boolean fill) {
+    public void drawCircle(Graphics2D g2, Vector2D p, double r, boolean fill) {
         this.drawEllipse(g2,p,r,r,fill);
     }
 
@@ -242,14 +248,16 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         double leftX = c0.getX() - w / 2.0;
         double leftY =c0.getY() - h / 2.0;
         Shape s = new Ellipse2D.Double(leftX,leftY,w,h);
-        if (fill)
+        if (fill) {
             g2.fill(s);
+//            g2.drawString("[%.2f,%.2f]".formatted(p.getX(),p.getY()),
+//                    (int) c0.getX(), (int) (c0.getY() - 10));
+        }
         else
             g2.draw(s);
-        g2.drawString("[%.2f,%.2f]".formatted(p.getX(),p.getY()),
-         (int) c0.getX(), (int) (c0.getY() - 10));
-         Shape radius = new Ellipse2D.Double(c0.getX(),c0.getY() - 10,4,4);
-         g2.fill(radius);
+
+//         Shape radius = new Ellipse2D.Double(c0.getX(),c0.getY() - 10,4,4);
+//         g2.fill(radius);
     }
 
     //绘制多边形
@@ -300,7 +308,77 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         this.drawPoly(g2,polys.toArray(Vector2D[]::new),fill);
     }
 
-    protected void drawPoly(Graphics2D g2,Vector2D[] poly,boolean filling) {
+    public void drawPolyLine(Graphics2D g2, Vector2D[] poly,boolean showVertices) {
+        if(poly == null || poly.length == 0)
+            return;
+        if (g2 == null)
+            return;
+        Matrix3x3f view = getViewportTransform();
+        Vector2D[] copy = new Vector2D[poly.length];
+        int i;
+
+
+        for ( i=0;i<poly.length;i++)
+        {
+            copy[i] = view.mul(poly[i]);
+        }
+
+
+        if (showVertices)
+        {
+            TextLayout tl;
+            Font font = g2.getFont();
+            FontRenderContext frc = g2.getFontRenderContext();
+            for (i = 0; i < poly.length; i++)
+            {
+                this.drawCircle(g2,poly[i],0.05,true);
+                this.drawCircle(g2,poly[i],0.1,false);
+                tl = new TextLayout("[%.2f,%.2f]".formatted(
+                        poly[i].getX(),poly[i].getY()
+                ),font,frc);
+                tl.draw(g2, (float) copy[i].x, (float) copy[i].y);
+            }
+        }
+
+        Vector2D start = copy[0];
+        for (i = 1; i<copy.length;i++) {
+            Vector2D end = copy[i];
+            Line2D l = new Line2D.Double(
+                    start.getX(),start.getY(),
+                    end.getX(),end.getY()
+            );
+            g2.draw(l);
+            start = end;
+        }
+    }
+
+    public void drawPolyLine(Graphics2D g2, Vector2D[] poly) {
+        if(poly == null || poly.length == 0)
+            return;
+        if (g2 == null)
+            return;
+        Matrix3x3f view = getViewportTransform();
+        Vector2D[] copy = new Vector2D[poly.length];
+        for (int i=0;i<poly.length;i++)
+        {
+            drawCircle(g2,poly[i],0.05,true);
+            drawCircle(g2,poly[i],.01,false);
+            copy[i] = view.mul(poly[i]);
+        }
+
+        Vector2D start = copy[0];
+        for (int i = 1; i<copy.length;i++) {
+            Vector2D end = copy[i];
+            Line2D l = new Line2D.Double(
+                    start.getX(),start.getY(),
+                    end.getX(),end.getY()
+            );
+            g2.draw(l);
+            start = end;
+        }
+    }
+
+    public void drawPoly(Graphics2D g2, Vector2D[] poly, boolean filling) {
         if(poly == null || poly.length == 0)
             return;
         if (g2 == null)
@@ -322,6 +400,7 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
                 f = v;
                 path.lineTo(f.getX(),f.getY());
             }
+            path.closePath();
             g2.fill(path);
         }
         else
@@ -386,7 +465,7 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
         g2.drawImage(image, (int) leftX, (int) leftY,null);
     }
 
-    protected void drawLine(Graphics2D g2,Vector2D start,Vector2D end)
+    public void drawLine(Graphics2D g2,Vector2D start,Vector2D end)
     {
         Matrix3x3f vt = getViewportTransform();
         Vector2D v1 = vt.mul(start);
@@ -417,10 +496,10 @@ public class DiKaErPlus extends SimpleGameFramePlus implements MouseWheelListene
             for (Vector2D v : vertices)
             {
                 this.drawCircle(g2,v,0.05,true);
-//                tl = new TextLayout("[%.2f,%.2f]".formatted(
-//                        v.getX(),v.getY()
-//                ),font,frc);
-//                this.drawText(g2,tl,v);
+                tl = new TextLayout("[%.2f,%.2f]".formatted(
+                        v.getX(),v.getY()
+                ),font,frc);
+                this.drawText(g2,tl,v);
             }
         }
     }

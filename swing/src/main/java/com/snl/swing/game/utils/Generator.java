@@ -13,4 +13,10 @@ public class Generator {
             throw new UnsupportedOperationException("未收支持的操作");
         return generator.nextDouble(lowBound,upBounds);
     }
+
+    public static float generateFloat(float lowBound,float upBounds) {
+        if (lowBound > upBounds)
+            throw new UnsupportedOperationException("未收支持的操作");
+        return generator.nextFloat(lowBound,upBounds);
+    }
 }

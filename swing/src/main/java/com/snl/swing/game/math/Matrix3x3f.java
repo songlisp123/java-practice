@@ -9,13 +9,14 @@ import java.util.Arrays;
 
 public class Matrix3x3f {
     double[][] mat = new double[3][3];
+    public  static Matrix3x3f I = null;
 
     public Matrix3x3f() {
     }
 
     /**
-     * 按照行向量的标准初始化矩阵
-     * @param c 行向量数组
+     * 按照列向量的标准初始化矩阵
+     * @param c 列向量数组
      */
     public Matrix3x3f(double[] c) {
         this.mat[0][0] = c[0];
@@ -110,6 +111,11 @@ public class Matrix3x3f {
         );
     }
 
+    /**
+     * ??????
+     * @param p
+     * @return
+     */
     public Point2D mul(Point2D p) {
         Vector2D v = mul(new Vector2D(p.getX(), p.getY()));
         return Utils.vectorCovertToPoint(v);
@@ -143,7 +149,7 @@ public class Matrix3x3f {
     public static  Matrix3x3f rotate(double rat) {
         return new Matrix3x3f(new double[][]{
                 {Math.cos(rat),-Math.sin(rat),0.0},
-                {Math.sin(rat),Math.cos(rat),0.0},
+                {Math.sin(rat), Math.cos(rat),0.0},
                 {0.0,0.0,1.0}
         });
     }
@@ -292,5 +298,37 @@ public class Matrix3x3f {
         for (double[] doubles : mat)
             s.append(Arrays.toString(doubles)).append("\n");
         return s.toString();
+    }
+
+    public void setColumn(int column, Vector2D vSide) {
+        mat[0][column] = vSide.x;
+        mat[1][column] = vSide.y;
+        mat[2][column] = vSide.w;
+    }
+
+    public Vector2D getColumn(int column) {
+        if (column < 0 || column > 2)
+            throw new IllegalArgumentException("列参数不正常，请稍后再试");
+        Vector2D r = new Vector2D();
+        r.x = this.mat[0][column];
+        r.y = this.mat[1][column];
+        r.w = this.mat[2][column];
+        return r;
+    }
+
+    public boolean setValue(double newValue,int column,int row) {
+        mat[row][column] = newValue;
+        return true;
+    }
+
+    public double getElement(int column,int row) {
+        return mat[row][column];
+    }
+
+
+    public static Matrix3x3f getIdentity() {
+        if (I == null)
+            I = Matrix3x3f.identity();
+        return I;
     }
 }

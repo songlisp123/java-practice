@@ -1,7 +1,6 @@
 package com.snl.swing.game.math;
 
-import java.awt.*;
-import java.awt.geom.Arc2D;
+
 import java.util.Objects;
 
 public class AABB extends Convexity implements Cloneable {
@@ -275,9 +274,17 @@ public class AABB extends Convexity implements Cloneable {
         this.center = this.center.add(d);
     }
 
-    public AABB getTranslated(Vector2D d) {
+    public AABB getTranslated(double dx,double dy) {
+        Vector2D min = getMin();
+        Vector2D max = getMax();
+        double x1 = min.x + dx;
+        double y1 = min.y + dy;
+
+        double x2 = max.x + dx;
+        double y2 = max.y + dy;
+
         return new AABB(
-                min.add(d),max.add(d)
+                new Vector2D(x1,y1),new Vector2D(x2,y2)
         );
     }
 
@@ -416,7 +423,7 @@ public class AABB extends Convexity implements Cloneable {
 
     @Override
     public AABB clone() {
-        return new AABB(this.min,this.max);
+        return new AABB(this.min.clone(),this.max.clone());
     }
 
     @Override
