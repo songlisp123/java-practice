@@ -1,4 +1,4 @@
-package com.snl.test.animate.race.spline;
+package com.snl.swing.spline;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,27 +14,17 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.text.NumberFormat;
 import java.util.Locale;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -79,29 +69,31 @@ class SplineControlPanel extends JPanel {
                 new Insets(0, 0, 0, 0),
                 0, 0));
         
-//        button = addButton(debugPanel, "Create");
-//        button.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                JFileChooser chooser = new JFileChooser(".");
-//                int choice = chooser.showSaveDialog(SplineControlPanel.this);
-//                if (choice == JFileChooser.CANCEL_OPTION) {
-//                    return;
-//                }
-//                File file = chooser.getSelectedFile();
-//                try {
-//                    OutputStream out = new FileOutputStream(file);
-//                    display.saveAsTemplate(out);
-//                    out.close();
-//                } catch (FileNotFoundException e1) {
-//                } catch (IOException e1) {
-//                }
-//            }
-//        });
+        button = addButton(debugPanel, "Create");
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser chooser = new JFileChooser(".");
+                int choice = chooser.showSaveDialog(SplineControlPanel.this);
+                if (choice == JFileChooser.CANCEL_OPTION) {
+                    return;
+                }
+                File file = chooser.getSelectedFile();
+                System.out.println("file = " + file);
+                try {
+                    OutputStream out = new FileOutputStream(file);
+                    out = new BufferedOutputStream(out);
+                    display.saveAsTemplate(out);
+                    out.close();
+                } catch (FileNotFoundException e1) {
+                } catch (IOException e1) {
+                }
+            }
+        });
         
-        addSeparator(debugPanel, "Control Points");
+        addSeparator(debugPanel, "控制点");
         labelControl1 = addDebugLabel(debugPanel, "Point 1:", formatPoint(display.getControl1()));
         labelControl2 = addDebugLabel(debugPanel, "Point 2:", formatPoint(display.getControl2()));
-        button = addButton(debugPanel, "Copy Code");
+        button = addButton(debugPanel, "复制代码");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 NumberFormat formatter = getNumberFormatter();
@@ -121,9 +113,9 @@ class SplineControlPanel extends JPanel {
         });
         
         addEmptySpace(debugPanel, 6);
-        addSeparator(debugPanel, "Animation");
+        addSeparator(debugPanel, "动画");
         
-        button = addButton(debugPanel, "Play Sample");
+        button = addButton(debugPanel, "演示");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 startSampleAnimation();
@@ -131,7 +123,7 @@ class SplineControlPanel extends JPanel {
         });
         
         addEmptySpace(debugPanel, 6);
-        addSeparator(debugPanel, "Templates");
+        addSeparator(debugPanel, "模板");
         debugPanel.add(createTemplates(),
                 new GridBagConstraints(0, linesCount++,
                 2, 1,

@@ -1,12 +1,6 @@
-package com.snl.test.animate.race.spline;
+package com.snl.swing.spline;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Composite;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -81,6 +75,8 @@ public class DropSimulator extends AbstractSimulator {
 
     private void drawBackground(Graphics2D g2) {
         g2.setColor(COLOR_BACKGROUND);
+        Rectangle clipBounds = g2.getClipBounds();
+        System.out.println("clipBounds = " + clipBounds);
         g2.fill(g2.getClipBounds());
     }
 

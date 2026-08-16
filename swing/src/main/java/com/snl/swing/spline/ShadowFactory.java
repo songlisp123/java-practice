@@ -29,7 +29,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.snl.test.animate.race.spline;
+package com.snl.swing.spline;
 
 import java.awt.*;
 import java.awt.image.*;

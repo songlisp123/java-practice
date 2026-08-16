@@ -1,4 +1,4 @@
-package com.snl.test.animate.race.spline;
+package com.snl.swing.spline;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,14 +23,17 @@ public class EquationDisplay extends JComponent implements PropertyChangeListene
     
     private List<DrawableEquation> equations;
 
+    //初始视口矩阵
     protected double minX;
     protected double maxX;
     protected double minY;
     protected double maxY;
 
+    //原点
     private double originX;
     private double originY;
 
+    //这是什么？？？
     private double majorX;
     private int minorX;
     private double majorY;
@@ -177,7 +180,7 @@ public class EquationDisplay extends JComponent implements PropertyChangeListene
         return (position - minX) * (double) getWidth() / (maxX - minX);
     }
     
-    protected double xPixelToPosition(double pixel) {
+    protected double  xPixelToPosition(double pixel) {
         double axisV = xPositionToPixel(originX);
         return (pixel - axisV) * (maxX - minX) / (double) getWidth();
     }
@@ -221,7 +224,6 @@ public class EquationDisplay extends JComponent implements PropertyChangeListene
         
         GeneralPath path = new GeneralPath();
         path.moveTo(x, y);
-        
         for (x = 0.0f; x < getWidth(); x += 1.0f) {
             double position = xPixelToPosition(x);
             y = (float) yPositionToPixel(equation.compute(position));
@@ -388,7 +390,7 @@ public class EquationDisplay extends JComponent implements PropertyChangeListene
         g2.fill(g2.getClipBounds());
     }
 
-    private class DrawableEquation {
+    class DrawableEquation {
         private AbstractEquation equation;
         private Color color;
 
@@ -406,7 +408,7 @@ public class EquationDisplay extends JComponent implements PropertyChangeListene
         }
     }
     
-    private class ZoomHandler implements MouseWheelListener {
+    class ZoomHandler implements MouseWheelListener {
         public void mouseWheelMoved(MouseWheelEvent e) {
             double distanceX = maxX - minX;
             double distanceY = maxY - minY;
@@ -432,7 +434,7 @@ public class EquationDisplay extends JComponent implements PropertyChangeListene
         }
     }
     
-    private class PanHandler extends MouseAdapter {
+    class PanHandler extends MouseAdapter {
         @Override
         public void mousePressed(MouseEvent e) {
             dragStart = e.getPoint();

@@ -1,4 +1,4 @@
-package com.snl.test.animate.race.spline;
+package com.snl.swing.spline;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

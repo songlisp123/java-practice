@@ -1,13 +1,6 @@
-package com.snl.test.animate.race.spline;
+package com.snl.swing.spline;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Stroke;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -98,7 +91,8 @@ public class SplineDisplay extends EquationDisplay {
                                                    (int) (yPositionToPixel(0.0) - yPositionToPixel(1.0)) + 1);
         
         try {
-            ImageIO.write(subImage, "PNG", out);
+            ImageIO.write(subImage, "png", out); 
+            Toolkit.getDefaultToolkit().beep();
         } catch (IOException e) {
         }
         

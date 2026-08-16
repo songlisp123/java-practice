@@ -1,4 +1,4 @@
-package com.snl.test.animate.race.spline;
+package com.snl.swing.spline;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
