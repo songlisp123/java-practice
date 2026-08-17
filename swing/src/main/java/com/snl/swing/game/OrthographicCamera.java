@@ -1,5 +1,6 @@
 package com.snl.swing.game;
 
+import com.snl.swing.game.math.AABB;
 import com.snl.swing.game.math.Matrix4x4f;
 import com.snl.swing.game.math.Vector2D;
 import com.snl.swing.game.math.Vector3D;
@@ -72,7 +73,6 @@ public class OrthographicCamera {
         Vector3D view = viewMat.mul(worldPosition);
         //视图坐标投影到摄像机视口宽度
         view = projectionMat.mul(view);
-        System.out.println("view = " + view);
         view.perspectiveDivide();
         return view;
     }
@@ -117,6 +117,48 @@ public class OrthographicCamera {
 
     public void setT(double t) {
         this.t = t;
+        projection();
+    }
+
+    public void translatedX(float cord) {
+        position.x += cord;
+        resetViewMat();
+    }
+
+    public void translatedY(float cord) {
+        position.y += cord;
+        resetViewMat();
+    }
+
+    public double getL() {
+        return l;
+    }
+
+    public double getR() {
+        return r;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public double getT() {
+        return t;
+    }
+
+    public AABB getViewBoundingBox() {
+        double halfW = (r - l) / 2;
+        double halfH = (t - b) / 2;
+        return new AABB(new Vector2D(position.x - halfW,position.y - halfH),new Vector2D(position.x + halfW,position.y + halfH));
+    }
+
+    public void setNear(float near) {
+        this.near = near;
+        projection();
+    }
+
+    public void setFar(float far) {
+        this.far = far;
         projection();
     }
 }

@@ -49,6 +49,14 @@ public class AABB extends Convexity implements Cloneable {
     /* ******************          碰撞测试         ************************ */
     //**********************************************************************//
 
+    @Override
+    public boolean containsPoint(double x, double y) {
+        if (x < min.x || x > max.x)
+            return false;
+        return !(y < min.y) && !(y > max.y);
+    }
+
+
     //TODO 我需要时间来将这个东西重构一下
 
     public boolean collisionAABB(AABB aabb) {

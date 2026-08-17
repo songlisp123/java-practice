@@ -208,6 +208,10 @@ public class Vector2D implements Cloneable {
                 this.y == other.y;
     }
 
+    public Vector3D toVector3DinZisZero() {
+        return Vector3D.point(x,y,0);
+    }
+
     public boolean isZero() {
         return this.x ==  0 && this.y == 0;
     }

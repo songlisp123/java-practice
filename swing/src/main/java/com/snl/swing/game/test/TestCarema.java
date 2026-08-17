@@ -5,16 +5,20 @@ import com.snl.swing.animator.TimingTarget;
 import com.snl.swing.game.OrthographicCamera;
 import com.snl.swing.game.curve.HermiteCurve;
 import com.snl.swing.game.gameFrame.DiKaErPlus;
+import com.snl.swing.game.math.AABB;
 import com.snl.swing.game.math.Vector2D;
 import com.snl.swing.game.math.Vector3D;
+import com.snl.swing.game.utils.Utils;
+import com.snl.swing.game2d.util.Utility;
 
 import java.awt.*;
+import java.awt.font.TextLayout;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestCarema extends DiKaErPlus implements TimingTarget {
 
-    OrthographicCamera orthographicCamera;
+    OrthographicCamera orthographicCamera,camera2;
     HermiteCurve hc;
     Vector2D p;
     Animator animator;
@@ -23,11 +27,23 @@ public class TestCarema extends DiKaErPlus implements TimingTarget {
         List<Vector3D> pcopy;
     Vector3D pc;
 
+    AABB aabb;
+
     @Override
     protected void gameInitial() {
         super.gameInitial();
         orthographicCamera = new OrthographicCamera(3);
-        orthographicCamera.setPosition(Vector3D.point(0,0,5));
+        orthographicCamera.setL(-3);
+        orthographicCamera.setR(6);
+        orthographicCamera.setB(-3);
+        orthographicCamera.setT(6);
+        orthographicCamera.setPosition(Vector3D.point(0,0,3));
+
+        camera2 = new OrthographicCamera(4);
+        camera2.setL(-6);
+        camera2.setR(0);
+        camera2.setT(0);
+        camera2.setB(-6);
         hc = new HermiteCurve();
 
 
@@ -40,10 +56,7 @@ public class TestCarema extends DiKaErPlus implements TimingTarget {
 //        hc.initializeClamped(coord,t,coord.length,new Vector2D(-1,1),new Vector2D(3,1));
 //
         hc.initializeNatural(coord,t,coord.length);
-        orthographicCamera.setL(0);
-        orthographicCamera.setR(6);
-        orthographicCamera.setB(0);
-        orthographicCamera.setT(6);
+
 
 
         p = Vector2D.originPoint;
@@ -55,9 +68,16 @@ public class TestCarema extends DiKaErPlus implements TimingTarget {
         path.add(p);
         pcopy.add(pc);
 
+        aabb = new AABB(
+                new Vector2D(-5,-5),new Vector2D(-1,-1)
+        );
+
         animator = new Animator((long) (t[t.length - 1] + 0.5f),this);
+        animator.setRepeatCount(Animator.INFINITE);
         animator.start();
     }
+
+
 
     @Override
     protected void draw(Graphics g) {
@@ -73,6 +93,27 @@ public class TestCarema extends DiKaErPlus implements TimingTarget {
         Vector2D center = orthographicCamera.projectionToScreen(c, 150,150,0,0);
         drawCircle(g2,center,0.5,true);
 
+        drawCircle(g2,new Vector2D(1,1),0.1,true);
+
+        AABB viewBoundingBox = orthographicCamera.getViewBoundingBox();
+        System.out.println("viewBoundingBox = " + viewBoundingBox);
+        if (viewBoundingBox.containsPoint(1,1))
+        {
+            Vector2D vector2D = orthographicCamera.projectionToScreen(new Vector2D(1, 1).toVector3DinZisZero(), 100, 100, 500, 0);
+            drawCircleInPixel(vector2D,g2);
+        }
+
+        if (viewBoundingBox.collisionAABB(aabb)){
+            AABB aabb1 = viewBoundingBox.intersection(aabb);
+            Vector2D v1 = orthographicCamera.projectionToScreen(aabb1.getMin().toVector3DinZisZero(), 100, 100, 500, 0);
+            Vector2D v2 = orthographicCamera.projectionToScreen(aabb1.getMax().toVector3DinZisZero(), 100, 100, 500, 0);
+            g2.drawLine((int) v1.x, (int) v1.y, (int) v1.x, (int) v2.y);
+            g2.drawLine((int) v1.x, (int) v1.y, (int) v2.x, (int) v1.y);
+            g2.drawLine((int) v2.x, (int) v2.y, (int) v2.x, (int) v1.y);
+            g2.drawLine((int) v2.x, (int) v2.y, (int) v1.x, (int) v2.y);
+
+        }
+
         drawPolyLine(g2,hc.getmPositions(),true);
         drawCircle(g2,p,0.1,false);
         drawCircle(g2,p,0.05,true);
@@ -81,8 +122,13 @@ public class TestCarema extends DiKaErPlus implements TimingTarget {
             drawPolyLine(g2, path.toArray(Vector2D[]::new),false);
 
         //摄像机怎么看？？
-        Vector2D M = orthographicCamera.projectionToScreen(pc, 50, 50, 550, 0);
+        Vector2D M = orthographicCamera.projectionToScreen(pc, 100, 100, 500, 0);
         drawCircleInPixel(M,g2);
+
+        Utils.drawText(g2,500,100,0,new TextLayout("摄像机视图A",g2.getFont(),g2.getFontRenderContext()));
+        Utils.drawText(g2,500,110,0,new TextLayout("范围[%.2f,%.2f]".formatted(orthographicCamera.getL(),orthographicCamera.getR()),g2.getFont(),g2.getFontRenderContext()));
+
+        drawAAbb(g2,aabb,true);
 
         g2.dispose();
     }
@@ -120,5 +166,7 @@ public class TestCarema extends DiKaErPlus implements TimingTarget {
         path.add(p);
         pc = Vector3D.point(p.x,p.y,0);
         pcopy.add(pc);
+
+        orthographicCamera.setPosition(p.toVector3DinZisZero());
     }
 }
