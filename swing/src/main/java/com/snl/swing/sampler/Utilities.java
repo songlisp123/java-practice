@@ -42,6 +42,7 @@ public class Utilities {
                 imageType);
         Graphics2D g2 = bf.createGraphics();
         g2.drawImage(image,null,null);
+        g2.dispose();
         return bf;
     }
 

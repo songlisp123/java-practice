@@ -200,10 +200,10 @@ public class Sampler extends JFrame {
                 BufferedImageOp op = (BufferedImageOp) mOps.get(key);
                 BufferedImage source = mSplitImageComponent.getSecondImage();
                 boolean accumulate = accumulateCheckbox.getState();
-                if (source == null || accumulate == false)
+                if (source == null || !accumulate)
                     source = mSplitImageComponent.getImage();
                 String previous = mImageFrame.getTitle() + " + ";
-                if (accumulate == false)
+                if (!accumulate)
                     previous = "";
                 mImageFrame.setTitle(previous + key);
                 statusLabel.setText("Performing " + key + "...");
