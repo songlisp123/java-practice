@@ -96,4 +96,12 @@ public abstract class Component implements DrawAble {
     public void setPaint(Paint paint) {
         this.paint = paint;
     }
+
+    public Vector2D[] getOutlines() {
+        return outlines;
+    }
+
+    public Vector2D[] getCopy() {
+        return copy;
+    }
 }
