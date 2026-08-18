@@ -62,9 +62,6 @@ public class TestBezier extends DiKaErPlus implements TimingTarget {
         rebuild();
         //创建坦克
         createTank();
-
-        float[][] floats = Bezier.bernstein_Base_Mat(3);
-        System.out.println("Arrays.toString(floats[0]) = " + Arrays.toString(floats[0]));
         animator.start();
     }
 
@@ -85,19 +82,19 @@ public class TestBezier extends DiKaErPlus implements TimingTarget {
 
         j = 0;
         for (;i<=1.0f; i+=step) {
-            Vector2D t = Bezier.bezier_curve(control_points, i, control_points.length);
-            Vector2D t2 = Bezier.bezier_curve(cp2, i, cp2.length);
+            Vector2D t = BezierHelp.evaluate(i,control_points);
+            Vector2D t2 = BezierHelp.evaluate(i,cp2);
             bezier_points02[j] = t2;
 
             bezier_points[j] = t;
-            Vector2D s = Bezier.derivative(control_points,i,1);
+            Vector2D s = BezierHelp.derivative(control_points,i,control_points.length - 1);
 
             derivative[j] = s;
 
             Vector2D aitken = Polynomials.aitken(poly_points.length - 1, poly_points, i);
             poly_curve_points[j] = aitken;
 
-            Vector2D v = Bezier.derivative(control_points,i,2);
+            Vector2D v = BezierHelp.second_derivative(control_points,i,control_points.length - 1);
             secondDerivative[j++] = v;
         }
     }
@@ -195,34 +192,35 @@ public class TestBezier extends DiKaErPlus implements TimingTarget {
         drawPolyLine(g2, bezier_points,false);
         drawPolyLine(g2, control_points,true);
 //
-//        //绘制贝塞尔多边形和贝塞尔曲线
-//        drawPolyLine(g2, bezier_points02,false);
-//        drawPolyLine(g2, cp2,false);
+        //绘制贝塞尔多边形和贝塞尔曲线
+        drawPolyLine(g2, bezier_points02,false);
+        drawPolyLine(g2, cp2,true);
 
-        drawPolyLine(g2,poly_curve_points,false);
+        //绘制一般多项式插值后的系数
+//        drawPolyLine(g2,poly_curve_points,false);
 
 
-//        //一阶导不为0
-//        if (deri != null)
-//        {
-//            drawCircle(g2,deri,.05,true);
-//            drawCircle(g2,deri,.1,false);
-//
-//            g2.setColor(Color.MAGENTA);
-//            drawPolyLine(g2,derivatePoly,true);
-//            drawPolyLine(g2,derivative,false);
-//        }
-//
-//        //二阶导不为0
-//        if (seconderivative != null)
-//        {
-//            g2.setColor(Color.cyan);
-//            drawPolyLine(g2,secondDerivativePoly,true);
-//            drawPolyLine(g2,secondDerivative,false);
-//            g2.setColor(Color.green);
-//            drawCircle(g2,seconderivative,0.05,true);
-//            drawCircle(g2,seconderivative,0.1,false);
-//        }
+        //一阶导不为0
+        if (deri != null)
+        {
+            drawCircle(g2,deri,.05,true);
+            drawCircle(g2,deri,.1,false);
+
+            g2.setColor(Color.MAGENTA);
+            drawPolyLine(g2,derivatePoly,true);
+            drawPolyLine(g2,derivative,false);
+        }
+
+        //二阶导不为0
+        if (seconderivative != null)
+        {
+            g2.setColor(Color.cyan);
+            drawPolyLine(g2,secondDerivativePoly,true);
+            drawPolyLine(g2,secondDerivative,false);
+            g2.setColor(Color.green);
+            drawCircle(g2,seconderivative,0.05,true);
+            drawCircle(g2,seconderivative,0.1,false);
+        }
 
         //绘制坦克
         tank.draw(g2,this);

@@ -100,11 +100,11 @@ public class TestCurve extends DiKaErPlus implements TimingTarget {
 
         g2.setColor(Color.green);
         drawCircle(g2,c,0.1,true);
-        drawPolyLine(g2,points);
-        drawPolyLine(g2,b01);
-        drawPolyLine(g2,bezier02);
-        drawPolyLine(g2,bezier03);
-        drawPolyLine(g2,bezier04);
+        drawPolyLine(g2,points,false);
+        drawPolyLine(g2,b01,false);
+        drawPolyLine(g2,bezier02,false);
+        drawPolyLine(g2,bezier03,false);
+        drawPolyLine(g2,bezier04,false);
         g2.dispose();
 
     }

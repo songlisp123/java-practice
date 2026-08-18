@@ -99,4 +99,23 @@ public class MyMath {
     public static boolean isZero(float val,float e) {
         return ABS(val) <= e;
     }
+
+    public static float erChi(int base, int n) {
+
+        if (n < 0 || n > base) {
+            return 0;
+        }
+
+        if (n > base - n) {
+            n = base - n;
+        }
+
+        float result = 1;
+
+        for (int i = 1; i <= n; i++) {
+            result *= (float) (base - n + i) / i;
+        }
+
+        return result;
+    }
 }

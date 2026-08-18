@@ -175,7 +175,7 @@ public class HermiteCurve extends CurveImplement {
         z[0] = sample_positions[1].sub(sample_positions[0]).scale(3.0f).div(L);
         for ( int i = 1; i < n-1; ++i )
         {
-            // add internal entry to linear system for smooth spline
+            // 插值曲线
             L = 4.0f - U[i-1];
             U[i] = 1.0f/L;
             z[i] = sample_positions[i + 1].sub(sample_positions[i - 1]).scale(3.f);

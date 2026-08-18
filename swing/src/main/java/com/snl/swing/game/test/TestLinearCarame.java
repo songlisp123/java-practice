@@ -22,6 +22,7 @@ public class TestLinearCarame extends DiKaErPlus implements TimingTarget {
 
     Animator animator;
     AABB aabb;
+    AABB aabb02;
     Vector2D p;
 
     SimpleTank tank;
@@ -87,7 +88,12 @@ public class TestLinearCarame extends DiKaErPlus implements TimingTarget {
         linear.Initialize(s,times,s.length);
 
         camera = new OrthographicCamera(3);
+        camera.setL(-2);
+        camera.setR(2);
+        camera.setB(-2);
+        camera.setT(3);
         aabb = new AABB(new Vector2D(-1,-1),new Vector2D(1,1));
+        aabb02 = new AABB(new Vector2D(1,-1),new Vector2D(6,4));
 
         createTank();
 
@@ -140,8 +146,9 @@ public class TestLinearCarame extends DiKaErPlus implements TimingTarget {
 
         if (viewBoundingBox.collisionAABB(aabb)){
             AABB aabb1 = viewBoundingBox.intersection(aabb);
-            Vector2D v1 = camera.projectionToScreen(aabb1.getMin().toVector3DinZisZero(), 30, 30, 480, 20);
-            Vector2D v2 = camera.projectionToScreen(aabb1.getMax().toVector3DinZisZero(), 30, 30, 480, 20);
+            Vector2D v1 = camera.projectionToScreen(aabb1.getMin().toVector3DinZisZero(), 100, 100, 480, 20);
+            Vector2D v2 = camera.projectionToScreen(aabb1.getMax().toVector3DinZisZero(), 100, 100, 480, 20);
+            g2.setColor(Color.red);
             g2.drawLine((int) v1.x, (int) v1.y, (int) v1.x, (int) v2.y);
             g2.drawLine((int) v1.x, (int) v1.y, (int) v2.x, (int) v1.y);
             g2.drawLine((int) v2.x, (int) v2.y, (int) v2.x, (int) v1.y);
@@ -149,15 +156,40 @@ public class TestLinearCarame extends DiKaErPlus implements TimingTarget {
 
         }
 
+        if (viewBoundingBox.collisionAABB(aabb02)){
+            AABB aabb1 = viewBoundingBox.intersection(aabb02);
+            Vector2D v1 = camera.projectionToScreen(aabb1.getMin().toVector3DinZisZero(), 100, 100, 480, 20);
+            Vector2D v2 = camera.projectionToScreen(aabb1.getMax().toVector3DinZisZero(), 100, 100, 480, 20);
+            g2.setColor(Color.green);
+            g2.drawLine((int) v1.x, (int) v1.y, (int) v1.x, (int) v2.y);
+            g2.drawLine((int) v1.x, (int) v1.y, (int) v2.x, (int) v1.y);
+            g2.drawLine((int) v2.x, (int) v2.y, (int) v2.x, (int) v1.y);
+            g2.drawLine((int) v2.x, (int) v2.y, (int) v1.x, (int) v2.y);
+
+        }
+
+        if (viewBoundingBox.containsPoint(p)) {
+            Vector2D vector2D = camera.projectionToScreen(p.toVector3DinZisZero(), 100, 100, 480, 20);
+            g2.fillOval((int) (vector2D.x - 5), (int) (vector2D.y - 5),10,10);
+        }
+
+
+        Bullet bullet = tank.getBullet();
+        if (bullet!=null) {
+            if (viewBoundingBox.containsPoint(bullet.getPosition())) {
+                Vector2D vector2D = camera.projectionToScreen(bullet.getPosition().toVector3DinZisZero(), 100, 100, 480, 20);
+                g2.fillOval((int) (vector2D.x - 5), (int) (vector2D.y - 5), 10, 10);
+            }
+        }
 
 
         Vector2D[] samplePoints = linear.getSample_points();
         for (int i = 0; i< samplePoints.length - 1;i++) {
             if (viewBoundingBox.collisionLineSegment(samplePoints[i],samplePoints[i + 1]))
             {
-                Vector2D v1 = camera.projectionToScreen(samplePoints[i].toVector3DinZisZero(), 30, 30, 480, 20);
+                Vector2D v1 = camera.projectionToScreen(samplePoints[i].toVector3DinZisZero(), 100, 100, 480, 20);
                 System.out.println("v1 = " + v1);
-                Vector2D v2 = camera.projectionToScreen(samplePoints[i + 1].toVector3DinZisZero(), 30, 30, 480, 20);
+                Vector2D v2 = camera.projectionToScreen(samplePoints[i + 1].toVector3DinZisZero(), 100, 100, 480, 20);
                 g2.drawLine((int) v1.x, (int) v1.y, (int) v2.x, (int) v2.y);
             }
         }
@@ -171,10 +203,11 @@ public class TestLinearCarame extends DiKaErPlus implements TimingTarget {
 //        }
 //        tank.draw(g2,this   );
 //        Utils.drawText(g2,500,110,0,new TextLayout("范围[%.2f,%.2f]".formatted(orthographicCamera.getL(),orthographicCamera.getR()),g2.getFont(),g2.getFontRenderContext()));
-        Utils.drawText(g2,500,100,0,new TextLayout("摄像机视图A",g2.getFont(),g2.getFontRenderContext()));
+        Utils.drawText(g2,500,150,0,new TextLayout("摄像机视图A",g2.getFont(),g2.getFontRenderContext()));
 
 
         drawAAbb(g2,aabb,false);
+        drawAAbb(g2,aabb02,false);
         tank.draw(g2,this);
         g2.dispose();
     }
