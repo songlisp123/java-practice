@@ -41,8 +41,7 @@ public class Vector3D implements Cloneable , Serializable{
          double xv = x - other.x;
         double yv = y - other.y;
         double zv =  z -  other.z;
-        double wv = w - other.w;
-        return new Vector3D(xv,yv,zv,wv);
+        return Vector3D.direction(xv,yv,zv);
     }
 
     public Vector3D  add(Vector3D other) {
@@ -50,8 +49,9 @@ public class Vector3D implements Cloneable , Serializable{
         xv = x + other.x;
         yv = y + other.y;
         zv = z + other.z;
-        wv = w + other.w;
-        return new Vector3D(xv,yv,zv,wv);
+//        wv = w + other.w;
+        //点加向量还是向量加向量？？？
+        return new Vector3D(xv,yv,zv,this.w);
     }
 
     public Vector3D mul(double factor) {
@@ -59,12 +59,12 @@ public class Vector3D implements Cloneable , Serializable{
         xv = x * factor;
         yv = y * factor;
         zv = z * factor;
-        wv = w * factor;
-        return new Vector3D(xv,yv,zv,wv);
+//        wv = w * factor;
+        return new Vector3D(xv,yv,zv,this.w);
     }
 
     public Vector3D inv() {
-        return new Vector3D(-x,-y,-z);
+        return Vector3D.direction(-x,-y,-z);
     }
 
     public double length() {
@@ -117,7 +117,7 @@ public class Vector3D implements Cloneable , Serializable{
         double x = this.y * v3.z - z * v3.y;
         double y = this.z * v3.x - this.x * v3.z;
         double z = this.x * v3.y - this.y * v3.x;
-        return new Vector3D(x,y,z,0.0);
+        return Vector3D.direction(x,y,z);
     }
 
     public static Vector3D point(double x,double y,double z) {
@@ -153,5 +153,18 @@ public class Vector3D implements Cloneable , Serializable{
         this.y /= w;
         this.z /= w;
         this.w = 1;
+    }
+
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
     }
 }

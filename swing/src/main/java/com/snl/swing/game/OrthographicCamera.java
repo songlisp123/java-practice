@@ -8,7 +8,7 @@ import com.snl.swing.game.math.Vector3D;
 public class OrthographicCamera {
 
     private Vector3D position;
-    private final Vector3D direction;
+    private Vector3D direction;
     //摄像机“上方”,在《计算机视觉中》，这个初始化为j向量
     private Vector3D viewUp;
     //摄像机侧方
@@ -31,6 +31,9 @@ public class OrthographicCamera {
     //投影矩阵
     public Matrix4x4f projectionMat;
 
+    public OrthographicCamera() {
+        this(0);
+    }
 
     public OrthographicCamera(double d) {
         r = t = 1;
@@ -97,37 +100,30 @@ public class OrthographicCamera {
 
     public void setPosition(Vector3D position) {
         this.position = position;
-        resetViewMat();
     }
 
     public void setL(double l) {
         this.l = l;
-        projection();
     }
 
     public void setR(double r) {
         this.r = r;
-        projection();
     }
 
     public void setB(double b) {
         this.b = b;
-        projection();
     }
 
     public void setT(double t) {
         this.t = t;
-        projection();
     }
 
     public void translatedX(float cord) {
         position.x += cord;
-        resetViewMat();
     }
 
     public void translatedY(float cord) {
         position.y += cord;
-        resetViewMat();
     }
 
     public double getL() {
@@ -154,11 +150,47 @@ public class OrthographicCamera {
 
     public void setNear(float near) {
         this.near = near;
-        projection();
     }
 
     public void setFar(float far) {
         this.far = far;
+    }
+
+
+    public Vector3D getPosition() {
+        return position;
+    }
+
+    public Vector3D getDirection() {
+        return direction;
+    }
+
+    public Vector3D getViewUp() {
+        return viewUp;
+    }
+
+    public Vector3D getvSide() {
+        return vSide;
+    }
+
+    public void setDirection(Vector3D direction) {
+        this.direction = direction;
+    }
+
+    public void setvSide(Vector3D vSide) {
+        this.vSide = vSide;
+    }
+
+    public void setViewUp(Vector3D viewUp) {
+        this.viewUp = viewUp;
+    }
+
+    public Matrix4x4f getCameraMat() {
+        return cameraMat;
+    }
+
+    public void update() {
+        resetViewMat();
         projection();
     }
 }

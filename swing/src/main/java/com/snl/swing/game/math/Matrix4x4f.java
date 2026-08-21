@@ -88,6 +88,14 @@ public class Matrix4x4f {
         );
     }
 
+    public Vector3D getRow(int rowIndex) {
+        checkColumnIndex(rowIndex);
+        return new Vector3D(
+                data[rowIndex][0],data[rowIndex][1],data[rowIndex][2],
+                data[rowIndex][3]
+        );
+    }
+
 
     public void swapColumns(int columnIndex01,int columnIndex02) {
         checkColumnIndex(columnIndex01);
