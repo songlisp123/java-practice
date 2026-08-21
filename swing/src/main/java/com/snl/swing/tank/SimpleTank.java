@@ -182,4 +182,12 @@ public class SimpleTank implements TimingTarget {
     public Vector2D getCenter() {
         return base.transFrom.mul(Vector2D.originPoint);
     }
+
+    public Bullet getBullet() {
+        return bullet;
+    }
+
+    public Animator getFiringAnimator() {
+        return firingAnimator;
+    }
 }

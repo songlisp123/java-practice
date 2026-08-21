@@ -29,4 +29,16 @@ public class Bullet {
         bullet.speed = speed;
         return bullet;
     }
+
+    public Vector2D getPosition() {
+        return position;
+    }
+
+    public Vector2D getDirection() {
+        return direction;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
 }
